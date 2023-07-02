@@ -11,7 +11,6 @@ namespace 翻译姬 {
         /// </summary>
         [STAThread]
         static void Main() {
-            //Test1
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
