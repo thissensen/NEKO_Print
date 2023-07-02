@@ -1,3 +1,6 @@
+using System;
+using System.Windows.Forms;
+
 namespace 翻译姬 {
     internal static class Program {
         /// <summary>
