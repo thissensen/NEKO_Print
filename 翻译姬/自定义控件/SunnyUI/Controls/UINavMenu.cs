@@ -41,6 +41,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using 翻译姬;
 
 namespace Sunny.UI
 {
@@ -674,6 +675,10 @@ namespace Sunny.UI
                     }
                 }
 
+                int 四 = (int)(4 * 全局字符串.屏幕缩放比);
+                int 六 = (int)(6 * 全局字符串.屏幕缩放比);
+                int 二四 = (int)(24 * 全局字符串.屏幕缩放比);
+                int 十二 = (int)(12 * 全局字符串.屏幕缩放比);
                 SizeF sf = e.Graphics.MeasureString(e.Node.Text, Font);
                 if (e.Node == SelectedNode)
                 {
@@ -690,7 +695,7 @@ namespace Sunny.UI
                     }
 
                     e.Graphics.DrawString(e.Node.Text, Font, SelectedForeColor, drawLeft, e.Bounds.Y + (ItemHeight - sf.Height) / 2.0f);
-                    e.Graphics.FillRectangle(SelectedHighColor, new Rectangle(0, e.Bounds.Y, 4, e.Bounds.Height));
+                    e.Graphics.FillRectangle(SelectedHighColor, new Rectangle(0, e.Bounds.Y, 四, e.Bounds.Height));
                 }
                 else if (e.Node == CurrentNode && (e.State & TreeNodeStates.Hot) != 0)
                 {
@@ -708,7 +713,6 @@ namespace Sunny.UI
                     e.Graphics.FillRectangle(color, new Rectangle(new Point(0, e.Node.Bounds.Y), new Size(Width, e.Node.Bounds.Height)));
                     e.Graphics.DrawString(e.Node.Text, Font, ForeColor, drawLeft, e.Bounds.Y + (ItemHeight - sf.Height) / 2.0f);
                 }
-
                 //画右侧图标
                 Color rightSymbolColor = ForeColor;
                 if (e.Node == SelectedNode) rightSymbolColor = SelectedForeColor;
@@ -721,7 +725,7 @@ namespace Sunny.UI
                     int firstLeft = left - TreeNodeSymbols[e.Node].Count * 30;
                     for (int i = 0; i < TreeNodeSymbols[e.Node].Count; i++)
                     {
-                        e.Graphics.DrawFontImage(TreeNodeSymbols[e.Node][i], 24, rightSymbolColor, new Rectangle(firstLeft + i * 30, e.Bounds.Top, 30, e.Bounds.Height));
+                        e.Graphics.DrawFontImage(TreeNodeSymbols[e.Node][i], 二四, rightSymbolColor, new Rectangle(firstLeft + i * 30, e.Bounds.Top, 30, e.Bounds.Height));
                     }
                 }
 
@@ -747,10 +751,9 @@ namespace Sunny.UI
                 //显示右侧下拉箭头
                 if (ShowItemsArrow && e.Node.Nodes.Count > 0)
                 {
-                    int size = 24;
-                    int left = Width - size - 6;
+                    int left = Width - 二四 - 六;
                     if (Bar.Visible) left -= Bar.Width;
-                    e.Graphics.DrawFontImage(e.Node.IsExpanded ? 61702 : 61703, 24, ForeColor, left, e.Bounds.Y + (ItemHeight - 24) / 2);
+                    e.Graphics.DrawFontImage(e.Node.IsExpanded ? 61702 : 61703, 二四, ForeColor, left, e.Bounds.Y + (ItemHeight - 二四) / 2);
                 }
 
                 //显示Tips圆圈

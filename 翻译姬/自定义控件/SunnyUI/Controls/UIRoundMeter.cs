@@ -130,17 +130,6 @@ namespace Sunny.UI
 
                 _meterType = value;
 
-                if (value == TMeterType.Gps)
-                {
-                    BackgroundImage = Resources.gps1;
-                    AngleImage = Resources.gps_postion;
-                }
-
-                if (value == TMeterType.Wind)
-                {
-                    BackgroundImage = Resources.wind;
-                    AngleImage = Resources.wind_postion;
-                }
 
                 Invalidate();
             }

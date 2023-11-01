@@ -49,7 +49,7 @@
             this.bg3 = new System.ComponentModel.BackgroundWorker();
             this.bg4 = new System.ComponentModel.BackgroundWorker();
             this.bg5 = new System.ComponentModel.BackgroundWorker();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1 = new Sunny.UI.UIPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -312,7 +312,7 @@
         private System.ComponentModel.BackgroundWorker bg3;
         private System.ComponentModel.BackgroundWorker bg4;
         private System.ComponentModel.BackgroundWorker bg5;
-        private System.Windows.Forms.Panel panel1;
+        private Sunny.UI.UIPanel panel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;

@@ -351,7 +351,7 @@ namespace Sunny.UI
                 return false;
             }
 
-            List<UIPage> pages = tabControl.SelectedTab.GetControls<UIPage>();
+            List<UIPage> pages = tabControl.GetControls<UIPage>();
             if (pages.Count == 1)
             {
                 bool isCancel = pages[0].OnPageDeselecting();

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
+using 翻译姬;
 
 namespace Sunny.UI
 {
@@ -9,6 +11,22 @@ namespace Sunny.UI
         {
             InitializeComponent();
             Translate();
+        }
+
+        private void UIColorItem_Load(object sender, EventArgs e) {
+            Size s = new Size() {
+                Width = (int)(Width * 全局字符串.屏幕缩放比),
+                Height = (int)(Height * 全局字符串.屏幕缩放比)
+            };
+
+            MinimumSize = s;
+            /*var info = GetType().GetProperty("Size");
+            info.SetValue(this, s);*/
+            var a = Size;
+            foreach (Control con in Controls) {
+                con.Width = (int)(con.Width * 全局字符串.屏幕缩放比);
+                con.Height = (int)(con.Height * 全局字符串.屏幕缩放比);
+            }
         }
 
         public override void SetDPIScale()
@@ -75,9 +93,9 @@ namespace Sunny.UI
             this.btnOK = new Sunny.UI.UISymbolButton();
             this.btnCancel = new Sunny.UI.UISymbolButton();
             this.SuspendLayout();
-            //
+            // 
             // m_colorTable
-            //
+            // 
             this.m_colorTable.BackColor = System.Drawing.Color.Transparent;
             this.m_colorTable.Colors = new System.Drawing.Color[] {
         System.Drawing.Color.Black,
@@ -222,6 +240,7 @@ namespace Sunny.UI
         System.Drawing.Color.White};
             this.m_colorTable.Cols = 16;
             this.m_colorTable.FieldSize = new System.Drawing.Size(12, 12);
+            this.m_colorTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.m_colorTable.FrameColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.m_colorTable.Location = new System.Drawing.Point(10, 8);
             this.m_colorTable.Name = "m_colorTable";
@@ -230,100 +249,109 @@ namespace Sunny.UI
             this.m_colorTable.SelectedItem = System.Drawing.Color.Black;
             this.m_colorTable.Size = new System.Drawing.Size(253, 148);
             this.m_colorTable.Style = Sunny.UI.UIStyle.Custom;
-            this.m_colorTable.StyleCustomMode = false;
             this.m_colorTable.TabIndex = 0;
-            this.m_colorTable.TagString = null;
             this.m_colorTable.Text = "colorTable1";
             this.m_colorTable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.m_colorTable.TextAngle = 0F;
             this.m_colorTable.SelectedIndexChanged += new System.EventHandler(this.m_colorTable_SelectedIndexChanged);
-            //
+            // 
             // m_colorSample
-            //
+            // 
+            this.m_colorSample.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.m_colorSample.FrameColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.m_colorSample.Location = new System.Drawing.Point(10, 163);
             this.m_colorSample.Name = "m_colorSample";
             this.m_colorSample.RotatePointAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.m_colorSample.Size = new System.Drawing.Size(253, 26);
             this.m_colorSample.Style = Sunny.UI.UIStyle.Custom;
-            this.m_colorSample.StyleCustomMode = false;
             this.m_colorSample.TabIndex = 1;
             this.m_colorSample.TabStop = false;
-            this.m_colorSample.TagString = null;
             this.m_colorSample.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.m_colorSample.TextAngle = 0F;
             this.m_colorSample.Paint += new System.Windows.Forms.PaintEventHandler(this.m_colorSample_Paint);
-            //
+            // 
             // edtA
-            //
+            // 
             this.edtA.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.edtA.FillColor = System.Drawing.Color.White;
             this.edtA.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.edtA.Location = new System.Drawing.Point(29, 197);
             this.edtA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.edtA.Maximum = 255D;
             this.edtA.Minimum = 0D;
+            this.edtA.MinimumSize = new System.Drawing.Size(1, 16);
             this.edtA.Name = "edtA";
             this.edtA.Padding = new System.Windows.Forms.Padding(5);
+            this.edtA.ShowText = false;
             this.edtA.Size = new System.Drawing.Size(41, 26);
             this.edtA.Style = Sunny.UI.UIStyle.Custom;
             this.edtA.TabIndex = 2;
             this.edtA.Text = "0";
+            this.edtA.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.edtA.Type = Sunny.UI.UITextBox.UIEditType.Integer;
-            //
+            this.edtA.Watermark = "";
+            // 
             // edtR
-            //
+            // 
             this.edtR.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.edtR.FillColor = System.Drawing.Color.White;
             this.edtR.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.edtR.Location = new System.Drawing.Point(93, 197);
             this.edtR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.edtR.Maximum = 255D;
             this.edtR.Minimum = 0D;
+            this.edtR.MinimumSize = new System.Drawing.Size(1, 16);
             this.edtR.Name = "edtR";
             this.edtR.Padding = new System.Windows.Forms.Padding(5);
+            this.edtR.ShowText = false;
             this.edtR.Size = new System.Drawing.Size(41, 26);
             this.edtR.Style = Sunny.UI.UIStyle.Custom;
             this.edtR.TabIndex = 3;
             this.edtR.Text = "0";
+            this.edtR.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.edtR.Type = Sunny.UI.UITextBox.UIEditType.Integer;
-            //
+            this.edtR.Watermark = "";
+            // 
             // edtG
-            //
+            // 
             this.edtG.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.edtG.FillColor = System.Drawing.Color.White;
             this.edtG.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.edtG.Location = new System.Drawing.Point(158, 197);
             this.edtG.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.edtG.Maximum = 255D;
             this.edtG.Minimum = 0D;
+            this.edtG.MinimumSize = new System.Drawing.Size(1, 16);
             this.edtG.Name = "edtG";
             this.edtG.Padding = new System.Windows.Forms.Padding(5);
+            this.edtG.ShowText = false;
             this.edtG.Size = new System.Drawing.Size(41, 26);
             this.edtG.Style = Sunny.UI.UIStyle.Custom;
             this.edtG.TabIndex = 4;
             this.edtG.Text = "0";
+            this.edtG.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.edtG.Type = Sunny.UI.UITextBox.UIEditType.Integer;
-            //
+            this.edtG.Watermark = "";
+            // 
             // edtB
-            //
+            // 
             this.edtB.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.edtB.FillColor = System.Drawing.Color.White;
             this.edtB.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.edtB.Location = new System.Drawing.Point(222, 197);
             this.edtB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.edtB.Maximum = 255D;
             this.edtB.Minimum = 0D;
+            this.edtB.MinimumSize = new System.Drawing.Size(1, 16);
             this.edtB.Name = "edtB";
             this.edtB.Padding = new System.Windows.Forms.Padding(5);
+            this.edtB.ShowText = false;
             this.edtB.Size = new System.Drawing.Size(41, 26);
             this.edtB.Style = Sunny.UI.UIStyle.Custom;
             this.edtB.TabIndex = 5;
             this.edtB.Text = "0";
+            this.edtB.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.edtB.Type = Sunny.UI.UITextBox.UIEditType.Integer;
-            //
+            this.edtB.Watermark = "";
+            // 
             // lblA
-            //
+            // 
             this.lblA.AutoSize = true;
             this.lblA.BackColor = System.Drawing.Color.Transparent;
             this.lblA.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -334,9 +362,9 @@ namespace Sunny.UI
             this.lblA.TabIndex = 6;
             this.lblA.Text = "A";
             this.lblA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // lblR
-            //
+            // 
             this.lblR.AutoSize = true;
             this.lblR.BackColor = System.Drawing.Color.Transparent;
             this.lblR.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -347,9 +375,9 @@ namespace Sunny.UI
             this.lblR.TabIndex = 7;
             this.lblR.Text = "R";
             this.lblR.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // lblG
-            //
+            // 
             this.lblG.AutoSize = true;
             this.lblG.BackColor = System.Drawing.Color.Transparent;
             this.lblG.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -360,9 +388,9 @@ namespace Sunny.UI
             this.lblG.TabIndex = 8;
             this.lblG.Text = "G";
             this.lblG.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // lblB
-            //
+            // 
             this.lblB.AutoSize = true;
             this.lblB.BackColor = System.Drawing.Color.Transparent;
             this.lblB.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -373,30 +401,29 @@ namespace Sunny.UI
             this.lblB.TabIndex = 9;
             this.lblB.Text = "B";
             this.lblB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //
+            // 
             // m_colorWheel
-            //
-            this.m_colorWheel.BackColor = System.Drawing.Color.Transparent;
+            // 
+            this.m_colorWheel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.m_colorWheel.FrameColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.m_colorWheel.Location = new System.Drawing.Point(269, 8);
             this.m_colorWheel.Name = "m_colorWheel";
             this.m_colorWheel.SelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(235)))), ((int)(((byte)(205)))));
             this.m_colorWheel.Size = new System.Drawing.Size(148, 148);
             this.m_colorWheel.Style = Sunny.UI.UIStyle.Custom;
-            this.m_colorWheel.StyleCustomMode = false;
             this.m_colorWheel.TabIndex = 10;
-            this.m_colorWheel.TagString = null;
             this.m_colorWheel.Text = "colorWheel1";
             this.m_colorWheel.SelectedColorChanged += new System.EventHandler(this.m_colorWheel_SelectedColorChanged);
-            //
+            // 
             // m_colorBar
-            //
+            // 
             this.m_colorBar.BackColor = System.Drawing.Color.Transparent;
             this.m_colorBar.BarPadding = new System.Windows.Forms.Padding(12, 5, 32, 10);
             this.m_colorBar.Color1 = System.Drawing.Color.Black;
             this.m_colorBar.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(127)))), ((int)(((byte)(127)))));
             this.m_colorBar.Color3 = System.Drawing.Color.White;
             this.m_colorBar.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.m_colorBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.m_colorBar.FrameColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.m_colorBar.Location = new System.Drawing.Point(422, 8);
             this.m_colorBar.Name = "m_colorBar";
@@ -407,24 +434,22 @@ namespace Sunny.UI
             this.m_colorBar.RotatePointAlignment = System.Drawing.ContentAlignment.MiddleRight;
             this.m_colorBar.Size = new System.Drawing.Size(45, 148);
             this.m_colorBar.Style = Sunny.UI.UIStyle.Custom;
-            this.m_colorBar.StyleCustomMode = false;
             this.m_colorBar.TabIndex = 11;
-            this.m_colorBar.TagString = null;
             this.m_colorBar.Text = "Lightness";
             this.m_colorBar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.m_colorBar.TextAngle = 270F;
             this.m_colorBar.ValueOrientation = Sunny.UI.ColorSlider.eValueOrientation.MaxToMin;
             this.m_colorBar.SelectedValueChanged += new System.EventHandler(this.m_colorBar_SelectedValueChanged);
-            //
+            // 
             // m_opacitySlider
-            //
+            // 
             this.m_opacitySlider.BackColor = System.Drawing.Color.Transparent;
             this.m_opacitySlider.BarPadding = new System.Windows.Forms.Padding(60, 12, 80, 25);
             this.m_opacitySlider.Color1 = System.Drawing.Color.White;
             this.m_opacitySlider.Color2 = System.Drawing.Color.Black;
             this.m_opacitySlider.Color3 = System.Drawing.Color.Black;
             this.m_opacitySlider.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.m_opacitySlider.ForeColor = System.Drawing.Color.Black;
+            this.m_opacitySlider.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.m_opacitySlider.FrameColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.m_opacitySlider.Location = new System.Drawing.Point(269, 163);
             this.m_opacitySlider.Name = "m_opacitySlider";
@@ -435,33 +460,34 @@ namespace Sunny.UI
             this.m_opacitySlider.RotatePointAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.m_opacitySlider.Size = new System.Drawing.Size(198, 26);
             this.m_opacitySlider.Style = Sunny.UI.UIStyle.Custom;
-            this.m_opacitySlider.StyleCustomMode = false;
             this.m_opacitySlider.TabIndex = 1;
-            this.m_opacitySlider.TagString = null;
             this.m_opacitySlider.Text = "Opacity";
             this.m_opacitySlider.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.m_opacitySlider.TextAngle = 0F;
             this.m_opacitySlider.ValueOrientation = Sunny.UI.ColorSlider.eValueOrientation.MinToMax;
             this.m_opacitySlider.SelectedValueChanged += new System.EventHandler(this.m_opacitySlider_SelectedValueChanged);
-            //
+            // 
             // btnOK
-            //
+            // 
             this.btnOK.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnOK.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.btnOK.Location = new System.Drawing.Point(269, 197);
+            this.btnOK.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnOK.Name = "btnOK";
             this.btnOK.Padding = new System.Windows.Forms.Padding(28, 0, 0, 0);
             this.btnOK.Size = new System.Drawing.Size(95, 26);
             this.btnOK.Style = Sunny.UI.UIStyle.Custom;
             this.btnOK.TabIndex = 12;
             this.btnOK.Text = "确定";
+            this.btnOK.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            //
+            // 
             // btnCancel
-            //
+            // 
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.btnCancel.Location = new System.Drawing.Point(372, 197);
+            this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Padding = new System.Windows.Forms.Padding(28, 0, 0, 0);
             this.btnCancel.Size = new System.Drawing.Size(95, 26);
@@ -469,10 +495,11 @@ namespace Sunny.UI
             this.btnCancel.Symbol = 61453;
             this.btnCancel.TabIndex = 13;
             this.btnCancel.Text = "取消";
+            this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            //
+            // 
             // UIColorItem
-            //
+            // 
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.m_opacitySlider);
@@ -489,11 +516,14 @@ namespace Sunny.UI
             this.Controls.Add(this.m_colorSample);
             this.Controls.Add(this.m_colorTable);
             this.FillColor = System.Drawing.Color.White;
+            this.MaximumSize = new System.Drawing.Size(10000, 10000);
             this.Name = "UIColorItem";
             this.Size = new System.Drawing.Size(476, 233);
             this.Style = Sunny.UI.UIStyle.Custom;
+            this.Load += new System.EventHandler(this.UIColorItem_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private void m_colorTable_SelectedIndexChanged(object sender, EventArgs e)

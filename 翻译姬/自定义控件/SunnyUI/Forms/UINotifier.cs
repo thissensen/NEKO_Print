@@ -34,6 +34,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using 翻译姬;
 
 #pragma warning disable 1591
 
@@ -92,8 +93,8 @@ namespace Sunny.UI
         private readonly bool IsDialog;                                  // Note is Dialog
         private BackDialogStyle backDialogStyle = BackDialogStyle.None; // DialogNote default background
 
-        private Color HoverColor = Color.FromArgb(0, 0, 0, 0);               // Default Color for hover
-        private Color LeaveColor = Color.FromArgb(0, 0, 0, 0);               // Default Color for leave
+        private Color HoverColor = 全局字符串.主题色;               // Default Color for hover
+        private Color LeaveColor = 全局字符串.主题色;               // Default Color for leave
 
         private readonly int Timeout;                    // Temporary note: timeout
         private AutoResetEvent timerResetEvent;                 // Temporary note: reset event
@@ -160,8 +161,8 @@ namespace Sunny.UI
         //-------------------------------------------------------------------------------------------------------------------------------
         private void OnLoad(object sender, EventArgs e)
         {
-            BackColor = Color.Blue;                               // Initial default graphics
-            TransparencyKey = Color.FromArgb(128, 128, 128);            // Initial default graphics
+            BackColor = 全局字符串.背景色;                               // Initial default graphics
+            TransparencyKey = 全局字符串.背景色;            // Initial default graphics
             FormBorderStyle = FormBorderStyle.None;                     // Initial default graphics
 
             Tag = "__Notifier|" + ID.ToString("X4");               // Save the note identification in the Tag field
@@ -195,9 +196,9 @@ namespace Sunny.UI
 
                 case UINotifierType.INFO:
                     icon.Symbol = 61530;
-                    icon.SymbolColor = UIStyles.Blue.ButtonFillColor;
-                    LeaveColor = UIStyles.Blue.ButtonFillColor;
-                    HoverColor = UIStyles.Blue.ButtonFillHoverColor;
+                    icon.SymbolColor = 全局字符串.主题色;
+                    LeaveColor = 全局字符串.主题色;
+                    HoverColor = 全局字符串.主题色;
                     break;
 
                 case UINotifierType.WARNING:
@@ -468,7 +469,7 @@ namespace Sunny.UI
         //-------------------------------------------------------------------------------------------------------------------------------
         private void OnPaint(object sender, PaintEventArgs e)
         {
-            var image = 翻译姬.Properties.Resources.close;
+            Image image = null;
 
             if (image != null)
             {
@@ -636,7 +637,7 @@ namespace Sunny.UI
             {
                 back = new Form();                                              // Create the fade background
                 back.FormBorderStyle = FormBorderStyle.None;
-                back.BackColor = Color.FromArgb(0, 0, 0);
+                back.BackColor = 全局字符串.背景色;
                 back.Opacity = 0.6;
                 back.ShowInTaskbar = false;
             }

@@ -133,6 +133,10 @@ namespace Sunny.UI
                 return;
             }
 
+            if (IsDisposed) {
+                return;
+            }
+
             var si = ScrollBarInfo.GetInfo(Handle);
             if (si.ScrollMax > 0)
             {

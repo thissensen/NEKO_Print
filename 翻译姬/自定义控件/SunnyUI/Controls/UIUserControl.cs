@@ -370,11 +370,9 @@ namespace Sunny.UI
             }
         }
 
-        protected override void OnVisibleChanged(EventArgs e)
-        {
+        protected override void OnVisibleChanged(EventArgs e) {
             base.OnVisibleChanged(e);
-            if (AutoScaleMode == AutoScaleMode.Font)
-            {
+            if (AutoScaleMode == AutoScaleMode.Font) {
                 AutoScaleMode = AutoScaleMode.None;
             }
         }

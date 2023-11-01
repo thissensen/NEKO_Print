@@ -725,7 +725,7 @@ namespace Sunny.UI
         /// <summary>
         /// 预置资源
         /// </summary>
-        private static class PresetsResources
+        public static class PresetsResources
         {
             public static readonly Color[,] Colors =
             {
@@ -749,7 +749,7 @@ namespace Sunny.UI
             /// 创建图标
             /// </summary>
             /// <param name="index">0=i；1=√；2=！；3=×；其余=null</param>
-            private static Bitmap CreateIcon(int index)
+            public static Bitmap CreateIcon(int index)
             {
                 if (index < 0 || index > 3)
                 {

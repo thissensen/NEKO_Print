@@ -49,7 +49,6 @@
             // noteContent
             // 
             this.noteContent.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.noteContent.Image = global::翻译姬.Properties.Resources.notifier;
             this.noteContent.Location = new System.Drawing.Point(43, 30);
             this.noteContent.Name = "noteContent";
             this.noteContent.Size = new System.Drawing.Size(270, 73);
@@ -62,7 +61,6 @@
             // 
             this.noteDate.AutoSize = true;
             this.noteDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.noteDate.Image = global::翻译姬.Properties.Resources.notifier;
             this.noteDate.Location = new System.Drawing.Point(11, 97);
             this.noteDate.Name = "noteDate";
             this.noteDate.Size = new System.Drawing.Size(13, 9);
@@ -87,7 +85,6 @@
             // buttonMenu
             // 
             this.buttonMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(90)))), ((int)(((byte)(140)))), ((int)(((byte)(230)))));
-            this.buttonMenu.BackgroundImage = global::翻译姬.Properties.Resources.menu;
             this.buttonMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.buttonMenu.ContextMenuStrip = this.menu;
             this.buttonMenu.Location = new System.Drawing.Point(275, 2);
@@ -129,7 +126,6 @@
             // 
             this.idLabel.AutoSize = true;
             this.idLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.idLabel.Image = global::翻译姬.Properties.Resources.notifier;
             this.idLabel.Location = new System.Drawing.Point(296, 103);
             this.idLabel.Name = "idLabel";
             this.idLabel.Size = new System.Drawing.Size(21, 9);
@@ -158,7 +154,6 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = global::翻译姬.Properties.Resources.notifier;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(324, 117);
             this.Controls.Add(this.icon);

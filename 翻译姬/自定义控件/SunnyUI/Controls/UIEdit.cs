@@ -452,7 +452,7 @@ namespace Sunny.UI
         {
             get
             {
-                if (Text == "" && CanEmpty) return 0;
+                if (Text.IsNullOrEmpty() && CanEmpty) return 0;
                 return Text.ToDouble();
             }
             set
@@ -470,7 +470,7 @@ namespace Sunny.UI
         {
             get
             {
-                if (Text == "" && CanEmpty) return 0;
+                if (Text.IsNullOrEmpty() && CanEmpty) return 0;
                 return Text.ToInt();
             }
             set
@@ -491,7 +491,7 @@ namespace Sunny.UI
 
         private bool StringIndexIsChar(string str, int idx, char inChar)
         {
-            if (str == "")
+            if (str.IsNullOrEmpty())
                 return false;
             if (idx >= str.Length)
                 return false;
@@ -520,7 +520,7 @@ namespace Sunny.UI
                 b = KeyChar.Equals('+');
                 if (b)
                 {
-                    if (str == "") return true;
+                    if (str.IsNullOrEmpty()) return true;
                     if (pos != 1) return false;
                     b = ((str.IndexOf('+') == -1) & (str.IndexOf('-') == -1)) | (SelectionLength > 0);
                     return b;
@@ -529,7 +529,7 @@ namespace Sunny.UI
                 b = KeyChar.Equals('-');
                 if (b)
                 {
-                    if (str == "") return true;
+                    if (str.IsNullOrEmpty()) return true;
                     if (pos != 1) return false;
                     b = ((str.IndexOf('+') == -1) & (str.IndexOf('-') == -1)) | (SelectionLength > 0);
                     return b;
@@ -556,7 +556,7 @@ namespace Sunny.UI
                 b = KeyChar.Equals('.');
                 if (b)
                 {
-                    if (str == "") return true;
+                    if (str.IsNullOrEmpty()) return true;
                     if (SubCharCount(str, KeyChar) != 0) return false;
                     if ((str.IndexOf('+') >= 0) | (str.IndexOf('-') >= 0))
                     {
@@ -571,7 +571,7 @@ namespace Sunny.UI
                 b = KeyChar.Equals('+');
                 if (b)
                 {
-                    if (str == "") return true;
+                    if (str.IsNullOrEmpty()) return true;
                     if (pos != 1) return false;
                     b = ((str.IndexOf('+') == -1) & (str.IndexOf('-') == -1)) | (SelectionLength > 0);
                     return b;
@@ -580,7 +580,7 @@ namespace Sunny.UI
                 b = KeyChar.Equals('-');
                 if (b)
                 {
-                    if (str == "") return true;
+                    if (str.IsNullOrEmpty()) return true;
                     if (pos != 1) return false;
                     b = ((str.IndexOf('+') == -1) & (str.IndexOf('-') == -1)) | (SelectionLength > 0);
                     return b;
@@ -626,7 +626,7 @@ namespace Sunny.UI
         {
             if (_uiEditType == UITextBox.UIEditType.Integer)
             {
-                if (Text == "" && CanEmpty) return;
+                if (Text.IsNullOrEmpty() && CanEmpty) return;
                 if (!int.TryParse(Text, out var a)) return;
 
                 if (a > MaxValue)
@@ -646,7 +646,7 @@ namespace Sunny.UI
 
             if (_uiEditType == UITextBox.UIEditType.Double)
             {
-                if (Text == "" && CanEmpty) return;
+                if (Text.IsNullOrEmpty() && CanEmpty) return;
                 if (!double.TryParse(Text, out var a)) return;
 
                 if (a > MaxValue)
@@ -715,9 +715,9 @@ namespace Sunny.UI
             //如果为整型,为空时自动为0
             if (_uiEditType == UITextBox.UIEditType.Integer)
             {
-                if (Text == "" && CanEmpty) return;
+                if (Text.IsNullOrEmpty() && CanEmpty) return;
 
-                if (Text == "")
+                if (Text.IsNullOrEmpty())
                     Text = "0";
 
                 if (!Text.IsInt())
@@ -727,7 +727,7 @@ namespace Sunny.UI
             //如果为浮点,检查.前后是否为空,为空加0
             if (_uiEditType == UITextBox.UIEditType.Double)
             {
-                if (Text == "" && CanEmpty) return;
+                if (Text.IsNullOrEmpty() && CanEmpty) return;
 
                 //if (StringIndexIsChar(Text, 0, '.'))
                 //    Text = @"0" + Text;

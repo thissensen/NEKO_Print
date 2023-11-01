@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
+using 翻译姬;
 
 namespace Sunny.UI
 {
@@ -142,6 +143,11 @@ namespace Sunny.UI
             m_initialColorCount = m_colors.Count;
             Cols = 16;
 
+            /*m_fieldSize = new Size {
+                Width = (int)(m_fieldSize.Width * 全局字符串.屏幕缩放比),
+                Height = (int)(m_fieldSize.Height * 全局字符串.屏幕缩放比)
+            };*/
+
             Size = new Size(253, 148);
             Padding = new Padding(8);
         }
@@ -186,6 +192,7 @@ namespace Sunny.UI
         {
             Rectangle rect = GetRectangle(m_selindex);
             rect.Inflate(m_fieldSize.Width / 2, m_fieldSize.Height / 2);
+            
             return rect;
         }
 
@@ -201,11 +208,21 @@ namespace Sunny.UI
             col = index - (row * m_cols);
         }
 
+        //单元格大小
         private Rectangle GetRectangle(int row, int col)
         {
             int x = Padding.Left + (col * (m_fieldSize.Width + m_spacing));
             int y = Padding.Top + (row * (m_fieldSize.Height + m_spacing));
-            return new Rectangle(x, y, m_fieldSize.Width, m_fieldSize.Height);
+            var rect = new Rectangle(x, y, m_fieldSize.Width, m_fieldSize.Height);
+            rect.Size = new Size {
+                Width = (int)(rect.Width * 全局字符串.屏幕缩放比),
+                Height = (int)(rect.Height * 全局字符串.屏幕缩放比)
+            };
+            rect.Location = new Point {
+                X = (int)(rect.X * 全局字符串.屏幕缩放比),
+                Y = (int)(rect.Y * 全局字符串.屏幕缩放比)
+            };
+            return rect;
         }
 
         private int GetIndexFromMousePos(int x, int y)
@@ -256,7 +273,10 @@ namespace Sunny.UI
         /// <param name="e">绘图参数</param>
         protected override void OnPaint(PaintEventArgs e)
         {
-            Size = new Size(253, 148);
+            Size = new Size {
+                Width = (int)(253 * 全局字符串.屏幕缩放比),
+                Height = (int)(148 * 全局字符串.屏幕缩放比)
+            };
             base.OnPaint(e);
             int index = 0;
             int totalwidth = m_cols * (m_fieldSize.Width + m_spacing);
@@ -266,6 +286,10 @@ namespace Sunny.UI
             Rectangle r = new Rectangle(0, 0, totalwidth, totalheight);
             r.X += Padding.Left - offset;
             r.Y += Padding.Top - offset;
+            r.Size = new Size {
+                Width = (int)(r.Width * 全局字符串.屏幕缩放比),
+                Height = (int)(r.Height * 全局字符串.屏幕缩放比)
+            };
             e.Graphics.DrawRectangle(Pens.CadetBlue, r);
             r.X++;
             r.Y++;

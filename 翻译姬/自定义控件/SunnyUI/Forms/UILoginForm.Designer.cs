@@ -210,7 +210,6 @@
             // 
             this.AllowShowTitle = false;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackgroundImage = global::翻译姬.Properties.Resources.Login1;
             this.ClientSize = new System.Drawing.Size(750, 450);
             this.Controls.Add(this.uiPanel1);
             this.Controls.Add(this.lblSubText);

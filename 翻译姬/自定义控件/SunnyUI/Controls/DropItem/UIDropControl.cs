@@ -28,6 +28,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using 翻译姬;
 
 namespace Sunny.UI
 {
@@ -400,16 +401,20 @@ namespace Sunny.UI
             g.FillRectangle(GetFillColor(), new Rectangle(Width - 27, Radius / 2, 26, Height - Radius));
             Color color = GetRectColor();
             int symbol = dropSymbol;
+            int symbolSize = (int)(24 * 全局字符串.屏幕缩放比);
+            int 一 = (int)(1 * 全局字符串.屏幕缩放比);
+            int 二八 = (int)(28 * 全局字符串.屏幕缩放比);
+            int 十二 = (int)(12 * 全局字符串.屏幕缩放比);
             if (NeedDrawClearButton)
             {
                 symbol = 261527;
-                SizeF sf = g.GetFontImageSize(symbol, 24);
-                g.DrawFontImage(symbol, 24, color, Width - 28 + (12 - sf.Width / 2.0f), (Height - sf.Height) / 2.0f, 1, 1);
+                SizeF sf = g.GetFontImageSize(symbol, symbolSize);
+                g.DrawFontImage(symbol, symbolSize, color, Width - 二八 + (十二 - sf.Width / 2.0f), (Height - sf.Height) / 2.0f, 一, 一);
             }
             else
             {
-                SizeF sf = g.GetFontImageSize(symbol, 24);
-                g.DrawFontImage(symbol, 24, color, Width - 28 + (12 - sf.Width / 2.0f), (Height - sf.Height) / 2.0f);
+                SizeF sf = g.GetFontImageSize(symbol, symbolSize);
+                g.DrawFontImage(symbol, symbolSize, color, Width - 二八 + (十二 - sf.Width / 2.0f), (Height - sf.Height) / 2.0f);
             }
 
             //g.DrawLine(RectColor, Width - 1, Radius / 2, Width - 1, Height - Radius);
@@ -487,7 +492,7 @@ namespace Sunny.UI
         }
 
         [Browsable(false)]
-        public bool IsEmpty => edit.Text == "";
+        public bool IsEmpty => edit.Text.IsNullOrEmpty();
 
         /// <summary>
         /// 重载鼠标按下事件

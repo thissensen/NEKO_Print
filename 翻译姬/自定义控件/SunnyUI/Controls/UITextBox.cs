@@ -53,14 +53,14 @@ using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Design;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 
 namespace Sunny.UI
 {
     [DefaultEvent("TextChanged")]
     [DefaultProperty("Text")]
-    public partial class UITextBox : UIPanel, ISymbol, IToolTip
-    {
+    public partial class UITextBox : UIPanel, ISymbol, IToolTip {
         private readonly UIEdit edit = new UIEdit();
         private readonly UIScrollBar bar = new UIScrollBar();
         private readonly UISymbolButton btn = new UISymbolButton();
@@ -824,8 +824,23 @@ namespace Sunny.UI
         public int IntValue
         {
             get => edit.IntValue;
-            set => edit.IntValue = value;
+            set {
+                edit.IntValue = value;
+                //通知更改(() => IntValue);
+            }
         }
+
+        /*public event PropertyChangedEventHandler PropertyChanged;
+        public void 通知更改<T>(Expression<Func<T>> property) {
+            if (PropertyChanged == null)
+                return;
+
+            var memberExpression = property.Body as MemberExpression;
+            if (memberExpression == null)
+                return;
+
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs(memberExpression.Member.Name));
+        }*/
 
         [Description("文本返回值"), Category("SunnyUI")]
         [Browsable(true)]
@@ -858,7 +873,7 @@ namespace Sunny.UI
                 edit.Text = "";
         }
 
-        public bool IsEmpty => edit.Text == "";
+        public bool IsEmpty => edit.Text.IsNullOrEmpty();
 
         /// <summary>
         /// 重载鼠标按下事件
