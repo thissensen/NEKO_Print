@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Sunny.UI;
 using System;
 using System.Collections.Generic;
@@ -20,7 +20,6 @@ namespace 翻译姬 {
         private static readonly string 软件存储目录 = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\翻译姬\";
         private static readonly string 数据库路径 = 软件存储目录 + "翻译姬数据库.db";
 
-        //C:\Users\wu\AppData\Roaming\翻译姬
         [STAThread]
         static void Main() {
             if (Environment.OSVersion.Version.Major >= 6) {
