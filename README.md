@@ -8,6 +8,8 @@ UI框架SunnyUI：https://gitee.com/yhuse/SunnyUI
 
 GPT机翻参考：https://github.com/cx2333-gal/GalTransl
 
+字体[猫啃珠圆体]：https://www.maoken.com/freefonts/17948.html
+
 交流群：866373258（分为2个群，普通交流群与翻译姬专属群）
 
  **软件介绍：** 
