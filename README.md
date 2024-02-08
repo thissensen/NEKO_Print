@@ -1,6 +1,6 @@
 # 翻译姬
 
-最新版本：V1.0.1.6(内测中)
+最新版本：V1.0.1.7(内测中)
 
 帮助文档：https://gitee.com/this_sensen/NEKO_Print/wikis/
 
