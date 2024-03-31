@@ -15,7 +15,7 @@ namespace 翻译姬 {
 
         private string[] 待机翻Lines {
             get {
-                return 待机翻Box.Text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                return 待机翻Box.Text.Split(Environment.NewLine);
             }
             set {
                 待机翻Box.Text = string.Join(Environment.NewLine, value);
@@ -65,6 +65,14 @@ namespace 翻译姬 {
 
         private bool 表格增删改_保存前验证() {
             try {
+                var res = from row in 查询表格.DataTable.AsEnumerable()
+                          where row.RowState != DataRowState.Deleted
+                          group row by row["正则名称"].ToString() into g
+                          where g.Count() > 1
+                          select g.Key;
+                if (res.Count() > 0) {
+                    throw new Exception($"正则名称【{string.Join(",", res)}】重复");
+                }
                 foreach (DataRow row in 查询表格.DataTable.Rows) {
                     行验证(row);
                 }
@@ -82,13 +90,7 @@ namespace 翻译姬 {
             if (row[正则名称.DataPropertyName].ToString().Trim().IsNullOrEmpty()) {
                 throw new Exception("正则名称未填写");
             }
-            /*if (row[行过滤正则.DataPropertyName].ToString().IsNullOrEmpty() &&
-                row[文本过滤正则.DataPropertyName].ToString().IsNullOrEmpty() &&
-                row[提取前行过滤正则.DataPropertyName].ToString().IsNullOrEmpty() &&
-                row[提取型正则.DataPropertyName].ToString().IsNullOrEmpty()
-                ) {
-                throw new Exception("正则未填写");
-            }*/
+
             for (int i = 0; i < 查询表格.Columns.Count; i++) {
                 string 列名 = 查询表格.Columns[i].HeaderText;
                 if (!列名.EndsWith("正则")) {
@@ -103,15 +105,30 @@ namespace 翻译姬 {
             }
         }
 
+        private void 查询表格_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e) {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) {
+                return;
+            }
+            if (e.Button != MouseButtons.Right) {
+                return;
+            }
+            DataRow row = (查询表格.Rows[e.RowIndex].DataBoundItem as DataRowView).Row;
+            行过滤正则Box.Text = row[行过滤正则.DataPropertyName].ToString();
+            文本过滤正则Box.Text = row[文本过滤正则.DataPropertyName].ToString();
+            提取前行过滤正则Box.Text = row[提取前行过滤正则.DataPropertyName].ToString();
+            提取型正则Box.Text = row[提取型正则.DataPropertyName].ToString();
+        }
+
         private void 查询表格_CellClick(object sender, DataGridViewCellEventArgs e) {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) {
                 return;
             }
             DataRow row = 查询表格.获取所在行();
-            行过滤正则Box.Text = row[行过滤正则.DataPropertyName].ToString();
-            文本过滤正则Box.Text = row[文本过滤正则.DataPropertyName].ToString();
-            提取前行过滤正则Box.Text = row[提取前行过滤正则.DataPropertyName].ToString();
-            提取型正则Box.Text = row[提取型正则.DataPropertyName].ToString();
+            string 列名 = 查询表格.Columns[e.ColumnIndex].HeaderText;
+            if (列名 != "正则名称") {
+                var f = new 正则指令数值更改(row, 列名);
+                f.ShowDialog();
+            }
         }
 
         private void 预览Btn_Click(object sender, EventArgs e) {
@@ -126,8 +143,8 @@ namespace 翻译姬 {
                 正则row["提取前行过滤正则"] = 提取前行过滤正则Box.Text;
                 正则row["提取型正则"] = 提取型正则Box.Text;
 
-                string[] 提取文本 = 正则读写.正则文本提取(待机翻Lines, 正则row);
-                string[] 机翻后 = 工具类.文本置换机翻(提取文本);
+                文本[] 提取文本 = 正则读写.正则文本提取(待机翻Lines, 正则row);
+                文本[] 机翻后 = 工具类.文本置换机翻(提取文本);
                 机翻后Lines = 正则读写.正则文本写入(待机翻Lines, 机翻后, 正则row);
 
             } catch (Exception ex) {

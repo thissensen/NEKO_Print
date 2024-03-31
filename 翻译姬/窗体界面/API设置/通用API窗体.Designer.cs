@@ -31,18 +31,18 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.表格增删改 = new 翻译姬.表格增删改();
             this.查询表格 = new 翻译姬.自定义DataGridView();
+            this.QPS_bs = new System.Windows.Forms.BindingSource(this.components);
+            this.检测可用Btn = new Sunny.UI.UISymbolButton();
+            this.通用API控件区Panel = new Sunny.UI.UIPanel();
+            this.前往注册Btn = new Sunny.UI.UISymbolButton();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.类型 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.是否启用 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KEY = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.秘钥 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QPS = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.QPS_bs = new System.Windows.Forms.BindingSource(this.components);
             this.已用额度 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.可用额度 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.检测可用Btn = new Sunny.UI.UISymbolButton();
-            this.通用API控件区Panel = new Sunny.UI.UIPanel();
-            this.前往注册Btn = new Sunny.UI.UISymbolButton();
             ((System.ComponentModel.ISupportInitialize)(this.查询表格)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.QPS_bs)).BeginInit();
             this.通用API控件区Panel.SuspendLayout();
@@ -61,6 +61,7 @@
             this.表格增删改.表格 = this.查询表格;
             this.表格增删改.表格行移动中 = false;
             this.表格增删改.新添行后执行 += new 翻译姬.表格增删改.表格增删改_新添行后执行(this.表格增删改_新添行后执行);
+            this.表格增删改.保存前验证 += new 翻译姬.表格增删改.表格增删改_保存前验证(this.表格增删改_保存前验证);
             // 
             // 查询表格
             // 
@@ -132,70 +133,6 @@
             this.查询表格.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.查询表格_DataError);
             this.查询表格.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.查询表格_EditingControlShowing);
             // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Visible = false;
-            this.ID.Width = 51;
-            // 
-            // 类型
-            // 
-            this.类型.DataPropertyName = "类型";
-            this.类型.HeaderText = "类型";
-            this.类型.Name = "类型";
-            this.类型.ReadOnly = true;
-            this.类型.Visible = false;
-            // 
-            // 是否启用
-            // 
-            this.是否启用.DataPropertyName = "是否启用";
-            this.是否启用.HeaderText = "是否启用";
-            this.是否启用.Name = "是否启用";
-            this.是否启用.ReadOnly = true;
-            this.是否启用.Width = 80;
-            // 
-            // KEY
-            // 
-            this.KEY.DataPropertyName = "KEY";
-            this.KEY.HeaderText = "KEY";
-            this.KEY.Name = "KEY";
-            this.KEY.Width = 300;
-            // 
-            // 秘钥
-            // 
-            this.秘钥.DataPropertyName = "秘钥";
-            this.秘钥.HeaderText = "秘钥";
-            this.秘钥.Name = "秘钥";
-            this.秘钥.Width = 300;
-            // 
-            // QPS
-            // 
-            this.QPS.DataPropertyName = "QPS";
-            this.QPS.DataSource = this.QPS_bs;
-            this.QPS.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.QPS.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.QPS.HeaderText = "QPS";
-            this.QPS.Name = "QPS";
-            this.QPS.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.QPS.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.QPS.Width = 80;
-            // 
-            // 已用额度
-            // 
-            this.已用额度.DataPropertyName = "已用额度";
-            this.已用额度.HeaderText = "已用额度";
-            this.已用额度.Name = "已用额度";
-            this.已用额度.Width = 110;
-            // 
-            // 可用额度
-            // 
-            this.可用额度.DataPropertyName = "可用额度";
-            this.可用额度.HeaderText = "可用额度";
-            this.可用额度.Name = "可用额度";
-            this.可用额度.Width = 110;
-            // 
             // 检测可用Btn
             // 
             this.检测可用Btn.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -245,6 +182,69 @@
             this.前往注册Btn.TipsText = "提示文本";
             this.前往注册Btn.Click += new System.EventHandler(this.前往注册Btn_Click);
             // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Visible = false;
+            this.ID.Width = 51;
+            // 
+            // 类型
+            // 
+            this.类型.DataPropertyName = "类型";
+            this.类型.HeaderText = "类型";
+            this.类型.Name = "类型";
+            this.类型.ReadOnly = true;
+            this.类型.Visible = false;
+            // 
+            // 是否启用
+            // 
+            this.是否启用.DataPropertyName = "是否启用";
+            this.是否启用.HeaderText = "是否启用";
+            this.是否启用.Name = "是否启用";
+            this.是否启用.ReadOnly = true;
+            this.是否启用.Width = 80;
+            // 
+            // KEY
+            // 
+            this.KEY.DataPropertyName = "KEY";
+            this.KEY.HeaderText = "KEY";
+            this.KEY.Name = "KEY";
+            this.KEY.Width = 300;
+            // 
+            // 秘钥
+            // 
+            this.秘钥.DataPropertyName = "秘钥";
+            this.秘钥.HeaderText = "秘钥";
+            this.秘钥.Name = "秘钥";
+            this.秘钥.Width = 300;
+            // 
+            // QPS
+            // 
+            this.QPS.DataPropertyName = "QPS";
+            this.QPS.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.QPS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.QPS.HeaderText = "QPS";
+            this.QPS.Name = "QPS";
+            this.QPS.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.QPS.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.QPS.Width = 80;
+            // 
+            // 已用额度
+            // 
+            this.已用额度.DataPropertyName = "已用额度";
+            this.已用额度.HeaderText = "已用额度";
+            this.已用额度.Name = "已用额度";
+            this.已用额度.Width = 110;
+            // 
+            // 可用额度
+            // 
+            this.可用额度.DataPropertyName = "可用额度";
+            this.可用额度.HeaderText = "可用额度";
+            this.可用额度.Name = "可用额度";
+            this.可用额度.Width = 110;
+            // 
             // 通用API窗体
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -269,6 +269,7 @@
         public 自定义DataGridView 查询表格;
         public Sunny.UI.UISymbolButton 检测可用Btn;
         public Sunny.UI.UISymbolButton 前往注册Btn;
+        public 表格增删改 表格增删改;
         public System.Windows.Forms.DataGridViewTextBoxColumn ID;
         public System.Windows.Forms.DataGridViewTextBoxColumn 类型;
         public System.Windows.Forms.DataGridViewTextBoxColumn 是否启用;
@@ -277,6 +278,5 @@
         public System.Windows.Forms.DataGridViewComboBoxColumn QPS;
         public System.Windows.Forms.DataGridViewTextBoxColumn 已用额度;
         public System.Windows.Forms.DataGridViewTextBoxColumn 可用额度;
-        public 表格增删改 表格增删改;
     }
 }

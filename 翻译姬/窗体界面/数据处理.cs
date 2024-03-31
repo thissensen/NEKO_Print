@@ -1,9 +1,11 @@
-﻿using Sunny.UI;
+﻿using Newtonsoft.Json;
+using Sunny.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -33,7 +35,7 @@ public partial class 数据处理 : 自定义Form {
             页数显示Label.Text = $"第{显示中文本组下标 + 1}/{显示中文本组.Length}页";
         }
     }
-    private int _显示中文本组下标;
+    private int _显示中文本组下标 = -1;
 
     public 数据处理(文件结构[] 处理中文件结构) {
         this.处理中文件结构 = 处理中文件结构;
@@ -49,7 +51,12 @@ public partial class 数据处理 : 自定义Form {
             X = (W - Width) / 2,
             Y = (H - Height) / 2
         };
+        数据中转.数据处理 = this;
         数据刷新();
+    }
+
+    private void 数据处理_FormClosed(object sender, FormClosedEventArgs e) {
+        数据中转.数据处理 = null;
     }
 
     private void 数据刷新() {
@@ -61,15 +68,17 @@ public partial class 数据处理 : 自定义Form {
         文件列表Panel.Clear();
         foreach (var 文件 in 处理中文件结构) {
             var 文本 = 文件.文本组.FirstOrDefault(t => !t.完成状态);
-            if (!只显示未完成数据Switch.Active && 文本 == null) {//已完成
-                文件列表Panel.Add(获取按钮(文件, true));
+            if (只显示未完成数据Switch.Active) {
+                if (文本 != null) {
+                    文件列表Panel.Add(获取按钮(文件, false));
+                }
             } else {
-                文件列表Panel.Add(获取按钮(文件, false));
+                文件列表Panel.Add(获取按钮(文件, 文本 == null));//=null就是已完成
             }
         }
         if (文件列表Panel.Controls.Count > 0) {
             var btn = 文件列表Panel.Get(0) as UIButton;
-            btn.PerformClick();
+            btn?.PerformClick();
         }
     }
 
@@ -93,39 +102,48 @@ public partial class 数据处理 : 自定义Form {
             return;
         }
         文本组 文本 = 显示中文本组[显示下标];
+        表格数据填充(文本.文本);
+        按钮状态检测();
+    }
+
+    private void 表格数据填充(文本[] 文本) {
         DataTable dt = new DataTable();
+        dt.Columns.Add("异常");
         dt.Columns.Add("原文");
         dt.Columns.Add("译文");
-        int max = 文本.原文.Length;
-        if (max < 文本.译文?.Length) {
-            max = 文本.译文.Length;
-        }
-        for (int i = 0; i < max; i++) {
+
+        for (int i = 0; i < 文本.Length; i++) {
             DataRow dr = dt.NewRow();
-            dr["原文"] = 文本.原文.ElementAtOrDefault(i);
-            dr["译文"] = 文本.译文?.ElementAtOrDefault(i);
+            var 异常 = 文本[i].异常状态 == 文本异常状态.无 ? "" : 文本[i].异常状态.ToString();
+            if (文本[i].文本类型 == 文本类型.人名) {
+                if (异常 == "") {
+                    异常 = "人名";
+                } else {
+                    异常 = "人名/" + 异常;
+                }
+            }
+            dr["异常"] = 异常;
+            dr["原文"] = 文本[i].原文;
+            dr["译文"] = 文本[i].译文;
             dt.Rows.Add(dr);
         }
         表格.DataTable = dt;
         //异常状态显示
-        if (文本.异常状态.Count > 0) {
-            foreach (var item in 文本.异常状态) {
-                if (item.Item2 != -1) {
-                    表格.Rows[item.Item2].DefaultCellStyle.BackColor = 全局字符串.不可用时颜色;
-                } else {
-                    for (int i = 0; i < 表格.Rows.Count; i++) {
-                        表格.Rows[i].DefaultCellStyle.BackColor = 全局字符串.不可用时颜色;
-                    }
-                    break;
-                }
+        for (int i = 0; i < 表格.RowCount; i++) {
+            var 异常 = 表格.Rows[i].Cells["异常"].Value.ToString();
+            if (异常 != "" && 异常 != "人名") {
+                表格.Rows[i].DefaultCellStyle.BackColor = 全局字符串.不可用时颜色;
             }
         }
-        按钮状态检测();
     }
 
     private void 表格数据保存() {
+        if (显示中文本组下标 == -1) {
+            return;
+        }
         文本组 文本 = 显示中文本组.ElementAtOrDefault(显示中文本组下标);
         if (文本 == null) {
+            消息框帮助.轻便消息("表格数据保存失败", this);
             return;
         }
         var 译文list = new List<string>();
@@ -133,7 +151,10 @@ public partial class 数据处理 : 自定义Form {
             string 译文 = 表格.Rows[i].Cells["译文"].EditedFormattedValue.ToString();
             译文list.Add(译文);
         }
-        文本.译文 = 译文list.ToArray();
+        int index = 0;
+        foreach (var t in 文本.文本) {
+            t.译文 = 译文list[index++];
+        }
     }
 
     private void 上一页() {
@@ -200,6 +221,12 @@ public partial class 数据处理 : 自定义Form {
     }
 
     private void 按钮状态检测() {
+        //跳转按钮检测
+        if (显示中文本组.Length == 0) {
+            跳转Btn.Enabled = false;
+        } else {
+            跳转Btn.Enabled = true;
+        }
         //上一页检测
         if (显示中文本组.ElementAtOrDefault(显示中文本组下标 - 1) == null) {
             上一页Btn.Enabled = false;
@@ -213,26 +240,33 @@ public partial class 数据处理 : 自定义Form {
             下一页Btn.Enabled = true;
         }
         //异常行检测
-        var res = from 文件 in 处理中文件结构
-                  let 文本 = 文件.文本组.FirstOrDefault(文本 => 文本.异常状态.Count > 0)
-                  where 文本 != null
-                  select 文本;
-        if (!下一页Btn.Enabled && 显示中文本组下标 != -1) {//最后一页，额外检测
-            文本组 文本 = 显示中文本组[显示中文本组下标];
-            int 最大异常下标 = (from 异常状态 in 文本.异常状态
-                          orderby 异常状态.Item2 descending
-                          select 异常状态.Item2).FirstOrDefault();
-            if (表格.FirstDisplayedScrollingRowIndex + 1 > 最大异常下标) {
-                异常行Btn.Enabled = false;
-            } else {
+        if (显示中文本组下标 == -1) {
+            return;
+        }
+        var 当前显示行下标 = new List<int>();
+        for (var i = 0; i < 表格.Rows.Count; i++) {
+            if (表格.Rows[i].Displayed) {
+                当前显示行下标.Add(i);
+            }
+        }
+        文本组 文本 = 显示中文本组[显示中文本组下标];
+        var 最大异常下标 = from t in 文本.文本//检索当前页未显示出的异常行
+                    where t.异常状态 != 文本异常状态.无 &&
+                    !当前显示行下标.Contains(t.文本组中下标) &&
+                    t.文本组中下标 > 表格.FirstDisplayedScrollingRowIndex + 1
+                    select t.文本组中下标;        
+        if (最大异常下标.Count() == 0) {
+            //往后面页检索
+            var 后方有异常文本组 = from 文本组 in 显示中文本组.Skip(显示中文本组下标 + 1)
+                        where 文本组.文本.Any(t => t.异常状态 != 文本异常状态.无)
+                        select 文本组;
+            if (后方有异常文本组.Count() > 0) {
                 异常行Btn.Enabled = true;
+            } else {
+                异常行Btn.Enabled = false;
             }
         } else {
-            if (res.Count() == 0) {
-                异常行Btn.Enabled = false;
-            } else {
-                异常行Btn.Enabled = true;
-            }
+            异常行Btn.Enabled = true;
         }
     }
 
@@ -248,7 +282,10 @@ public partial class 数据处理 : 自定义Form {
         btn.Text = 文件.文件名;
         btn.Tag = 文件;
         btn.主题设置();
-        btn.Click += (_, _) => 表格刷新(文件.文本组);
+        btn.Click += (_, _) => {
+            表格数据保存();
+            表格刷新(文件.文本组);
+        };
         btn.Click += 文件按钮_Click;
         return btn;
     }
@@ -274,6 +311,16 @@ public partial class 数据处理 : 自定义Form {
 
     private void 只显示未完成数据Switch_ActiveChanged(object sender, EventArgs e) => 数据刷新();
 
+    private void 跳转Btn_Click(object sender, EventArgs e) {
+        var f = new 跳转到();
+        f.页码Box.TextBox.IntValue = 显示中文本组下标 + 1;
+        f.页码Box.TextBox.Maximum = 显示中文本组.Length;
+        f.ShowDialog();
+        if (f.所选数值 != -1 && f.所选数值 - 1 != 显示中文本组下标) {
+            显示中文本组下标 = f.所选数值 - 1;
+        }
+    }
+
     private void 上一页Btn_Click(object sender, EventArgs e) => 上一页();
 
     private void 下一页Btn_Click(object sender, EventArgs e) => 下一页();
@@ -294,33 +341,22 @@ public partial class 数据处理 : 自定义Form {
         var 文件 = btn.Tag as 文件结构;
         if (MessageBoxEx.Show($"是否将【{文件.文件名}】保存到输出目录？", "显示按钮", 提示窗按钮.确认取消)) {
             表格数据保存();
-            保存文件(文件);
+            文件.写出();
             消息框帮助.轻便消息("保存成功", this);
         }
     }
 
     private void 全部保存Btn_Click(object sender, EventArgs e) {
-        if (处理中文件结构.Length == 0) {
+        if (处理中文件结构 == null || 处理中文件结构.Length == 0) {
             return;
         }
         if (MessageBoxEx.Show("是否将所有文件保存到输出目录？", "显示按钮", 提示窗按钮.确认取消)) {
             表格数据保存();
             foreach (UIButton btn in 文件列表Panel.Panel.Controls) {
                 var 文件 = btn.Tag as 文件结构;
-                保存文件(文件);
+                文件.写出();
             }
             消息框帮助.轻便消息("保存成功", this);
-        }
-    }
-
-    private void 保存文件(文件结构 文件) {
-        foreach (var 文本 in 文件.文本组) {
-            文本.异常状态.Clear();
-        }
-        if (文件.Json文本 == null) {
-            调用管理.文本写出(写出方式.本地写出, 文件);
-        } else {
-            调用管理.文本写出(写出方式.Json写出, 文件);
         }
     }
 
@@ -332,6 +368,7 @@ public partial class 数据处理 : 自定义Form {
         if (btn == null) {
             return;
         }
+        文本组 当前文本组 = 显示中文本组[显示中文本组下标];
         try {
             var 文件 = btn.Tag as 文件结构;
             Type API类型 = 文件.处理数据.API类型;
@@ -340,33 +377,12 @@ public partial class 数据处理 : 自定义Form {
             if (明细row == null) {
                 throw new Exception($"【{API名称}】没有可用的账号，请前往添加并开启");
             }
-            var 待机翻 = new List<string>();
-            for (int i = 0; i < 表格.Rows.Count; i++) {
-                string text = 表格.Rows[i].Cells["原文"].FormattedValue.ToString();
-                if (text.Trim() != "") {
-                    待机翻.Add(text);
-                }
-            }
             API信息 data = API信息.Parse(明细row);
             API接口模板 api = Activator.CreateInstance(API类型, data) as API接口模板;
-            string[] 机翻完 = api.文本机翻(待机翻.ToArray());
-            if (机翻完.Length != 待机翻.Count) {
-                消息框帮助.轻便消息("机翻内容依旧错行", this);
-            }
-            if (机翻完.Length <= 待机翻.Count) {
-                for (int i = 0; i < 表格.Rows.Count; i++) {
-                    表格.Rows[i].Cells["译文"].Value = 机翻完.ElementAtOrDefault(i);
-                }
-            } else {
-                //扩充表格行
-                for (int i = 0; i < 机翻完.Length - 待机翻.Count; i++) {
-                    DataRow dr = 表格.DataTable.NewRow();
-                    表格.DataTable.Rows.Add(dr);
-                }
-                for (int i = 0; i < 表格.Rows.Count; i++) {
-                    表格.Rows[i].Cells["译文"].Value = 机翻完[i];
-                }
-            }
+            api.文本机翻(当前文本组.文本);
+            当前文本组.机翻状态 = true;
+            当前文本组.文本.文本检查();
+            表格数据填充(当前文本组.文本);
             消息框帮助.轻便消息("重翻成功", this);
         } catch (Exception ex) {
             MessageBoxEx.Show(ex.Message);
@@ -374,18 +390,73 @@ public partial class 数据处理 : 自定义Form {
     }
 
     private void 异常行Btn_Click(object sender, EventArgs e) {
-异常行开始:
+        //向下检索
+        var 当前显示行下标 = new List<int>();
+        for (var i = 0; i < 表格.Rows.Count; i++) {
+            if (表格.Rows[i].Displayed) {
+                当前显示行下标.Add(i);
+            }
+        }
+    异常行开始:
         文本组 文本 = 显示中文本组[显示中文本组下标];
-        var res = from 异常状态 in 文本.异常状态
-                where 异常状态.Item2 > 表格.FirstDisplayedScrollingRowIndex + 1
-                select 异常状态.Item2;
+        var res = from t in 文本.文本
+                 where t.异常状态 != 文本异常状态.无 &&
+                 !当前显示行下标.Contains(t.文本组中下标) &&
+                 t.文本组中下标 > 表格.FirstDisplayedScrollingRowIndex + 1
+                 select t.文本组中下标;
         if (res.Count() == 0) {//当前文本组没有了
             if (显示中文本组下标 != 显示中文本组.Length - 1) {
                 下一页();
+                当前显示行下标.Clear();
                 goto 异常行开始;
             }
         } else {//定位到当前文本组的下一个异常
             表格.FirstDisplayedScrollingRowIndex = res.First();
         }
+    }
+
+    private void 人名导出Btn_Click(object sender, EventArgs e) {
+        try {
+            string file = 工具类.选择保存目录("人名导出", 全局字符串.桌面路径 + "词汇表.csv", "CSV", "*.csv");
+            if (file == null) {
+                return;
+            }
+            var res = (from 文件 in 处理中文件结构
+                      from 文本 in 文件.文本组
+                      from t in 文本.文本
+                      where t.文本类型 == 文本类型.人名
+                      select t.原文).Distinct().ToArray();
+            var sb = new StringBuilder("原文,译文,备注\r\n");
+            foreach (var item in res) {
+                sb.Append($"{item},{item},").AppendLine();
+            }
+            using var fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write);
+            using var sw = new StreamWriter(fs, Encoding.Default);
+            sw.Write(sb.ToString());
+            sw.Flush();
+            消息框帮助.轻便消息("导出成功", this);
+        } catch (Exception ex) {
+            MessageBoxEx.Show(ex.Message);
+        }
+    }
+
+    private void 缓存导出Btn_Click(object sender, EventArgs e) {
+        try {
+            string file = 工具类.选择保存目录("缓存导出", 全局字符串.桌面路径 + "缓存数据.json", "JSON", "*.json");
+            if (file == null) {
+                return;
+            }
+            File.WriteAllText(file, JsonConvert.SerializeObject(处理中文件结构, Formatting.Indented));
+            消息框帮助.轻便消息("导出成功", this);
+        } catch (Exception ex) {
+            MessageBoxEx.Show(ex.Message);
+        }
+    }
+
+    private void 数据转换Btn_Click(object sender, EventArgs e) {
+        表格数据保存();
+        var f = new 数据转换();
+        f.ShowDialog();
+        表格刷新(显示中文本组);
     }
 }

@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sunny.UI;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace 翻译姬;
 public partial class 全局设置 : 自定义Page {
@@ -33,9 +35,9 @@ public partial class 全局设置 : 自定义Page {
         无视返回空值Switch.DataBindings.Add("Active", 全局设置数据, "无视返回空值", false, DataSourceUpdateMode.OnPropertyChanged);
         重复内容跳过Switch.DataBindings.Add("Active", 全局设置数据, "重复内容跳过", false, DataSourceUpdateMode.OnPropertyChanged);
         无视返回原文Switch.DataBindings.Add("Active", 全局设置数据, "无视返回原文", false, DataSourceUpdateMode.OnPropertyChanged);
-        机翻目标地址Box.DataBindings.Add("Text", 全局设置数据, "机翻目标地址", false, DataSourceUpdateMode.OnPropertyChanged);
-        机翻目标端口Box.DataBindings.Add("Text", 全局设置数据, "机翻目标端口", false, DataSourceUpdateMode.OnPropertyChanged);
-        机翻连接类型Box.DataBindings.Add("Text", 全局设置数据, "机翻连接类型", false, DataSourceUpdateMode.OnPropertyChanged);
+        文本级多线程Switch.DataBindings.Add("Active", 全局设置数据, "文本级多线程", false, DataSourceUpdateMode.OnPropertyChanged);
+        启用单组上限Switch.DataBindings.Add("Active", 全局设置数据, "启用单组上限", false, DataSourceUpdateMode.OnPropertyChanged);
+        API单组上限Box.DataBindings.Add("Text", 全局设置数据, "API单组上限", false, DataSourceUpdateMode.OnPropertyChanged);
 
         写出目录Box.DataBindings.Add("Text", 全局设置数据, "写出目录", false, DataSourceUpdateMode.OnPropertyChanged);
         写出编码Box.DataBindings.Add("Text", 全局设置数据, "写出编码", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -45,8 +47,8 @@ public partial class 全局设置 : 自定义Page {
         JSON指令Box.DataBindings.Add("Text", 全局设置数据, "指令集名称", false, DataSourceUpdateMode.OnPropertyChanged);
         Xml指令Box.DataBindings.Add("Text", 全局设置数据, "Xml指令集名称", false, DataSourceUpdateMode.OnPropertyChanged);
         写出后删除源文件Switch.DataBindings.Add("Active", 全局设置数据, "写出后删除源文件", false, DataSourceUpdateMode.OnPropertyChanged);
+        内置中括号过滤Switch.DataBindings.Add("Active", 全局设置数据, "内置中括号过滤", false, DataSourceUpdateMode.OnPropertyChanged);
 
-        机翻连接类型Box.DataSource = new List<string>() { "IPv4", "IPv6" };
         源语言Box.DataSource = new List<string>() { "日语", "英语", "韩语", "繁中", "简中"};
         目标语言Box.DataSource = new List<string>() { "简中", "繁中", "日语", "英语", "韩语" };
         读取编码Box.DataSource = new List<string>() { "自动识别", "Shift-JIS", "UTF-8", "GBK", "UTF-16LE" };
@@ -94,6 +96,28 @@ public partial class 全局设置 : 自定义Page {
         读取目录Box.Text = paths[0] + "\\";
     }
 
+    private void 后缀验证Btn_Click(object sender, EventArgs e) {
+        if (读取后缀Box.Text.Trim() == "") {
+            return;
+        }
+        try {
+            string[] arr = 读取后缀Box.Text.Split('|');
+            foreach (string s in arr) {
+                if (s.Trim().IsNullOrEmpty() || !Regex.IsMatch(s, @"\*\.\w")) {
+                    string 提示 = """
+                        读取后缀不符合规则
+                        正确规则例如：*.txt|*.ks
+                        *开头，使用|分割
+                        """;
+                    throw new Exception(提示);
+                }
+            }
+            消息框帮助.轻便消息("验证成功", this);
+        } catch (Exception ex) {
+            MessageBoxEx.Show(ex.Message);
+        }
+    }
+
     private void 写出目录Btn_Click(object sender, EventArgs e) {
         string[] paths = 工具类.选择文件夹("选择机翻输出目录");
         if (paths.Length == 0) {
@@ -128,17 +152,35 @@ public partial class 全局设置 : 自定义Page {
     }
 
     private void 机翻空值使用原文Switch_ActiveChanged(object sender, EventArgs e) {
-        if (机翻空值使用原文Switch.Active && 无视返回空值Switch.Active) {
-            机翻空值使用原文Switch.Active = false;
-            MessageBoxEx.Show("机翻空值使用原文与无视返回空值无法共存");
-        }
+        BeginInvoke(() => {
+            if (机翻空值使用原文Switch.Active) {
+                无视返回空值Switch.Active = false;
+            }
+        });
     }
 
     private void 无视返回空值Switch_ActiveChanged(object sender, EventArgs e) {
-        if (无视返回空值Switch.Active && 机翻空值使用原文Switch.Active) {
-            无视返回空值Switch.Active = false;
-            MessageBoxEx.Show("无视返回空值与机翻空值使用原文无法共存");
+        BeginInvoke(() => {
+            if (无视返回空值Switch.Active) {
+                机翻空值使用原文Switch.Active = false;
+            }
+        });
+    }
+
+    private void 启用单组上限Switch_ActiveChanged(object sender, EventArgs e) {
+        if (启用单组上限Switch.Active) {
+            API单组上限Box.Enabled = true;
+        } else {
+            API单组上限Box.Enabled = false;
         }
     }
 
+    private void 文本级多线程Switch_ActiveChanged(object sender, EventArgs e) {
+        BeginInvoke(() => {
+            if (!文本级多线程Switch.Active) {
+                全局数据.GPT设置数据.上下文提示 = false;
+                启用单组上限Switch.Active = false;
+            }
+        });
+    }
 }

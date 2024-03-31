@@ -12,16 +12,22 @@ using System.Windows.Forms;
 namespace 翻译姬 {
     public partial class 百度 : 通用API窗体 {
 
+        public override Dictionary<string, int> QPS数据 => new Dictionary<string, int> {
+            ["标准版"] = 1,
+            ["高级版"] = 10,
+            ["尊享版"] = 100
+        };
+
         public 百度() {
             InitializeComponent();
-            QPS数据.Add("标准版", 1);
-            QPS数据.Add("高级版", 10);
-            QPS数据.Add("尊享版", 100);
             KEY.HeaderText = "APP ID";
             秘钥.HeaderText = "秘钥";
         }
 
         protected override void QPS列数据变化(DataGridViewRow row, int 值) {
+            if (row == null) {
+                return;
+            }
             //百度对应额度设置
             if (值 == 1) {
                 row.Cells[可用额度.DataPropertyName].Value = 50000;

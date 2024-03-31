@@ -1,9 +1,11 @@
-﻿using Sunny.UI;
+﻿using Newtonsoft.Json;
+using Sunny.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -25,11 +27,12 @@ namespace 翻译姬 {
         private void 移动窗口_MouseDown(object sender, MouseEventArgs e) { ReleaseCapture(); PostMessage(this.Handle, 0x112, 0xf012, 0); }
         #endregion
 
-        private Dictionary<string, 自定义Page> 界面组 = new Dictionary<string, 自定义Page>() {
+        public static Dictionary<string, 自定义Page> 界面组 = new Dictionary<string, 自定义Page>() {
                 ["文本翻译"] = new 文本翻译(),
                 ["百度"] = new 百度(),
                 ["腾讯云"] = new 腾讯云(),
                 ["阿里云"] = new 阿里云(),
+                ["火山"] = new 火山(),
                 ["GPT"] = new GPT(),
                 ["全局设置"] = new 全局设置(),
                 ["GPT设置"] = new GPT设置(),
@@ -42,13 +45,14 @@ namespace 翻译姬 {
 
         public 主界面() {
             InitializeComponent();
+            Activated += 主界面_Activated;
             Icon = Resources.sensen;
+            数据中转.主窗体 = this;
+            数据中转.进度条 = 进度条;
             //Dpi设置
             全局字符串.屏幕缩放比 = 获取屏幕缩放比();
             //主题设置
             窗体列表.BackColor = 全局字符串.背景色;
-            数据中转.主窗体 = this;
-            数据中转.进度条 = 进度条;
             //主题设置
             关闭Btn.RectColor = Color.Red;
             关闭Btn.RectHoverColor = Color.Red;
@@ -70,6 +74,7 @@ namespace 翻译姬 {
             窗体列表.CreateChildNode(API设置node, AddPage(界面组["百度"]));
             窗体列表.CreateChildNode(API设置node, AddPage(界面组["腾讯云"]));
             窗体列表.CreateChildNode(API设置node, AddPage(界面组["阿里云"]));
+            窗体列表.CreateChildNode(API设置node, AddPage(界面组["火山"]));
             窗体列表.CreateChildNode(API设置node, AddPage(界面组["GPT"]));
             TreeNode 设置node = 窗体列表.CreateNode("设置", 57399, 图标大小, -1);
             窗体列表.CreateChildNode(设置node, AddPage(界面组["全局设置"]));
@@ -83,6 +88,13 @@ namespace 翻译姬 {
             窗体列表.SelectedNode = 文本翻译Node;
             界面组["文本翻译"].OnPage被选中();
 
+        }
+
+        private void 主界面_Activated(object sender, EventArgs e) {
+            if (数据中转.数据处理 != null) {
+                数据中转.数据处理.TopMost = true;
+                数据中转.数据处理.TopMost = false;
+            }
         }
 
         protected override void OnResize(EventArgs e) {
@@ -140,7 +152,14 @@ namespace 翻译姬 {
         }
 
         private void 关闭Btn_Click(object sender, EventArgs e) {
-            Close();
+            if (文本翻译.机翻中) {
+                if (MessageBoxEx.Show("机翻中，是否强制退出？", "提示", 提示窗按钮.确认取消)) {
+                    File.WriteAllText(全局数据.缓存数据路径, JsonConvert.SerializeObject(文本翻译.处理中文件结构, Formatting.Indented));
+                    Close();
+                }
+            } else {
+                Close();
+            }
         }
 
         //下拉框点击事件

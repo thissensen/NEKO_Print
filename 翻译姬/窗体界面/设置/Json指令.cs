@@ -70,6 +70,14 @@ namespace 翻译姬 {
 
         private bool 表格增删改_保存前验证() {
             try {
+                var res = from row in 查询表格.DataTable.AsEnumerable()
+                          where row.RowState != DataRowState.Deleted
+                          group row by row["名称"].ToString() into g
+                          where g.Count() > 1
+                          select g.Key;
+                if (res.Count() > 0) {
+                    throw new Exception($"名称【{string.Join(",", res)}】重复");
+                }
                 foreach (DataRow row in 查询表格.DataTable.Rows) {
                     行验证(row);
                 }
@@ -164,8 +172,8 @@ namespace 翻译姬 {
                 }
                 DataRow json指令row = 查询表格.DataTable.Clone().NewRow();
                 json指令row["指令集"] = string.Join("|", 指令集Lines);
-                string[] res = 文本读写.Json提取(指令表格.Tag.ToString(), json指令row);
-                提取结果Box.Text = string.Join(Environment.NewLine, res);
+                文本[] res = 文本读写.Json提取(指令表格.Tag.ToString(), json指令row);
+                提取结果Box.Text = string.Join(Environment.NewLine, res.获取原文组());
 
             } catch(Exception ex) {
                 消息框帮助.轻便消息(ex.Message, 查询表格, UINotifierType.WARNING);

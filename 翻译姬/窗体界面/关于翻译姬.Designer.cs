@@ -48,7 +48,9 @@
             this.使用手册Btn = new Sunny.UI.UIButton();
             this.介绍内容Box = new Sunny.UI.UITextBox();
             this.时间校准Btn = new Sunny.UI.UIButton();
-            this.更新正则Btn = new Sunny.UI.UIButton();
+            this.初始化Btn = new Sunny.UI.UIButton();
+            this.清空所有Btn = new Sunny.UI.UIButton();
+            this.本机数据Btn = new Sunny.UI.UIButton();
             this.主题设置Box.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -394,24 +396,55 @@
             this.时间校准Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.时间校准Btn.Click += new System.EventHandler(this.时间校准Btn_Click);
             // 
-            // 更新正则Btn
+            // 初始化Btn
             // 
-            this.更新正则Btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.更新正则Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.更新正则Btn.Location = new System.Drawing.Point(409, 136);
-            this.更新正则Btn.MinimumSize = new System.Drawing.Size(1, 1);
-            this.更新正则Btn.Name = "更新正则Btn";
-            this.更新正则Btn.Radius = 15;
-            this.更新正则Btn.Size = new System.Drawing.Size(77, 29);
-            this.更新正则Btn.TabIndex = 82;
-            this.更新正则Btn.Text = "更新正则";
-            this.更新正则Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.初始化Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.初始化Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.初始化Btn.Location = new System.Drawing.Point(508, 136);
+            this.初始化Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.初始化Btn.Name = "初始化Btn";
+            this.初始化Btn.Radius = 15;
+            this.初始化Btn.Size = new System.Drawing.Size(77, 29);
+            this.初始化Btn.TabIndex = 82;
+            this.初始化Btn.Text = "初始化";
+            this.初始化Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.初始化Btn.Click += new System.EventHandler(this.初始化Btn_Click);
+            // 
+            // 清空所有Btn
+            // 
+            this.清空所有Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.清空所有Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.清空所有Btn.Location = new System.Drawing.Point(607, 136);
+            this.清空所有Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.清空所有Btn.Name = "清空所有Btn";
+            this.清空所有Btn.Radius = 15;
+            this.清空所有Btn.Size = new System.Drawing.Size(77, 29);
+            this.清空所有Btn.TabIndex = 83;
+            this.清空所有Btn.Text = "清空所有";
+            this.清空所有Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.清空所有Btn.Click += new System.EventHandler(this.清空所有Btn_Click);
+            // 
+            // 本机数据Btn
+            // 
+            this.本机数据Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.本机数据Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.本机数据Btn.Location = new System.Drawing.Point(409, 136);
+            this.本机数据Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.本机数据Btn.Name = "本机数据Btn";
+            this.本机数据Btn.Radius = 15;
+            this.本机数据Btn.Size = new System.Drawing.Size(77, 29);
+            this.本机数据Btn.TabIndex = 84;
+            this.本机数据Btn.Text = "本机数据";
+            this.本机数据Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.本机数据Btn.Click += new System.EventHandler(this.本机数据Btn_Click);
             // 
             // 关于翻译姬
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(987, 618);
-            this.Controls.Add(this.更新正则Btn);
+            this.Controls.Add(this.本机数据Btn);
+            this.Controls.Add(this.清空所有Btn);
+            this.Controls.Add(this.初始化Btn);
             this.Controls.Add(this.时间校准Btn);
             this.Controls.Add(this.介绍内容Box);
             this.Controls.Add(this.使用手册Btn);
@@ -460,6 +493,8 @@
         private Sunny.UI.UIButton 使用手册Btn;
         private Sunny.UI.UITextBox 介绍内容Box;
         private Sunny.UI.UIButton 时间校准Btn;
-        private Sunny.UI.UIButton 更新正则Btn;
+        private Sunny.UI.UIButton 初始化Btn;
+        private Sunny.UI.UIButton 清空所有Btn;
+        private Sunny.UI.UIButton 本机数据Btn;
     }
 }

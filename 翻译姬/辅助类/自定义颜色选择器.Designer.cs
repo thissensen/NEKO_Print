@@ -29,12 +29,9 @@ partial class 自定义颜色选择器 {
             this.lblB = new Sunny.UI.UILabel();
             this.lblG = new Sunny.UI.UILabel();
             this.lblR = new Sunny.UI.UILabel();
-            this.lblA = new Sunny.UI.UILabel();
             this.edtB = new Sunny.UI.UITextBox();
             this.edtG = new Sunny.UI.UITextBox();
             this.edtR = new Sunny.UI.UITextBox();
-            this.edtA = new Sunny.UI.UITextBox();
-            this.ABar = new Sunny.UI.UITrackBar();
             this.RBar = new Sunny.UI.UITrackBar();
             this.GBar = new Sunny.UI.UITrackBar();
             this.BBar = new Sunny.UI.UITrackBar();
@@ -45,7 +42,7 @@ partial class 自定义颜色选择器 {
             // 
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.btnCancel.Location = new System.Drawing.Point(165, 184);
+            this.btnCancel.Location = new System.Drawing.Point(165, 149);
             this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Padding = new System.Windows.Forms.Padding(28, 0, 0, 0);
@@ -60,7 +57,7 @@ partial class 自定义颜色选择器 {
             // 
             this.btnOK.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnOK.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.btnOK.Location = new System.Drawing.Point(31, 184);
+            this.btnOK.Location = new System.Drawing.Point(31, 149);
             this.btnOK.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnOK.Name = "btnOK";
             this.btnOK.Padding = new System.Windows.Forms.Padding(28, 0, 0, 0);
@@ -75,7 +72,7 @@ partial class 自定义颜色选择器 {
             this.lblB.AutoSize = true;
             this.lblB.BackColor = System.Drawing.Color.Transparent;
             this.lblB.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblB.Location = new System.Drawing.Point(12, 121);
+            this.lblB.Location = new System.Drawing.Point(12, 86);
             this.lblB.Name = "lblB";
             this.lblB.Size = new System.Drawing.Size(18, 20);
             this.lblB.TabIndex = 24;
@@ -87,7 +84,7 @@ partial class 自定义颜色选择器 {
             this.lblG.AutoSize = true;
             this.lblG.BackColor = System.Drawing.Color.Transparent;
             this.lblG.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblG.Location = new System.Drawing.Point(12, 86);
+            this.lblG.Location = new System.Drawing.Point(12, 51);
             this.lblG.Name = "lblG";
             this.lblG.Size = new System.Drawing.Size(19, 20);
             this.lblG.TabIndex = 23;
@@ -99,30 +96,18 @@ partial class 自定义颜色选择器 {
             this.lblR.AutoSize = true;
             this.lblR.BackColor = System.Drawing.Color.Transparent;
             this.lblR.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblR.Location = new System.Drawing.Point(12, 51);
+            this.lblR.Location = new System.Drawing.Point(12, 16);
             this.lblR.Name = "lblR";
             this.lblR.Size = new System.Drawing.Size(18, 20);
             this.lblR.TabIndex = 22;
             this.lblR.Text = "R";
             this.lblR.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblA
-            // 
-            this.lblA.AutoSize = true;
-            this.lblA.BackColor = System.Drawing.Color.Transparent;
-            this.lblA.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblA.Location = new System.Drawing.Point(12, 16);
-            this.lblA.Name = "lblA";
-            this.lblA.Size = new System.Drawing.Size(19, 20);
-            this.lblA.TabIndex = 21;
-            this.lblA.Text = "A";
-            this.lblA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // edtB
             // 
             this.edtB.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.edtB.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.edtB.Location = new System.Drawing.Point(31, 118);
+            this.edtB.Location = new System.Drawing.Point(31, 83);
             this.edtB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.edtB.Maximum = 255D;
             this.edtB.Minimum = 0D;
@@ -142,7 +127,7 @@ partial class 自定义颜色选择器 {
             // 
             this.edtG.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.edtG.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.edtG.Location = new System.Drawing.Point(31, 83);
+            this.edtG.Location = new System.Drawing.Point(31, 48);
             this.edtG.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.edtG.Maximum = 255D;
             this.edtG.Minimum = 0D;
@@ -162,7 +147,7 @@ partial class 自定义颜色选择器 {
             // 
             this.edtR.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.edtR.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.edtR.Location = new System.Drawing.Point(31, 48);
+            this.edtR.Location = new System.Drawing.Point(31, 13);
             this.edtR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.edtR.Maximum = 255D;
             this.edtR.Minimum = 0D;
@@ -178,41 +163,10 @@ partial class 自定义颜色选择器 {
             this.edtR.Watermark = "";
             this.edtR.TextChanged += new System.EventHandler(this.颜色变更_Changed);
             // 
-            // edtA
-            // 
-            this.edtA.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.edtA.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.edtA.Location = new System.Drawing.Point(31, 13);
-            this.edtA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.edtA.Maximum = 255D;
-            this.edtA.Minimum = 0D;
-            this.edtA.MinimumSize = new System.Drawing.Size(1, 16);
-            this.edtA.Name = "edtA";
-            this.edtA.Padding = new System.Windows.Forms.Padding(5);
-            this.edtA.ShowText = false;
-            this.edtA.Size = new System.Drawing.Size(41, 26);
-            this.edtA.TabIndex = 17;
-            this.edtA.Text = "0";
-            this.edtA.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.edtA.Type = Sunny.UI.UITextBox.UIEditType.Integer;
-            this.edtA.Watermark = "";
-            this.edtA.TextChanged += new System.EventHandler(this.颜色变更_Changed);
-            // 
-            // ABar
-            // 
-            this.ABar.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ABar.Location = new System.Drawing.Point(79, 12);
-            this.ABar.Maximum = 255;
-            this.ABar.MinimumSize = new System.Drawing.Size(1, 1);
-            this.ABar.Name = "ABar";
-            this.ABar.Size = new System.Drawing.Size(202, 29);
-            this.ABar.TabIndex = 29;
-            this.ABar.Text = "uiTrackBar1";
-            // 
             // RBar
             // 
             this.RBar.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RBar.Location = new System.Drawing.Point(79, 47);
+            this.RBar.Location = new System.Drawing.Point(79, 12);
             this.RBar.Maximum = 255;
             this.RBar.MinimumSize = new System.Drawing.Size(1, 1);
             this.RBar.Name = "RBar";
@@ -223,7 +177,7 @@ partial class 自定义颜色选择器 {
             // GBar
             // 
             this.GBar.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.GBar.Location = new System.Drawing.Point(79, 82);
+            this.GBar.Location = new System.Drawing.Point(79, 47);
             this.GBar.Maximum = 255;
             this.GBar.MinimumSize = new System.Drawing.Size(1, 1);
             this.GBar.Name = "GBar";
@@ -234,7 +188,7 @@ partial class 自定义颜色选择器 {
             // BBar
             // 
             this.BBar.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.BBar.Location = new System.Drawing.Point(79, 117);
+            this.BBar.Location = new System.Drawing.Point(79, 82);
             this.BBar.Maximum = 255;
             this.BBar.MinimumSize = new System.Drawing.Size(1, 1);
             this.BBar.Name = "BBar";
@@ -245,7 +199,7 @@ partial class 自定义颜色选择器 {
             // 颜色框
             // 
             this.颜色框.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.颜色框.Location = new System.Drawing.Point(16, 154);
+            this.颜色框.Location = new System.Drawing.Point(16, 119);
             this.颜色框.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.颜色框.MinimumSize = new System.Drawing.Size(1, 1);
             this.颜色框.Name = "颜色框";
@@ -258,22 +212,19 @@ partial class 自定义颜色选择器 {
             // 
             this.AllowShowTitle = false;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(293, 218);
+            this.ClientSize = new System.Drawing.Size(293, 189);
             this.Controls.Add(this.颜色框);
             this.Controls.Add(this.BBar);
             this.Controls.Add(this.GBar);
             this.Controls.Add(this.RBar);
-            this.Controls.Add(this.ABar);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblB);
             this.Controls.Add(this.lblG);
             this.Controls.Add(this.lblR);
-            this.Controls.Add(this.lblA);
             this.Controls.Add(this.edtB);
             this.Controls.Add(this.edtG);
             this.Controls.Add(this.edtR);
-            this.Controls.Add(this.edtA);
             this.Name = "自定义颜色选择器";
             this.Padding = new System.Windows.Forms.Padding(0);
             this.ShowInTaskbar = false;
@@ -295,12 +246,9 @@ partial class 自定义颜色选择器 {
     private Sunny.UI.UILabel lblB;
     private Sunny.UI.UILabel lblG;
     private Sunny.UI.UILabel lblR;
-    private Sunny.UI.UILabel lblA;
     private Sunny.UI.UITextBox edtB;
     private Sunny.UI.UITextBox edtG;
     private Sunny.UI.UITextBox edtR;
-    private Sunny.UI.UITextBox edtA;
-    private Sunny.UI.UITrackBar ABar;
     private Sunny.UI.UITrackBar RBar;
     private Sunny.UI.UITrackBar GBar;
     private Sunny.UI.UITrackBar BBar;

@@ -144,6 +144,11 @@ namespace 翻译姬 {
                 button.ForeSelectedColor = 全局字符串.主题色;
                 button.RectSelectedColor = 全局字符串.主题色;
 
+            } else if (con is UILine line) {
+                line.FillColor = Color.Transparent;
+                line.BackColor = Color.Transparent;
+                line.LineColor = 全局字符串.主题色;
+
             } else if (con is 自定义DataGridView view) {
                 view.BackgroundColor = 全局字符串.背景色;
                 //奇偶行背景色

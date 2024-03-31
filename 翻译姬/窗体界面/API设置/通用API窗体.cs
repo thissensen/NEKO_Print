@@ -14,12 +14,14 @@ namespace 翻译姬 {
     public partial class 通用API窗体 : 自定义Page {
 
         public string API类型 => GetType().Name;
-        public Dictionary<string, int> QPS数据  = new Dictionary<string, int>();
+        public virtual Dictionary<string, int> QPS数据 { get; }
 
         public 通用API窗体() {
             InitializeComponent();
+            QPS_bs.DataSource = QPS数据;
             QPS.DisplayMember = "Key";
             QPS.ValueMember = "Value";
+            QPS.DataSource = QPS_bs;
             查询表格.禁用排序();
             查询表格.CellEndEdit += 查询表格_CellEndEdit;
         }
@@ -62,7 +64,7 @@ namespace 翻译姬 {
             if (DesignMode) {
                 return;
             }
-            QPS_bs.DataSource = QPS数据;
+            
             通用API窗体_Page被选中();
         }
 
@@ -91,6 +93,18 @@ namespace 翻译姬 {
             QPS列数据变化(查询表格.Rows[查询表格.Rows.Count - 1], 0);
         }
 
+        private bool 表格增删改_保存前验证() {
+            foreach (DataRow row in 查询表格.DataTable.Rows) {
+                if (row.RowState == DataRowState.Modified) {
+                    row["KEY"] = row["KEY"].ToString().Trim();
+                    row["秘钥"] = row["秘钥"].ToString().Trim();
+                }
+            }
+            return true;
+        }
+
+        private bool 是否初始化 = false;
+
         private void 查询表格_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e) {
             if (查询表格.CurrentCell == null) {
                 return;
@@ -105,8 +119,11 @@ namespace 翻译姬 {
             cb.ValueMember = "value";
             cb.DataSource = QPS_bs;
             cb.SelectedValue = 表格值;
+            if (是否初始化) {
+                return;
+            }
             cb.SelectedIndexChanged += QPS_SelectedIndexChanged;
-            cb.Leave += (s, e2) => cb.SelectedValueChanged -= QPS_SelectedIndexChanged;
+            是否初始化 = true;
         }
 
         private void QPS_SelectedIndexChanged(object sender, EventArgs e) {
@@ -114,8 +131,8 @@ namespace 翻译姬 {
                 return;
             }
             var cb = sender as 自定义ComboBox;
-            int num = int.Parse(cb.SelectedValue.ToString());
-            QPS列数据变化(查询表格.CurrentCell.OwningRow, num);
+            int.TryParse(cb.SelectedValue?.ToString(), out int num);
+            QPS列数据变化(查询表格.CurrentCell?.OwningRow, num);
         }
 
         protected virtual void 检测可用Btn_Click(object sender, EventArgs e) {
@@ -165,7 +182,7 @@ namespace 翻译姬 {
             data.目标语言 = 主表row["简中"].ToString();
             API接口模板 api = Activator.CreateInstance(type, data) as API接口模板;
             try {
-                api.文本机翻(new string[] { "Hi" });
+                api.文本机翻(new 文本[] { new 文本(0, "Hi") });
                 row["是否启用"] = true;
                 row["已用额度"] = 已用 + 2;
                 return true;

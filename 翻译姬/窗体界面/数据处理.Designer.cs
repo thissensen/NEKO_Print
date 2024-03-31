@@ -30,6 +30,11 @@ partial class 数据处理 {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.缓存导出Btn = new Sunny.UI.UISymbolButton();
+            this.人名导出Btn = new Sunny.UI.UISymbolButton();
+            this.数据转换Btn = new Sunny.UI.UISymbolButton();
+            this.下移Btn = new Sunny.UI.UISymbolButton();
+            this.上移Btn = new Sunny.UI.UISymbolButton();
             this.全部保存Btn = new Sunny.UI.UISymbolButton();
             this.返回Btn = new Sunny.UI.UISymbolButton();
             this.uiLabel9 = new Sunny.UI.UILabel();
@@ -38,17 +43,17 @@ partial class 数据处理 {
             this.uiPanel2 = new Sunny.UI.UIPanel();
             this.表格Panel = new Sunny.UI.UIPanel();
             this.表格 = new 翻译姬.自定义DataGridView();
-            this.原文 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.译文 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel3 = new Sunny.UI.UIPanel();
+            this.跳转Btn = new Sunny.UI.UISymbolButton();
             this.异常行Btn = new Sunny.UI.UISymbolButton();
-            this.下移Btn = new Sunny.UI.UISymbolButton();
-            this.上移Btn = new Sunny.UI.UISymbolButton();
             this.重翻Btn = new Sunny.UI.UISymbolButton();
             this.保存Btn = new Sunny.UI.UISymbolButton();
             this.页数显示Label = new Sunny.UI.UILabel();
             this.下一页Btn = new Sunny.UI.UISymbolButton();
             this.上一页Btn = new Sunny.UI.UISymbolButton();
+            this.异常 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.原文 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.译文 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel1.SuspendLayout();
             this.uiPanel2.SuspendLayout();
             this.表格Panel.SuspendLayout();
@@ -58,6 +63,11 @@ partial class 数据处理 {
             // 
             // uiPanel1
             // 
+            this.uiPanel1.Controls.Add(this.缓存导出Btn);
+            this.uiPanel1.Controls.Add(this.人名导出Btn);
+            this.uiPanel1.Controls.Add(this.数据转换Btn);
+            this.uiPanel1.Controls.Add(this.下移Btn);
+            this.uiPanel1.Controls.Add(this.上移Btn);
             this.uiPanel1.Controls.Add(this.全部保存Btn);
             this.uiPanel1.Controls.Add(this.返回Btn);
             this.uiPanel1.Controls.Add(this.uiLabel9);
@@ -75,16 +85,99 @@ partial class 数据处理 {
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.移动窗口_MouseDown);
             // 
+            // 缓存导出Btn
+            // 
+            this.缓存导出Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.缓存导出Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.缓存导出Btn.Location = new System.Drawing.Point(776, 12);
+            this.缓存导出Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.缓存导出Btn.Name = "缓存导出Btn";
+            this.缓存导出Btn.Radius = 25;
+            this.缓存导出Btn.Size = new System.Drawing.Size(100, 35);
+            this.缓存导出Btn.Symbol = 61686;
+            this.缓存导出Btn.SymbolOffset = new System.Drawing.Point(3, 1);
+            this.缓存导出Btn.TabIndex = 86;
+            this.缓存导出Btn.Text = "缓存导出";
+            this.缓存导出Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.缓存导出Btn.Click += new System.EventHandler(this.缓存导出Btn_Click);
+            // 
+            // 人名导出Btn
+            // 
+            this.人名导出Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.人名导出Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.人名导出Btn.Location = new System.Drawing.Point(1032, 12);
+            this.人名导出Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.人名导出Btn.Name = "人名导出Btn";
+            this.人名导出Btn.Radius = 25;
+            this.人名导出Btn.Size = new System.Drawing.Size(100, 35);
+            this.人名导出Btn.Symbol = 362748;
+            this.人名导出Btn.SymbolOffset = new System.Drawing.Point(0, 1);
+            this.人名导出Btn.TabIndex = 54;
+            this.人名导出Btn.Text = "人名导出";
+            this.人名导出Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.人名导出Btn.Click += new System.EventHandler(this.人名导出Btn_Click);
+            // 
+            // 数据转换Btn
+            // 
+            this.数据转换Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.数据转换Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.数据转换Btn.Location = new System.Drawing.Point(648, 12);
+            this.数据转换Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.数据转换Btn.Name = "数据转换Btn";
+            this.数据转换Btn.Radius = 25;
+            this.数据转换Btn.Size = new System.Drawing.Size(100, 35);
+            this.数据转换Btn.Symbol = 61473;
+            this.数据转换Btn.SymbolOffset = new System.Drawing.Point(2, 1);
+            this.数据转换Btn.TabIndex = 53;
+            this.数据转换Btn.Text = "数据转换";
+            this.数据转换Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.数据转换Btn.Click += new System.EventHandler(this.数据转换Btn_Click);
+            // 
+            // 下移Btn
+            // 
+            this.下移Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.下移Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.下移Btn.Location = new System.Drawing.Point(376, 12);
+            this.下移Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.下移Btn.Name = "下移Btn";
+            this.下移Btn.Radius = 15;
+            this.下移Btn.Size = new System.Drawing.Size(84, 35);
+            this.下移Btn.Symbol = 61611;
+            this.下移Btn.TabIndex = 85;
+            this.下移Btn.Text = "下移";
+            this.下移Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.下移Btn.TipsText = "提示文本";
+            this.下移Btn.Visible = false;
+            this.下移Btn.Click += new System.EventHandler(this.下移Btn_Click);
+            // 
+            // 上移Btn
+            // 
+            this.上移Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.上移Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.上移Btn.Location = new System.Drawing.Point(275, 12);
+            this.上移Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.上移Btn.Name = "上移Btn";
+            this.上移Btn.Radius = 15;
+            this.上移Btn.Size = new System.Drawing.Size(84, 35);
+            this.上移Btn.Symbol = 61610;
+            this.上移Btn.TabIndex = 84;
+            this.上移Btn.Text = "上移";
+            this.上移Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.上移Btn.TipsText = "提示文本";
+            this.上移Btn.Visible = false;
+            this.上移Btn.Click += new System.EventHandler(this.上移Btn_Click);
+            // 
             // 全部保存Btn
             // 
             this.全部保存Btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.全部保存Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.全部保存Btn.Location = new System.Drawing.Point(1006, 12);
+            this.全部保存Btn.Location = new System.Drawing.Point(904, 12);
             this.全部保存Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.全部保存Btn.Name = "全部保存Btn";
             this.全部保存Btn.Radius = 25;
             this.全部保存Btn.Size = new System.Drawing.Size(100, 35);
             this.全部保存Btn.Symbol = 61639;
+            this.全部保存Btn.SymbolOffset = new System.Drawing.Point(2, 1);
             this.全部保存Btn.TabIndex = 51;
             this.全部保存Btn.Text = "全部保存";
             this.全部保存Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -94,7 +187,7 @@ partial class 数据处理 {
             // 
             this.返回Btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.返回Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.返回Btn.Location = new System.Drawing.Point(1168, 12);
+            this.返回Btn.Location = new System.Drawing.Point(1160, 12);
             this.返回Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.返回Btn.Name = "返回Btn";
             this.返回Btn.Radius = 25;
@@ -198,6 +291,7 @@ partial class 数据处理 {
             this.表格.ColumnHeadersHeight = 32;
             this.表格.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.表格.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.异常,
             this.原文,
             this.译文});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -223,6 +317,7 @@ partial class 数据处理 {
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.表格.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.表格.RowHeadersVisible = false;
             this.表格.RowHeadersWidth = 4;
             this.表格.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
@@ -236,28 +331,10 @@ partial class 数据处理 {
             this.表格.Size = new System.Drawing.Size(1001, 604);
             this.表格.TabIndex = 6;
             // 
-            // 原文
-            // 
-            this.原文.DataPropertyName = "原文";
-            this.原文.HeaderText = "原文";
-            this.原文.Name = "原文";
-            this.原文.ReadOnly = true;
-            this.原文.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.原文.Width = 491;
-            // 
-            // 译文
-            // 
-            this.译文.DataPropertyName = "译文";
-            this.译文.HeaderText = "译文";
-            this.译文.Name = "译文";
-            this.译文.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.译文.Width = 491;
-            // 
             // uiPanel3
             // 
+            this.uiPanel3.Controls.Add(this.跳转Btn);
             this.uiPanel3.Controls.Add(this.异常行Btn);
-            this.uiPanel3.Controls.Add(this.下移Btn);
-            this.uiPanel3.Controls.Add(this.上移Btn);
             this.uiPanel3.Controls.Add(this.重翻Btn);
             this.uiPanel3.Controls.Add(this.保存Btn);
             this.uiPanel3.Controls.Add(this.页数显示Label);
@@ -276,12 +353,28 @@ partial class 数据处理 {
             this.uiPanel3.Text = null;
             this.uiPanel3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // 跳转Btn
+            // 
+            this.跳转Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.跳转Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.跳转Btn.Location = new System.Drawing.Point(341, 8);
+            this.跳转Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.跳转Btn.Name = "跳转Btn";
+            this.跳转Btn.Radius = 15;
+            this.跳转Btn.Size = new System.Drawing.Size(84, 35);
+            this.跳转Btn.Symbol = 61540;
+            this.跳转Btn.TabIndex = 87;
+            this.跳转Btn.Text = "跳转";
+            this.跳转Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.跳转Btn.TipsText = "提示文本";
+            this.跳转Btn.Click += new System.EventHandler(this.跳转Btn_Click);
+            // 
             // 异常行Btn
             // 
             this.异常行Btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.异常行Btn.Enabled = false;
             this.异常行Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.异常行Btn.Location = new System.Drawing.Point(229, 8);
+            this.异常行Btn.Location = new System.Drawing.Point(677, 8);
             this.异常行Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.异常行Btn.Name = "异常行Btn";
             this.异常行Btn.Radius = 15;
@@ -293,43 +386,11 @@ partial class 数据处理 {
             this.异常行Btn.TipsText = "提示文本";
             this.异常行Btn.Click += new System.EventHandler(this.异常行Btn_Click);
             // 
-            // 下移Btn
-            // 
-            this.下移Btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.下移Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.下移Btn.Location = new System.Drawing.Point(681, 8);
-            this.下移Btn.MinimumSize = new System.Drawing.Size(1, 1);
-            this.下移Btn.Name = "下移Btn";
-            this.下移Btn.Radius = 15;
-            this.下移Btn.Size = new System.Drawing.Size(84, 35);
-            this.下移Btn.Symbol = 61611;
-            this.下移Btn.TabIndex = 85;
-            this.下移Btn.Text = "下移";
-            this.下移Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.下移Btn.TipsText = "提示文本";
-            this.下移Btn.Click += new System.EventHandler(this.下移Btn_Click);
-            // 
-            // 上移Btn
-            // 
-            this.上移Btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.上移Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.上移Btn.Location = new System.Drawing.Point(568, 8);
-            this.上移Btn.MinimumSize = new System.Drawing.Size(1, 1);
-            this.上移Btn.Name = "上移Btn";
-            this.上移Btn.Radius = 15;
-            this.上移Btn.Size = new System.Drawing.Size(84, 35);
-            this.上移Btn.Symbol = 61610;
-            this.上移Btn.TabIndex = 84;
-            this.上移Btn.Text = "上移";
-            this.上移Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.上移Btn.TipsText = "提示文本";
-            this.上移Btn.Click += new System.EventHandler(this.上移Btn_Click);
-            // 
             // 重翻Btn
             // 
             this.重翻Btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.重翻Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.重翻Btn.Location = new System.Drawing.Point(342, 8);
+            this.重翻Btn.Location = new System.Drawing.Point(789, 8);
             this.重翻Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.重翻Btn.Name = "重翻Btn";
             this.重翻Btn.Radius = 15;
@@ -345,7 +406,7 @@ partial class 数据处理 {
             // 
             this.保存Btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.保存Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.保存Btn.Location = new System.Drawing.Point(907, 8);
+            this.保存Btn.Location = new System.Drawing.Point(901, 8);
             this.保存Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.保存Btn.Name = "保存Btn";
             this.保存Btn.Radius = 10;
@@ -373,7 +434,7 @@ partial class 数据处理 {
             this.下一页Btn.Enabled = false;
             this.下一页Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.下一页Btn.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.下一页Btn.Location = new System.Drawing.Point(794, 8);
+            this.下一页Btn.Location = new System.Drawing.Point(565, 8);
             this.下一页Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.下一页Btn.Name = "下一页Btn";
             this.下一页Btn.Radius = 10;
@@ -391,7 +452,7 @@ partial class 数据处理 {
             this.上一页Btn.Enabled = false;
             this.上一页Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.上一页Btn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.上一页Btn.Location = new System.Drawing.Point(455, 8);
+            this.上一页Btn.Location = new System.Drawing.Point(453, 8);
             this.上一页Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.上一页Btn.Name = "上一页Btn";
             this.上一页Btn.Radius = 10;
@@ -402,6 +463,32 @@ partial class 数据处理 {
             this.上一页Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.上一页Btn.TipsText = "提示文本";
             this.上一页Btn.Click += new System.EventHandler(this.上一页Btn_Click);
+            // 
+            // 异常
+            // 
+            this.异常.DataPropertyName = "异常";
+            this.异常.HeaderText = "";
+            this.异常.Name = "异常";
+            this.异常.ReadOnly = true;
+            this.异常.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.异常.Width = 82;
+            // 
+            // 原文
+            // 
+            this.原文.DataPropertyName = "原文";
+            this.原文.HeaderText = "原文";
+            this.原文.Name = "原文";
+            this.原文.ReadOnly = true;
+            this.原文.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.原文.Width = 450;
+            // 
+            // 译文
+            // 
+            this.译文.DataPropertyName = "译文";
+            this.译文.HeaderText = "译文";
+            this.译文.Name = "译文";
+            this.译文.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.译文.Width = 450;
             // 
             // 数据处理
             // 
@@ -419,6 +506,7 @@ partial class 数据处理 {
             this.ShowRadius = false;
             this.ShowTitle = false;
             this.Text = "数据处理";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.数据处理_FormClosed);
             this.Load += new System.EventHandler(this.数据处理_Load);
             this.uiPanel1.ResumeLayout(false);
             this.uiPanel1.PerformLayout();
@@ -448,9 +536,14 @@ partial class 数据处理 {
     public Sunny.UI.UISymbolButton 上一页Btn;
     public Sunny.UI.UISymbolButton 重翻Btn;
     private Sunny.UI.UISymbolButton 全部保存Btn;
-    private System.Windows.Forms.DataGridViewTextBoxColumn 原文;
-    private System.Windows.Forms.DataGridViewTextBoxColumn 译文;
     public Sunny.UI.UISymbolButton 下移Btn;
     public Sunny.UI.UISymbolButton 上移Btn;
     public Sunny.UI.UISymbolButton 异常行Btn;
+    private Sunny.UI.UISymbolButton 数据转换Btn;
+    private Sunny.UI.UISymbolButton 人名导出Btn;
+    public Sunny.UI.UISymbolButton 跳转Btn;
+    private Sunny.UI.UISymbolButton 缓存导出Btn;
+    private System.Windows.Forms.DataGridViewTextBoxColumn 异常;
+    private System.Windows.Forms.DataGridViewTextBoxColumn 原文;
+    private System.Windows.Forms.DataGridViewTextBoxColumn 译文;
 }

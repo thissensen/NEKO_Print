@@ -55,6 +55,7 @@ using System.Drawing;
 using System.Drawing.Design;
 using System.IO;
 using System.Windows.Forms;
+using 翻译姬;
 
 namespace Sunny.UI
 {
@@ -1636,6 +1637,7 @@ namespace Sunny.UI
             }
             else
             {
+
                 FormEx.SetFormRoundRectRegion(this, ShowRadius ? 5 : 0);
             }
 

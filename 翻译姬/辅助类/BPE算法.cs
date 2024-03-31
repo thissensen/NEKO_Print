@@ -25,18 +25,15 @@ public class BPE算法 {
     /// </summary>
     /// <param name="模型词表">GPT模型词表</param>
     /// <exception cref="FormatException"></exception>
-    public BPE算法() {
+    /*public BPE算法() {
         //格式化
         var bpeDict = new Dictionary<byte[], int>(new ByteArrayComparer());
-        if (string.IsNullOrWhiteSpace(全局数据.GPT设置数据.模型词表)) {
-            throw new Exception($"请选择模型词表后方可计算Token");
-        }
-        if (!File.Exists(全局数据.GPT设置数据.模型词表)) {
-            throw new Exception("模型词表路径不存在");
+        if (!File.Exists(Program.GPT词表路径)) {
+            throw new Exception("模型词表路径不存在，请联系开发者");
         }
         string[] 模型词表;
         try {
-            模型词表 = File.ReadAllLines(全局数据.GPT设置数据.模型词表);
+            模型词表 = File.ReadAllLines(Program.GPT词表路径);
         } catch (Exception ex) {
             throw new Exception($"模型词表读取错误：{ex.Message}");
         }
@@ -56,7 +53,7 @@ public class BPE算法 {
             bpeDict[tokenBytes] = rank;
         }
         _corePBE = new CoreBPE(bpeDict, special_tokens, @"(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\r\n\p{L}\p{N}]?\p{L}+|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n]*|\s*[\r\n]+|\s+(?!\S)|\s+");
-    }
+    }*/
 
     public int Token计算(string text) {
         try {

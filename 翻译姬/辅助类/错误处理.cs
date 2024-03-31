@@ -11,7 +11,7 @@ namespace 翻译姬 {
 
         public static void 普通错误处理(string text) {
             lock (_普通lock) {
-                数据中转.文本显示AppendLine(text);
+                数据中转.文本显示AppendLine($"{text} {DateTime.Now:HH:mm:ss}");
             }
         }
 

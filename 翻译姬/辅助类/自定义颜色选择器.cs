@@ -18,7 +18,7 @@ public partial class 自定义颜色选择器 : 自定义Form {
     public 自定义颜色选择器(Color 所选颜色) {
         InitializeComponent();
         this.所选颜色 = 所选颜色;
-        edtA.DataBindings.Add("Text", ABar, "Value", false, DataSourceUpdateMode.OnPropertyChanged);
+        //edtA.DataBindings.Add("Text", ABar, "Value", false, DataSourceUpdateMode.OnPropertyChanged);
         edtR.DataBindings.Add("Text", RBar, "Value", false, DataSourceUpdateMode.OnPropertyChanged);
         edtG.DataBindings.Add("Text", GBar, "Value", false, DataSourceUpdateMode.OnPropertyChanged);
         edtB.DataBindings.Add("Text", BBar, "Value", false, DataSourceUpdateMode.OnPropertyChanged);
@@ -28,7 +28,7 @@ public partial class 自定义颜色选择器 : 自定义Form {
     }
 
     private void 自定义颜色选择器_Shown(object sender, EventArgs e) {
-        edtA.IntValue = 所选颜色.A;
+        //edtA.IntValue = 所选颜色.A;
         edtR.IntValue = 所选颜色.R;
         edtG.IntValue = 所选颜色.G;
         edtB.IntValue = 所选颜色.B;
@@ -49,7 +49,7 @@ public partial class 自定义颜色选择器 : 自定义Form {
     }
 
     private void 颜色变更_Changed(object sender, EventArgs e) {
-        var color = Color.FromArgb(edtA.IntValue, edtR.IntValue, edtG.IntValue, edtB.IntValue);
+        var color = Color.FromArgb(edtR.IntValue, edtG.IntValue, edtB.IntValue);
         颜色框.FillColor = color;
     }
 }

@@ -11,9 +11,13 @@ using System.Windows.Forms;
 
 namespace 翻译姬;
 public partial class GPT : 通用API窗体 {
+
+    public override Dictionary<string, int> QPS数据 => new Dictionary<string, int> {
+        ["自定义"] = 0
+    };
+
     public GPT() {
         InitializeComponent();
-        QPS数据.Add("自定义", -1);
         QPS.ReadOnly = true;
         KEY.Visible = false;
         秘钥.Width += KEY.Width;
@@ -21,7 +25,10 @@ public partial class GPT : 通用API窗体 {
         可用额度.ReadOnly = true;
     }
     protected override void QPS列数据变化(DataGridViewRow row, int 值) {
-        row.Cells[可用额度.DataPropertyName].Value = -1;
+        if (row == null) {
+            return;
+        }
+        row.Cells[可用额度.DataPropertyName].Value = 0;
     }
     protected override void 前往注册Btn_Click(object sender, EventArgs e) {
         MessageBoxEx.Show("GPT注册请自行解决");

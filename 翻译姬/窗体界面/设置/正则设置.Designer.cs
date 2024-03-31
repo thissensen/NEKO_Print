@@ -132,7 +132,7 @@
             // 提示内容Box
             // 
             this.提示内容Box.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.提示内容Box.Font = new System.Drawing.Font("微软雅黑", 7F);
+            this.提示内容Box.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.提示内容Box.Location = new System.Drawing.Point(13, 194);
             this.提示内容Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.提示内容Box.MinimumSize = new System.Drawing.Size(1, 16);
@@ -144,8 +144,8 @@
             this.提示内容Box.Size = new System.Drawing.Size(383, 96);
             this.提示内容Box.Style = Sunny.UI.UIStyle.Custom;
             this.提示内容Box.TabIndex = 10;
-            this.提示内容Box.Text = "提取型正则规范：\r\n1、使用()提取，每段正则只允许出现一个，不完全匹配不会提取\r\n    样例：^@name=([^ ]*).*$\r\n2、|符号用于正则的分段\r" +
-    "\n    样例：正则段A|正则段B\r\n正则优先级顺序：提取前行过滤正则+提取型正则 -> 行过滤正则 -> 文本过滤正则";
+            this.提示内容Box.Text = "执行顺序：先【提取类正则】，提取不到则【行过滤正则】\r\n1、提取型正则使用()提取\r\n2、提取型正则(?\'name\'xxx)用于标记人名，人名不会被机翻\r\n3、文" +
+    "本过滤正则用于文本切割";
             this.提示内容Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.提示内容Box.Watermark = "";
             // 
@@ -365,6 +365,7 @@
             this.查询表格.Size = new System.Drawing.Size(987, 282);
             this.查询表格.TabIndex = 2;
             this.查询表格.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.查询表格_CellClick);
+            this.查询表格.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.查询表格_CellMouseUp);
             // 
             // ID
             // 
@@ -386,28 +387,32 @@
             this.行过滤正则.DataPropertyName = "行过滤正则";
             this.行过滤正则.HeaderText = "行过滤正则";
             this.行过滤正则.Name = "行过滤正则";
-            this.行过滤正则.Width = 200;
+            this.行过滤正则.ReadOnly = true;
+            this.行过滤正则.Width = 222;
             // 
             // 文本过滤正则
             // 
             this.文本过滤正则.DataPropertyName = "文本过滤正则";
             this.文本过滤正则.HeaderText = "文本过滤正则";
             this.文本过滤正则.Name = "文本过滤正则";
-            this.文本过滤正则.Width = 290;
+            this.文本过滤正则.ReadOnly = true;
+            this.文本过滤正则.Width = 222;
             // 
             // 提取前行过滤正则
             // 
             this.提取前行过滤正则.DataPropertyName = "提取前行过滤正则";
             this.提取前行过滤正则.HeaderText = "提取前行过滤正则";
             this.提取前行过滤正则.Name = "提取前行过滤正则";
-            this.提取前行过滤正则.Width = 200;
+            this.提取前行过滤正则.ReadOnly = true;
+            this.提取前行过滤正则.Width = 222;
             // 
             // 提取型正则
             // 
             this.提取型正则.DataPropertyName = "提取型正则";
             this.提取型正则.HeaderText = "提取型正则";
             this.提取型正则.Name = "提取型正则";
-            this.提取型正则.Width = 200;
+            this.提取型正则.ReadOnly = true;
+            this.提取型正则.Width = 224;
             // 
             // 正则设置
             // 
@@ -438,16 +443,16 @@
         private 组合控件TextBox 提取前行过滤正则Box;
         private 组合控件TextBox 文本过滤正则Box;
         private 组合控件TextBox 行过滤正则Box;
+        private Sunny.UI.UISymbolLabel uiSymbolLabel1;
+        private Sunny.UI.UIButton 预览Btn;
+        private Sunny.UI.UITextBox 提示内容Box;
+        private 组合控件TextBox 机翻后Box;
+        private 组合控件TextBox 待机翻Box;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn 正则名称;
         private System.Windows.Forms.DataGridViewTextBoxColumn 行过滤正则;
         private System.Windows.Forms.DataGridViewTextBoxColumn 文本过滤正则;
         private System.Windows.Forms.DataGridViewTextBoxColumn 提取前行过滤正则;
         private System.Windows.Forms.DataGridViewTextBoxColumn 提取型正则;
-        private Sunny.UI.UISymbolLabel uiSymbolLabel1;
-        private Sunny.UI.UIButton 预览Btn;
-        private Sunny.UI.UITextBox 提示内容Box;
-        private 组合控件TextBox 机翻后Box;
-        private 组合控件TextBox 待机翻Box;
     }
 }

@@ -185,9 +185,9 @@
         private Sunny.UI.UIPanel 窗体总Panel;
         private Sunny.UI.UIPanel 按钮区Panel;
         private Sunny.UI.UIPanel 标题栏Panel;
-        private Sunny.UI.UIButton 取消Btn;
-        private Sunny.UI.UIButton 确认Btn;
         private Sunny.UI.UIPanel 中间区Panel;
         private Sunny.UI.UIRichTextBox lbMsg;
+        public Sunny.UI.UIButton 取消Btn;
+        public Sunny.UI.UIButton 确认Btn;
     }
 }

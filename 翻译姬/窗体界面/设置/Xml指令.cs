@@ -78,8 +78,8 @@ public class Xml指令 : Json指令 {
             }
             DataRow 指令row = 查询表格.DataTable.Clone().NewRow();
             指令row["指令集"] = string.Join("|", 指令集Lines);
-            string[] res = 文本读写.Xml提取(指令表格.Tag.ToString(), 指令row);
-            提取结果Box.Text = string.Join(Environment.NewLine, res);
+            文本[] res = 文本读写.Xml提取(指令表格.Tag.ToString(), 指令row);
+            提取结果Box.Text = string.Join(Environment.NewLine, res.获取原文组());
 
         } catch (Exception ex) {
             消息框帮助.轻便消息(ex.Message, 查询表格, UINotifierType.WARNING);

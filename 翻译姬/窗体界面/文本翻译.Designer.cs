@@ -26,6 +26,7 @@
             this.开始Btn = new Sunny.UI.UIButton();
             this.预显示Btn = new Sunny.UI.UIButton();
             this.控件区Panel = new Sunny.UI.UIPanel();
+            this.缓存续翻Btn = new Sunny.UI.UIButton();
             this.实际使用字符Label = new Sunny.UI.UILabel();
             this.uiLabel13 = new Sunny.UI.UILabel();
             this.写出编码Box = new Sunny.UI.UIComboBox();
@@ -66,7 +67,7 @@
             this.开始Btn.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.开始Btn.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.开始Btn.Font = new System.Drawing.Font("微软雅黑", 48F);
-            this.开始Btn.Location = new System.Drawing.Point(78, 12);
+            this.开始Btn.Location = new System.Drawing.Point(24, 12);
             this.开始Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.开始Btn.Name = "开始Btn";
             this.开始Btn.Radius = 15;
@@ -90,7 +91,7 @@
             this.预显示Btn.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.预显示Btn.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.预显示Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.预显示Btn.Location = new System.Drawing.Point(309, 483);
+            this.预显示Btn.Location = new System.Drawing.Point(309, 450);
             this.预显示Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.预显示Btn.Name = "预显示Btn";
             this.预显示Btn.Radius = 15;
@@ -98,7 +99,7 @@
             this.预显示Btn.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
             this.预显示Btn.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.预显示Btn.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
-            this.预显示Btn.Size = new System.Drawing.Size(100, 64);
+            this.预显示Btn.Size = new System.Drawing.Size(100, 35);
             this.预显示Btn.Style = Sunny.UI.UIStyle.Colorful;
             this.预显示Btn.TabIndex = 9;
             this.预显示Btn.Text = "预显示";
@@ -107,6 +108,7 @@
             // 
             // 控件区Panel
             // 
+            this.控件区Panel.Controls.Add(this.缓存续翻Btn);
             this.控件区Panel.Controls.Add(this.实际使用字符Label);
             this.控件区Panel.Controls.Add(this.uiLabel13);
             this.控件区Panel.Controls.Add(this.写出编码Box);
@@ -153,11 +155,36 @@
             this.控件区Panel.Text = null;
             this.控件区Panel.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // 缓存续翻Btn
+            // 
+            this.缓存续翻Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.缓存续翻Btn.Enabled = false;
+            this.缓存续翻Btn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.缓存续翻Btn.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.缓存续翻Btn.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.缓存续翻Btn.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.缓存续翻Btn.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.缓存续翻Btn.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.缓存续翻Btn.Location = new System.Drawing.Point(318, 12);
+            this.缓存续翻Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.缓存续翻Btn.Name = "缓存续翻Btn";
+            this.缓存续翻Btn.Radius = 15;
+            this.缓存续翻Btn.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.缓存续翻Btn.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.缓存续翻Btn.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.缓存续翻Btn.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.缓存续翻Btn.Size = new System.Drawing.Size(100, 76);
+            this.缓存续翻Btn.Style = Sunny.UI.UIStyle.Colorful;
+            this.缓存续翻Btn.TabIndex = 86;
+            this.缓存续翻Btn.Text = "缓存续翻";
+            this.缓存续翻Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.缓存续翻Btn.Click += new System.EventHandler(this.缓存续翻Btn_Click);
+            // 
             // 实际使用字符Label
             // 
             this.实际使用字符Label.AutoSize = true;
             this.实际使用字符Label.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.实际使用字符Label.Location = new System.Drawing.Point(19, 551);
+            this.实际使用字符Label.Location = new System.Drawing.Point(19, 510);
             this.实际使用字符Label.Name = "实际使用字符Label";
             this.实际使用字符Label.Size = new System.Drawing.Size(115, 20);
             this.实际使用字符Label.Style = Sunny.UI.UIStyle.Colorful;
@@ -169,7 +196,7 @@
             // 
             this.uiLabel13.AutoSize = true;
             this.uiLabel13.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel13.Location = new System.Drawing.Point(213, 450);
+            this.uiLabel13.Location = new System.Drawing.Point(213, 411);
             this.uiLabel13.Name = "uiLabel13";
             this.uiLabel13.Size = new System.Drawing.Size(74, 21);
             this.uiLabel13.Style = Sunny.UI.UIStyle.Colorful;
@@ -192,7 +219,7 @@
             "GBK"});
             this.写出编码Box.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.写出编码Box.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.写出编码Box.Location = new System.Drawing.Point(297, 446);
+            this.写出编码Box.Location = new System.Drawing.Point(297, 407);
             this.写出编码Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.写出编码Box.MinimumSize = new System.Drawing.Size(63, 0);
             this.写出编码Box.Name = "写出编码Box";
@@ -208,7 +235,7 @@
             // 
             this.uiLabel8.AutoSize = true;
             this.uiLabel8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel8.Location = new System.Drawing.Point(214, 407);
+            this.uiLabel8.Location = new System.Drawing.Point(214, 368);
             this.uiLabel8.Name = "uiLabel8";
             this.uiLabel8.Size = new System.Drawing.Size(74, 21);
             this.uiLabel8.Style = Sunny.UI.UIStyle.Colorful;
@@ -233,7 +260,7 @@
             "UTF-16LE"});
             this.读取编码Box.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.读取编码Box.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.读取编码Box.Location = new System.Drawing.Point(297, 403);
+            this.读取编码Box.Location = new System.Drawing.Point(297, 364);
             this.读取编码Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.读取编码Box.MinimumSize = new System.Drawing.Size(63, 0);
             this.读取编码Box.Name = "读取编码Box";
@@ -249,7 +276,7 @@
             // 
             this.uiLabel6.AutoSize = true;
             this.uiLabel6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel6.Location = new System.Drawing.Point(19, 407);
+            this.uiLabel6.Location = new System.Drawing.Point(19, 368);
             this.uiLabel6.Name = "uiLabel6";
             this.uiLabel6.Size = new System.Drawing.Size(58, 21);
             this.uiLabel6.Style = Sunny.UI.UIStyle.Colorful;
@@ -273,13 +300,13 @@
             "简中"});
             this.源语言Box.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.源语言Box.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.源语言Box.Location = new System.Drawing.Point(101, 403);
+            this.源语言Box.Location = new System.Drawing.Point(101, 364);
             this.源语言Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.源语言Box.MinimumSize = new System.Drawing.Size(63, 0);
             this.源语言Box.Name = "源语言Box";
             this.源语言Box.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.源语言Box.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.源语言Box.Size = new System.Drawing.Size(86, 29);
+            this.源语言Box.Size = new System.Drawing.Size(104, 29);
             this.源语言Box.Style = Sunny.UI.UIStyle.Colorful;
             this.源语言Box.TabIndex = 79;
             this.源语言Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -289,7 +316,7 @@
             // 
             this.uiLabel7.AutoSize = true;
             this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel7.Location = new System.Drawing.Point(19, 450);
+            this.uiLabel7.Location = new System.Drawing.Point(19, 411);
             this.uiLabel7.Name = "uiLabel7";
             this.uiLabel7.Size = new System.Drawing.Size(74, 21);
             this.uiLabel7.Style = Sunny.UI.UIStyle.Colorful;
@@ -313,13 +340,13 @@
             "英语"});
             this.目标语言Box.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.目标语言Box.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.目标语言Box.Location = new System.Drawing.Point(101, 446);
+            this.目标语言Box.Location = new System.Drawing.Point(101, 407);
             this.目标语言Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.目标语言Box.MinimumSize = new System.Drawing.Size(63, 0);
             this.目标语言Box.Name = "目标语言Box";
             this.目标语言Box.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.目标语言Box.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.目标语言Box.Size = new System.Drawing.Size(86, 29);
+            this.目标语言Box.Size = new System.Drawing.Size(104, 29);
             this.目标语言Box.Style = Sunny.UI.UIStyle.Colorful;
             this.目标语言Box.TabIndex = 77;
             this.目标语言Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -334,7 +361,7 @@
             this.数据处理Btn.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.数据处理Btn.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.数据处理Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.数据处理Btn.Location = new System.Drawing.Point(309, 571);
+            this.数据处理Btn.Location = new System.Drawing.Point(309, 491);
             this.数据处理Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.数据处理Btn.Name = "数据处理Btn";
             this.数据处理Btn.Radius = 15;
@@ -353,7 +380,7 @@
             // 
             this.uiLabel5.AutoSize = true;
             this.uiLabel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel5.Location = new System.Drawing.Point(19, 493);
+            this.uiLabel5.Location = new System.Drawing.Point(19, 454);
             this.uiLabel5.Name = "uiLabel5";
             this.uiLabel5.Size = new System.Drawing.Size(106, 21);
             this.uiLabel5.Style = Sunny.UI.UIStyle.Colorful;
@@ -365,7 +392,7 @@
             // 
             this.记住读取目录Switch.ActiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.记住读取目录Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.记住读取目录Switch.Location = new System.Drawing.Point(144, 489);
+            this.记住读取目录Switch.Location = new System.Drawing.Point(144, 450);
             this.记住读取目录Switch.MinimumSize = new System.Drawing.Size(1, 1);
             this.记住读取目录Switch.Name = "记住读取目录Switch";
             this.记住读取目录Switch.Size = new System.Drawing.Size(75, 29);
@@ -377,7 +404,7 @@
             // 
             this.uiLabel4.AutoSize = true;
             this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel4.Location = new System.Drawing.Point(19, 368);
+            this.uiLabel4.Location = new System.Drawing.Point(19, 329);
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.Size = new System.Drawing.Size(74, 21);
             this.uiLabel4.Style = Sunny.UI.UIStyle.Colorful;
@@ -396,7 +423,7 @@
             this.使用正则Box.ItemRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.使用正则Box.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.使用正则Box.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.使用正则Box.Location = new System.Drawing.Point(101, 364);
+            this.使用正则Box.Location = new System.Drawing.Point(101, 325);
             this.使用正则Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.使用正则Box.MinimumSize = new System.Drawing.Size(63, 0);
             this.使用正则Box.Name = "使用正则Box";
@@ -412,7 +439,7 @@
             // 
             this.uiLabel3.AutoSize = true;
             this.uiLabel3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel3.Location = new System.Drawing.Point(19, 329);
+            this.uiLabel3.Location = new System.Drawing.Point(214, 251);
             this.uiLabel3.Name = "uiLabel3";
             this.uiLabel3.Size = new System.Drawing.Size(74, 21);
             this.uiLabel3.Style = Sunny.UI.UIStyle.Colorful;
@@ -431,13 +458,13 @@
             this.写出方式Box.ItemRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.写出方式Box.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.写出方式Box.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.写出方式Box.Location = new System.Drawing.Point(101, 325);
+            this.写出方式Box.Location = new System.Drawing.Point(297, 247);
             this.写出方式Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.写出方式Box.MinimumSize = new System.Drawing.Size(63, 0);
             this.写出方式Box.Name = "写出方式Box";
             this.写出方式Box.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.写出方式Box.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.写出方式Box.Size = new System.Drawing.Size(308, 29);
+            this.写出方式Box.Size = new System.Drawing.Size(112, 29);
             this.写出方式Box.Style = Sunny.UI.UIStyle.Colorful;
             this.写出方式Box.TabIndex = 70;
             this.写出方式Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -473,7 +500,7 @@
             this.读取方式Box.Name = "读取方式Box";
             this.读取方式Box.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.读取方式Box.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.读取方式Box.Size = new System.Drawing.Size(308, 29);
+            this.读取方式Box.Size = new System.Drawing.Size(104, 29);
             this.读取方式Box.Style = Sunny.UI.UIStyle.Colorful;
             this.读取方式Box.TabIndex = 68;
             this.读取方式Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -520,7 +547,7 @@
             // 
             this.预计使用字符Label.AutoSize = true;
             this.预计使用字符Label.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.预计使用字符Label.Location = new System.Drawing.Point(19, 531);
+            this.预计使用字符Label.Location = new System.Drawing.Point(19, 490);
             this.预计使用字符Label.Name = "预计使用字符Label";
             this.预计使用字符Label.Size = new System.Drawing.Size(115, 20);
             this.预计使用字符Label.Style = Sunny.UI.UIStyle.Colorful;
@@ -591,7 +618,6 @@
             this.写出目录Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.写出目录Box.MinimumSize = new System.Drawing.Size(1, 16);
             this.写出目录Box.Name = "写出目录Box";
-            this.写出目录Box.ReadOnly = true;
             this.写出目录Box.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.写出目录Box.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.写出目录Box.ShowText = false;
@@ -616,7 +642,6 @@
             this.读取目录Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.读取目录Box.MinimumSize = new System.Drawing.Size(1, 16);
             this.读取目录Box.Name = "读取目录Box";
-            this.读取目录Box.ReadOnly = true;
             this.读取目录Box.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.读取目录Box.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.读取目录Box.ShowText = false;
@@ -662,6 +687,7 @@
             this.机翻接口Box.Text = "2345";
             this.机翻接口Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.机翻接口Box.Watermark = "";
+            this.机翻接口Box.TextChanged += new System.EventHandler(this.机翻接口Box_TextChanged);
             // 
             // 文本显示Box
             // 
@@ -746,5 +772,6 @@
         private Sunny.UI.UILabel uiLabel8;
         private Sunny.UI.UIComboBox 读取编码Box;
         private Sunny.UI.UILabel 实际使用字符Label;
+        private Sunny.UI.UIButton 缓存续翻Btn;
     }
 }

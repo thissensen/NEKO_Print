@@ -48,7 +48,7 @@ public class DataGridViewComboBoxCellEx : DataGridViewComboBoxCell {
 
     public override Type ValueType {
         get {
-            return typeof(string);
+            return typeof(int);//不知道为什么，int就没事
         }
     }
 

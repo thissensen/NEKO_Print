@@ -231,5 +231,34 @@ namespace 翻译姬 {
             }
         }
 
+        private void 初始化Btn_Click(object sender, EventArgs e) {
+            if (MessageBoxEx.Show("仅清空默认设置，不影响账号、正则、替换列表等数据", "提示", 提示窗按钮.确认取消)) {
+                数据库.Execute("delete from 窗体序列化");
+                Environment.Exit(0);
+            }
+        }
+
+        private void 清空所有Btn_Click(object sender, EventArgs e) {
+            if (MessageBoxEx.Show("将清空所有数据！", "提示", 提示窗按钮.确认取消)) {
+#if DEBUG
+#else
+                var con = 全局数据.数据库 as SQLite数据库;
+                con.con.Close();
+                con.con.Dispose();
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+                try {
+                    File.Delete(Program.数据库路径);
+                    Environment.Exit(0);
+                } catch (Exception ex) {
+                    MessageBoxEx.Show($"删除失败：{ex.Message}");
+                }
+#endif
+            }
+        }
+
+        private void 本机数据Btn_Click(object sender, EventArgs e) {
+            工具类.CMD异步调用($"explorer \"{Program.软件存储目录}\"");
+        }
     }
 }

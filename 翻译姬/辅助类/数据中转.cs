@@ -9,12 +9,19 @@ using System.Windows.Forms;
 namespace 翻译姬 {
     public static class 数据中转 {
 
+        static 数据中转() {
+            异常处理.翻译姬核心异常处理 += text => 文本显示AppendLine($"{text} {DateTime.Now:HH:mm:ss}");
+            Util.机翻完成行数 += num => 进度条当前值增加(num);
+            API接口模板.翻译姬核心使用字符增加 += num => 使用字符增加(num);
+        }
+
+        public static Form 数据处理 { get; set; }   
         public static Form 主窗体 { get; set; }
         public static UIProcessBar 进度条 { get; set; }
         public static UITextBox 文本显示Box { get; set; }
         public static UILabel 实际使用字符Label { get; set; }
 
-        public static void 文本显示Append(string text) {
+        private static void 文本显示Append(string text) {
             文本显示Box?.BeginInvoke(new Action(() => {
                 文本显示Box.AppendText(text);
             }));

@@ -32,39 +32,52 @@ partial class GPT设置 {
             this.单次机翻行Box = new Sunny.UI.UITextBox();
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.上下文提示Switch = new 翻译姬.自定义Switch();
-            this.uiLabel19 = new Sunny.UI.UILabel();
-            this.使用多线程Switch = new 翻译姬.自定义Switch();
             this.使用模型Label = new Sunny.UI.UILabel();
             this.使用模型Box = new Sunny.UI.UITextBox();
             this.连接域名Label = new Sunny.UI.UILabel();
             this.连接域名Box = new Sunny.UI.UITextBox();
-            this.uiLabel3 = new Sunny.UI.UILabel();
             this.uiLabel5 = new Sunny.UI.UILabel();
             this.uiLabel6 = new Sunny.UI.UILabel();
             this.语境Box = new Sunny.UI.UITextBox();
-            this.预设原文Box = new Sunny.UI.UITextBox();
-            this.uiLabel7 = new Sunny.UI.UILabel();
-            this.预设返回Box = new Sunny.UI.UITextBox();
-            this.uiLabel8 = new Sunny.UI.UILabel();
-            this.uiLabel9 = new Sunny.UI.UILabel();
-            this.发送预设Switch = new 翻译姬.自定义Switch();
-            this.模型词表Btn = new Sunny.UI.UIButton();
-            this.模型词表Box = new Sunny.UI.UITextBox();
-            this.uiLabel10 = new Sunny.UI.UILabel();
-            this.下载Btn = new Sunny.UI.UIButton();
             this.uiLabel11 = new Sunny.UI.UILabel();
             this.次数限制Box = new Sunny.UI.UITextBox();
             this.uiLabel12 = new Sunny.UI.UILabel();
             this.Token限制Box = new Sunny.UI.UITextBox();
-            this.预设原文选择Box = new Sunny.UI.UIComboBox();
-            this.预设返回选择Box = new Sunny.UI.UIComboBox();
+            this.uiLabel13 = new Sunny.UI.UILabel();
+            this.异常重试上限Box = new Sunny.UI.UITextBox();
+            this.预设源语言Box = new Sunny.UI.UIComboBox();
+            this.uiLabel15 = new Sunny.UI.UILabel();
+            this.上下文深度Box = new Sunny.UI.UITextBox();
+            this.预设目标语言Box = new Sunny.UI.UIComboBox();
+            this.uiLabel10 = new Sunny.UI.UILabel();
+            this.uiLabel14 = new Sunny.UI.UILabel();
+            this.连续对话合并Switch = new 翻译姬.自定义Switch();
+            this.uiLabel16 = new Sunny.UI.UILabel();
+            this.合并分隔符Box = new Sunny.UI.UITextBox();
+            this.uiLabel7 = new Sunny.UI.UILabel();
+            this.漏翻重试次数Box = new Sunny.UI.UITextBox();
+            this.uiLabel8 = new Sunny.UI.UILabel();
+            this.漏翻检测Switch = new 翻译姬.自定义Switch();
+            this.uiLabel9 = new Sunny.UI.UILabel();
+            this.润色语境Box = new Sunny.UI.UITextBox();
+            this.uiLabel17 = new Sunny.UI.UILabel();
+            this.翻后润色Switch = new 翻译姬.自定义Switch();
+            this.词汇表设置Btn = new Sunny.UI.UIButton();
+            this.uiLabel18 = new Sunny.UI.UILabel();
+            this.错误跳过Switch = new 翻译姬.自定义Switch();
+            this.Http设置Btn = new Sunny.UI.UIButton();
+            this.uiLine1 = new Sunny.UI.UILine();
+            this.uiLine2 = new Sunny.UI.UILine();
+            this.uiLine3 = new Sunny.UI.UILine();
+            this.uiLine4 = new Sunny.UI.UILine();
+            this.uiLine5 = new Sunny.UI.UILine();
             this.SuspendLayout();
             // 
             // uiLabel4
             // 
             this.uiLabel4.AutoSize = true;
             this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel4.Location = new System.Drawing.Point(330, 85);
+            this.uiLabel4.Location = new System.Drawing.Point(29, 560);
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.Size = new System.Drawing.Size(132, 21);
             this.uiLabel4.TabIndex = 107;
@@ -77,14 +90,14 @@ partial class GPT设置 {
             this.请求等待延迟Box.DoubleValue = 3D;
             this.请求等待延迟Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.请求等待延迟Box.IntValue = 3;
-            this.请求等待延迟Box.Location = new System.Drawing.Point(510, 81);
+            this.请求等待延迟Box.Location = new System.Drawing.Point(225, 556);
             this.请求等待延迟Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.请求等待延迟Box.Maximum = 10D;
+            this.请求等待延迟Box.Maximum = 360D;
             this.请求等待延迟Box.Minimum = 1D;
             this.请求等待延迟Box.MinimumSize = new System.Drawing.Size(1, 16);
             this.请求等待延迟Box.Name = "请求等待延迟Box";
             this.请求等待延迟Box.ShowText = false;
-            this.请求等待延迟Box.Size = new System.Drawing.Size(104, 29);
+            this.请求等待延迟Box.Size = new System.Drawing.Size(75, 29);
             this.请求等待延迟Box.TabIndex = 106;
             this.请求等待延迟Box.Text = "3";
             this.请求等待延迟Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -95,7 +108,7 @@ partial class GPT设置 {
             // 
             this.uiLabel2.AutoSize = true;
             this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel2.Location = new System.Drawing.Point(627, 85);
+            this.uiLabel2.Location = new System.Drawing.Point(29, 485);
             this.uiLabel2.Name = "uiLabel2";
             this.uiLabel2.Size = new System.Drawing.Size(90, 21);
             this.uiLabel2.TabIndex = 105;
@@ -108,9 +121,9 @@ partial class GPT设置 {
             this.错行重试数Box.DoubleValue = 1D;
             this.错行重试数Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.错行重试数Box.IntValue = 1;
-            this.错行重试数Box.Location = new System.Drawing.Point(721, 81);
+            this.错行重试数Box.Location = new System.Drawing.Point(225, 481);
             this.错行重试数Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.错行重试数Box.Maximum = 10D;
+            this.错行重试数Box.Maximum = 100D;
             this.错行重试数Box.Minimum = 0D;
             this.错行重试数Box.MinimumSize = new System.Drawing.Size(1, 16);
             this.错行重试数Box.Name = "错行重试数Box";
@@ -126,7 +139,7 @@ partial class GPT设置 {
             // 
             this.uiLabel21.AutoSize = true;
             this.uiLabel21.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel21.Location = new System.Drawing.Point(627, 49);
+            this.uiLabel21.Location = new System.Drawing.Point(29, 524);
             this.uiLabel21.Name = "uiLabel21";
             this.uiLabel21.Size = new System.Drawing.Size(90, 21);
             this.uiLabel21.TabIndex = 103;
@@ -139,7 +152,7 @@ partial class GPT设置 {
             this.单次机翻行Box.DoubleValue = 8D;
             this.单次机翻行Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.单次机翻行Box.IntValue = 8;
-            this.单次机翻行Box.Location = new System.Drawing.Point(721, 45);
+            this.单次机翻行Box.Location = new System.Drawing.Point(225, 520);
             this.单次机翻行Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.单次机翻行Box.Maximum = 500D;
             this.单次机翻行Box.Minimum = 1D;
@@ -157,7 +170,7 @@ partial class GPT设置 {
             // 
             this.uiLabel1.AutoSize = true;
             this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel1.Location = new System.Drawing.Point(330, 121);
+            this.uiLabel1.Location = new System.Drawing.Point(29, 141);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.Size = new System.Drawing.Size(90, 21);
             this.uiLabel1.TabIndex = 100;
@@ -167,7 +180,7 @@ partial class GPT设置 {
             // 上下文提示Switch
             // 
             this.上下文提示Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.上下文提示Switch.Location = new System.Drawing.Point(428, 117);
+            this.上下文提示Switch.Location = new System.Drawing.Point(225, 137);
             this.上下文提示Switch.MinimumSize = new System.Drawing.Size(1, 1);
             this.上下文提示Switch.Name = "上下文提示Switch";
             this.上下文提示Switch.Size = new System.Drawing.Size(75, 29);
@@ -175,33 +188,11 @@ partial class GPT设置 {
             this.上下文提示Switch.Text = "自定义Switch1";
             this.上下文提示Switch.ActiveChanged += new System.EventHandler(this.上下文提示Switch_ActiveChanged);
             // 
-            // uiLabel19
-            // 
-            this.uiLabel19.AutoSize = true;
-            this.uiLabel19.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel19.Location = new System.Drawing.Point(29, 121);
-            this.uiLabel19.Name = "uiLabel19";
-            this.uiLabel19.Size = new System.Drawing.Size(90, 21);
-            this.uiLabel19.TabIndex = 98;
-            this.uiLabel19.Text = "使用多线程";
-            this.uiLabel19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // 使用多线程Switch
-            // 
-            this.使用多线程Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.使用多线程Switch.Location = new System.Drawing.Point(143, 117);
-            this.使用多线程Switch.MinimumSize = new System.Drawing.Size(1, 1);
-            this.使用多线程Switch.Name = "使用多线程Switch";
-            this.使用多线程Switch.Size = new System.Drawing.Size(75, 29);
-            this.使用多线程Switch.TabIndex = 99;
-            this.使用多线程Switch.Text = "自定义Switch1";
-            this.使用多线程Switch.ActiveChanged += new System.EventHandler(this.使用多线程Switch_ActiveChanged);
-            // 
             // 使用模型Label
             // 
             this.使用模型Label.AutoSize = true;
             this.使用模型Label.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.使用模型Label.Location = new System.Drawing.Point(330, 49);
+            this.使用模型Label.Location = new System.Drawing.Point(693, 13);
             this.使用模型Label.Name = "使用模型Label";
             this.使用模型Label.Size = new System.Drawing.Size(74, 21);
             this.使用模型Label.TabIndex = 95;
@@ -212,7 +203,7 @@ partial class GPT设置 {
             // 
             this.使用模型Box.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.使用模型Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.使用模型Box.Location = new System.Drawing.Point(428, 45);
+            this.使用模型Box.Location = new System.Drawing.Point(777, 9);
             this.使用模型Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.使用模型Box.MinimumSize = new System.Drawing.Size(1, 16);
             this.使用模型Box.Name = "使用模型Box";
@@ -247,17 +238,6 @@ partial class GPT设置 {
             this.连接域名Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.连接域名Box.Watermark = "例如：api.openai.com";
             // 
-            // uiLabel3
-            // 
-            this.uiLabel3.AutoSize = true;
-            this.uiLabel3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel3.Location = new System.Drawing.Point(152, 13);
-            this.uiLabel3.Name = "uiLabel3";
-            this.uiLabel3.Size = new System.Drawing.Size(67, 21);
-            this.uiLabel3.TabIndex = 108;
-            this.uiLabel3.Text = "https://";
-            this.uiLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // uiLabel5
             // 
             this.uiLabel5.AutoSize = true;
@@ -273,7 +253,7 @@ partial class GPT设置 {
             // 
             this.uiLabel6.AutoSize = true;
             this.uiLabel6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel6.Location = new System.Drawing.Point(29, 224);
+            this.uiLabel6.Location = new System.Drawing.Point(326, 102);
             this.uiLabel6.Name = "uiLabel6";
             this.uiLabel6.Size = new System.Drawing.Size(141, 21);
             this.uiLabel6.TabIndex = 110;
@@ -284,152 +264,22 @@ partial class GPT设置 {
             // 
             this.语境Box.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.语境Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.语境Box.Location = new System.Drawing.Point(33, 250);
+            this.语境Box.Location = new System.Drawing.Point(326, 137);
             this.语境Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.语境Box.MinimumSize = new System.Drawing.Size(1, 16);
             this.语境Box.Multiline = true;
             this.语境Box.Name = "语境Box";
             this.语境Box.ShowText = false;
-            this.语境Box.Size = new System.Drawing.Size(927, 87);
+            this.语境Box.Size = new System.Drawing.Size(637, 200);
             this.语境Box.TabIndex = 111;
             this.语境Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.语境Box.Watermark = "";
-            // 
-            // 预设原文Box
-            // 
-            this.预设原文Box.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.预设原文Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.预设原文Box.Location = new System.Drawing.Point(33, 386);
-            this.预设原文Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.预设原文Box.MinimumSize = new System.Drawing.Size(1, 16);
-            this.预设原文Box.Multiline = true;
-            this.预设原文Box.Name = "预设原文Box";
-            this.预设原文Box.ShowText = false;
-            this.预设原文Box.Size = new System.Drawing.Size(444, 218);
-            this.预设原文Box.TabIndex = 113;
-            this.预设原文Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.预设原文Box.Watermark = "";
-            // 
-            // uiLabel7
-            // 
-            this.uiLabel7.AutoSize = true;
-            this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel7.Location = new System.Drawing.Point(29, 353);
-            this.uiLabel7.Name = "uiLabel7";
-            this.uiLabel7.Size = new System.Drawing.Size(107, 21);
-            this.uiLabel7.TabIndex = 112;
-            this.uiLabel7.Text = "预设原文Json";
-            this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // 预设返回Box
-            // 
-            this.预设返回Box.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.预设返回Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.预设返回Box.Location = new System.Drawing.Point(516, 386);
-            this.预设返回Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.预设返回Box.MinimumSize = new System.Drawing.Size(1, 16);
-            this.预设返回Box.Multiline = true;
-            this.预设返回Box.Name = "预设返回Box";
-            this.预设返回Box.ShowText = false;
-            this.预设返回Box.Size = new System.Drawing.Size(444, 218);
-            this.预设返回Box.TabIndex = 115;
-            this.预设返回Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.预设返回Box.Watermark = "";
-            // 
-            // uiLabel8
-            // 
-            this.uiLabel8.AutoSize = true;
-            this.uiLabel8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel8.Location = new System.Drawing.Point(512, 353);
-            this.uiLabel8.Name = "uiLabel8";
-            this.uiLabel8.Size = new System.Drawing.Size(107, 21);
-            this.uiLabel8.TabIndex = 114;
-            this.uiLabel8.Text = "预设返回Json";
-            this.uiLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // uiLabel9
-            // 
-            this.uiLabel9.AutoSize = true;
-            this.uiLabel9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel9.Location = new System.Drawing.Point(557, 121);
-            this.uiLabel9.Name = "uiLabel9";
-            this.uiLabel9.Size = new System.Drawing.Size(74, 21);
-            this.uiLabel9.TabIndex = 116;
-            this.uiLabel9.Text = "发送预设";
-            this.uiLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // 发送预设Switch
-            // 
-            this.发送预设Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.发送预设Switch.Location = new System.Drawing.Point(642, 117);
-            this.发送预设Switch.MinimumSize = new System.Drawing.Size(1, 1);
-            this.发送预设Switch.Name = "发送预设Switch";
-            this.发送预设Switch.Size = new System.Drawing.Size(75, 29);
-            this.发送预设Switch.TabIndex = 117;
-            this.发送预设Switch.Text = "自定义Switch1";
-            this.发送预设Switch.ActiveChanged += new System.EventHandler(this.发送预设Switch_ActiveChanged);
-            // 
-            // 模型词表Btn
-            // 
-            this.模型词表Btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.模型词表Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.模型词表Btn.Location = new System.Drawing.Point(33, 155);
-            this.模型词表Btn.MinimumSize = new System.Drawing.Size(1, 1);
-            this.模型词表Btn.Name = "模型词表Btn";
-            this.模型词表Btn.Radius = 15;
-            this.模型词表Btn.Size = new System.Drawing.Size(77, 29);
-            this.模型词表Btn.TabIndex = 119;
-            this.模型词表Btn.Text = "模型词表";
-            this.模型词表Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.模型词表Btn.Click += new System.EventHandler(this.模型词表Btn_Click);
-            // 
-            // 模型词表Box
-            // 
-            this.模型词表Box.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.模型词表Box.Enabled = false;
-            this.模型词表Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.模型词表Box.Location = new System.Drawing.Point(33, 192);
-            this.模型词表Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.模型词表Box.MaxLength = 10000;
-            this.模型词表Box.MinimumSize = new System.Drawing.Size(1, 16);
-            this.模型词表Box.Name = "模型词表Box";
-            this.模型词表Box.ReadOnly = true;
-            this.模型词表Box.ShowText = false;
-            this.模型词表Box.Size = new System.Drawing.Size(927, 29);
-            this.模型词表Box.TabIndex = 118;
-            this.模型词表Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.模型词表Box.Watermark = "";
-            // 
-            // uiLabel10
-            // 
-            this.uiLabel10.AutoSize = true;
-            this.uiLabel10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel10.Location = new System.Drawing.Point(310, 159);
-            this.uiLabel10.Name = "uiLabel10";
-            this.uiLabel10.Size = new System.Drawing.Size(161, 21);
-            this.uiLabel10.TabIndex = 120;
-            this.uiLabel10.Text = "tip:用于预估Token数";
-            this.uiLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // 下载Btn
-            // 
-            this.下载Btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.下载Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.下载Btn.Location = new System.Drawing.Point(124, 155);
-            this.下载Btn.MinimumSize = new System.Drawing.Size(1, 1);
-            this.下载Btn.Name = "下载Btn";
-            this.下载Btn.Radius = 15;
-            this.下载Btn.Size = new System.Drawing.Size(151, 29);
-            this.下载Btn.TabIndex = 121;
-            this.下载Btn.Text = "cl100k_base下载";
-            this.下载Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.下载Btn.Click += new System.EventHandler(this.下载Btn_Click);
             // 
             // uiLabel11
             // 
             this.uiLabel11.AutoSize = true;
             this.uiLabel11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel11.Location = new System.Drawing.Point(29, 49);
+            this.uiLabel11.Location = new System.Drawing.Point(29, 52);
             this.uiLabel11.Name = "uiLabel11";
             this.uiLabel11.Size = new System.Drawing.Size(139, 21);
             this.uiLabel11.TabIndex = 123;
@@ -442,7 +292,7 @@ partial class GPT设置 {
             this.次数限制Box.DoubleValue = 3D;
             this.次数限制Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.次数限制Box.IntValue = 3;
-            this.次数限制Box.Location = new System.Drawing.Point(225, 45);
+            this.次数限制Box.Location = new System.Drawing.Point(225, 48);
             this.次数限制Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.次数限制Box.Maximum = 5000D;
             this.次数限制Box.Minimum = 3D;
@@ -460,7 +310,7 @@ partial class GPT设置 {
             // 
             this.uiLabel12.AutoSize = true;
             this.uiLabel12.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel12.Location = new System.Drawing.Point(29, 85);
+            this.uiLabel12.Location = new System.Drawing.Point(29, 88);
             this.uiLabel12.Name = "uiLabel12";
             this.uiLabel12.Size = new System.Drawing.Size(170, 21);
             this.uiLabel12.TabIndex = 125;
@@ -473,9 +323,9 @@ partial class GPT设置 {
             this.Token限制Box.DoubleValue = 150000D;
             this.Token限制Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Token限制Box.IntValue = 150000;
-            this.Token限制Box.Location = new System.Drawing.Point(225, 81);
+            this.Token限制Box.Location = new System.Drawing.Point(225, 84);
             this.Token限制Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Token限制Box.Maximum = 1000000D;
+            this.Token限制Box.Maximum = 100000000D;
             this.Token限制Box.Minimum = 10000D;
             this.Token限制Box.MinimumSize = new System.Drawing.Size(1, 16);
             this.Token限制Box.Name = "Token限制Box";
@@ -487,66 +337,432 @@ partial class GPT设置 {
             this.Token限制Box.Type = Sunny.UI.UITextBox.UIEditType.Integer;
             this.Token限制Box.Watermark = "";
             // 
-            // 预设原文选择Box
+            // uiLabel13
             // 
-            this.预设原文选择Box.DataSource = null;
-            this.预设原文选择Box.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.预设原文选择Box.FillColor = System.Drawing.Color.White;
-            this.预设原文选择Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.预设原文选择Box.Location = new System.Drawing.Point(143, 349);
-            this.预设原文选择Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.预设原文选择Box.MinimumSize = new System.Drawing.Size(63, 0);
-            this.预设原文选择Box.Name = "预设原文选择Box";
-            this.预设原文选择Box.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.预设原文选择Box.Size = new System.Drawing.Size(150, 29);
-            this.预设原文选择Box.TabIndex = 126;
-            this.预设原文选择Box.Text = "uiComboBox1";
-            this.预设原文选择Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.预设原文选择Box.Watermark = "";
-            this.预设原文选择Box.TextChanged += new System.EventHandler(this.预设选择下拉框_TextChanged);
+            this.uiLabel13.AutoSize = true;
+            this.uiLabel13.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel13.Location = new System.Drawing.Point(29, 446);
+            this.uiLabel13.Name = "uiLabel13";
+            this.uiLabel13.Size = new System.Drawing.Size(106, 21);
+            this.uiLabel13.TabIndex = 131;
+            this.uiLabel13.Text = "异常重试上限";
+            this.uiLabel13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // 预设返回选择Box
+            // 异常重试上限Box
             // 
-            this.预设返回选择Box.DataSource = null;
-            this.预设返回选择Box.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.预设返回选择Box.FillColor = System.Drawing.Color.White;
-            this.预设返回选择Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.预设返回选择Box.Location = new System.Drawing.Point(629, 349);
-            this.预设返回选择Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.预设返回选择Box.MinimumSize = new System.Drawing.Size(63, 0);
-            this.预设返回选择Box.Name = "预设返回选择Box";
-            this.预设返回选择Box.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.预设返回选择Box.Size = new System.Drawing.Size(150, 29);
-            this.预设返回选择Box.TabIndex = 127;
-            this.预设返回选择Box.Text = "uiComboBox1";
-            this.预设返回选择Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.预设返回选择Box.Watermark = "";
-            this.预设返回选择Box.TextChanged += new System.EventHandler(this.预设选择下拉框_TextChanged);
+            this.异常重试上限Box.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.异常重试上限Box.DoubleValue = 10D;
+            this.异常重试上限Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.异常重试上限Box.IntValue = 10;
+            this.异常重试上限Box.Location = new System.Drawing.Point(225, 442);
+            this.异常重试上限Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.异常重试上限Box.Maximum = 100D;
+            this.异常重试上限Box.Minimum = 3D;
+            this.异常重试上限Box.MinimumSize = new System.Drawing.Size(1, 16);
+            this.异常重试上限Box.Name = "异常重试上限Box";
+            this.异常重试上限Box.ShowText = false;
+            this.异常重试上限Box.Size = new System.Drawing.Size(75, 29);
+            this.异常重试上限Box.TabIndex = 130;
+            this.异常重试上限Box.Text = "10";
+            this.异常重试上限Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.异常重试上限Box.Type = Sunny.UI.UITextBox.UIEditType.Integer;
+            this.异常重试上限Box.Watermark = "";
+            // 
+            // 预设源语言Box
+            // 
+            this.预设源语言Box.DataSource = null;
+            this.预设源语言Box.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.预设源语言Box.FillColor = System.Drawing.Color.White;
+            this.预设源语言Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.预设源语言Box.Location = new System.Drawing.Point(482, 98);
+            this.预设源语言Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.预设源语言Box.MinimumSize = new System.Drawing.Size(63, 0);
+            this.预设源语言Box.Name = "预设源语言Box";
+            this.预设源语言Box.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.预设源语言Box.Size = new System.Drawing.Size(123, 29);
+            this.预设源语言Box.TabIndex = 132;
+            this.预设源语言Box.Text = "uiComboBox1";
+            this.预设源语言Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.预设源语言Box.Watermark = "";
+            this.预设源语言Box.TextChanged += new System.EventHandler(this.预设源语言Box_TextChanged);
+            // 
+            // uiLabel15
+            // 
+            this.uiLabel15.AutoSize = true;
+            this.uiLabel15.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel15.Location = new System.Drawing.Point(29, 178);
+            this.uiLabel15.Name = "uiLabel15";
+            this.uiLabel15.Size = new System.Drawing.Size(90, 21);
+            this.uiLabel15.TabIndex = 136;
+            this.uiLabel15.Text = "上下文深度";
+            this.uiLabel15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // 上下文深度Box
+            // 
+            this.上下文深度Box.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.上下文深度Box.DoubleValue = 1D;
+            this.上下文深度Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.上下文深度Box.IntValue = 1;
+            this.上下文深度Box.Location = new System.Drawing.Point(225, 174);
+            this.上下文深度Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.上下文深度Box.Maximum = 10D;
+            this.上下文深度Box.Minimum = 1D;
+            this.上下文深度Box.MinimumSize = new System.Drawing.Size(1, 16);
+            this.上下文深度Box.Name = "上下文深度Box";
+            this.上下文深度Box.ShowText = false;
+            this.上下文深度Box.Size = new System.Drawing.Size(75, 29);
+            this.上下文深度Box.TabIndex = 135;
+            this.上下文深度Box.Text = "1";
+            this.上下文深度Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.上下文深度Box.Type = Sunny.UI.UITextBox.UIEditType.Integer;
+            this.上下文深度Box.Watermark = "";
+            // 
+            // 预设目标语言Box
+            // 
+            this.预设目标语言Box.DataSource = null;
+            this.预设目标语言Box.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.预设目标语言Box.FillColor = System.Drawing.Color.White;
+            this.预设目标语言Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.预设目标语言Box.Location = new System.Drawing.Point(646, 98);
+            this.预设目标语言Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.预设目标语言Box.MinimumSize = new System.Drawing.Size(63, 0);
+            this.预设目标语言Box.Name = "预设目标语言Box";
+            this.预设目标语言Box.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.预设目标语言Box.Size = new System.Drawing.Size(123, 29);
+            this.预设目标语言Box.TabIndex = 133;
+            this.预设目标语言Box.Text = "uiComboBox1";
+            this.预设目标语言Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.预设目标语言Box.Watermark = "";
+            this.预设目标语言Box.TextChanged += new System.EventHandler(this.预设目标语言Box_TextChanged);
+            // 
+            // uiLabel10
+            // 
+            this.uiLabel10.AutoSize = true;
+            this.uiLabel10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel10.Location = new System.Drawing.Point(612, 102);
+            this.uiLabel10.Name = "uiLabel10";
+            this.uiLabel10.Size = new System.Drawing.Size(26, 21);
+            this.uiLabel10.TabIndex = 137;
+            this.uiLabel10.Text = "→";
+            this.uiLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // uiLabel14
+            // 
+            this.uiLabel14.AutoSize = true;
+            this.uiLabel14.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel14.Location = new System.Drawing.Point(29, 231);
+            this.uiLabel14.Name = "uiLabel14";
+            this.uiLabel14.Size = new System.Drawing.Size(106, 21);
+            this.uiLabel14.TabIndex = 138;
+            this.uiLabel14.Text = "连续对话合并";
+            this.uiLabel14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // 连续对话合并Switch
+            // 
+            this.连续对话合并Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.连续对话合并Switch.Location = new System.Drawing.Point(225, 227);
+            this.连续对话合并Switch.MinimumSize = new System.Drawing.Size(1, 1);
+            this.连续对话合并Switch.Name = "连续对话合并Switch";
+            this.连续对话合并Switch.Size = new System.Drawing.Size(75, 29);
+            this.连续对话合并Switch.TabIndex = 139;
+            this.连续对话合并Switch.Text = "自定义Switch1";
+            this.连续对话合并Switch.ActiveChanged += new System.EventHandler(this.连续对话合并Switch_ActiveChanged);
+            // 
+            // uiLabel16
+            // 
+            this.uiLabel16.AutoSize = true;
+            this.uiLabel16.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel16.Location = new System.Drawing.Point(29, 267);
+            this.uiLabel16.Name = "uiLabel16";
+            this.uiLabel16.Size = new System.Drawing.Size(90, 21);
+            this.uiLabel16.TabIndex = 141;
+            this.uiLabel16.Text = "合并分隔符";
+            this.uiLabel16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // 合并分隔符Box
+            // 
+            this.合并分隔符Box.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.合并分隔符Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.合并分隔符Box.Location = new System.Drawing.Point(225, 263);
+            this.合并分隔符Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.合并分隔符Box.Maximum = 10D;
+            this.合并分隔符Box.Minimum = 0D;
+            this.合并分隔符Box.MinimumSize = new System.Drawing.Size(1, 16);
+            this.合并分隔符Box.Name = "合并分隔符Box";
+            this.合并分隔符Box.ShowText = false;
+            this.合并分隔符Box.Size = new System.Drawing.Size(75, 29);
+            this.合并分隔符Box.TabIndex = 140;
+            this.合并分隔符Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.合并分隔符Box.Watermark = "";
+            // 
+            // uiLabel7
+            // 
+            this.uiLabel7.AutoSize = true;
+            this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel7.Location = new System.Drawing.Point(29, 356);
+            this.uiLabel7.Name = "uiLabel7";
+            this.uiLabel7.Size = new System.Drawing.Size(106, 21);
+            this.uiLabel7.TabIndex = 145;
+            this.uiLabel7.Text = "漏翻重试次数";
+            this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // 漏翻重试次数Box
+            // 
+            this.漏翻重试次数Box.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.漏翻重试次数Box.DoubleValue = 1D;
+            this.漏翻重试次数Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.漏翻重试次数Box.IntValue = 1;
+            this.漏翻重试次数Box.Location = new System.Drawing.Point(225, 352);
+            this.漏翻重试次数Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.漏翻重试次数Box.Maximum = 10D;
+            this.漏翻重试次数Box.Minimum = 1D;
+            this.漏翻重试次数Box.MinimumSize = new System.Drawing.Size(1, 16);
+            this.漏翻重试次数Box.Name = "漏翻重试次数Box";
+            this.漏翻重试次数Box.ShowText = false;
+            this.漏翻重试次数Box.Size = new System.Drawing.Size(75, 29);
+            this.漏翻重试次数Box.TabIndex = 144;
+            this.漏翻重试次数Box.Text = "1";
+            this.漏翻重试次数Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.漏翻重试次数Box.Type = Sunny.UI.UITextBox.UIEditType.Integer;
+            this.漏翻重试次数Box.Watermark = "";
+            // 
+            // uiLabel8
+            // 
+            this.uiLabel8.AutoSize = true;
+            this.uiLabel8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel8.Location = new System.Drawing.Point(29, 319);
+            this.uiLabel8.Name = "uiLabel8";
+            this.uiLabel8.Size = new System.Drawing.Size(74, 21);
+            this.uiLabel8.TabIndex = 142;
+            this.uiLabel8.Text = "漏翻检测";
+            this.uiLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // 漏翻检测Switch
+            // 
+            this.漏翻检测Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.漏翻检测Switch.Location = new System.Drawing.Point(225, 316);
+            this.漏翻检测Switch.MinimumSize = new System.Drawing.Size(1, 1);
+            this.漏翻检测Switch.Name = "漏翻检测Switch";
+            this.漏翻检测Switch.Size = new System.Drawing.Size(75, 29);
+            this.漏翻检测Switch.TabIndex = 143;
+            this.漏翻检测Switch.Text = "自定义Switch1";
+            this.漏翻检测Switch.ActiveChanged += new System.EventHandler(this.漏翻检测Switch_ActiveChanged);
+            // 
+            // uiLabel9
+            // 
+            this.uiLabel9.AutoSize = true;
+            this.uiLabel9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel9.Location = new System.Drawing.Point(326, 351);
+            this.uiLabel9.Name = "uiLabel9";
+            this.uiLabel9.Size = new System.Drawing.Size(74, 21);
+            this.uiLabel9.TabIndex = 146;
+            this.uiLabel9.Text = "润色语境";
+            this.uiLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // 润色语境Box
+            // 
+            this.润色语境Box.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.润色语境Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.润色语境Box.Location = new System.Drawing.Point(326, 385);
+            this.润色语境Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.润色语境Box.MinimumSize = new System.Drawing.Size(1, 16);
+            this.润色语境Box.Multiline = true;
+            this.润色语境Box.Name = "润色语境Box";
+            this.润色语境Box.ShowText = false;
+            this.润色语境Box.Size = new System.Drawing.Size(637, 200);
+            this.润色语境Box.TabIndex = 112;
+            this.润色语境Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.润色语境Box.Watermark = "";
+            // 
+            // uiLabel17
+            // 
+            this.uiLabel17.AutoSize = true;
+            this.uiLabel17.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel17.Location = new System.Drawing.Point(806, 351);
+            this.uiLabel17.Name = "uiLabel17";
+            this.uiLabel17.Size = new System.Drawing.Size(74, 21);
+            this.uiLabel17.TabIndex = 147;
+            this.uiLabel17.Text = "翻后润色";
+            this.uiLabel17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // 翻后润色Switch
+            // 
+            this.翻后润色Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.翻后润色Switch.Location = new System.Drawing.Point(888, 347);
+            this.翻后润色Switch.MinimumSize = new System.Drawing.Size(1, 1);
+            this.翻后润色Switch.Name = "翻后润色Switch";
+            this.翻后润色Switch.Size = new System.Drawing.Size(75, 29);
+            this.翻后润色Switch.TabIndex = 148;
+            this.翻后润色Switch.Text = "自定义Switch1";
+            // 
+            // 词汇表设置Btn
+            // 
+            this.词汇表设置Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.词汇表设置Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.词汇表设置Btn.Location = new System.Drawing.Point(326, 52);
+            this.词汇表设置Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.词汇表设置Btn.Name = "词汇表设置Btn";
+            this.词汇表设置Btn.Size = new System.Drawing.Size(105, 35);
+            this.词汇表设置Btn.TabIndex = 149;
+            this.词汇表设置Btn.Text = "词汇表设置";
+            this.词汇表设置Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.词汇表设置Btn.Click += new System.EventHandler(this.词汇表设置Btn_Click);
+            // 
+            // uiLabel18
+            // 
+            this.uiLabel18.AutoSize = true;
+            this.uiLabel18.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel18.Location = new System.Drawing.Point(29, 409);
+            this.uiLabel18.Name = "uiLabel18";
+            this.uiLabel18.Size = new System.Drawing.Size(74, 21);
+            this.uiLabel18.TabIndex = 150;
+            this.uiLabel18.Text = "错误跳过";
+            this.uiLabel18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // 错误跳过Switch
+            // 
+            this.错误跳过Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.错误跳过Switch.Location = new System.Drawing.Point(225, 405);
+            this.错误跳过Switch.MinimumSize = new System.Drawing.Size(1, 1);
+            this.错误跳过Switch.Name = "错误跳过Switch";
+            this.错误跳过Switch.Size = new System.Drawing.Size(75, 29);
+            this.错误跳过Switch.TabIndex = 151;
+            this.错误跳过Switch.Text = "自定义Switch1";
+            this.错误跳过Switch.ActiveChanged += new System.EventHandler(this.错误跳过Switch_ActiveChanged);
+            // 
+            // Http设置Btn
+            // 
+            this.Http设置Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Http设置Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Http设置Btn.Location = new System.Drawing.Point(140, 6);
+            this.Http设置Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Http设置Btn.Name = "Http设置Btn";
+            this.Http设置Btn.Size = new System.Drawing.Size(78, 35);
+            this.Http设置Btn.TabIndex = 152;
+            this.Http设置Btn.Text = "https://";
+            this.Http设置Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Http设置Btn.Click += new System.EventHandler(this.Http设置Btn_Click);
+            // 
+            // uiLine1
+            // 
+            this.uiLine1.BackColor = System.Drawing.Color.Transparent;
+            this.uiLine1.FillColor = System.Drawing.Color.Transparent;
+            this.uiLine1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine1.ForeColor = System.Drawing.Color.Transparent;
+            this.uiLine1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.uiLine1.LineColor2 = System.Drawing.Color.Transparent;
+            this.uiLine1.Location = new System.Drawing.Point(33, 121);
+            this.uiLine1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiLine1.Name = "uiLine1";
+            this.uiLine1.Size = new System.Drawing.Size(267, 10);
+            this.uiLine1.Style = Sunny.UI.UIStyle.Custom;
+            this.uiLine1.StyleCustomMode = true;
+            this.uiLine1.TabIndex = 153;
+            // 
+            // uiLine2
+            // 
+            this.uiLine2.BackColor = System.Drawing.Color.Transparent;
+            this.uiLine2.FillColor = System.Drawing.Color.Transparent;
+            this.uiLine2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine2.ForeColor = System.Drawing.Color.Transparent;
+            this.uiLine2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.uiLine2.LineColor2 = System.Drawing.Color.Transparent;
+            this.uiLine2.Location = new System.Drawing.Point(33, 211);
+            this.uiLine2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiLine2.Name = "uiLine2";
+            this.uiLine2.Size = new System.Drawing.Size(267, 10);
+            this.uiLine2.Style = Sunny.UI.UIStyle.Custom;
+            this.uiLine2.StyleCustomMode = true;
+            this.uiLine2.TabIndex = 154;
+            // 
+            // uiLine3
+            // 
+            this.uiLine3.BackColor = System.Drawing.Color.Transparent;
+            this.uiLine3.FillColor = System.Drawing.Color.Transparent;
+            this.uiLine3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine3.ForeColor = System.Drawing.Color.Transparent;
+            this.uiLine3.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.uiLine3.LineColor2 = System.Drawing.Color.Transparent;
+            this.uiLine3.Location = new System.Drawing.Point(33, 300);
+            this.uiLine3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiLine3.Name = "uiLine3";
+            this.uiLine3.Size = new System.Drawing.Size(267, 10);
+            this.uiLine3.Style = Sunny.UI.UIStyle.Custom;
+            this.uiLine3.StyleCustomMode = true;
+            this.uiLine3.TabIndex = 155;
+            // 
+            // uiLine4
+            // 
+            this.uiLine4.BackColor = System.Drawing.Color.Transparent;
+            this.uiLine4.FillColor = System.Drawing.Color.Transparent;
+            this.uiLine4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine4.ForeColor = System.Drawing.Color.Transparent;
+            this.uiLine4.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.uiLine4.LineColor2 = System.Drawing.Color.Transparent;
+            this.uiLine4.Location = new System.Drawing.Point(33, 389);
+            this.uiLine4.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiLine4.Name = "uiLine4";
+            this.uiLine4.Size = new System.Drawing.Size(267, 10);
+            this.uiLine4.Style = Sunny.UI.UIStyle.Custom;
+            this.uiLine4.StyleCustomMode = true;
+            this.uiLine4.TabIndex = 156;
+            // 
+            // uiLine5
+            // 
+            this.uiLine5.BackColor = System.Drawing.Color.Transparent;
+            this.uiLine5.Direction = Sunny.UI.UILine.LineDirection.Vertical;
+            this.uiLine5.FillColor = System.Drawing.Color.Transparent;
+            this.uiLine5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine5.ForeColor = System.Drawing.Color.Transparent;
+            this.uiLine5.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.uiLine5.LineColor2 = System.Drawing.Color.Transparent;
+            this.uiLine5.Location = new System.Drawing.Point(307, 48);
+            this.uiLine5.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiLine5.Name = "uiLine5";
+            this.uiLine5.Size = new System.Drawing.Size(12, 537);
+            this.uiLine5.Style = Sunny.UI.UIStyle.Custom;
+            this.uiLine5.StyleCustomMode = true;
+            this.uiLine5.TabIndex = 157;
             // 
             // GPT设置
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(987, 618);
-            this.Controls.Add(this.预设返回选择Box);
-            this.Controls.Add(this.预设原文选择Box);
+            this.Controls.Add(this.uiLine5);
+            this.Controls.Add(this.uiLine4);
+            this.Controls.Add(this.uiLine3);
+            this.Controls.Add(this.uiLine2);
+            this.Controls.Add(this.uiLine1);
+            this.Controls.Add(this.Http设置Btn);
+            this.Controls.Add(this.uiLabel18);
+            this.Controls.Add(this.错误跳过Switch);
+            this.Controls.Add(this.词汇表设置Btn);
+            this.Controls.Add(this.uiLabel17);
+            this.Controls.Add(this.翻后润色Switch);
+            this.Controls.Add(this.润色语境Box);
+            this.Controls.Add(this.uiLabel9);
+            this.Controls.Add(this.uiLabel7);
+            this.Controls.Add(this.漏翻重试次数Box);
+            this.Controls.Add(this.uiLabel8);
+            this.Controls.Add(this.漏翻检测Switch);
+            this.Controls.Add(this.uiLabel16);
+            this.Controls.Add(this.合并分隔符Box);
+            this.Controls.Add(this.uiLabel14);
+            this.Controls.Add(this.连续对话合并Switch);
+            this.Controls.Add(this.uiLabel10);
+            this.Controls.Add(this.预设目标语言Box);
+            this.Controls.Add(this.uiLabel15);
+            this.Controls.Add(this.上下文深度Box);
+            this.Controls.Add(this.预设源语言Box);
+            this.Controls.Add(this.uiLabel13);
+            this.Controls.Add(this.异常重试上限Box);
             this.Controls.Add(this.uiLabel12);
             this.Controls.Add(this.Token限制Box);
             this.Controls.Add(this.uiLabel11);
             this.Controls.Add(this.次数限制Box);
-            this.Controls.Add(this.下载Btn);
-            this.Controls.Add(this.uiLabel10);
-            this.Controls.Add(this.模型词表Btn);
-            this.Controls.Add(this.模型词表Box);
-            this.Controls.Add(this.uiLabel9);
-            this.Controls.Add(this.发送预设Switch);
-            this.Controls.Add(this.预设返回Box);
-            this.Controls.Add(this.uiLabel8);
-            this.Controls.Add(this.预设原文Box);
-            this.Controls.Add(this.uiLabel7);
             this.Controls.Add(this.语境Box);
             this.Controls.Add(this.uiLabel6);
             this.Controls.Add(this.uiLabel5);
-            this.Controls.Add(this.uiLabel3);
             this.Controls.Add(this.uiLabel4);
             this.Controls.Add(this.请求等待延迟Box);
             this.Controls.Add(this.uiLabel2);
@@ -555,8 +771,6 @@ partial class GPT设置 {
             this.Controls.Add(this.单次机翻行Box);
             this.Controls.Add(this.uiLabel1);
             this.Controls.Add(this.上下文提示Switch);
-            this.Controls.Add(this.uiLabel19);
-            this.Controls.Add(this.使用多线程Switch);
             this.Controls.Add(this.使用模型Label);
             this.Controls.Add(this.使用模型Box);
             this.Controls.Add(this.连接域名Label);
@@ -565,6 +779,7 @@ partial class GPT设置 {
             this.Text = "GPT设置";
             this.Page被选中 += new 翻译姬.自定义Page.自定义Page被选中(this.GPT设置_Page被选中);
             this.Load += new System.EventHandler(this.GPT设置_Load);
+            this.Shown += new System.EventHandler(this.GPT设置_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -580,30 +795,43 @@ partial class GPT设置 {
     private Sunny.UI.UITextBox 单次机翻行Box;
     private Sunny.UI.UILabel uiLabel1;
     private 自定义Switch 上下文提示Switch;
-    private Sunny.UI.UILabel uiLabel19;
-    private 自定义Switch 使用多线程Switch;
     private Sunny.UI.UILabel 使用模型Label;
     private Sunny.UI.UITextBox 使用模型Box;
     private Sunny.UI.UILabel 连接域名Label;
     private Sunny.UI.UITextBox 连接域名Box;
-    private Sunny.UI.UILabel uiLabel3;
     private Sunny.UI.UILabel uiLabel5;
     private Sunny.UI.UILabel uiLabel6;
     private Sunny.UI.UITextBox 语境Box;
-    private Sunny.UI.UITextBox 预设原文Box;
-    private Sunny.UI.UILabel uiLabel7;
-    private Sunny.UI.UITextBox 预设返回Box;
-    private Sunny.UI.UILabel uiLabel8;
-    private Sunny.UI.UILabel uiLabel9;
-    private 自定义Switch 发送预设Switch;
-    private Sunny.UI.UIButton 模型词表Btn;
-    private Sunny.UI.UITextBox 模型词表Box;
-    private Sunny.UI.UILabel uiLabel10;
-    private Sunny.UI.UIButton 下载Btn;
     private Sunny.UI.UILabel uiLabel11;
     private Sunny.UI.UITextBox 次数限制Box;
     private Sunny.UI.UILabel uiLabel12;
     private Sunny.UI.UITextBox Token限制Box;
-    private Sunny.UI.UIComboBox 预设原文选择Box;
-    private Sunny.UI.UIComboBox 预设返回选择Box;
+    private Sunny.UI.UILabel uiLabel13;
+    private Sunny.UI.UITextBox 异常重试上限Box;
+    private Sunny.UI.UIComboBox 预设源语言Box;
+    private Sunny.UI.UILabel uiLabel15;
+    private Sunny.UI.UITextBox 上下文深度Box;
+    private Sunny.UI.UIComboBox 预设目标语言Box;
+    private Sunny.UI.UILabel uiLabel10;
+    private Sunny.UI.UILabel uiLabel14;
+    private 自定义Switch 连续对话合并Switch;
+    private Sunny.UI.UILabel uiLabel16;
+    private Sunny.UI.UITextBox 合并分隔符Box;
+    private Sunny.UI.UILabel uiLabel7;
+    private Sunny.UI.UITextBox 漏翻重试次数Box;
+    private Sunny.UI.UILabel uiLabel8;
+    private 自定义Switch 漏翻检测Switch;
+    private Sunny.UI.UILabel uiLabel9;
+    private Sunny.UI.UITextBox 润色语境Box;
+    private Sunny.UI.UILabel uiLabel17;
+    private 自定义Switch 翻后润色Switch;
+    private Sunny.UI.UIButton 词汇表设置Btn;
+    private Sunny.UI.UILabel uiLabel18;
+    private 自定义Switch 错误跳过Switch;
+    private Sunny.UI.UIButton Http设置Btn;
+    private Sunny.UI.UILine uiLine1;
+    private Sunny.UI.UILine uiLine2;
+    private Sunny.UI.UILine uiLine3;
+    private Sunny.UI.UILine uiLine4;
+    private Sunny.UI.UILine uiLine5;
 }
