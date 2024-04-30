@@ -158,7 +158,7 @@ namespace 翻译姬 {
         }
 
         private void 前往下载Btn_Click(object sender, EventArgs e) {
-            MessageBoxEx.Show("当前为内测版，仅在群内发布");
+            Process.Start("https://gitee.com/this_sensen/NEKO_Print/releases");
         }
 
         private void 项目地址Btn_Click(object sender, EventArgs e) {
