@@ -55,7 +55,6 @@ public class GPTAPI : API接口模板 {
 机翻开始:
             try {
                 返回结果 = GPT调用.调用(请求内容);
-                机翻执行次数++;//用于QPS的限制
                 机翻字符增加(返回结果.Usage.TotalTokens);
                 解析结束的请求 = 数据处理.返回值解析(返回结果.Choices[0].Message.Content, 原请求);//List<GPT请求>
             } catch (Exception_API异常) {
@@ -79,7 +78,6 @@ public class GPTAPI : API接口模板 {
 润色开始:
                 try {
                     var 润色返回结果 = GPT调用.调用(待润色请求内容);
-                    机翻执行次数++;
                     机翻字符增加(润色返回结果.Usage.TotalTokens);
                     解析结束的请求 = 数据处理.返回值解析(润色返回结果.Choices[0].Message.Content, 待润色请求);
                 } catch (Exception_API异常) {
@@ -122,6 +120,12 @@ public class GPTAPI : API接口模板 {
     protected override void 机翻字符增加(int 字符数) {
         base.机翻字符增加(字符数);
         GPT调用.已用token += 字符数;
+        if (GPT调用.已进行token限制) {
+            GPT调用.已进行token限制 = false;
+            机翻执行次数 = 0;
+        } else {
+            机翻执行次数++;
+        }
     }
 
     public static IEnumerable<文本[]> 文本分割(文本[] arr) {

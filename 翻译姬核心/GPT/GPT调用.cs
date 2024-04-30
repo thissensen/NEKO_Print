@@ -25,6 +25,7 @@ public class GPT调用 {
     public int 已用token { get; set; }
     public int token限制 { get; set; }
     public int QPS显示单位 { get; set; } = 60000;//token的限制为每60秒
+    public bool 已进行token限制 { get; set; } = false;
 
     public GPT调用(Stopwatch 计时器, int token限制, bool 是否Https, string 域名, string 路由, string 模型, int 等待超时, string 令牌) {
         this.计时器 = 计时器;
@@ -47,6 +48,7 @@ public class GPT调用 {
                 Thread.Sleep(QPS显示单位 - num);
             }
             已用token = 0;
+            已进行token限制 = true;
             计时器.Restart();
         }
         string json;
