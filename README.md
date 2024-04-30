@@ -50,3 +50,16 @@ GPT参考：
 https://github.com/NEKOparapa/AiNiee
 
 https://github.com/cx2333-gal/GalTransl
+
+ **界面预览** 
+
+可在[关于翻译姬]界面进行主题更改
+
+![文本翻译](https://foruda.gitee.com/images/1714463215960716668/3518df98_10364928.jpeg "文本翻译.jpg")
+![数据处理](https://foruda.gitee.com/images/1714462638578270479/13f0f6bc_10364928.jpeg "数据处理.jpg")
+![API设置界面](https://foruda.gitee.com/images/1698737641872288175/76ab6a4c_10364928.jpeg "API设置.jpg")
+![全局设置](https://foruda.gitee.com/images/1714463245281152268/189dd091_10364928.jpeg "全局设置.jpg")
+![GPT设置](https://foruda.gitee.com/images/1714463846659387355/aa6d2349_10364928.jpeg "GPT设置.jpg")
+![正则设置](https://foruda.gitee.com/images/1698740336574517631/c57f5b83_10364928.jpeg "正则设置.jpg")
+![替换列表](https://foruda.gitee.com/images/1698813678607926739/cfb9f529_10364928.jpeg "替换列表.jpg")
+![Json和Xml指令](https://foruda.gitee.com/images/1698819502910042916/d1a22f27_10364928.jpeg "Json和Xml指令.jpg")
