@@ -17,6 +17,7 @@ TG群：[TG群链接(不常用)](https://t.me/neko_print)
 - 软件需要正则基础，如果不会，进群免费帮写。
 - 使用该软件机翻后公开发布游戏的，请标记本软件并注明是机翻。(机翻就是机翻，请勿使用精翻、汉化等词汇)
 - 纯免费软件，禁止商用。如有特殊需求例如linux系统、docker部署、汉化对照辅助等请在群咨询
+- BUG/建议提交最好去QQ群，其次TG和issues(git玩的不熟)
 
  **所需环境：** 
 
@@ -34,6 +35,12 @@ win10、win11可直接使用，win7则需要 .Net Framework 4.6.2环境，部分
 7. 繁简转换、文本润色、GPT词汇表辅助等常用功能
 8. 可对接支持OpenAI API的翻译模型，例如Sakura一类
 9. 轻松支持mtool、SExtractor等常用工具提取的文本
-10. 更多功能请进入wiki界面查看
 
 更多详细功能请参考帮助文档
+
+ **相关链接** 
+界面UI：https://gitee.com/yhuse/SunnyUI
+字体[猫啃珠圆体]：https://www.maoken.com/freefonts/17948.html
+GPT参考：
+https://github.com/NEKOparapa/AiNiee
+https://github.com/cx2333-gal/GalTransl
