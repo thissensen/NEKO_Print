@@ -39,8 +39,13 @@ win10、win11可直接使用，win7则需要 .Net Framework 4.6.2环境，部分
 更多详细功能请参考帮助文档
 
  **相关链接** 
+
 界面UI：https://gitee.com/yhuse/SunnyUI
+
 字体[猫啃珠圆体]：https://www.maoken.com/freefonts/17948.html
+
 GPT参考：
+
 https://github.com/NEKOparapa/AiNiee
+
 https://github.com/cx2333-gal/GalTransl
