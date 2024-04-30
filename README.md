@@ -1,9 +1,10 @@
-# 介绍
 最新版本：V1.0.0.0
 
  **翻译姬是用于机翻各类游戏脚本、小说、文档等文本类型的机翻工具。** 
 
 只要你的文本能用txt文本编辑器打开，那么都可以进行机翻，并对机翻内容进行精确替换
+
+下载地址：https://gitee.com/this_sensen/NEKO_Print/releases
 
 使用教程/wiki：https://gitee.com/this_sensen/NEKO_Print/wikis
 
