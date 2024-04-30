@@ -75,6 +75,8 @@ partial class 全局设置 {
             this.uiLabel8 = new Sunny.UI.UILabel();
             this.内置中括号过滤Switch = new 翻译姬.自定义Switch();
             this.本机IPBtn = new Sunny.UI.UIButton();
+            this.uiLabel11 = new Sunny.UI.UILabel();
+            this.正则逆向写入Switch = new 翻译姬.自定义Switch();
             this.读写设置Box.SuspendLayout();
             this.机翻设置Box.SuspendLayout();
             this.其他设置Box.SuspendLayout();
@@ -730,6 +732,8 @@ partial class 全局设置 {
             // 
             // 其他设置Box
             // 
+            this.其他设置Box.Controls.Add(this.uiLabel11);
+            this.其他设置Box.Controls.Add(this.正则逆向写入Switch);
             this.其他设置Box.Controls.Add(this.uiLabel8);
             this.其他设置Box.Controls.Add(this.内置中括号过滤Switch);
             this.其他设置Box.Controls.Add(this.本机IPBtn);
@@ -778,6 +782,27 @@ partial class 全局设置 {
             this.本机IPBtn.Text = "本机IP";
             this.本机IPBtn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.本机IPBtn.Click += new System.EventHandler(this.本机IPBtn_Click);
+            // 
+            // uiLabel11
+            // 
+            this.uiLabel11.AutoSize = true;
+            this.uiLabel11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel11.Location = new System.Drawing.Point(17, 70);
+            this.uiLabel11.Name = "uiLabel11";
+            this.uiLabel11.Size = new System.Drawing.Size(106, 21);
+            this.uiLabel11.TabIndex = 66;
+            this.uiLabel11.Text = "正则逆向写入";
+            this.uiLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // 正则逆向写入Switch
+            // 
+            this.正则逆向写入Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.正则逆向写入Switch.Location = new System.Drawing.Point(161, 66);
+            this.正则逆向写入Switch.MinimumSize = new System.Drawing.Size(1, 1);
+            this.正则逆向写入Switch.Name = "正则逆向写入Switch";
+            this.正则逆向写入Switch.Size = new System.Drawing.Size(75, 29);
+            this.正则逆向写入Switch.TabIndex = 67;
+            this.正则逆向写入Switch.Text = "自定义Switch1";
             // 
             // 全局设置
             // 
@@ -853,4 +878,6 @@ partial class 全局设置 {
     private Sunny.UI.UIMarkLabel uiMarkLabel2;
     private Sunny.UI.UILabel uiLabel8;
     private 自定义Switch 内置中括号过滤Switch;
+    private Sunny.UI.UILabel uiLabel11;
+    private 自定义Switch 正则逆向写入Switch;
 }

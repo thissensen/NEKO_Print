@@ -30,7 +30,7 @@ public class Xml指令 : Json指令 {
             return;
         }
         try {
-            string text = File.ReadAllText(paths[0], Encoding.GetEncoding(工具类.文本编码识别(paths[0])));
+            string text = File.ReadAllText(paths[0], Encoding.GetEncoding(Util.文本编码识别(paths[0])));
             XmlDocument xml = new XmlDocument();
             try {
                 xml.LoadXml(text);

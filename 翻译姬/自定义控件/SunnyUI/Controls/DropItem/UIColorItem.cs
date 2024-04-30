@@ -20,9 +20,6 @@ namespace Sunny.UI
             };
 
             MinimumSize = s;
-            /*var info = GetType().GetProperty("Size");
-            info.SetValue(this, s);*/
-            var a = Size;
             foreach (Control con in Controls) {
                 con.Width = (int)(con.Width * 全局字符串.屏幕缩放比);
                 con.Height = (int)(con.Height * 全局字符串.屏幕缩放比);

@@ -134,9 +134,6 @@ namespace 翻译姬 {
                     if (总行数 == 0) {
                         return;
                     }
-                    if (File.Exists(全局数据.缓存数据路径)) {
-                        var a = 0;
-                    }
                     if (File.Exists(全局数据.缓存数据路径) &&
                     !MessageBoxEx.Show("检测到有未完成的缓存数据，继续机翻将覆盖已缓存数据", 显示按钮: 提示窗按钮.确认取消, 确认按钮文本: "继续")) {
                         return;
@@ -293,7 +290,7 @@ namespace 翻译姬 {
                 int num = 0, 总字符 = 0;
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine("\"机翻\"字符表示将会被机翻的内容");
-                sb.AppendLine("如显示乱码，或机翻到了不该机翻的内容，请勿机翻");
+                sb.AppendLine("如显示乱码，或机翻到了不该机翻的内容，请勿开始");
                 sb.AppendLine("*****************************************************************");
                 foreach (var 文件 in 处理中文件结构) {
                     调用管理.文本机翻(机翻方式.不机翻, 文件);
@@ -311,7 +308,7 @@ namespace 翻译姬 {
                             }
                         }
                         总行数 += 文本组.文本.Length;
-                        译文组.AddRange(工具类.文本置换机翻(文本组.文本));//区别于源文件，这个是复制出来的
+                        译文组.AddRange(Util.文本置换机翻(文本组.文本));//区别于源文件，这个是复制出来的
                     }
                     string[] 写入前文本;
                     string[] 写入后文本;

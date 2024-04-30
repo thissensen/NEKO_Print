@@ -85,11 +85,31 @@ public class 正则读写 {
             if (提取文本 != null) {
                 //替换为译文
                 string 译文text = text;
-                int 搜索位置 = 0;
-                for (int j = 0; j < 提取文本.Length; j++) {
-                    string 分割译文text = 译文[译文下标++].译文;
-                    译文text = new Regex(Regex.Escape(提取文本[j].原文)).Replace(译文text, 分割译文text, 1, 搜索位置);
-                    搜索位置 += 分割译文text.Length;
+                if (!全局设置数据.正则逆向写入) {
+                    int 搜索位置 = 0;
+                    for (int j = 0; j < 提取文本.Length; j++) {
+                        string 分割译文text = 译文[译文下标++].译文;
+                        译文text = new Regex(Regex.Escape(提取文本[j].原文)).Replace(译文text, m => {
+                            搜索位置 = m.Index + 分割译文text.Length;//正序：会匹配包括m.idnex的字符
+                            return 分割译文text;
+                        }, 1, 搜索位置);
+                    }
+                } else {
+                    int 搜索位置 = 译文text.Length;
+                    var 待替换译文 = new List<string>();
+                    for (int j = 0; j < 提取文本.Length; j++) {
+                        string 分割译文text = 译文[译文下标++].译文;
+                        待替换译文.Add(分割译文text);
+                    }
+                    for (int j = 提取文本.Length - 1; j >= 0; j--) {
+                        var 分割译文text = 待替换译文[j];
+                        译文text = new Regex(Regex.Escape(提取文本[j].原文), RegexOptions.RightToLeft)
+                            .Replace(译文text, m => {
+                                //从右往左，不包括m.idnex的字符
+                                搜索位置 = m.Index;
+                                return 分割译文text;
+                            }, 1, 搜索位置);
+                    }
                 }
                 //进行写出格式替换
                 res.Add(写出格式替换(text, 译文text));

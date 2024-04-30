@@ -24,6 +24,7 @@ namespace 翻译姬 {
             QPS.DataSource = QPS_bs;
             查询表格.禁用排序();
             查询表格.CellEndEdit += 查询表格_CellEndEdit;
+            查询表格.RowHeadersVisible = false;
         }
 
         private void 查询表格_CellEndEdit(object sender, DataGridViewCellEventArgs e) {

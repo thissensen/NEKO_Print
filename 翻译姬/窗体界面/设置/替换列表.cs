@@ -16,6 +16,7 @@ namespace 翻译姬 {
         public 替换列表() {
             InitializeComponent();
             查询表格.禁用排序();
+            查询表格.RowHeadersVisible = false;
         }
 
         private void 替换列表_Page被选中() {

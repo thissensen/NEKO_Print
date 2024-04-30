@@ -1,43 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
 namespace 翻译姬 {
-    /// <summary>
-    /// 引用程序集：
-    /// System.IO.Compression
-    /// System.IO.Compression.FileSystem
-    /// </summary>
-
-    
     public class Util {
 
         private static 全局设置数据 全局设置数据 => 全局数据.全局设置数据;
-
-        private static object 数据库_lock = new object();
-        private static object 进度条_lock = new object();
-
+        private static GPT设置数据 GPT设置数据 => 全局数据.GPT设置数据;
+        
         private static Dictionary<string, Regex> 语言范围 = new() {
             ["简中"] = new Regex(@"[\u4e00-\u9fa5]"),
             ["日语"] = new Regex(@"[\u0800-\u4e00]"),
             ["英语"] = new Regex(@"[[a-zA-Zａ-ｚＡ-Ｚ]]"),
             ["韩语"] = new Regex(@"[\x3130-\x318F\xAC00-\xD7A3]")
         };
-
         /// <summary>
         /// 漏翻了就返回true
         /// </summary>
-        /// <param name="text"></param>
-        /// <returns></returns>
         public static bool 漏翻检测(string text) {
             string 替换后 = Regex.Replace(text, @"[\p{P}\p{N}\p{M}\p{S}\p{Z}\p{C}]", "");//去符号
             替换后 = 替换后.Replace("ー", "");//日文的常见特殊符号
@@ -54,12 +37,14 @@ namespace 翻译姬 {
             return 不符合数量 / 替换后.Length > 0.3m;
         }
 
-
+        private static object 数据库_lock = new object();
         public static void 多线程数据库Exec(string sql) {
             lock (数据库_lock) {
                 全局数据.数据库.Execute(sql);
             }
         }
+
+        private static object 进度条_lock = new object();
         public delegate void 多线程机翻完成行数(int 增加值);
         public static event 多线程机翻完成行数 机翻完成行数;
         public static void 多线程进度条增加(int 增加值) {
@@ -260,7 +245,88 @@ namespace 翻译姬 {
             return res;
         }
 
-        public static string 换行符修正(string src) {
+        public static List<KeyValue<string, string>> 文本提取对话(文本[] 文本arr) {
+            var 下标分组 = from 文本 in 文本arr
+                       where 文本.文本类型 != 文本类型.人名
+                       group 文本 by 文本.文本下标 into g
+                       select g;
+            var res = new List<KeyValue<string, string>>();
+            int 最后合并id = -1;
+            文本 人名文本 = null;
+            for (int i = 0; i < 文本arr.Length; i++) {
+                var 文本 = 文本arr[i];
+                if (文本.文本类型 == 文本类型.人名) {
+                    人名文本 = 文本;
+                    continue;
+                }
+                if (GPT设置数据.连续对话合并 && 文本.文本下标 == 最后合并id) {
+                    //不进行重复合并保存
+                    continue;
+                }
+                var kv = new KeyValue<string, string>();
+                kv.Key = 人名文本?.原文;
+                if (GPT设置数据.连续对话合并) {
+                    var 原文组 = 下标分组.Single(t => t.Key == 文本.文本下标).Select(t => t.原文);
+                    kv.Value = string.Join(GPT设置数据.合并分隔符, 原文组);
+                    最后合并id = 文本.文本下标;
+                } else {
+                    kv.Value = 文本.原文;
+                }
+                res.Add(kv);
+                人名文本 = null;
+            }
+            return res;
+        }
+
+        public static void 对话写入文本(文本[] 文本arr, List<KeyValue<string, string>> 对话list, bool 返回值换行符修正) {
+            var 下标分组 = from 文本 in 文本arr
+                       where 文本.文本类型 != 文本类型.人名
+                       group 文本 by 文本.文本下标 into g
+                       select g;
+            int 请求id = 0, 最后合并id = -1;
+            for (int i = 0; i < 文本arr.Length; i++) {
+                var 文本 = 文本arr[i];
+                if (文本.文本类型 == 文本类型.人名) {
+                    continue;
+                }
+                if (GPT设置数据.连续对话合并 && 文本.文本下标 == 最后合并id) {
+                    //不进行重复合并保存
+                    continue;
+                }
+                var kv = 对话list[请求id++];
+                bool 是否漏翻 = (bool)kv.Tag;
+                if (GPT设置数据.连续对话合并) {
+                    var 原文组 = 下标分组.Single(t => t.Key == 文本.文本下标).Select(t => t).ToArray();
+                    string 请求结果 = kv.Value;
+                    if (返回值换行符修正) {
+                        请求结果 = 换行符修正(请求结果);
+                    }
+                    string[] gpt译文 = Regex.Split(请求结果, Regex.Escape(GPT设置数据.合并分隔符));
+                    int j;
+                    for (j = 0; j < 原文组.Length; j++) {
+                        string val = gpt译文.ElementAtOrDefault(j) ?? "";
+                        原文组[j].译文 = val;
+                        if (是否漏翻) {
+                            原文组[j].异常状态 = 文本异常状态.存在漏翻;
+                        }
+                    }
+                    if (j < gpt译文.Length) {//没问题就是等于
+                                           //gpt多换行符                        
+                        原文组.Last().译文 += string.Join("", gpt译文.Skip(j));
+                        原文组.Last().异常状态 = 文本异常状态.多换行符;
+                    }
+
+                    最后合并id = 文本.文本下标;
+                } else {
+                    文本.译文 = kv.Value;
+                    if (是否漏翻) {
+                        文本.异常状态 = 文本异常状态.存在漏翻;
+                    }
+                }
+            }
+        }
+
+        private static string 换行符修正(string src) {
             var reg_n = new Regex(@"(?<!\r)\n");
             if (reg_n.IsMatch(src)) {
                 src = reg_n.Replace(src, "\r\n");
@@ -274,7 +340,6 @@ namespace 翻译姬 {
             src = Regex.Replace(src, @"\\+n", @"\n");
             return src;
         }
-
         /// <summary>
         /// 防止文件存在，后面加(1) (2)之类
         /// </summary>

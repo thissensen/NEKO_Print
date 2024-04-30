@@ -33,6 +33,17 @@ public class GPT设置数据 : INotifyPropertyChanged {
     }
     private string _连接域名;
 
+    public string 连接路由 {
+        get => _连接路由;
+        set {
+            if (_连接路由 != value) {
+                _连接路由 = value?.Trim();
+                通知更改(() => 连接路由);
+            }
+        }
+    }
+    private string _连接路由 = "/v1/chat/completions";
+
     public string 使用模型 {
         get => _使用模型;
         set {
@@ -53,7 +64,7 @@ public class GPT设置数据 : INotifyPropertyChanged {
             }
         }
     }
-    private int _次数限制;
+    private int _次数限制 = 3;
 
     public int Token限制 {
         get => _Token限制;
@@ -64,7 +75,7 @@ public class GPT设置数据 : INotifyPropertyChanged {
             }
         }
     }
-    private int _Token限制;
+    private int _Token限制 = 40000;
 
     public int 请求等待延迟 {
         get => _请求等待延迟;
@@ -86,7 +97,18 @@ public class GPT设置数据 : INotifyPropertyChanged {
             }
         }
     }
-    private int _单次机翻行 = 8;
+    private int _单次机翻行 = 12;
+
+    public bool 上下文提示 {
+        get => _上下文提示;
+        set {
+            if (_上下文提示 != value) {
+                _上下文提示 = value;
+                通知更改(() => 上下文提示);
+            }
+        }
+    }
+    private bool _上下文提示 = true;
 
     public int 上下文深度 {
         get => _上下文深度;
@@ -120,17 +142,6 @@ public class GPT设置数据 : INotifyPropertyChanged {
         }
     }
     private int _异常重试上限 = 10;
-
-    public bool 上下文提示 {
-        get => _上下文提示;
-        set {
-            if (_上下文提示 != value) {
-                _上下文提示 = value;
-                通知更改(() => 上下文提示);
-            }
-        }
-    }
-    private bool _上下文提示;
 
     public bool 漏翻检测 {
         get => _漏翻检测;
@@ -200,6 +211,17 @@ public class GPT设置数据 : INotifyPropertyChanged {
         }
     }
     private string _语境;
+
+    public bool 简易模式 {
+        get => _简易模式;
+        set {
+            if (_简易模式 != value) {
+                _简易模式 = value;
+                通知更改(() => 简易模式);
+            }
+        }
+    }
+    private bool _简易模式;
 
     public bool 翻后润色 {
         get => _翻后润色;

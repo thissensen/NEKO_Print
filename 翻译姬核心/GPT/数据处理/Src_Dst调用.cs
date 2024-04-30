@@ -11,14 +11,15 @@ public class Src_Dst调用 : GPT数据处理接口 {
 
     public GPT设置数据 GPT设置数据 { get ; set; }
     public Dictionary<string, string> 上文内容 { get; set; } = new Dictionary<string, string>();
-    public bool 润色模式 { get; set; }
+    public int 错行重试次数 { get; set; } = 0;
 
-    public List<dynamic> 获取请求内容(params dynamic[] data) {
-        string json = data[0];
-        List<Src_Dst请求> GPT请求 = data[1];
+    //返回 List<dynamic>
+    public List<dynamic> 获取请求内容(bool 是否润色, dynamic data) {
+        var GPT请求 = data as List<Src_Dst请求>;
+        string json = JsonConvert.SerializeObject(GPT请求);
         //请求内容计算
         var 请求内容 = new List<dynamic>();
-        if (!润色模式) {
+        if (!是否润色) {
             请求内容.Add(new { role = "system", content = 语境设置词汇表(GPT设置数据.语境, GPT请求) });
         } else {
             请求内容.Add(new { role = "system", content = 语境设置词汇表(GPT设置数据.润色语境, GPT请求) });
@@ -28,7 +29,6 @@ public class Src_Dst调用 : GPT数据处理接口 {
             var res = 上文内容.Skip(上文内容.Count - 取值深度);
             foreach (var kv in res) {
                 请求内容.Add(new { role = "user", content = kv.Key });
-                //请求内容.Add(new { role = "system", content = kv.Value });
                 请求内容.Add(new { role = "assistant", content = kv.Value });
             }
         }
@@ -68,12 +68,13 @@ public class Src_Dst调用 : GPT数据处理接口 {
         }
     }
 
-    public dynamic 返回值解析(string content) {
-        string text = Regex.Replace(content, @"^`+[^{\[]+", "");
-        text = Regex.Replace(text, @"[\r\n]", "");
-        text = Regex.Replace(text, @"`+$", "");
+    public dynamic 返回值解析(string content, dynamic GPT请求) {
+        var 原请求 = GPT请求 as List<Src_Dst请求>;
+        string text = Regex.Replace(content, @"^`+[^{\[]+", "");//去除开头的`
+        text = Regex.Replace(text, @"[\r\n]", "");//去除莫名的换行
+        text = Regex.Replace(text, @"`+$", "");//去除结尾的`
         text = Regex.Replace(text, @"^\[|\]$", "");//删除左右[]
-        text = Regex.Replace(text, @"(?<=""|,)}?\]?\s*?[，,]?\s*?\[?{", "}\r\n{");
+        text = Regex.Replace(text, @"(?<=""|,)}?\]?\s*?[，,]?\s*?\[?{", "}\r\n{");//修正}, {的异常
         if (!text.EndsWith("}")) {
             text += "}";
         }
@@ -109,44 +110,111 @@ public class Src_Dst调用 : GPT数据处理接口 {
                 res.Add(gpt);
             }
         } catch { }
-        /*foreach (var g in res) {
-            if (g.dst == null) {
-                异常处理.错误处理($"GPT未返回dst，重试");
-                机翻执行次数++;
-                var 返回 = 机翻(GPT请求);
-                return 返回值解析(返回.Choices[0].Message.Content, GPT请求);
-            }
-        }
-        if (res.Count != GPT请求.Count) {
+
+        if (res.Count != 原请求.Count) {
             if (错行重试次数 == GPT设置数据.错行重试数) {
-                throw new Exception($"GPT错行次数已达上限");
+                throw new Exception_API异常("GPT错行次数已达上限");
             } else {
-                异常处理.错误处理($"GPT错行，异常内容：{原始text}\r\n");
                 错行重试次数++;
-                机翻执行次数++;
-                var 返回 = 机翻(GPT请求);
-                return 返回值解析(返回.Choices[0].Message.Content, GPT请求);
+                throw new Exception($"GPT错行");
             }
         }
-        for (int i = 0; i < GPT请求.Count; i++) {
-            if (res.FirstOrDefault(t => t.id == i) == null) {
-                异常处理.错误处理($"GPT返回错误id，异常内容：{原始text}");
-                机翻执行次数++;
-                var 返回 = 机翻(GPT请求);
-                return 返回值解析(返回.Choices[0].Message.Content, GPT请求);
+        foreach (var g in res) {
+            if (g.dst == null) {
+                throw new Exception("GPT未返回dst");
             }
-        }*/
-        return res.OrderBy(t => t.id).ToList();
+        }
+        for (int i = 0; i < 原请求.Count; i++) {
+            if (res.FirstOrDefault(t => t.id == i) == null) {
+                throw new Exception("GPT返回错误id");
+            }
+        }
+        错行重试次数 = 0;
+        var temp = res.OrderBy(t => t.id).ToList();
+        Name对齐( 原请求, temp);//name可能缺失，进行还原
+        return temp;
+    }
+    private void Name对齐(List<Src_Dst请求> 原请求, List<Src_Dst请求> 返回值) {
+        for (int i = 0; i < 返回值.Count; i++) {
+            返回值[i].name = 原请求[i].name;
+        }
+    }
+
+    public dynamic 文本转请求(文本[] 文本arr) {
+        var list = Util.文本提取对话(文本arr);
+        var res = new List<Src_Dst请求>();
+        for (int i = 0; i < list.Count; i++) {
+            var 请求 = new Src_Dst请求();
+            请求.id = i;
+            请求.name = list[i].Key;
+            请求.src = list[i].Value;
+            res.Add(请求);
+        }
+        return res;
+    }
+
+    public void 请求写入文本(dynamic 返回值, 文本[] 文本arr) {
+        var list = 返回值 as List<Src_Dst请求>;
+        var res = new List<KeyValue<string, string>>();
+        foreach (var item in list) {
+            var kv = new KeyValue<string, string>();
+            //kv.Key = item.name;
+            kv.Value = item.dst;
+            kv.Tag = item.是否漏翻;
+            res.Add(kv);
+        }
+        Util.对话写入文本(文本arr, res, true);
+    }
+
+    public dynamic 获取待润色数据(dynamic 原请求, dynamic 返回值) {
+        var res = new List<Src_Dst请求>();
+        var 原数据 = 原请求 as List<Src_Dst请求>;
+        var 返回数据 = 返回值 as List<Src_Dst请求>;
+        for (int i = 0; i < 原数据.Count; i++) {
+            var data = 原数据[i] with { dst = 返回数据[i].dst };
+            res.Add(data);
+        }
+        return res;
+    }
+
+    public bool 漏翻检测(dynamic 返回值) {
+        var res = 返回值 as List<Src_Dst请求>;
+        bool result = false;
+        foreach (var item in res) {
+            if (Util.漏翻检测(item.dst)) {
+                item.是否漏翻 = true;
+                result = true;
+            }
+        }
+        return result;
+    }
+    
+    public void 添加上文内容(dynamic 原请求, dynamic 机翻后) {
+        var 原数据 = 原请求 as List<Src_Dst请求>;
+        var 机翻数据 = 机翻后 as List<Src_Dst请求>;
+        var 理想机翻数据 = new List<Src_Dst请求>();
+        for (int i = 0; i < 原数据.Count; i++) {
+            var data = 原数据[i] with { src = null, dst = 机翻数据[i].dst };
+            理想机翻数据.Add(data);
+        }
+        var 原json = JsonConvert.SerializeObject(原数据);
+        if (!上文内容.ContainsKey(原json)) {
+            上文内容.Add(原json, JsonConvert.SerializeObject(理想机翻数据));
+        }
+    }
+
+    public void 清空上文内容() {
+        上文内容.Clear();
     }
 }
-public class Src_Dst请求 {
+public record class Src_Dst请求 {
     public int id { get; set; }
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public string name { get; set; }
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-    public string src { get; set; }
+    public string src { get; set; }//原文
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-    public string dst { get; set; }//翻后
+    public string dst { get; set; }//译文
     [JsonIgnore]
     public bool 是否漏翻 = false;
 }

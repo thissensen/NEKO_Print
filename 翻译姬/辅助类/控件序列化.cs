@@ -73,9 +73,6 @@ namespace 翻译姬 {
                 if (con is UITextBox box) {
                     box.Text = obj[box.Name].Value<string>();
                 } else if (con is UIComboBox combobox) {
-                    if (combobox.Name == "读取目录Box") {
-                        var a = 0;
-                    }
                     string val = obj[combobox.Name].Value<string>();
                     combobox.Text = val ?? "";
                 } else if (con is UISwitch sw) {

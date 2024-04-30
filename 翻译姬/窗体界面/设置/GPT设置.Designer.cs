@@ -36,7 +36,6 @@ partial class GPT设置 {
             this.使用模型Box = new Sunny.UI.UITextBox();
             this.连接域名Label = new Sunny.UI.UILabel();
             this.连接域名Box = new Sunny.UI.UITextBox();
-            this.uiLabel5 = new Sunny.UI.UILabel();
             this.uiLabel6 = new Sunny.UI.UILabel();
             this.语境Box = new Sunny.UI.UITextBox();
             this.uiLabel11 = new Sunny.UI.UILabel();
@@ -71,6 +70,10 @@ partial class GPT设置 {
             this.uiLine3 = new Sunny.UI.UILine();
             this.uiLine4 = new Sunny.UI.UILine();
             this.uiLine5 = new Sunny.UI.UILine();
+            this.连接路由Box = new Sunny.UI.UITextBox();
+            this.修改Btn = new Sunny.UI.UIButton();
+            this.uiLabel3 = new Sunny.UI.UILabel();
+            this.简易模式Switch = new 翻译姬.自定义Switch();
             this.SuspendLayout();
             // 
             // uiLabel4
@@ -186,7 +189,6 @@ partial class GPT设置 {
             this.上下文提示Switch.Size = new System.Drawing.Size(75, 29);
             this.上下文提示Switch.TabIndex = 101;
             this.上下文提示Switch.Text = "自定义Switch1";
-            this.上下文提示Switch.ActiveChanged += new System.EventHandler(this.上下文提示Switch_ActiveChanged);
             // 
             // 使用模型Label
             // 
@@ -236,18 +238,7 @@ partial class GPT设置 {
             this.连接域名Box.Size = new System.Drawing.Size(212, 29);
             this.连接域名Box.TabIndex = 92;
             this.连接域名Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.连接域名Box.Watermark = "例如：api.openai.com";
-            // 
-            // uiLabel5
-            // 
-            this.uiLabel5.AutoSize = true;
-            this.uiLabel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel5.Location = new System.Drawing.Point(440, 13);
-            this.uiLabel5.Name = "uiLabel5";
-            this.uiLabel5.Size = new System.Drawing.Size(174, 21);
-            this.uiLabel5.TabIndex = 109;
-            this.uiLabel5.Text = "/v1/chat/completions";
-            this.uiLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.连接域名Box.Watermark = "例：api.openai.com";
             // 
             // uiLabel6
             // 
@@ -320,9 +311,9 @@ partial class GPT设置 {
             // Token限制Box
             // 
             this.Token限制Box.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.Token限制Box.DoubleValue = 150000D;
+            this.Token限制Box.DoubleValue = 40000D;
             this.Token限制Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Token限制Box.IntValue = 150000;
+            this.Token限制Box.IntValue = 40000;
             this.Token限制Box.Location = new System.Drawing.Point(225, 84);
             this.Token限制Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Token限制Box.Maximum = 100000000D;
@@ -332,7 +323,7 @@ partial class GPT设置 {
             this.Token限制Box.ShowText = false;
             this.Token限制Box.Size = new System.Drawing.Size(75, 29);
             this.Token限制Box.TabIndex = 124;
-            this.Token限制Box.Text = "150000";
+            this.Token限制Box.Text = "40000";
             this.Token限制Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.Token限制Box.Type = Sunny.UI.UITextBox.UIEditType.Integer;
             this.Token限制Box.Watermark = "";
@@ -724,10 +715,64 @@ partial class GPT设置 {
             this.uiLine5.StyleCustomMode = true;
             this.uiLine5.TabIndex = 157;
             // 
+            // 连接路由Box
+            // 
+            this.连接路由Box.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.连接路由Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.连接路由Box.Location = new System.Drawing.Point(445, 9);
+            this.连接路由Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.连接路由Box.MinimumSize = new System.Drawing.Size(1, 16);
+            this.连接路由Box.Name = "连接路由Box";
+            this.连接路由Box.ShowText = false;
+            this.连接路由Box.Size = new System.Drawing.Size(183, 29);
+            this.连接路由Box.TabIndex = 93;
+            this.连接路由Box.Text = "/v1/chat/completions";
+            this.连接路由Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.连接路由Box.Watermark = "例：/v1/chat/completions";
+            // 
+            // 修改Btn
+            // 
+            this.修改Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.修改Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.修改Btn.Location = new System.Drawing.Point(635, 9);
+            this.修改Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.修改Btn.Name = "修改Btn";
+            this.修改Btn.Size = new System.Drawing.Size(52, 29);
+            this.修改Btn.TabIndex = 158;
+            this.修改Btn.Text = "修改";
+            this.修改Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.修改Btn.Click += new System.EventHandler(this.修改Btn_Click);
+            // 
+            // uiLabel3
+            // 
+            this.uiLabel3.AutoSize = true;
+            this.uiLabel3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel3.Location = new System.Drawing.Point(806, 98);
+            this.uiLabel3.Name = "uiLabel3";
+            this.uiLabel3.Size = new System.Drawing.Size(74, 21);
+            this.uiLabel3.TabIndex = 159;
+            this.uiLabel3.Text = "简易模式";
+            this.uiLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // 简易模式Switch
+            // 
+            this.简易模式Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.简易模式Switch.Location = new System.Drawing.Point(888, 94);
+            this.简易模式Switch.MinimumSize = new System.Drawing.Size(1, 1);
+            this.简易模式Switch.Name = "简易模式Switch";
+            this.简易模式Switch.Size = new System.Drawing.Size(75, 29);
+            this.简易模式Switch.TabIndex = 160;
+            this.简易模式Switch.Text = "自定义Switch1";
+            this.简易模式Switch.ActiveChanged += new System.EventHandler(this.简易模式Switch_ActiveChanged);
+            // 
             // GPT设置
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(987, 618);
+            this.Controls.Add(this.uiLabel3);
+            this.Controls.Add(this.简易模式Switch);
+            this.Controls.Add(this.修改Btn);
+            this.Controls.Add(this.连接路由Box);
             this.Controls.Add(this.uiLine5);
             this.Controls.Add(this.uiLine4);
             this.Controls.Add(this.uiLine3);
@@ -762,7 +807,6 @@ partial class GPT设置 {
             this.Controls.Add(this.次数限制Box);
             this.Controls.Add(this.语境Box);
             this.Controls.Add(this.uiLabel6);
-            this.Controls.Add(this.uiLabel5);
             this.Controls.Add(this.uiLabel4);
             this.Controls.Add(this.请求等待延迟Box);
             this.Controls.Add(this.uiLabel2);
@@ -799,7 +843,6 @@ partial class GPT设置 {
     private Sunny.UI.UITextBox 使用模型Box;
     private Sunny.UI.UILabel 连接域名Label;
     private Sunny.UI.UITextBox 连接域名Box;
-    private Sunny.UI.UILabel uiLabel5;
     private Sunny.UI.UILabel uiLabel6;
     private Sunny.UI.UITextBox 语境Box;
     private Sunny.UI.UILabel uiLabel11;
@@ -834,4 +877,8 @@ partial class GPT设置 {
     private Sunny.UI.UILine uiLine3;
     private Sunny.UI.UILine uiLine4;
     private Sunny.UI.UILine uiLine5;
+    private Sunny.UI.UITextBox 连接路由Box;
+    private Sunny.UI.UIButton 修改Btn;
+    private Sunny.UI.UILabel uiLabel3;
+    private 自定义Switch 简易模式Switch;
 }

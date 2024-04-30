@@ -353,6 +353,7 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.查询表格.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.查询表格.RowHeadersVisible = false;
             this.查询表格.RowHeadersWidth = 4;
             this.查询表格.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
@@ -380,7 +381,7 @@
             this.正则名称.DataPropertyName = "正则名称";
             this.正则名称.HeaderText = "正则名称";
             this.正则名称.Name = "正则名称";
-            this.正则名称.Width = 90;
+            this.正则名称.Width = 180;
             // 
             // 行过滤正则
             // 
@@ -388,7 +389,7 @@
             this.行过滤正则.HeaderText = "行过滤正则";
             this.行过滤正则.Name = "行过滤正则";
             this.行过滤正则.ReadOnly = true;
-            this.行过滤正则.Width = 222;
+            this.行过滤正则.Width = 200;
             // 
             // 文本过滤正则
             // 
@@ -396,7 +397,7 @@
             this.文本过滤正则.HeaderText = "文本过滤正则";
             this.文本过滤正则.Name = "文本过滤正则";
             this.文本过滤正则.ReadOnly = true;
-            this.文本过滤正则.Width = 222;
+            this.文本过滤正则.Width = 200;
             // 
             // 提取前行过滤正则
             // 
@@ -404,7 +405,7 @@
             this.提取前行过滤正则.HeaderText = "提取前行过滤正则";
             this.提取前行过滤正则.Name = "提取前行过滤正则";
             this.提取前行过滤正则.ReadOnly = true;
-            this.提取前行过滤正则.Width = 222;
+            this.提取前行过滤正则.Width = 200;
             // 
             // 提取型正则
             // 
@@ -412,7 +413,7 @@
             this.提取型正则.HeaderText = "提取型正则";
             this.提取型正则.Name = "提取型正则";
             this.提取型正则.ReadOnly = true;
-            this.提取型正则.Width = 224;
+            this.提取型正则.Width = 200;
             // 
             // 正则设置
             // 

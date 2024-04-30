@@ -78,7 +78,6 @@ namespace 翻译姬 {
             //设置全局字体
             float 字体大小 = con.Font.Size;
             con.Font = new Font(全局字符串.主字体, 字体大小);
-
             if (con is UIUserControl userControl) {
                 userControl.BackColor = 全局字符串.背景色;
                 userControl.FillColor = 全局字符串.背景色;
@@ -87,7 +86,7 @@ namespace 翻译姬 {
                 userControl.ForeColor = 全局字符串.主题色;
                 userControl.RectColor = 全局字符串.主题色;
                 userControl.RectDisableColor = 全局字符串.不可用时颜色;
-
+                
             } else if (con is UIProcessBar processBar) {
                 processBar.FillColor = 全局字符串.背景色;
                 processBar.ForeColor = 全局字符串.主题色;
@@ -230,6 +229,7 @@ namespace 翻译姬 {
             }
             //UIPanel子类
             if (con is UITextBox textBox) {
+
                 textBox.ScrollBarBackColor = 全局字符串.背景色;//滚动条背景色
                 textBox.ScrollBarColor = 全局字符串.主题色;//滚动条颜色
                 textBox.FillReadOnlyColor = 全局字符串.背景色;
@@ -238,6 +238,9 @@ namespace 翻译姬 {
                 textBox.WatermarkActiveColor = 全局字符串.次级主题色;
                 textBox.WatermarkColor = 全局字符串.次级主题色;
 
+            } else if (con is UIRichTextBox richBox) {
+                richBox.ScrollBarBackColor = 全局字符串.背景色;//滚动条背景色
+                richBox.ScrollBarColor = 全局字符串.主题色;//滚动条颜色
             } else if (con is UIListBox listBox) {
                 listBox.ScrollBarBackColor = 全局字符串.背景色;
                 listBox.ScrollBarColor = 全局字符串.主题色;

@@ -59,7 +59,7 @@ namespace 翻译姬 {
                 } catch { throw new Exception("提取型正则格式错误，需要有2个()"); }
                 string[] paths = 工具类.选择文件("选择字典文件", "字典", "*.txt");
                 if (paths.Length == 1) {
-                    string[] lines = File.ReadAllLines(paths[0], Encoding.GetEncoding(工具类.文本编码识别(paths[0])));
+                    string[] lines = File.ReadAllLines(paths[0], Encoding.GetEncoding(Util.文本编码识别(paths[0])));
                     Dictionary<string, string> dic = new Dictionary<string, string>();
                     foreach (string line in lines) {
                         var groups = Regex.Match(line, 提取型正则Box.Text).Groups;

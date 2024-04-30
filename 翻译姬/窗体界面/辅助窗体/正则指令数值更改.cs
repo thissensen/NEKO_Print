@@ -36,7 +36,7 @@ public partial class 正则指令数值更改 : 自定义Form {
         Location = p;
 
         var text = row[列名].ToString();
-        指令集Lines = 工具类.正则分割(text); 
+        指令集Lines = Util.正则分割(text); 
     }
 
     private void 返回Btn_Click(object sender, EventArgs e) {

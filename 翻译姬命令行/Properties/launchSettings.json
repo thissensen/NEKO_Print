@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "翻译姬命令行": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

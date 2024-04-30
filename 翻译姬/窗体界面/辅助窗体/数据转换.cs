@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace 翻译姬;
 public partial class 数据转换 : 自定义Form {
 
     private static readonly string name_message = "name-message";
+    private static readonly string mtool = "mtool";
     private Dictionary<string, string> 导出预览 = new Dictionary<string, string>() {
         [name_message] = """
         [
@@ -27,6 +29,12 @@ public partial class 数据转换 : 自定义Form {
             }
             ……
         ]
+        """,
+        [mtool] = """
+        {
+            "aaa": "aaa",//若译文为空，则导出原文
+            "bbb": "bbb"
+        }
         """
     };
 
@@ -57,13 +65,18 @@ public partial class 数据转换 : 自定义Form {
 
     private void 全部导出Btn_Click(object sender, EventArgs e) {
         try {
-            string file = 工具类.选择文件夹("导出文件夹", 全局字符串.桌面路径).ElementAt(0);
-            if (file == "") {
+            string file = 工具类.选择文件夹("导出文件夹", 全局字符串.桌面路径).SingleOrDefault();
+            if (file == null) {
                 return;
+            }
+            if (!Regex.IsMatch(file, @"[\\/]$")) {
+                file += "\\";
             }
             foreach (var 文件 in 文本翻译.处理中文件结构) {
                 if (转换类型Box.Text == name_message) {
                     name_message导出(file, 文件);
+                } else if (转换类型Box.Text == mtool) {
+                    mtool_导出(file, 文件);
                 }
             }
             消息框帮助.轻便消息("导出成功", this);
@@ -74,14 +87,16 @@ public partial class 数据转换 : 自定义Form {
 
     private void 全部导入Btn_Click(object sender, EventArgs e) {
         try {
-            string file = 工具类.选择文件夹("导入文件夹", 全局字符串.桌面路径).ElementAt(0);
-            if (file == "") {
+            string file = 工具类.选择文件夹("导入文件夹", 全局字符串.桌面路径).SingleOrDefault();
+            if (file == null) {
                 return;
             }
             var files = 文本读写.获取文件列表(file);
             foreach (var f in files) {
                 if (转换类型Box.Text == name_message) {
                     name_message导入(file, f);
+                } else if (转换类型Box.Text == mtool) {
+                    mtool_导入(file, f);
                 }
             }
             MessageBoxEx.Show("导入成功，请前往[数据处理]页面进行检查并保存");
@@ -91,15 +106,12 @@ public partial class 数据转换 : 自定义Form {
     }
 
     private void name_message导出(string 输出目录, 文件结构 文件) {
-        if (!Regex.IsMatch(输出目录, @"[\\/]$")) {
-            输出目录 += "\\";
-        }
         var res = new List<Name_Message>();
-        var gpt请求 = 工具类.文本转请求(文件.有效文本);
-        foreach (var g in gpt请求) {
+        var 对话组 = Util.文本提取对话(文件.有效文本);
+        foreach (var g in 对话组) {
             var n = new Name_Message();
-            n.name = g.name;
-            n.message = g.src;
+            n.name = g.Key;
+            n.message = g.Value;
             res.Add(n);
         }
         var file = 输出目录 + 文件.相对路径;
@@ -129,6 +141,39 @@ public partial class 数据转换 : 自定义Form {
             文本.译文 = n.message;
             if (n.name != null && 文本.人名 != null) {
                 文本.人名 = n.name;
+            }
+        }
+    }
+
+    private void mtool_导出(string 输出目录, 文件结构 文件) {
+        var res = new JObject();
+        foreach (var 文本 in 文件.有效文本) {
+            res.Add(文本.原文, 文本.译文.IsNullOrEmpty() ? 文本.原文 : 文本.译文);
+        }
+        var file = 输出目录 + 文件.相对路径;
+        file.创建父目录();
+        File.WriteAllText(file, JsonConvert.SerializeObject(res, Formatting.Indented));
+    }
+
+    private void mtool_导入(string 输入目录, string 输入路径) {
+        var 相对路径 = 输入路径.Replace(输入目录, "");
+        相对路径 = Regex.Replace(相对路径, @"^[\\/]", "");
+        var 文件 = 文本翻译.处理中文件结构.SingleOrDefault(t => t.相对路径 == 相对路径);
+        if (文件 == null) {
+            throw new Exception("找不到对应的文件用于覆盖，请点击预显示后再次尝试");
+        }
+        JObject obj;
+        try {
+            obj = JObject.Parse(File.ReadAllText(输入路径));
+        } catch {
+            throw new Exception("Json格式转换错误，请勿改变Json格式以及编码");
+        }
+        if (obj.Count != 文件.有效文本.Length) {
+            throw new Exception($"导入数量不一致,导入数量:{obj.Count},原数量:{文件.有效文本.Length}");
+        }
+        foreach (var 文本 in 文件.有效文本) {
+            if (obj.ContainsKey(文本.原文)) {
+                文本.译文 = obj[文本.原文].Value<string>();
             }
         }
     }

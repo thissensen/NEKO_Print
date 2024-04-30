@@ -72,6 +72,7 @@ public class 标准机翻 {
                             //进度条增加
                             Util.多线程进度条增加(文本.文本.Length);
                         }
+                        api.单组执行完();
                         机翻完成数++;
                     } catch (Exception ex) {
                         异常处理.错误处理($"机翻过程错误:{ex.Message}");

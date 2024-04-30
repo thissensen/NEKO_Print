@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "翻译姬", "翻译姬\翻�
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "翻译姬核心", "翻译姬核心\翻译姬核心.csproj", "{4172E4D5-6F1A-457D-8694-6F313C3516FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "翻译姬命令行", "翻译姬命令行\翻译姬命令行.csproj", "{3639F870-44BD-433E-ABFB-9FF4BBE8F312}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4172E4D5-6F1A-457D-8694-6F313C3516FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4172E4D5-6F1A-457D-8694-6F313C3516FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4172E4D5-6F1A-457D-8694-6F313C3516FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3639F870-44BD-433E-ABFB-9FF4BBE8F312}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3639F870-44BD-433E-ABFB-9FF4BBE8F312}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3639F870-44BD-433E-ABFB-9FF4BBE8F312}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3639F870-44BD-433E-ABFB-9FF4BBE8F312}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

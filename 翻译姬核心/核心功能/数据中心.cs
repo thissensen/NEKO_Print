@@ -148,13 +148,13 @@ public class 文件结构 {
         } else if (API类型.Name == typeof(火山API).Name) {
             return Util.分割数组(原文本, 16, 5000);
 
-        } /*else if (API类型.Name == typeof(GPTAPI).Name) {
+        } else if (API类型.Name == typeof(GPTAPI).Name) {
             if (GPT设置数据.单次机翻行 < 1) {
                 throw new Exception($"请填写正确的GPT单次机翻行数");
             }
             return GPTAPI.文本分割(原文本);
 
-        }*/
+        }
         throw new Exception($"API类型错误：{API类型}");
     }
     public static Type 获取API类型(string API名称 = null) {
@@ -163,7 +163,7 @@ public class 文件结构 {
             "百度" => typeof(百度API),
             "阿里云" => typeof(阿里云API),
             "腾讯云" => typeof(腾讯云API),
-            //"GPT" => typeof(GPTAPI),
+            "GPT" => typeof(GPTAPI),
             "火山" => typeof(火山API),
             _ => throw new Exception($"不存在API名称【{全局数据.全局设置数据.使用机翻}】")
         };

@@ -42,6 +42,9 @@ namespace 翻译姬 {
         }
 
         private void Json指令_Load(object sender, EventArgs e) {
+            if (DesignMode) {
+                return;
+            }
             string sql = "select * from " + 关联表;
             查询表格.DataTable = 数据库.Select(sql);
             表格增删改.SQL = sql;
@@ -106,7 +109,7 @@ namespace 翻译姬 {
                 return;
             }
             try {
-                string json = File.ReadAllText(paths[0], Encoding.GetEncoding(工具类.文本编码识别(paths[0])));
+                string json = File.ReadAllText(paths[0], Encoding.GetEncoding(Util.文本编码识别(paths[0])));
                 JToken token;
                 try {
                     token = JToken.Parse(json);

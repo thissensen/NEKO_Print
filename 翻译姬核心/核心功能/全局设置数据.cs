@@ -235,11 +235,22 @@ public class 全局设置数据 : INotifyPropertyChanged {
         set {
             if (_内置中括号过滤 != value) {
                 _内置中括号过滤 = value;
-                通知更改(() => _内置中括号过滤);
+                通知更改(() => 内置中括号过滤);
             }
         }
     }
     private bool _内置中括号过滤;
+
+    public bool 正则逆向写入 {
+        get => _正则逆向写入;
+        set {
+            if (_正则逆向写入 != value) {
+                _正则逆向写入 = value;
+                通知更改(() => 正则逆向写入);
+            }
+        }
+    }
+    private bool _正则逆向写入;
 
     public event PropertyChangedEventHandler PropertyChanged;
     public void 通知更改<T>(Expression<Func<T>> property) {

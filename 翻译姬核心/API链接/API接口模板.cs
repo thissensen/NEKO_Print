@@ -43,7 +43,7 @@ namespace 翻译姬 {
         public void 文本机翻(文本[] 待机翻) {
             计时器.Start();
             if (data.类型 == "GPT") {
-                (this as GPTAPI).GPT机翻(待机翻);
+                (this as GPTAPI).GPT机翻(待机翻);//GPT没有重复内容跳过功能
             } else {
                 //重复内容跳过
                 string[] 机翻完;
@@ -96,12 +96,15 @@ namespace 翻译姬 {
         /// <param name="传入文本"></param>
         /// <returns></returns>
         protected abstract string[] 机翻(string[] 传入文本);
+        public virtual void 单组执行完() {//一组的文本都执行完了
+
+        }
         /// <summary>
         /// 记录使用的字符数
         /// </summary>
         /// <param name="字符数"></param>
         public static event 翻译姬核心使用字符增加 翻译姬核心使用字符增加;
-        protected void 机翻字符增加(int 字符数) {
+        protected virtual void 机翻字符增加(int 字符数) {
             //进行额度判断
             if (data.可用额度 != -1 && data.可用额度 > 0) {
                 if (data.已用额度 + 字符数 > data.可用额度) {

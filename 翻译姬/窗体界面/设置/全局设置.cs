@@ -48,6 +48,7 @@ public partial class 全局设置 : 自定义Page {
         Xml指令Box.DataBindings.Add("Text", 全局设置数据, "Xml指令集名称", false, DataSourceUpdateMode.OnPropertyChanged);
         写出后删除源文件Switch.DataBindings.Add("Active", 全局设置数据, "写出后删除源文件", false, DataSourceUpdateMode.OnPropertyChanged);
         内置中括号过滤Switch.DataBindings.Add("Active", 全局设置数据, "内置中括号过滤", false, DataSourceUpdateMode.OnPropertyChanged);
+        正则逆向写入Switch.DataBindings.Add("Active", 全局设置数据, "正则逆向写入", false, DataSourceUpdateMode.OnPropertyChanged);
 
         源语言Box.DataSource = new List<string>() { "日语", "英语", "韩语", "繁中", "简中"};
         目标语言Box.DataSource = new List<string>() { "简中", "繁中", "日语", "英语", "韩语" };
@@ -142,11 +143,16 @@ public partial class 全局设置 : 自定义Page {
         }
         StringBuilder sb = new StringBuilder();
         if (ipv4.Count > 0) {
-            sb.AppendLine($"IPv4 --- {ipv4[0]}");
+            foreach (var v4 in ipv4) {
+                sb.AppendLine($"IPv4 --- {v4}");
+            }
         }
         if (ipv6.Count > 2) {
-            sb.AppendLine($"本地IPv6 --- {ipv6[0]}");
-            sb.AppendLine($"临时IPv6 --- {ipv6[1]}");
+            foreach (var v6 in ipv6) {
+                sb.AppendLine($"IPv6 --- {v6}");
+            }
+            //sb.AppendLine($"本地IPv6 --- {ipv6[0]}");
+            //sb.AppendLine($"临时IPv6 --- {ipv6[1]}");
         }
         return sb.ToString().Trim();
     }

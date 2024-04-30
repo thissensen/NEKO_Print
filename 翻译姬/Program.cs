@@ -35,6 +35,7 @@ namespace 翻译姬 {
             /*if (!File.Exists(GPT词表路径)) {
                 File.WriteAllBytes(GPT词表路径, Resources.cl100k_base);
             }*/
+            全局数据.缓存数据路径 = 软件存储目录 + "未完成缓存数据.json";
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             全局数据.数据库 = new SQLite数据库(数据库路径);
 #if DEBUG
