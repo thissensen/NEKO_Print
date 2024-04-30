@@ -36,7 +36,7 @@ win10、win11可直接使用，win7则需要 .Net Framework 4.6.2环境，部分
 8. 可对接支持OpenAI API的翻译模型，例如Sakura一类
 9. 轻松支持mtool、SExtractor等常用工具提取的文本
 
-更多详细功能请参考帮助文档
+更多详细功能请参考使用教程/wiki：https://gitee.com/this_sensen/NEKO_Print/wikis
 
  **相关链接** 
 
