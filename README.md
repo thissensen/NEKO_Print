@@ -34,7 +34,7 @@ win10、win11可直接使用，win7则需要 .Net Framework 4.6.2环境，部分
 5. 支持断点续翻，可手动对文本进行错误修正，解决机翻错行、漏翻、异常翻译等情况
 6. 写出格式自定义，可实现一行原文一行译文等辅助汉化模式
 7. 繁简转换、文本润色、GPT词汇表辅助等常用功能
-8. 可对接支持OpenAI API的翻译模型，例如Sakura一类
+8. 可对接支持OpenAI API的AI模型，例如Sakura一类
 9. 轻松支持mtool、SExtractor等常用工具提取的文本
 
 更多详细功能请参考使用教程/wiki：https://gitee.com/this_sensen/NEKO_Print/wikis
