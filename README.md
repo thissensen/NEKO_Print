@@ -54,12 +54,18 @@ https://github.com/cx2333-gal/GalTransl
  **界面预览** 
 
 可在[关于翻译姬]界面进行主题更改
-
 ![文本翻译](https://foruda.gitee.com/images/1714463215960716668/3518df98_10364928.jpeg "文本翻译.jpg")
+这里可对机翻后文本进行修改、重翻、导出/导入其他格式等
 ![数据处理](https://foruda.gitee.com/images/1714462638578270479/13f0f6bc_10364928.jpeg "数据处理.jpg")
+这里保存了每个api账号，并可手动设置额度上限防止超额
 ![API设置界面](https://foruda.gitee.com/images/1698737641872288175/76ab6a4c_10364928.jpeg "API设置.jpg")
+这里是更深层次的设定
 ![全局设置](https://foruda.gitee.com/images/1714463245281152268/189dd091_10364928.jpeg "全局设置.jpg")
+GPT专属的设置
 ![GPT设置](https://foruda.gitee.com/images/1714463846659387355/aa6d2349_10364928.jpeg "GPT设置.jpg")
+翻译姬的运行核心，可在这里进行正则的测试，看是否提取到想要机翻的文本
 ![正则设置](https://foruda.gitee.com/images/1698740336574517631/c57f5b83_10364928.jpeg "正则设置.jpg")
+高效的多线程替换的数据来源，支持正则替换，可以实现更多的功能
 ![替换列表](https://foruda.gitee.com/images/1698813678607926739/cfb9f529_10364928.jpeg "替换列表.jpg")
+简单的Json/Xml指令生成界面，查询，然后点一点即可生成对应提取
 ![Json和Xml指令](https://foruda.gitee.com/images/1698819502910042916/d1a22f27_10364928.jpeg "Json和Xml指令.jpg")
