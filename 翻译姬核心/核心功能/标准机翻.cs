@@ -37,7 +37,7 @@ public class 标准机翻 {
         原文_机翻.Clear();
         //待机翻数据整理
         var 文本栈 = new ConcurrentStack<文本组[]>();
-        var 文本组arr = 文件切割(文件组).ToArray();//普通多线程一个数组只有1个
+        var 文本组arr = 文件切割(文件组).ToArray();
         for (int i = 文本组arr.Length - 1; i >= 0; i--) {
             文本栈.Push(文本组arr.ElementAt(i));
         }
@@ -96,41 +96,32 @@ public class 标准机翻 {
         }
     }
 
-    //根据组上限切割
     public static IEnumerable<文本组[]> 文件切割(params 文件结构[] 文件组) {
-        if (!全局设置数据.文本级多线程) {
-            if (全局设置数据.启用单组上限) {
-                var 全文本组 = new List<文本组>();
-                foreach (文件结构 文件 in 文件组) {
-                    foreach (文本组 文本 in 文件.文本组.OrderBy(t => t.序号)) {
-                        if (文本.机翻状态) {
-                            continue;
-                        }
-                        全文本组.Add(文本);
+        if (全局设置数据.启用单组上限 && !全局设置数据.文本级多线程) {
+            //合并所有文件
+            var 全文本组 = new List<文本组>();
+            foreach (文件结构 文件 in 文件组) {
+                foreach (文本组 文本 in 文件.文本组.OrderBy(t => t.序号)) {
+                    if (文本.机翻状态) {
+                        continue;
                     }
-                }
-                var res = new List<文本组>();
-                foreach (var 文本 in 全文本组) {
-                    res.Add(文本);
-                    if (res.Count == 全局设置数据.API单组上限) {
-                        yield return res.ToArray();
-                        res.Clear();
-                    }
-                }
-                if (res.Count > 0) {
-                    yield return res.ToArray();
-                }
-            } else {
-                foreach (文件结构 文件 in 文件组) {
-                    foreach (文本组 文本 in 文件.文本组.OrderBy(t => t.序号)) {
-                        if (文本.机翻状态) {
-                            continue;
-                        }
-                        yield return new 文本组[] { 文本 };
-                    }
+                    全文本组.Add(文本);
                 }
             }
-        } else {//文本级多线程按照文本单组上限进行分割
+            //切割
+            var res = new List<文本组>();
+            foreach (var 文本 in 全文本组) {
+                res.Add(文本);
+                if (res.Count == 全局设置数据.API单组上限) {
+                    yield return res.ToArray();
+                    res.Clear();
+                }
+            }
+            if (res.Count > 0) {
+                yield return res.ToArray();
+            }
+        } else {
+            //每个文件单独切割
             var res = new List<文本组>();
             foreach (文件结构 文件 in 文件组) {
                 foreach (文本组 文本 in 文件.文本组) {
