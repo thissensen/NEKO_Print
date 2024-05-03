@@ -1,4 +1,4 @@
-最新版本：V1.0.0.0
+最新版本：V1.0.0.1
 
  **翻译姬是用于机翻各类游戏脚本、小说、文档等文本类型的机翻工具。** 
 
@@ -53,11 +53,7 @@ win10、win11可直接使用，win7则需要 .Net Framework 4.6.2环境，部分
 
 字体[猫啃珠圆体]：https://www.maoken.com/freefonts/17948.html
 
-GPT参考：
-
-https://github.com/NEKOparapa/AiNiee
-
-https://github.com/cx2333-gal/GalTransl
+GPT参考(已获得作者授权，使用其prompt)：https://github.com/cx2333-gal/GalTransl
 
  **界面预览** 
 
