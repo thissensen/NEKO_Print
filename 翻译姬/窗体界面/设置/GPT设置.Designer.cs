@@ -44,11 +44,8 @@ partial class GPT设置 {
             this.Token限制Box = new Sunny.UI.UITextBox();
             this.uiLabel13 = new Sunny.UI.UILabel();
             this.异常重试上限Box = new Sunny.UI.UITextBox();
-            this.预设源语言Box = new Sunny.UI.UIComboBox();
             this.uiLabel15 = new Sunny.UI.UILabel();
             this.上下文深度Box = new Sunny.UI.UITextBox();
-            this.预设目标语言Box = new Sunny.UI.UIComboBox();
-            this.uiLabel10 = new Sunny.UI.UILabel();
             this.uiLabel14 = new Sunny.UI.UILabel();
             this.连续对话合并Switch = new 翻译姬.自定义Switch();
             this.uiLabel16 = new Sunny.UI.UILabel();
@@ -359,24 +356,6 @@ partial class GPT设置 {
             this.异常重试上限Box.Type = Sunny.UI.UITextBox.UIEditType.Integer;
             this.异常重试上限Box.Watermark = "";
             // 
-            // 预设源语言Box
-            // 
-            this.预设源语言Box.DataSource = null;
-            this.预设源语言Box.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.预设源语言Box.FillColor = System.Drawing.Color.White;
-            this.预设源语言Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.预设源语言Box.Location = new System.Drawing.Point(482, 98);
-            this.预设源语言Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.预设源语言Box.MinimumSize = new System.Drawing.Size(63, 0);
-            this.预设源语言Box.Name = "预设源语言Box";
-            this.预设源语言Box.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.预设源语言Box.Size = new System.Drawing.Size(123, 29);
-            this.预设源语言Box.TabIndex = 132;
-            this.预设源语言Box.Text = "uiComboBox1";
-            this.预设源语言Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.预设源语言Box.Watermark = "";
-            this.预设源语言Box.TextChanged += new System.EventHandler(this.预设源语言Box_TextChanged);
-            // 
             // uiLabel15
             // 
             this.uiLabel15.AutoSize = true;
@@ -407,35 +386,6 @@ partial class GPT设置 {
             this.上下文深度Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.上下文深度Box.Type = Sunny.UI.UITextBox.UIEditType.Integer;
             this.上下文深度Box.Watermark = "";
-            // 
-            // 预设目标语言Box
-            // 
-            this.预设目标语言Box.DataSource = null;
-            this.预设目标语言Box.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.预设目标语言Box.FillColor = System.Drawing.Color.White;
-            this.预设目标语言Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.预设目标语言Box.Location = new System.Drawing.Point(646, 98);
-            this.预设目标语言Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.预设目标语言Box.MinimumSize = new System.Drawing.Size(63, 0);
-            this.预设目标语言Box.Name = "预设目标语言Box";
-            this.预设目标语言Box.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.预设目标语言Box.Size = new System.Drawing.Size(123, 29);
-            this.预设目标语言Box.TabIndex = 133;
-            this.预设目标语言Box.Text = "uiComboBox1";
-            this.预设目标语言Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.预设目标语言Box.Watermark = "";
-            this.预设目标语言Box.TextChanged += new System.EventHandler(this.预设目标语言Box_TextChanged);
-            // 
-            // uiLabel10
-            // 
-            this.uiLabel10.AutoSize = true;
-            this.uiLabel10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel10.Location = new System.Drawing.Point(612, 102);
-            this.uiLabel10.Name = "uiLabel10";
-            this.uiLabel10.Size = new System.Drawing.Size(26, 21);
-            this.uiLabel10.TabIndex = 137;
-            this.uiLabel10.Text = "→";
-            this.uiLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // uiLabel14
             // 
@@ -794,11 +744,8 @@ partial class GPT设置 {
             this.Controls.Add(this.合并分隔符Box);
             this.Controls.Add(this.uiLabel14);
             this.Controls.Add(this.连续对话合并Switch);
-            this.Controls.Add(this.uiLabel10);
-            this.Controls.Add(this.预设目标语言Box);
             this.Controls.Add(this.uiLabel15);
             this.Controls.Add(this.上下文深度Box);
-            this.Controls.Add(this.预设源语言Box);
             this.Controls.Add(this.uiLabel13);
             this.Controls.Add(this.异常重试上限Box);
             this.Controls.Add(this.uiLabel12);
@@ -851,11 +798,8 @@ partial class GPT设置 {
     private Sunny.UI.UITextBox Token限制Box;
     private Sunny.UI.UILabel uiLabel13;
     private Sunny.UI.UITextBox 异常重试上限Box;
-    private Sunny.UI.UIComboBox 预设源语言Box;
     private Sunny.UI.UILabel uiLabel15;
     private Sunny.UI.UITextBox 上下文深度Box;
-    private Sunny.UI.UIComboBox 预设目标语言Box;
-    private Sunny.UI.UILabel uiLabel10;
     private Sunny.UI.UILabel uiLabel14;
     private 自定义Switch 连续对话合并Switch;
     private Sunny.UI.UILabel uiLabel16;

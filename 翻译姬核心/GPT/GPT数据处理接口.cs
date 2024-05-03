@@ -12,7 +12,7 @@ internal interface GPT数据处理接口 {
     List<dynamic> 获取请求内容(bool 是否润色, dynamic 原请求);
     void 请求写入文本(dynamic 返回值, 文本[] 文本arr);
     
-    dynamic 返回值解析(string content, dynamic 原请求);
+    dynamic 返回值解析(string content, dynamic 原请求, bool 是否润色);
 
     dynamic 文本转请求(文本[] 文本arr);
 

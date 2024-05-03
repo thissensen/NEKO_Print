@@ -49,6 +49,7 @@ public partial class 全局设置 : 自定义Page {
         写出后删除源文件Switch.DataBindings.Add("Active", 全局设置数据, "写出后删除源文件", false, DataSourceUpdateMode.OnPropertyChanged);
         内置中括号过滤Switch.DataBindings.Add("Active", 全局设置数据, "内置中括号过滤", false, DataSourceUpdateMode.OnPropertyChanged);
         正则逆向写入Switch.DataBindings.Add("Active", 全局设置数据, "正则逆向写入", false, DataSourceUpdateMode.OnPropertyChanged);
+        单账号线程数Box.DataBindings.Add("Text", 全局设置数据, "单账号线程数", false, DataSourceUpdateMode.OnPropertyChanged);
 
         源语言Box.DataSource = new List<string>() { "日语", "英语", "韩语", "繁中", "简中"};
         目标语言Box.DataSource = new List<string>() { "简中", "繁中", "日语", "英语", "韩语" };

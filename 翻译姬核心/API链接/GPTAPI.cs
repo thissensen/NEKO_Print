@@ -56,7 +56,7 @@ public class GPTAPI : API接口模板 {
             try {
                 返回结果 = GPT调用.调用(请求内容);
                 机翻字符增加(返回结果.Usage.TotalTokens);
-                解析结束的请求 = 数据处理.返回值解析(返回结果.Choices[0].Message.Content, 原请求);//List<GPT请求>
+                解析结束的请求 = 数据处理.返回值解析(返回结果.Choices[0].Message.Content, 原请求, false);//List<GPT请求>
             } catch (Exception_API异常) {
                 throw;
             } catch (Exception ex) {
@@ -67,7 +67,7 @@ public class GPTAPI : API接口模板 {
                 if (返回结果 == null) {
                     异常处理.错误处理(ex.Message);
                 } else {
-                    异常处理.错误处理($"{ex.Message}{返回结果?.Choices[0].Message.Content}");
+                    异常处理.错误处理($"{ex.Message}:{返回结果?.Choices[0].Message.Content}");
                 }
                 goto 机翻开始;
             }
@@ -79,7 +79,7 @@ public class GPTAPI : API接口模板 {
                 try {
                     var 润色返回结果 = GPT调用.调用(待润色请求内容);
                     机翻字符增加(润色返回结果.Usage.TotalTokens);
-                    解析结束的请求 = 数据处理.返回值解析(润色返回结果.Choices[0].Message.Content, 待润色请求);
+                    解析结束的请求 = 数据处理.返回值解析(润色返回结果.Choices[0].Message.Content, 待润色请求, true);
                 } catch (Exception_API异常) {
                     throw;
                 } catch (Exception ex) {
@@ -87,7 +87,11 @@ public class GPTAPI : API接口模板 {
                         throw new Exception("异常重试次数已达上限");
                     }
                     异常重试次数++;
-                    异常处理.错误处理(ex.Message);
+                    if (返回结果 == null) {
+                        异常处理.错误处理(ex.Message);
+                    } else {
+                        异常处理.错误处理($"{ex.Message}:{返回结果?.Choices[0].Message.Content}");
+                    }
                     goto 润色开始;
                 }
             }
@@ -105,6 +109,7 @@ public class GPTAPI : API接口模板 {
             数据处理.请求写入文本(解析结束的请求, 待机翻);
         } catch (Exception ex) {
             if (GPT设置数据.错误跳过) {
+                数据处理.清空上文内容();
                 //跳过严重异常，继续机翻
                 异常处理.错误处理($"已跳过严重错误:{ex.Message}");
                 return;
@@ -129,7 +134,7 @@ public class GPTAPI : API接口模板 {
     }
 
     public static IEnumerable<文本[]> 文本分割(文本[] arr) {
-        //使用键值对索引提速，linq嵌套会消耗大类性能
+        //使用键值对索引提速，linq嵌套会消耗大量性能
         var 下标分组 = (from 文本 in arr
                     where 文本.文本类型 != 文本类型.人名
                     group 文本 by 文本.文本下标 into g

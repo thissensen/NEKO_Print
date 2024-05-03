@@ -102,6 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GPTAPI2.cs" />
+    <Compile Include="数组数据数值更改.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="数组数据数值更改.Designer.cs">
+      <DependentUpon>数组数据数值更改.cs</DependentUpon>
+    </Compile>
     <Compile Include="窗体界面\API设置\火山.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -896,6 +902,9 @@
       <DependentUpon>表格增删改.cs</DependentUpon>
     </Compile>
     <Compile Include="辅助类\错误处理.cs" />
+    <EmbeddedResource Include="数组数据数值更改.resx">
+      <DependentUpon>数组数据数值更改.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="窗体界面\辅助窗体\GPT词汇表窗体.resx">
       <DependentUpon>GPT词汇表窗体.cs</DependentUpon>
     </EmbeddedResource>

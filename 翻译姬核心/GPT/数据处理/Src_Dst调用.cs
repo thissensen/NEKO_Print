@@ -16,13 +16,12 @@ public class Src_Dst调用 : GPT数据处理接口 {
     //返回 List<dynamic>
     public List<dynamic> 获取请求内容(bool 是否润色, dynamic data) {
         var GPT请求 = data as List<Src_Dst请求>;
-        string json = JsonConvert.SerializeObject(GPT请求);
         //请求内容计算
         var 请求内容 = new List<dynamic>();
         if (!是否润色) {
-            请求内容.Add(new { role = "system", content = 语境设置词汇表(GPT设置数据.语境, GPT请求) });
+            请求内容.Add(new { role = "system", content = 语境设置词汇表(GPT设置数据.语境,  GPT请求) });
         } else {
-            请求内容.Add(new { role = "system", content = 语境设置词汇表(GPT设置数据.润色语境, GPT请求) });
+            请求内容.Add(new { role = "system", content = 语境设置词汇表(GPT设置数据.润色语境,  GPT请求) });
         }
         if (GPT设置数据.上下文提示 && 上文内容.Count > 0) {
             var 取值深度 = 上文内容.Count < GPT设置数据.上下文深度 ? 上文内容.Count : GPT设置数据.上下文深度;
@@ -32,18 +31,38 @@ public class Src_Dst调用 : GPT数据处理接口 {
                 请求内容.Add(new { role = "assistant", content = kv.Value });
             }
         }
-        请求内容.Add(new { role = "user", content = json });
+        //请求内容.Add(new { role = "user", content = json });
         return 请求内容;
     }
     private string 语境设置词汇表(string 语境, List<Src_Dst请求> GPT请求) {
-        语境 = 语境.Replace("[行数]", GPT请求.Count.ToString());
+        //基础
+        string json = JsonConvert.SerializeObject(GPT请求);
+        语境 = 语境.Replace("[Input]", json);
+
+        语境 = 语境.Replace("[SourceLang]", 预设语言[全局数据.全局设置数据.源语言]);
+        语境 = 语境.Replace("[TargetLang]", 预设语言[全局数据.全局设置数据.目标语言]);
+        //人名动态prompt
         var 人名arr = (from 请求 in GPT请求
                      where 请求.name != null && 请求.name != ""
                      select 请求.name).Distinct();
+        if (人名arr.Count() > 0) {
+            var match = Regex.Match(语境, @"\[NamePrompt:(.*?)]");
+            var nameprompt = match.Groups[0].Value;
+            var 值 = match.Groups[1].Value;
+            if (nameprompt != "") {
+                语境 = 语境.Replace(nameprompt, 值);
+            } else {
+                语境 = 语境.Replace(nameprompt, "");
+            }
+        }
+        //词汇表设置
         var 文本arr = (from 请求 in GPT请求
                      select 请求.src).Distinct();
         var 请求内容arr = 人名arr.Concat(文本arr).Distinct();
         var sb = new StringBuilder();
+        sb.AppendLine("# Glossary");
+        sb.AppendLine("| Src | Dst(/Dst2/..) | Note |");
+        sb.AppendLine("| --- | --- | --- |");
         var 待添加rows = new List<DataRow>();
         foreach (DataRow row in GPT设置数据.GPT词汇表.Rows) {
             var 原文 = row["原文"].ToString();
@@ -61,16 +80,20 @@ public class Src_Dst调用 : GPT数据处理接口 {
         foreach (var row in 待添加rows) {
             sb.AppendLine($"| {row["原文"]} | {row["译文"]} | {row["备注"]} |");
         }
-        if (sb.Length == 0) {
-            return 语境.Replace("[词汇表]", "");
-        } else {
-            return 语境.Replace("[词汇表]", sb.ToString());
-        }
+        return 语境.Replace("[Glossary]", sb.ToString());
     }
+    private Dictionary<string, string> 预设语言 = new Dictionary<string, string> {
+        ["日语"] = "Japanese",
+        ["英语"] = "English",
+        ["韩语"] = "Korean",
+        ["繁中"] = "Traditional Chinese",
+        ["简中"] = "Simplified Chinese"
+    };
 
-    public dynamic 返回值解析(string content, dynamic GPT请求) {
+    public dynamic 返回值解析(string content, dynamic GPT请求, bool 是否润色) {
         var 原请求 = GPT请求 as List<Src_Dst请求>;
         string text = Regex.Replace(content, @"^`+[^{\[]+", "");//去除开头的`
+        text = Regex.Replace(text, @"^jsonline", "");//去除开头的jsonline
         text = Regex.Replace(text, @"[\r\n]", "");//去除莫名的换行
         text = Regex.Replace(text, @"`+$", "");//去除结尾的`
         text = Regex.Replace(text, @"^\[|\]$", "");//删除左右[]
@@ -81,7 +104,8 @@ public class Src_Dst调用 : GPT数据处理接口 {
         var res = new List<Src_Dst请求>();
         try {
             string[] arr = text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            var reg_dst = new Regex(@".*?""id"".+?(?'id'\d+).*?""dst"".*?""(?'dst'.*?)[""}]");
+            string 取值目标 = 是否润色 ? "newdst" : "dst";
+            var reg_dst = new Regex(@$".*?""id"".+?(?'id'\d+).*?""{取值目标}"".*?""(?'dst'.*?)[""}}]");
             var reg_src = new Regex(@".*?""id"".+?(?'id'\d+).*?""src"".*?""(?'src'.*?)[""}]");
             foreach (var s in arr) {
                 GroupCollection g = null;

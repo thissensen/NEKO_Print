@@ -18,9 +18,13 @@ public class 序列号调用 : GPT数据处理接口 {
         var list = Util.文本提取对话(文本arr);
         var res = new List<KeyValue<int, string>>();
         for (int i = 0; i < list.Count; i++) {
+            var val = list[i].Value;
+            if (list[i].Key != null) {
+                val = $"{list[i].Key}「{val}」";
+            }
             var kv = new KeyValue<int, string>();
             kv.Key = i;
-            kv.Value = list[i].Value;
+            kv.Value = val;
             res.Add(kv);
         }
         return res;
@@ -83,7 +87,11 @@ public class 序列号调用 : GPT数据处理接口 {
         return 请求内容;
     }
     private string 语境设置词汇表(string 语境, List<KeyValue<int, string>> GPT请求) {
-        语境 = 语境.Replace("[行数]", GPT请求.Count.ToString());
+        //基础
+        var dic = GPT请求.ToDictionary(t => t.Key, t => t.Value);
+        string json = JsonConvert.SerializeObject(dic);
+        //语境 = 语境.Replace("[Input]", json);
+        //词汇表
         var 请求内容arr = GPT请求.Select(kv => kv.Value).ToList();
         var sb = new StringBuilder();
         var 待添加rows = new List<DataRow>();
@@ -101,33 +109,50 @@ public class 序列号调用 : GPT数据处理接口 {
             }
         }
         foreach (var row in 待添加rows) {
-            sb.AppendLine($"| {row["原文"]} | {row["译文"]} | {row["备注"]} |");
+            sb.Append($"{row["原文"]}->{row["译文"]}");
+            if (row["备注"].ToString() != "") {
+                sb.AppendLine($" #{row["备注"]}");
+            } else {
+                sb.AppendLine();
+            }
         }
-        if (sb.Length == 0) {
-            return 语境.Replace("[词汇表]", "");
-        } else {
-            return 语境.Replace("[词汇表]", sb.ToString());
-        }
+        return 语境.Replace("[Glossary]", sb.ToString());
     }
 
     public void 请求写入文本(dynamic 返回值, 文本[] 文本arr) {
         var list = 返回值 as List<KeyValue<int, string>>;
         var res = new List<KeyValue<string, string>>();
+        var reg = new Regex(@".*?「(?'val'.*?)」$");
         foreach (var item in list) {
+            var val = item.Value;
+            if (reg.IsMatch(val)) {
+                val = reg.Match(val).Groups["val"].Value;
+            }
             var kv = new KeyValue<string, string>();
-            kv.Value = item.Value;
+            kv.Value = val;
             kv.Tag = item.Tag ?? false;
             res.Add(kv);
         }
         Util.对话写入文本(文本arr, res, true);
     }
 
-    public dynamic 返回值解析(string content, dynamic 原请求) {
-        
+    public dynamic 返回值解析(string content, dynamic 原请求, bool 是否润色) {
+        var GPT请求 = 原请求 as List<KeyValue<int, string>>;
         string text = Regex.Replace(content, @"^`+[^{\[]+", "");
         text = Regex.Replace(text, @"[\r\n]", "");
         text = Regex.Replace(text, @"`+$", "");
         var res = new List<KeyValue<int, string>>();
+        /*try {
+            var arr = text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            if (arr.Length == GPT请求.Count) {
+                for (int i = 0; i < arr.Length; i++) {
+                    res.Add(new KeyValue<int, string>() {
+                        Key = i,
+                        Value = arr[i]
+                    });
+                }
+            }
+        } catch { }*/
         try {
             var dic = JsonConvert.DeserializeObject<Dictionary<int, string>>(text);
             var temp = from kv in dic

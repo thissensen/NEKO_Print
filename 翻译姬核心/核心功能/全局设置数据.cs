@@ -252,6 +252,17 @@ public class 全局设置数据 : INotifyPropertyChanged {
     }
     private bool _正则逆向写入;
 
+    public int 单账号线程数 {
+        get => _单账号线程数;
+        set {
+            if (_单账号线程数 != value) {
+                _单账号线程数 = value;
+                通知更改(() => 单账号线程数);
+            }
+        }
+    }
+    private int _单账号线程数 = 1;
+
     public event PropertyChangedEventHandler PropertyChanged;
     public void 通知更改<T>(Expression<Func<T>> property) {
         if (PropertyChanged == null)

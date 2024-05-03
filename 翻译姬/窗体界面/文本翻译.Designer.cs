@@ -687,7 +687,6 @@
             this.机翻接口Box.Text = "2345";
             this.机翻接口Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.机翻接口Box.Watermark = "";
-            this.机翻接口Box.TextChanged += new System.EventHandler(this.机翻接口Box_TextChanged);
             // 
             // 文本显示Box
             // 

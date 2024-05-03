@@ -369,6 +369,7 @@ namespace 翻译姬 {
                     c.Enabled = false;
                 }
                 开始Btn.Enabled = false;
+                数据处理Btn.Enabled = true;
                 主界面.界面组["全局设置"].Enabled = false;
                 主界面.界面组["GPT设置"].Enabled = false;
             }));
@@ -430,7 +431,7 @@ namespace 翻译姬 {
             return token;
         }*/
 
-        private void 机翻接口Box_TextChanged(object sender, EventArgs e) {
+        /*private void 机翻接口Box_TextChanged(object sender, EventArgs e) {
             if (机翻接口Box.Text == "GPT") {
                 源语言Box.Enabled = false;
                 //目标语言Box.Enabled = false;
@@ -438,7 +439,7 @@ namespace 翻译姬 {
                 源语言Box.Enabled = true;
                 //目标语言Box.Enabled = true;
             }
-        }
+        }*/
 
         private void 机翻方式Box_TextChanged(object sender, EventArgs e) {
             if (机翻方式Box.Text == "标准机翻") {

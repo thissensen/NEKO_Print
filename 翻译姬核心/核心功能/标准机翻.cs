@@ -51,41 +51,43 @@ public class 标准机翻 {
         线程池 pool = new 线程池(API明细.Rows.Count);
         foreach (DataRow 明细row in API明细.Rows) {
             API信息 data = API信息.Parse(明细row);
-            API接口模板 api = Activator.CreateInstance(API类型, data) as API接口模板;
-            var t = new Task(() => {
-                while (!全局数据.是否中止 && !是否机翻完) {
-                    文本组[] 文本arr;
-                    if (!文本栈.TryPop(out 文本arr)) {
-                        Thread.Sleep(100);
-                        continue;
-                    }
-                    try {
-                        foreach (文本组 文本 in 文本arr) {
-                            if (全局数据.是否中止) {
-                                throw new Exception("机翻被中止");
-                            }
-                            if (文本.机翻状态) {
-                                continue;
-                            }
-                            api.文本机翻(文本.文本);//机翻
-                            文本.机翻状态 = true;
-                            //进度条增加
-                            Util.多线程进度条增加(文本.文本.Length);
+            for (int i = 0; i < 全局设置数据.单账号线程数; i++) {//单账号复用线程数
+                API接口模板 api = Activator.CreateInstance(API类型, data) as API接口模板;
+                var t = new Task(() => {
+                    while (!全局数据.是否中止 && !是否机翻完) {
+                        文本组[] 文本arr;
+                        if (!文本栈.TryPop(out 文本arr)) {
+                            Thread.Sleep(100);
+                            continue;
                         }
-                        api.单组执行完();
-                        机翻完成数++;
-                    } catch (Exception ex) {
-                        异常处理.错误处理($"机翻过程错误:{ex.Message}");
-                        文本栈.Push(文本arr);
-                        break;
+                        try {
+                            foreach (文本组 文本 in 文本arr) {
+                                if (全局数据.是否中止) {
+                                    throw new Exception("机翻被中止");
+                                }
+                                if (文本.机翻状态) {
+                                    continue;
+                                }
+                                api.文本机翻(文本.文本);//机翻
+                                文本.机翻状态 = true;
+                                //进度条增加
+                                Util.多线程进度条增加(文本.文本.Length);
+                            }
+                            api.单组执行完();
+                            机翻完成数++;
+                        } catch (Exception ex) {
+                            异常处理.错误处理($"机翻过程错误:{ex.Message}");
+                            文本栈.Push(文本arr);
+                            break;
+                        }
+                        //判断机翻完成情况
+                        if (机翻完成数 == 文本组arr.Length) {
+                            是否机翻完 = true;
+                        }
                     }
-                    //判断机翻完成情况
-                    if (机翻完成数 == 文本组arr.Length) {
-                        是否机翻完 = true;
-                    }
-                }
-            });
-            pool.添加线程(t);
+                });
+                pool.添加线程(t);
+            }
         }
         pool.执行并等待();
         if (文本栈.Count > 0) {
