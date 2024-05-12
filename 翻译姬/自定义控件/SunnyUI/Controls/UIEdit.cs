@@ -75,23 +75,26 @@ namespace Sunny.UI
 
         private void waterMarkContainer_Paint(object sender, PaintEventArgs e)
         {
-            waterMarkContainer.Visible = Watermark.IsValid();
-            waterMarkContainer.Location = new Point(4, -1);
-            waterMarkContainer.Height = this.Height;
-            waterMarkContainer.Width = this.Width - 4;
-            waterMarkContainer.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            try {
+                waterMarkContainer.Visible = Watermark.IsValid();
+                waterMarkContainer.Location = new Point(4, -1);
+                waterMarkContainer.Height = this.Height;
+                waterMarkContainer.Width = this.Width - 4;
+                waterMarkContainer.Anchor = AnchorStyles.Left | AnchorStyles.Right;
 
-            if (this.ContainsFocus)
-            {
-                waterMarkBrush = new SolidBrush(this._waterMarkActiveColor);
-            }
-            else
-            {
-                waterMarkBrush = new SolidBrush(this._waterMarkColor);
-            }
+                if (this.ContainsFocus)
+                {
+                    waterMarkBrush = new SolidBrush(this._waterMarkActiveColor);
+                }
+                else
+                {
+                    waterMarkBrush = new SolidBrush(this._waterMarkColor);
+                }
 
-            Graphics g = e.Graphics;
-            g.DrawString(this._waterMarkText, Font, waterMarkBrush, new PointF(-2f, 1f));//Take a look at that point
+                Graphics g = e.Graphics;
+                g.DrawString(this._waterMarkText, Font, waterMarkBrush, new PointF(-2f, 1f));//Take a look at that point
+
+            } catch { }//会报空指针，姑且屏蔽下
         }
 
         private void RemoveWaterMark()

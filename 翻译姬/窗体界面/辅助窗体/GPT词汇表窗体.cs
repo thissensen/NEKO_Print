@@ -43,14 +43,14 @@ public partial class GPT词汇表窗体 : 自定义Form {
                 if (t.Trim() == "") {
                     continue;
                 }
-                var arr = t.Split(',');
+                var arr = t.Split('\t');
                 if (arr.Length < 2) {
                     throw new Exception("csv格式异常，请从[数据处理]界面导出后修改再导入");
                 }
                 var dr = dt.NewRow();
                 dr["原文"] = arr[0];
                 dr["译文"] = arr[1];
-                dr["备注"] = string.Join(",", arr.Skip(2));
+                dr["备注"] = string.Join("\t", arr.Skip(2));
                 dt.Rows.Add(dr);
             }
             词汇表.DataTable = dt;

@@ -34,7 +34,7 @@ public partial class GPT : 通用API窗体 {
         MessageBoxEx.Show("GPT注册请自行解决");
     }
     protected override void 检测可用Btn_Click(object sender, EventArgs e) {
-        MessageBoxEx.Show("GPT无法检测可用状态");
+        //MessageBoxEx.Show("GPT无法检测可用状态");
     }
     protected override void 是否启用列数据变化(UISwitch sw, DataRow row) {
         表格增删改.保存Btn.PerformClick();

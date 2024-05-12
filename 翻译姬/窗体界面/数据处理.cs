@@ -426,12 +426,12 @@ public partial class 数据处理 : 自定义Form {
                       from t in 文本.文本
                       where t.文本类型 == 文本类型.人名
                       select t.原文).Distinct().ToArray();
-            var sb = new StringBuilder("原文,译文,备注\r\n");
+            var sb = new StringBuilder("原文\t译文\t备注\r\n");
             foreach (var item in res) {
-                sb.Append($"{item},{item},").AppendLine();
+                sb.Append($"{item}\t{item}\t").AppendLine();
             }
             using var fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write);
-            using var sw = new StreamWriter(fs, Encoding.Default);
+            using var sw = new StreamWriter(fs, Encoding.UTF8);
             sw.Write(sb.ToString());
             sw.Flush();
             消息框帮助.轻便消息("导出成功", this);
