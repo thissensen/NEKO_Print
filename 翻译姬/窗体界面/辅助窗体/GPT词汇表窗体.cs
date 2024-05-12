@@ -33,7 +33,7 @@ public partial class GPT词汇表窗体 : 自定义Form {
                 return;
             }
             using FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, false);
-            using StreamReader sr = new StreamReader(fs, Encoding.Default);
+            using StreamReader sr = new StreamReader(fs, Encoding.UTF8);
             string t = sr.ReadLine();
             var dt = new DataTable();
             dt.Columns.Add("原文");
