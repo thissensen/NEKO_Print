@@ -31,13 +31,15 @@ public class Src_Dst调用 : GPT数据处理接口 {
                 请求内容.Add(new { role = "assistant", content = kv.Value });
             }
         }
-        //请求内容.Add(new { role = "user", content = json });
+        string json = JsonConvert.SerializeObject(GPT请求);
+        请求内容.Add(new { role = "user", content = json });
         return 请求内容;
     }
     private string 语境设置词汇表(string 语境, List<Src_Dst请求> GPT请求) {
         //基础
-        string json = JsonConvert.SerializeObject(GPT请求);
-        语境 = 语境.Replace("[Input]", json);
+        /*string json = JsonConvert.SerializeObject(GPT请求);
+        语境 = 语境.Replace("[Input]", json);*/
+        //语境 = 语境.Replace("[Input]", "");
 
         语境 = 语境.Replace("[SourceLang]", 预设语言[全局数据.全局设置数据.源语言]);
         语境 = 语境.Replace("[TargetLang]", 预设语言[全局数据.全局设置数据.目标语言]);
@@ -51,9 +53,8 @@ public class Src_Dst调用 : GPT数据处理接口 {
             var 值 = match.Groups[1].Value;
             if (nameprompt != "") {
                 语境 = 语境.Replace(nameprompt, 值);
-            } else {
-                语境 = 语境.Replace(nameprompt, "");
             }
+            //string.Replace的值长度不能为0，故没有else
         }
         //词汇表设置
         var 文本arr = (from 请求 in GPT请求
@@ -105,24 +106,33 @@ public class Src_Dst调用 : GPT数据处理接口 {
         try {
             string[] arr = text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             string 取值目标 = 是否润色 ? "newdst" : "dst";
-            var reg_dst = new Regex(@$".*?""id"".+?(?'id'\d+).*?""{取值目标}"".*?""(?'dst'.*?)[""}}]");
-            var reg_src = new Regex(@".*?""id"".+?(?'id'\d+).*?""src"".*?""(?'src'.*?)[""}]");
+            var reg_dst = new Regex(@$".*?(?:""id"".+?(?'id'\d+))?.*?""{取值目标}"".*?""(?'dst'.*?)[""}}]");
+            var reg_src = new Regex(@".*?(?:""id"".+?(?'id'\d+))?.*?""src"".*?""(?'src'.*?)[""}]");
+            int num = 0;
             foreach (var s in arr) {
                 GroupCollection g = null;
                 int id = -1;
                 string dst = null;
                 if (reg_dst.IsMatch(s)) {
                     g = reg_dst.Match(s).Groups;
-                    id = int.Parse(g["id"].ToString());
                     dst = g["dst"].ToString().Trim();
                     if (dst != "") {
+                        if (g["id"].ToString() == "") {
+                            id = num++;
+                        } else {
+                            id = int.Parse(g["id"].ToString());
+                        }
                         goto 返回值提取成功;
                     }
                     dst = null;
                 }
                 //src提取解析
                 g = reg_src.Match(s).Groups;
-                id = int.Parse(g["id"].ToString());
+                if (g["id"].ToString() == "") {
+                    id = num++;
+                } else {
+                    id = int.Parse(g["id"].ToString());
+                }
                 var src = g["src"].ToString().Trim();
                 if (src != "" && !Util.漏翻检测(src)) {
                     dst = src;

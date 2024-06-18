@@ -187,6 +187,17 @@ public class GPT设置数据 : INotifyPropertyChanged {
     }
     private bool _连续对话合并 = true;
 
+    public bool 相邻对话合并 {
+        get => _相邻对话合并;
+        set {
+            if (_相邻对话合并 != value) {
+                _相邻对话合并 = value;
+                通知更改(() => 相邻对话合并);
+            }
+        }
+    }
+    private bool _相邻对话合并 = true;
+
     //原文-译文-备注
     public DataTable GPT词汇表 { get; set; } = new DataTable();
 

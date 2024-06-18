@@ -55,6 +55,7 @@
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.机翻接口Box = new Sunny.UI.UIComboBox();
             this.文本显示Box = new Sunny.UI.UITextBox();
+            this.补翻Btn = new Sunny.UI.UIButton();
             this.控件区Panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -108,6 +109,7 @@
             // 
             // 控件区Panel
             // 
+            this.控件区Panel.Controls.Add(this.补翻Btn);
             this.控件区Panel.Controls.Add(this.缓存续翻Btn);
             this.控件区Panel.Controls.Add(this.实际使用字符Label);
             this.控件区Panel.Controls.Add(this.uiLabel13);
@@ -173,10 +175,10 @@
             this.缓存续翻Btn.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
             this.缓存续翻Btn.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.缓存续翻Btn.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
-            this.缓存续翻Btn.Size = new System.Drawing.Size(100, 76);
+            this.缓存续翻Btn.Size = new System.Drawing.Size(100, 34);
             this.缓存续翻Btn.Style = Sunny.UI.UIStyle.Colorful;
             this.缓存续翻Btn.TabIndex = 86;
-            this.缓存续翻Btn.Text = "缓存续翻";
+            this.缓存续翻Btn.Text = "续翻";
             this.缓存续翻Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.缓存续翻Btn.Click += new System.EventHandler(this.缓存续翻Btn_Click);
             // 
@@ -715,6 +717,31 @@
             this.文本显示Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.文本显示Box.Watermark = "";
             // 
+            // 补翻Btn
+            // 
+            this.补翻Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.补翻Btn.Enabled = false;
+            this.补翻Btn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.补翻Btn.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.补翻Btn.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.补翻Btn.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.补翻Btn.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.补翻Btn.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.补翻Btn.Location = new System.Drawing.Point(318, 54);
+            this.补翻Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.补翻Btn.Name = "补翻Btn";
+            this.补翻Btn.Radius = 15;
+            this.补翻Btn.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.补翻Btn.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.补翻Btn.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.补翻Btn.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.补翻Btn.Size = new System.Drawing.Size(100, 34);
+            this.补翻Btn.Style = Sunny.UI.UIStyle.Colorful;
+            this.补翻Btn.TabIndex = 87;
+            this.补翻Btn.Text = "补翻";
+            this.补翻Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.补翻Btn.Click += new System.EventHandler(this.补翻Btn_Click);
+            // 
             // 文本翻译
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -772,5 +799,6 @@
         private Sunny.UI.UIComboBox 读取编码Box;
         private Sunny.UI.UILabel 实际使用字符Label;
         private Sunny.UI.UIButton 缓存续翻Btn;
+        private Sunny.UI.UIButton 补翻Btn;
     }
 }

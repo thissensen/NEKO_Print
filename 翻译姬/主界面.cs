@@ -154,7 +154,9 @@ namespace 翻译姬 {
         private void 关闭Btn_Click(object sender, EventArgs e) {
             if (文本翻译.机翻中) {
                 if (MessageBoxEx.Show("机翻中，是否强制退出？", "提示", 提示窗按钮.确认取消)) {
-                    File.WriteAllText(全局数据.缓存数据路径, JsonConvert.SerializeObject(文本翻译.处理中文件结构, Formatting.Indented));
+                    if (文本翻译.处理中文件结构 != null) {
+                        File.WriteAllText(全局数据.缓存数据路径, JsonConvert.SerializeObject(文本翻译.处理中文件结构, Formatting.Indented));
+                    }
                     Close();
                 }
             } else {

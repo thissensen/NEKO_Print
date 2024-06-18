@@ -15,10 +15,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-using static System.Net.Mime.MediaTypeNames;
-using System.Text.RegularExpressions;
-using System.Collections.Concurrent;
-using System.Drawing.Printing;
 
 namespace 翻译姬 {
     public partial class 文本翻译 : 自定义Page {
@@ -26,10 +22,23 @@ namespace 翻译姬 {
         public static bool 机翻中 { get; private set; } = false;
         private 全局设置数据 全局设置数据 => 全局数据.全局设置数据;
         private int 总行数 { get; set; } = 0;
-        //public static bool 是否中止 = false;
+        public static UIButton 补翻按钮;
         public static 文件结构[] 处理中文件结构 {
             get => 全局数据.处理中文件结构;
-            set => 全局数据.处理中文件结构 = value;
+            set {
+                全局数据.处理中文件结构 = value;
+                if (value != null) {
+                    var 异常可补翻数据 = from 文件结构 文件 in 处理中文件结构
+                                  from 文本组 in 文件.文本组
+                                  where 文本组.机翻状态 && !文本组.完成状态
+                                  let res = 文本组.文本.Where(t => t.异常状态 == 文本异常状态.返回原文).ToArray()
+                                  where res.Length > 0
+                                  select res;
+                    补翻按钮.Invoke(()=> {
+                        补翻按钮.Enabled = 异常可补翻数据.Count() > 0;
+                    });
+                }
+            }
         }
 
         private string 起始显示文本 = """
@@ -42,6 +51,7 @@ namespace 翻译姬 {
 
         public 文本翻译() {
             InitializeComponent();
+            补翻按钮 = 补翻Btn;
             数据中转.文本显示Box = 文本显示Box;
             数据中转.实际使用字符Label = 实际使用字符Label;
             文本显示Box.ShowScrollBar = true;
@@ -49,7 +59,6 @@ namespace 翻译姬 {
             tip.BackColor = 全局字符串.背景色;
             tip.ForeColor = 全局字符串.主题色;
             tip.RectColor = 全局字符串.主题色;
-            缓存续翻Btn.Text = "缓存\r\n续翻";
         }
 
         private void 文本翻译_Load(object sender, EventArgs e) {
@@ -99,7 +108,7 @@ namespace 翻译姬 {
                     处理中文件结构 = JsonConvert.DeserializeObject<文件结构[]>(json);
                     文本组反向覆盖有效文本(处理中文件结构);
                 } catch {
-                    throw new Exception("缓存数据解析失败");
+                    MessageBoxEx.Show("缓存数据解析失败");
                 }
             }
         }
@@ -160,13 +169,6 @@ namespace 翻译姬 {
                         }
                         调用管理.文本机翻(机翻, 处理中文件结构);
 
-                        /*foreach (var 文件 in 处理中文件结构) {
-                            调用管理.文本机翻(机翻, 文件);
-                            if (机翻 != 机翻方式.不机翻) {
-                                文件.文本组.强制生成机翻();
-                            }
-                            文件.写出();
-                        }*/
                     } catch (Exception ex) {
                         数据中转.文本显示AppendLine(ex.Message);
                     }
@@ -268,6 +270,62 @@ namespace 翻译姬 {
 
         }
 
+        private void 补翻Btn_Click(object sender, EventArgs e) {
+            机翻前();
+            Task.Run(() => {
+                try {
+                    if (!MessageBoxEx.Show("确定补翻返回原文的内容？", 显示按钮: 提示窗按钮.确认取消)) {
+                        return;
+                    }
+                    var 异常可补翻数据 = from 文件结构 文件 in 处理中文件结构
+                                  from 文本组 in 文件.文本组
+                                  where 文本组.机翻状态 && !文本组.完成状态
+                                  let res = 文本组.文本.Where(t => t.异常状态 == 文本异常状态.返回原文).ToArray()
+                                  where res.Length > 0
+                                  select res;
+                    var 所有待补翻文本 = new List<文本>();
+                    foreach (var item in 异常可补翻数据) {
+                        所有待补翻文本.AddRange(item);
+                    }
+                    var 文本组list = new List<文本组>();
+                    var api类型 = 文件结构.获取API类型();
+                    foreach (文本[] 文本arr in 处理中文件结构.First().分割文本(api类型, 所有待补翻文本.ToArray())) {
+                        var 文本组 = new 文本组();
+                        文本组.文本 = 文本arr;
+                        文本组list.Add(文本组);
+                    }
+                    开始Btn.Invoke(() => {
+                        开始Btn.Text = "中止";
+                        开始Btn.Enabled = true;
+                    });
+                    总行数 = 0;
+                    foreach (var 文本组 in 文本组list) {
+                        总行数 += 文本组.文本.Length;
+                    }
+                    数据中转.进度条当前值设定(0);
+                    数据中转.进度条最大值设定(总行数);
+                    机翻方式 机翻 = (机翻方式)Enum.Parse(typeof(机翻方式), 机翻方式Box.Text);
+
+                    try {
+                        标准机翻.文本组机翻(api类型, new 文本组[][] { 文本组list.ToArray() });
+
+                    } catch (Exception ex) {
+                        数据中转.文本显示AppendLine(ex.Message);
+                    }
+
+                    if (处理中文件结构.Any(t => t.文本组.Any(t2 => !t2.完成状态))) {
+                        MessageBoxEx.Show("发现未完成异常数据，可点击数据处理进行手动更正");
+                    }
+
+                    BeginInvoke(() => 消息框帮助.通知栏消息("机翻完成！"));
+                } catch (Exception ex) {
+                    MessageBoxEx.Show(ex.Message);
+                } finally {
+                    机翻后();
+                }
+            });
+        }
+
         private void 预显示Btn_Click(object sender, EventArgs e) {
             try {
                 总行数 = 0;
@@ -360,38 +418,53 @@ namespace 翻译姬 {
 
         private void 机翻前() {
             Invoke(new Action(() => {
-                数据中转.数据处理?.Close();
-                机翻中 = true;
-                全局数据.是否中止 = false;
-                实际使用字符Label.Text = "实际使用字符：0";
-                var cons = 控件组();
-                foreach (var c in cons) {
-                    c.Enabled = false;
+                try {
+                    数据中转.数据处理?.Close();
+                    机翻中 = true;
+                    全局数据.是否中止 = false;
+                    var a = 全局数据.是否中止;
+                    实际使用字符Label.Text = "实际使用字符：0";
+                    var cons = 控件组();
+                    foreach (var c in cons) {
+                        c.Enabled = false;
+                    }
+                    开始Btn.Enabled = false;
+                    数据处理Btn.Enabled = true;
+                    主界面.界面组["全局设置"].Enabled = false;
+                    主界面.界面组["GPT设置"].Enabled = false;
+                } catch (Exception ex) {
+                    MessageBoxEx.Show(ex.Message);
+                    机翻后();
                 }
-                开始Btn.Enabled = false;
-                数据处理Btn.Enabled = true;
-                主界面.界面组["全局设置"].Enabled = false;
-                主界面.界面组["GPT设置"].Enabled = false;
             }));
         }
 
         private void 机翻后() {
             BeginInvoke(new Action(() => {
-                机翻中 = false;
-                全局数据.是否中止 = true;
-                var cons = 控件组();
-                foreach (var c in cons) {
-                    c.Enabled = true;
-                }
-                开始Btn.Text = "开始";
-                开始Btn.Enabled = true;
-                主界面.界面组["全局设置"].Enabled = true;
-                主界面.界面组["GPT设置"].Enabled = true;
-                if (File.Exists(全局数据.缓存数据路径)) {
-                    缓存续翻Btn.Enabled = true;
-                } else {
-                    缓存续翻Btn.Enabled = false;
-                }
+                try {
+                    机翻中 = false;
+                    全局数据.是否中止 = true;
+                    var cons = 控件组();
+                    foreach (var c in cons) {
+                        c.Enabled = true;
+                    }
+                    开始Btn.Text = "开始";
+                    开始Btn.Enabled = true;
+                    主界面.界面组["全局设置"].Enabled = true;
+                    主界面.界面组["GPT设置"].Enabled = true;
+                    if (File.Exists(全局数据.缓存数据路径)) {
+                        缓存续翻Btn.Enabled = true;
+                    } else {
+                        缓存续翻Btn.Enabled = false;
+                    }
+                    var 异常可补翻数据 = from 文件结构 文件 in 处理中文件结构
+                                  from 文本组 in 文件.文本组
+                                  where 文本组.机翻状态 && !文本组.完成状态
+                                  let res = 文本组.文本.Where(t => t.异常状态 == 文本异常状态.返回原文).ToArray()
+                                  where res.Length > 0
+                                  select res;
+                    补翻Btn.Enabled = 异常可补翻数据.Count() > 0;
+                } catch { }
             }));
         }
 

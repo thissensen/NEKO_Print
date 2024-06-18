@@ -36,8 +36,19 @@ public class 标准机翻 {
         }
         原文_机翻.Clear();
         //待机翻数据整理
-        var 文本栈 = new ConcurrentStack<文本组[]>();
         var 文本组arr = 文件切割(文件组).ToArray();
+        文本组机翻(API类型, 文本组arr);
+    }
+
+    public static void 文本组机翻(Type API类型, 文本组[][] 文本组arr) {
+        string API名称 = API类型.Name.Substring(0, API类型.Name.Length - 3);//去掉API3个字
+        DataTable API明细 = 数据库.Select($"select * from API明细 where 是否启用=1 and 类型='{API名称}'");
+        if (API明细.Rows.Count == 0) {
+            throw new Exception($"【{API名称}】没有可用的账号，请前往添加并开启");
+        }
+        原文_机翻.Clear();
+        //待机翻数据整理
+        var 文本栈 = new ConcurrentStack<文本组[]>();
         for (int i = 文本组arr.Length - 1; i >= 0; i--) {
             文本栈.Push(文本组arr.ElementAt(i));
         }
@@ -111,6 +122,9 @@ public class 标准机翻 {
             //切割
             var res = new List<文本组>();
             foreach (var 文本 in 全文本组) {
+                if (文本.机翻状态) {
+                    continue;
+                }
                 res.Add(文本);
                 if (res.Count == 全局设置数据.API单组上限) {
                     yield return res.ToArray();

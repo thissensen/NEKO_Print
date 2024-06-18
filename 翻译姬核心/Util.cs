@@ -246,10 +246,138 @@ namespace 翻译姬 {
         }
 
         public static List<KeyValue<string, string>> 文本提取对话(文本[] 文本arr) {
-            var 下标分组 = from 文本 in 文本arr
-                       where 文本.文本类型 != 文本类型.人名
-                       group 文本 by 文本.文本下标 into g
-                       select g;
+            //文本下标 - 下标对应的文本组
+            var 下标分组 = (from 文本 in 文本arr
+                        where 文本.文本类型 != 文本类型.人名
+                        group 文本 by 文本.文本下标 into g
+                        select g).ToDictionary(t => t.Key, t => t);
+            var res = new List<KeyValue<string, string>>();
+            int 上级文本下标 = -2;
+            文本 人名文本 = null;
+            for (int i = 0; i < 文本arr.Length; i++) {
+                var 文本 = 文本arr[i];
+                if (文本.文本类型 == 文本类型.人名) {
+                    人名文本 = 文本;
+                    continue;
+                }
+                if (GPT设置数据.连续对话合并 && 文本.文本下标 == 上级文本下标) {
+                    //不进行左右重复合并保存
+                    continue;
+                }
+                if (GPT设置数据.连续对话合并) {
+                    if (GPT设置数据.相邻对话合并 && 文本.文本下标 == 上级文本下标 + 1) {
+                        //连续对话，当前内容合并到上级
+                        var 最后kv = res.Last();
+                        最后kv.Value += GPT设置数据.合并分隔符 + 文本.原文;
+                        res[res.Count - 1] = 最后kv;
+                        上级文本下标 = 文本.文本下标;
+                        continue;
+                    }
+                }
+                //非连续，正常新添
+                var kv = new KeyValue<string, string>();
+                kv.Key = 人名文本?.原文;
+                if (GPT设置数据.连续对话合并) {
+                    var 原文组 = 下标分组[文本.文本下标].Select(t => t.原文);
+                    kv.Value = string.Join(GPT设置数据.合并分隔符, 原文组);
+                } else {
+                    kv.Value = 文本.原文;
+                }
+                上级文本下标 = 文本.文本下标;
+                res.Add(kv);
+                人名文本 = null;
+            }
+            return res;
+        }
+
+        public static void 对话写入文本(文本[] 文本arr, List<KeyValue<string, string>> 对话list, bool 返回值换行符修正) {
+            var 下标分组 = (from 文本 in 文本arr
+                        where 文本.文本类型 != 文本类型.人名
+                        group 文本 by 文本.文本下标 into g
+                        select g).ToDictionary(t => t.Key, t => t);
+            int 请求id = 0, 上级文本下标 = -2;
+            文本 最后文本 = null;
+            var 读取中结果 = new Queue<string>();
+            for (int i = 0; i < 文本arr.Length; i++) {
+                var 文本 = 文本arr[i];
+                if (文本.文本类型 == 文本类型.人名) {
+                    continue;
+                }
+                if (GPT设置数据.连续对话合并 && 文本.文本下标 == 上级文本下标) {
+                    //不进行左右重复合并保存
+                    continue;
+                }
+                if (GPT设置数据.连续对话合并) {
+                    if (GPT设置数据.相邻对话合并 && 文本.文本下标 == 上级文本下标 + 1) {
+                        //连续对话，当前内容合并到上级
+                        var 原文组 = 下标分组[文本.文本下标];
+                        var 上级文本 = 下标分组[上级文本下标].Last();
+                        文本 临时最后文本 = null;
+                        foreach (var 原文文本 in 原文组) {
+                            if (读取中结果.Count > 0) {
+                                原文文本.译文 = 读取中结果.Dequeue();
+                                原文文本.异常状态 = 上级文本.异常状态;
+                                临时最后文本 = 原文文本;
+                            }
+                        }
+                        上级文本下标 = 文本.文本下标;
+                        continue;
+                    }
+                }
+                //非连续，正常读取赋值
+                var kv = 对话list[请求id++];
+                bool 是否漏翻 = (bool)kv.Tag;
+                if (GPT设置数据.连续对话合并) {//从左往右，从上往下，取值赋值
+                    var 原文组 = 下标分组[文本.文本下标];
+                    string 请求结果 = kv.Value;
+                    if (返回值换行符修正) {
+                        请求结果 = 换行符修正(请求结果);
+                    }
+                    //判断多换行符
+                    if (读取中结果.Count > 0) {
+                        if (最后文本 != null) {
+                            最后文本.异常状态 = 文本异常状态.多换行符;
+                            while (读取中结果.Count != 0) {
+                                最后文本.译文 += 读取中结果.Dequeue();//剩余的拼接在最后的文本中
+                            }
+                        } else {
+                            throw new Exception("算法异常，最后文本为null");
+                        }
+                        读取中结果.Clear();
+                    }
+                    //a-b  -  c-d
+                    string[] gpt译文 = Regex.Split(请求结果, Regex.Escape(GPT设置数据.合并分隔符));
+                    foreach (var 译文 in gpt译文) {
+                        读取中结果.Enqueue(译文);
+                    }
+                    foreach (var 原文文本 in 原文组) {
+                        if (读取中结果.Count > 0) {
+                            原文文本.译文 = 读取中结果.Dequeue();
+                            if (是否漏翻) {
+                                原文文本.异常状态 = 文本异常状态.存在漏翻;
+                            }
+                        }
+                        最后文本 = 原文文本;
+                    }
+                } else {
+                    文本.译文 = kv.Value;
+                    if (是否漏翻) {
+                        文本.异常状态 = 文本异常状态.存在漏翻;
+                    }
+                    最后文本 = 文本;
+                }
+                上级文本下标 = 文本.文本下标;
+            }
+        }
+
+        //废弃的原算法
+        /*public static List<KeyValue<string, string>> 文本提取对话3(文本[] 文本arr) {
+            //文本下标 - 下标对应的文本组
+            //目前是合并左右对话组，上下也要合并
+            var 下标分组 = (from 文本 in 文本arr
+                        where 文本.文本类型 != 文本类型.人名
+                        group 文本 by 文本.文本下标 into g
+                        select g).ToDictionary(t => t.Key, t => t);
             var res = new List<KeyValue<string, string>>();
             int 最后合并id = -1;
             文本 人名文本 = null;
@@ -266,7 +394,7 @@ namespace 翻译姬 {
                 var kv = new KeyValue<string, string>();
                 kv.Key = 人名文本?.原文;
                 if (GPT设置数据.连续对话合并) {
-                    var 原文组 = 下标分组.Single(t => t.Key == 文本.文本下标).Select(t => t.原文);
+                    var 原文组 = 下标分组[文本.文本下标];
                     kv.Value = string.Join(GPT设置数据.合并分隔符, 原文组);
                     最后合并id = 文本.文本下标;
                 } else {
@@ -278,7 +406,8 @@ namespace 翻译姬 {
             return res;
         }
 
-        public static void 对话写入文本(文本[] 文本arr, List<KeyValue<string, string>> 对话list, bool 返回值换行符修正) {
+
+        public static void 对话写入文本3(文本[] 文本arr, List<KeyValue<string, string>> 对话list, bool 返回值换行符修正) {
             var 下标分组 = from 文本 in 文本arr
                        where 文本.文本类型 != 文本类型.人名
                        group 文本 by 文本.文本下标 into g
@@ -325,7 +454,7 @@ namespace 翻译姬 {
                 }
             }
         }
-
+*/
         private static string 换行符修正(string src) {
             var reg_n = new Regex(@"(?<!\r)\n");
             if (reg_n.IsMatch(src)) {

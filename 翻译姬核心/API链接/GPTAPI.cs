@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace 翻译姬;
@@ -98,11 +99,12 @@ public class GPTAPI : API接口模板 {
             //漏翻检测并标记漏翻的句子
             if (GPT设置数据.漏翻检测 && 数据处理.漏翻检测(解析结束的请求)) {
                 if (漏翻重试次数 == GPT设置数据.漏翻重试次数) {
-                    throw new Exception("漏翻重试次数已达上限");
+                    异常处理.错误处理("漏翻重试次数已达上限");
+                } else {
+                    异常处理.错误处理("GPT检测到漏翻，重试");
+                    漏翻重试次数++;
+                    goto 机翻开始;
                 }
-                异常处理.错误处理("GPT检测到漏翻，重试");
-                漏翻重试次数++;
-                goto 机翻开始;
             }
             //写入文本
             数据处理.添加上文内容(原请求, 解析结束的请求);
@@ -139,6 +141,65 @@ public class GPTAPI : API接口模板 {
                     where 文本.文本类型 != 文本类型.人名
                     group 文本 by 文本.文本下标 into g
                     select g).ToDictionary(t => t.Key, t => t);
+        var 对话结果 = new List<文本[]>();//一组视为一个对话
+        文本 人名文本 = null;
+        int 上级文本下标 = -2;
+        for (int i = 0; i < arr.Length; i++) {
+            var 文本 = arr[i];
+            if (文本.文本类型 == 文本类型.人名) {//人名不算做对话组
+                人名文本 = 文本;
+                continue;
+            }
+            if (GPT设置数据.连续对话合并 && 文本.文本下标 == 上级文本下标) {
+                continue;
+            }
+            if (GPT设置数据.连续对话合并) {
+                if (GPT设置数据.相邻对话合并 && 文本.文本下标 == 上级文本下标 + 1) {
+                    var 文本arr = 下标分组[文本.文本下标];
+                    var 最后对话list = 对话结果.Last().ToList();
+                    最后对话list.AddRange(文本arr);
+                    对话结果[对话结果.Count - 1] = 最后对话list.ToArray();//填充到最后对话中
+                    上级文本下标 = 文本.文本下标;
+                    continue;
+                }
+                
+            }
+            if (GPT设置数据.连续对话合并) {
+                var 原文组 = 下标分组[文本.文本下标].ToList();
+                if (人名文本 != null) {
+                    原文组.Insert(0, 人名文本);
+                    人名文本 = null;
+                }
+                对话结果.Add(原文组.ToArray());
+            } else {
+                if (人名文本 != null) {
+                    对话结果.Add(new 文本[] { 人名文本, 文本 });
+                    人名文本 = null;
+                } else {
+                    对话结果.Add(new 文本[] { 文本 });
+                }
+            }
+            上级文本下标 = 文本.文本下标;
+        }
+
+        for (int i = 0; i < 对话结果.Count; i += GPT设置数据.单次机翻行) {
+            文本[][] temp = 对话结果.Skip(i).Take(GPT设置数据.单次机翻行).ToArray();
+            var res = new List<文本>();
+            foreach (文本[] 文本arr in temp) {
+                res.AddRange(文本arr);
+            }
+            yield return res.ToArray();
+        }
+        
+    }
+
+    //废弃的原算法
+    /*public static IEnumerable<文本[]> 文本分割2(文本[] arr) {
+        //使用键值对索引提速，linq嵌套会消耗大量性能
+        var 下标分组 = (from 文本 in arr
+                    where 文本.文本类型 != 文本类型.人名
+                    group 文本 by 文本.文本下标 into g
+                    select g).ToDictionary(t => t.Key, t => t);
         var res = new List<文本>();
         int 已存对话组 = 0, 最后合并id = -1;
         for (int i = 0; i < arr.Length; i++) {
@@ -167,6 +228,7 @@ public class GPTAPI : API接口模板 {
         if (res.Count > 0) {
             yield return res.ToArray();
         }
-    }
+    }*/
+
 
 }

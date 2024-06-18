@@ -135,7 +135,7 @@ public class 文件结构 {
             文本组.完成状态 = f;
         }
     }
-    private IEnumerable<文本[]> 分割文本(Type API类型, 文本[] 原文本) {
+    public IEnumerable<文本[]> 分割文本(Type API类型, 文本[] 原文本) {
         if (API类型.Name == typeof(百度API).Name) {
             return Util.分割数组(原文本, 总字符上限: 2000, 百度模式: true);
 

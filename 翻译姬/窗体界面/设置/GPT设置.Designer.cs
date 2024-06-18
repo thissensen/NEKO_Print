@@ -71,6 +71,8 @@ partial class GPT设置 {
             this.修改Btn = new Sunny.UI.UIButton();
             this.uiLabel3 = new Sunny.UI.UILabel();
             this.简易模式Switch = new 翻译姬.自定义Switch();
+            this.uiLabel5 = new Sunny.UI.UILabel();
+            this.相邻对话合并Switch = new 翻译姬.自定义Switch();
             this.SuspendLayout();
             // 
             // uiLabel4
@@ -108,7 +110,7 @@ partial class GPT设置 {
             // 
             this.uiLabel2.AutoSize = true;
             this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel2.Location = new System.Drawing.Point(29, 485);
+            this.uiLabel2.Location = new System.Drawing.Point(29, 488);
             this.uiLabel2.Name = "uiLabel2";
             this.uiLabel2.Size = new System.Drawing.Size(90, 21);
             this.uiLabel2.TabIndex = 105;
@@ -121,7 +123,7 @@ partial class GPT设置 {
             this.错行重试数Box.DoubleValue = 1D;
             this.错行重试数Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.错行重试数Box.IntValue = 1;
-            this.错行重试数Box.Location = new System.Drawing.Point(225, 481);
+            this.错行重试数Box.Location = new System.Drawing.Point(225, 484);
             this.错行重试数Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.错行重试数Box.Maximum = 100D;
             this.错行重试数Box.Minimum = 0D;
@@ -170,7 +172,7 @@ partial class GPT设置 {
             // 
             this.uiLabel1.AutoSize = true;
             this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel1.Location = new System.Drawing.Point(29, 141);
+            this.uiLabel1.Location = new System.Drawing.Point(29, 136);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.Size = new System.Drawing.Size(90, 21);
             this.uiLabel1.TabIndex = 100;
@@ -180,7 +182,7 @@ partial class GPT设置 {
             // 上下文提示Switch
             // 
             this.上下文提示Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.上下文提示Switch.Location = new System.Drawing.Point(225, 137);
+            this.上下文提示Switch.Location = new System.Drawing.Point(225, 132);
             this.上下文提示Switch.MinimumSize = new System.Drawing.Size(1, 1);
             this.上下文提示Switch.Name = "上下文提示Switch";
             this.上下文提示Switch.Size = new System.Drawing.Size(75, 29);
@@ -329,7 +331,7 @@ partial class GPT设置 {
             // 
             this.uiLabel13.AutoSize = true;
             this.uiLabel13.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel13.Location = new System.Drawing.Point(29, 446);
+            this.uiLabel13.Location = new System.Drawing.Point(29, 450);
             this.uiLabel13.Name = "uiLabel13";
             this.uiLabel13.Size = new System.Drawing.Size(106, 21);
             this.uiLabel13.TabIndex = 131;
@@ -342,7 +344,7 @@ partial class GPT设置 {
             this.异常重试上限Box.DoubleValue = 10D;
             this.异常重试上限Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.异常重试上限Box.IntValue = 10;
-            this.异常重试上限Box.Location = new System.Drawing.Point(225, 442);
+            this.异常重试上限Box.Location = new System.Drawing.Point(225, 446);
             this.异常重试上限Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.异常重试上限Box.Maximum = 100D;
             this.异常重试上限Box.Minimum = 3D;
@@ -360,7 +362,7 @@ partial class GPT设置 {
             // 
             this.uiLabel15.AutoSize = true;
             this.uiLabel15.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel15.Location = new System.Drawing.Point(29, 178);
+            this.uiLabel15.Location = new System.Drawing.Point(29, 172);
             this.uiLabel15.Name = "uiLabel15";
             this.uiLabel15.Size = new System.Drawing.Size(90, 21);
             this.uiLabel15.TabIndex = 136;
@@ -373,7 +375,7 @@ partial class GPT设置 {
             this.上下文深度Box.DoubleValue = 1D;
             this.上下文深度Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.上下文深度Box.IntValue = 1;
-            this.上下文深度Box.Location = new System.Drawing.Point(225, 174);
+            this.上下文深度Box.Location = new System.Drawing.Point(225, 168);
             this.上下文深度Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.上下文深度Box.Maximum = 10D;
             this.上下文深度Box.Minimum = 1D;
@@ -391,7 +393,7 @@ partial class GPT设置 {
             // 
             this.uiLabel14.AutoSize = true;
             this.uiLabel14.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel14.Location = new System.Drawing.Point(29, 231);
+            this.uiLabel14.Location = new System.Drawing.Point(29, 213);
             this.uiLabel14.Name = "uiLabel14";
             this.uiLabel14.Size = new System.Drawing.Size(106, 21);
             this.uiLabel14.TabIndex = 138;
@@ -401,7 +403,7 @@ partial class GPT设置 {
             // 连续对话合并Switch
             // 
             this.连续对话合并Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.连续对话合并Switch.Location = new System.Drawing.Point(225, 227);
+            this.连续对话合并Switch.Location = new System.Drawing.Point(225, 209);
             this.连续对话合并Switch.MinimumSize = new System.Drawing.Size(1, 1);
             this.连续对话合并Switch.Name = "连续对话合并Switch";
             this.连续对话合并Switch.Size = new System.Drawing.Size(75, 29);
@@ -413,7 +415,7 @@ partial class GPT设置 {
             // 
             this.uiLabel16.AutoSize = true;
             this.uiLabel16.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel16.Location = new System.Drawing.Point(29, 267);
+            this.uiLabel16.Location = new System.Drawing.Point(29, 282);
             this.uiLabel16.Name = "uiLabel16";
             this.uiLabel16.Size = new System.Drawing.Size(90, 21);
             this.uiLabel16.TabIndex = 141;
@@ -424,7 +426,7 @@ partial class GPT设置 {
             // 
             this.合并分隔符Box.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.合并分隔符Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.合并分隔符Box.Location = new System.Drawing.Point(225, 263);
+            this.合并分隔符Box.Location = new System.Drawing.Point(225, 278);
             this.合并分隔符Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.合并分隔符Box.Maximum = 10D;
             this.合并分隔符Box.Minimum = 0D;
@@ -440,7 +442,7 @@ partial class GPT设置 {
             // 
             this.uiLabel7.AutoSize = true;
             this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel7.Location = new System.Drawing.Point(29, 356);
+            this.uiLabel7.Location = new System.Drawing.Point(29, 365);
             this.uiLabel7.Name = "uiLabel7";
             this.uiLabel7.Size = new System.Drawing.Size(106, 21);
             this.uiLabel7.TabIndex = 145;
@@ -453,7 +455,7 @@ partial class GPT设置 {
             this.漏翻重试次数Box.DoubleValue = 1D;
             this.漏翻重试次数Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.漏翻重试次数Box.IntValue = 1;
-            this.漏翻重试次数Box.Location = new System.Drawing.Point(225, 352);
+            this.漏翻重试次数Box.Location = new System.Drawing.Point(225, 361);
             this.漏翻重试次数Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.漏翻重试次数Box.Maximum = 10D;
             this.漏翻重试次数Box.Minimum = 1D;
@@ -471,7 +473,7 @@ partial class GPT设置 {
             // 
             this.uiLabel8.AutoSize = true;
             this.uiLabel8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel8.Location = new System.Drawing.Point(29, 319);
+            this.uiLabel8.Location = new System.Drawing.Point(29, 328);
             this.uiLabel8.Name = "uiLabel8";
             this.uiLabel8.Size = new System.Drawing.Size(74, 21);
             this.uiLabel8.TabIndex = 142;
@@ -481,7 +483,7 @@ partial class GPT设置 {
             // 漏翻检测Switch
             // 
             this.漏翻检测Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.漏翻检测Switch.Location = new System.Drawing.Point(225, 316);
+            this.漏翻检测Switch.Location = new System.Drawing.Point(225, 325);
             this.漏翻检测Switch.MinimumSize = new System.Drawing.Size(1, 1);
             this.漏翻检测Switch.Name = "漏翻检测Switch";
             this.漏翻检测Switch.Size = new System.Drawing.Size(75, 29);
@@ -553,7 +555,7 @@ partial class GPT设置 {
             // 
             this.uiLabel18.AutoSize = true;
             this.uiLabel18.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel18.Location = new System.Drawing.Point(29, 409);
+            this.uiLabel18.Location = new System.Drawing.Point(29, 414);
             this.uiLabel18.Name = "uiLabel18";
             this.uiLabel18.Size = new System.Drawing.Size(74, 21);
             this.uiLabel18.TabIndex = 150;
@@ -563,7 +565,7 @@ partial class GPT设置 {
             // 错误跳过Switch
             // 
             this.错误跳过Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.错误跳过Switch.Location = new System.Drawing.Point(225, 405);
+            this.错误跳过Switch.Location = new System.Drawing.Point(225, 410);
             this.错误跳过Switch.MinimumSize = new System.Drawing.Size(1, 1);
             this.错误跳过Switch.Name = "错误跳过Switch";
             this.错误跳过Switch.Size = new System.Drawing.Size(75, 29);
@@ -592,7 +594,7 @@ partial class GPT设置 {
             this.uiLine1.ForeColor = System.Drawing.Color.Transparent;
             this.uiLine1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.uiLine1.LineColor2 = System.Drawing.Color.Transparent;
-            this.uiLine1.Location = new System.Drawing.Point(33, 121);
+            this.uiLine1.Location = new System.Drawing.Point(33, 118);
             this.uiLine1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiLine1.Name = "uiLine1";
             this.uiLine1.Size = new System.Drawing.Size(267, 10);
@@ -608,7 +610,7 @@ partial class GPT设置 {
             this.uiLine2.ForeColor = System.Drawing.Color.Transparent;
             this.uiLine2.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.uiLine2.LineColor2 = System.Drawing.Color.Transparent;
-            this.uiLine2.Location = new System.Drawing.Point(33, 211);
+            this.uiLine2.Location = new System.Drawing.Point(33, 200);
             this.uiLine2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiLine2.Name = "uiLine2";
             this.uiLine2.Size = new System.Drawing.Size(267, 10);
@@ -624,7 +626,7 @@ partial class GPT设置 {
             this.uiLine3.ForeColor = System.Drawing.Color.Transparent;
             this.uiLine3.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.uiLine3.LineColor2 = System.Drawing.Color.Transparent;
-            this.uiLine3.Location = new System.Drawing.Point(33, 300);
+            this.uiLine3.Location = new System.Drawing.Point(33, 312);
             this.uiLine3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiLine3.Name = "uiLine3";
             this.uiLine3.Size = new System.Drawing.Size(267, 10);
@@ -640,7 +642,7 @@ partial class GPT设置 {
             this.uiLine4.ForeColor = System.Drawing.Color.Transparent;
             this.uiLine4.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.uiLine4.LineColor2 = System.Drawing.Color.Transparent;
-            this.uiLine4.Location = new System.Drawing.Point(33, 389);
+            this.uiLine4.Location = new System.Drawing.Point(33, 397);
             this.uiLine4.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiLine4.Name = "uiLine4";
             this.uiLine4.Size = new System.Drawing.Size(267, 10);
@@ -715,10 +717,34 @@ partial class GPT设置 {
             this.简易模式Switch.Text = "自定义Switch1";
             this.简易模式Switch.ActiveChanged += new System.EventHandler(this.简易模式Switch_ActiveChanged);
             // 
+            // uiLabel5
+            // 
+            this.uiLabel5.AutoSize = true;
+            this.uiLabel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel5.Location = new System.Drawing.Point(29, 248);
+            this.uiLabel5.Name = "uiLabel5";
+            this.uiLabel5.Size = new System.Drawing.Size(106, 21);
+            this.uiLabel5.TabIndex = 161;
+            this.uiLabel5.Text = "相邻对话合并";
+            this.uiLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // 相邻对话合并Switch
+            // 
+            this.相邻对话合并Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.相邻对话合并Switch.Location = new System.Drawing.Point(225, 244);
+            this.相邻对话合并Switch.MinimumSize = new System.Drawing.Size(1, 1);
+            this.相邻对话合并Switch.Name = "相邻对话合并Switch";
+            this.相邻对话合并Switch.Size = new System.Drawing.Size(75, 29);
+            this.相邻对话合并Switch.TabIndex = 162;
+            this.相邻对话合并Switch.Text = "自定义Switch1";
+            this.相邻对话合并Switch.ActiveChanged += new System.EventHandler(this.相邻对话合并Switch_ActiveChanged);
+            // 
             // GPT设置
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(987, 618);
+            this.Controls.Add(this.uiLabel5);
+            this.Controls.Add(this.相邻对话合并Switch);
             this.Controls.Add(this.uiLabel3);
             this.Controls.Add(this.简易模式Switch);
             this.Controls.Add(this.修改Btn);
@@ -825,4 +851,6 @@ partial class GPT设置 {
     private Sunny.UI.UIButton 修改Btn;
     private Sunny.UI.UILabel uiLabel3;
     private 自定义Switch 简易模式Switch;
+    private Sunny.UI.UILabel uiLabel5;
+    private 自定义Switch 相邻对话合并Switch;
 }

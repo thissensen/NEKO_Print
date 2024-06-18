@@ -13,6 +13,16 @@ using System.Windows.Forms;
 using 翻译姬.Properties;
 
 namespace 翻译姬 {
+    /*
+     * 1、GPT设置的词汇表设置的导出功能保持与其他地方一致
+     * 2、GPT词汇表限制原文不能为空
+     * 3、新增补翻功能：机翻完成后(非异常中断)，若有异常文本，则可点击补翻，对异常文本专门进行机翻。常用于GPT机翻后，使用常规机翻进行补翻异常行
+     * 4、小幅优化kr引擎正则
+     * 5、GPT新增：相邻对话合并
+     * 6、调整语境
+     * 7、持续漏翻将不会视为严重错误
+     * 8、优化错行数据的提取，现可无ID提取
+     */
     internal static class Program {
 
         public static readonly string 软件存储目录 = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\翻译姬\";

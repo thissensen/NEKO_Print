@@ -47,6 +47,9 @@ public partial class GPT词汇表窗体 : 自定义Form {
                 if (arr.Length < 2) {
                     throw new Exception("csv格式异常，请从[数据处理]界面导出后修改再导入");
                 }
+                if (arr[0].ToString().Length == 0) {
+                    throw new Exception("原文不能为空");
+                }
                 var dr = dt.NewRow();
                 dr["原文"] = arr[0];
                 dr["译文"] = arr[1];
@@ -66,12 +69,12 @@ public partial class GPT词汇表窗体 : 自定义Form {
             if (file == null) {
                 return;
             }
-            var sb = new StringBuilder("原文,译文,备注\r\n");
+            var sb = new StringBuilder("原文\t译文\t备注\r\n");
             foreach (DataRow row in GPT设置数据.GPT词汇表.Rows) {
-                sb.AppendLine($"{row["原文"]},{row["译文"]},{row["备注"]}");
+                sb.AppendLine($"{row["原文"]}\t{row["译文"]}\t{row["备注"]}");
             }
             using var fs = new FileStream(file, FileMode.OpenOrCreate, FileAccess.Write);
-            using var sw = new StreamWriter(fs, Encoding.Default);
+            using var sw = new StreamWriter(fs, Encoding.UTF8);
             sw.Write(sb.ToString());
             sw.Flush();
             消息框帮助.轻便消息("导出成功", this);
