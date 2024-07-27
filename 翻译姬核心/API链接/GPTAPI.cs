@@ -147,6 +147,9 @@ public class GPTAPI : API接口模板 {
         for (int i = 0; i < arr.Length; i++) {
             var 文本 = arr[i];
             if (文本.文本类型 == 文本类型.人名) {//人名不算做对话组
+                if (人名文本 != null) {
+                    对话结果.Add(new 文本[] { 人名文本 });//连续人名会导致返回的文本数量与有效文本不一致
+                }
                 人名文本 = 文本;
                 continue;
             }
@@ -162,7 +165,7 @@ public class GPTAPI : API接口模板 {
                     上级文本下标 = 文本.文本下标;
                     continue;
                 }
-                
+
             }
             if (GPT设置数据.连续对话合并) {
                 var 原文组 = 下标分组[文本.文本下标].ToList();
@@ -181,6 +184,7 @@ public class GPTAPI : API接口模板 {
             }
             上级文本下标 = 文本.文本下标;
         }
+
 
         for (int i = 0; i < 对话结果.Count; i += GPT设置数据.单次机翻行) {
             文本[][] temp = 对话结果.Skip(i).Take(GPT设置数据.单次机翻行).ToArray();
