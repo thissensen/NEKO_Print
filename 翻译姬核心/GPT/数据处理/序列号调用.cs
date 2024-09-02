@@ -164,7 +164,7 @@ public class 序列号调用 : GPT数据处理接口 {
         try {
             if (res.Count == 0) {
                 //1：「xxx」\n2：
-                var matches = Regex.Matches(text, @"(?'id'\d+)[:：] ?");
+                var matches = Regex.Matches(text, @"(?'id'\d+)[:：　] ?");
                 int 当前取值下标 = 0, 上级取值长度 = -1, id取值长度 = 0;
                 var id组 = new List<int>();
                 var 数据组 = new List<string>();

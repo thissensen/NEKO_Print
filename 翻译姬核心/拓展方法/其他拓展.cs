@@ -18,6 +18,18 @@ namespace 翻译姬 {
             Array.Copy(val, 0, res, arr.Length, val.Length);
             return res;
         }
+        public static string Join(this IEnumerable<int> arr, string 合并符) => arr.Select(t => t.ToString()).Join(合并符);
+        public static string Join(this IEnumerable<string> arr, string 合并符) => string.Join(合并符, arr);
+        public static string Join(this IEnumerable<string> arr, string 合并符, string 前缀 = null, string 后缀 = null) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < arr.Count(); i++) {
+                sb.Append(前缀).Append(arr.ElementAt(i)).Append(后缀);
+                if (i != arr.Count() - 1) {
+                    sb.Append(合并符);
+                }
+            }
+            return sb.ToString();
+        }
         public static DataTable CopyToDataTable(this DataRow[] rows) {
             if (rows == null || rows.Length == 0) {
                 throw new Exception("DataRow不能为空");

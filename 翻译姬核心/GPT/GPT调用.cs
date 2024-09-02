@@ -12,6 +12,10 @@ using 翻译姬;
 namespace 翻译姬;
 public class GPT调用 {
 
+    static GPT调用() {
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+    }
+
     private HttpClient client = new HttpClient();
     private Stopwatch 计时器;//与api类共用计时器，同时对qps和token生效
 
@@ -62,6 +66,13 @@ public class GPT调用 {
             string body = JsonConvert.SerializeObject(res);
             var rep = client.PostAsync(url, new StringContent(body, Encoding.UTF8, "application/json")).Result;
             json = rep.Content.ReadAsStringAsync().Result;
+        } catch (AggregateException ex) {
+            var 异常信息 = new List<string>();
+            ex.Handle(x =>  {
+                异常信息.Add(x.Message);
+                 return true;
+             });
+            throw new Exception($"http请求错误:{异常信息.Join("\r\n")}");
         } catch (Exception ex) {
             throw new Exception($"http请求错误:{ex.Message}");
         }
