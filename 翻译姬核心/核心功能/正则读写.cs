@@ -78,7 +78,7 @@ public class 正则读写 {
             }
             return res.ToArray();
         }
-        int 译文下标 = 0;
+        int 译文下标 = 0, 写出格式id = 1;
         for (int i = 0; i < 原文本行.Length; i++) {
             string text = 原文本行[i];
             文本[] 提取文本 = 正则识别分割(text, i, 行过滤正则, 文本过滤正则, 提取前行过滤正则, 提取型正则);
@@ -112,7 +112,8 @@ public class 正则读写 {
                     }
                 }
                 //进行写出格式替换
-                res.Add(写出格式替换(text, 译文text, i));
+                res.Add(写出格式替换(text, 译文text, 写出格式id));
+                写出格式id++;
             } else {
                 res.Add(text);
             }
@@ -191,7 +192,6 @@ public class 正则读写 {
         if (全局设置数据.写出格式.IsNullOrEmpty()) {
             return 译文text;
         }
-        单文件行顺序++;//都默认从1开始
         string res = 全局设置数据.写出格式.Replace("[原文]", 原文text);
         res = res.Replace("[译文]", 译文text);
         if (单文件行reg.IsMatch(全局设置数据.写出格式)) {

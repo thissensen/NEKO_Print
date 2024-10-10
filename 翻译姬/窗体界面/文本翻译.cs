@@ -337,11 +337,11 @@ namespace 翻译姬 {
 
                 //路径验证
                 if (!Directory.Exists(全局设置数据.读取目录)) {
-                    读取目录Box.Text = 全局字符串.项目路径;
+                    读取目录Box.Invoke(() => 读取目录Box.Text = 全局字符串.项目路径);
                     throw new Exception("读取目录不存在，已设置为默认路径");
                 }
                 if (!Directory.Exists(全局设置数据.写出目录) && 全局设置数据.写出目录 != 全局字符串.桌面路径 + "机翻输出\\") {
-                    写出目录Box.Text = 全局字符串.桌面路径 + "机翻输出\\";
+                    写出目录Box.Invoke(() => 写出目录Box.Text = 全局字符串.桌面路径 + "机翻输出\\");
                     throw new Exception("写出目录不存在，已设置为默认路径");
                 }
 
