@@ -281,7 +281,9 @@ namespace 翻译姬 {
                     return;
                 }
                 string 翻译姬路径 = $"{全局字符串.项目路径 + 全局字符串.软件名称}.exe";
-                工具类.CMD异步调用(翻译姬路径, path);
+                Task.Run(() => {
+                    工具类.CMD异步调用(翻译姬路径, path);
+                });
             } catch (Exception ex) {
                 MessageBoxEx.Show(ex.Message);
             }
