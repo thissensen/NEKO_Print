@@ -45,6 +45,14 @@ namespace 翻译姬 {
             return path;
         }
 
+        public static string 补全路径斜杠(this string path) {
+            string 斜杠 = path.Contains("\\") ? "\\" : "/";
+            if (!path.EndsWith(斜杠)) {
+                return path + 斜杠;
+            }
+            return path;
+        }
+
         /// <summary>
         /// 给文件创建，防止出错
         /// </summary>
