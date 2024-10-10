@@ -51,6 +51,8 @@
             this.初始化Btn = new Sunny.UI.UIButton();
             this.清空所有Btn = new Sunny.UI.UIButton();
             this.本机数据Btn = new Sunny.UI.UIButton();
+            this.导出数据Btn = new Sunny.UI.UIButton();
+            this.使用指定数据启动翻译姬Btn = new Sunny.UI.UIButton();
             this.主题设置Box.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -438,10 +440,40 @@
             this.本机数据Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.本机数据Btn.Click += new System.EventHandler(this.本机数据Btn_Click);
             // 
+            // 导出数据Btn
+            // 
+            this.导出数据Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.导出数据Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.导出数据Btn.Location = new System.Drawing.Point(409, 171);
+            this.导出数据Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.导出数据Btn.Name = "导出数据Btn";
+            this.导出数据Btn.Radius = 15;
+            this.导出数据Btn.Size = new System.Drawing.Size(77, 29);
+            this.导出数据Btn.TabIndex = 85;
+            this.导出数据Btn.Text = "导出数据";
+            this.导出数据Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.导出数据Btn.Click += new System.EventHandler(this.导出数据Btn_Click);
+            // 
+            // 使用指定数据启动翻译姬Btn
+            // 
+            this.使用指定数据启动翻译姬Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.使用指定数据启动翻译姬Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.使用指定数据启动翻译姬Btn.Location = new System.Drawing.Point(508, 171);
+            this.使用指定数据启动翻译姬Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.使用指定数据启动翻译姬Btn.Name = "使用指定数据启动翻译姬Btn";
+            this.使用指定数据启动翻译姬Btn.Radius = 15;
+            this.使用指定数据启动翻译姬Btn.Size = new System.Drawing.Size(275, 29);
+            this.使用指定数据启动翻译姬Btn.TabIndex = 86;
+            this.使用指定数据启动翻译姬Btn.Text = "使用指定数据启动翻译姬";
+            this.使用指定数据启动翻译姬Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.使用指定数据启动翻译姬Btn.Click += new System.EventHandler(this.使用指定数据启动翻译姬Btn_Click);
+            // 
             // 关于翻译姬
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(987, 618);
+            this.Controls.Add(this.使用指定数据启动翻译姬Btn);
+            this.Controls.Add(this.导出数据Btn);
             this.Controls.Add(this.本机数据Btn);
             this.Controls.Add(this.清空所有Btn);
             this.Controls.Add(this.初始化Btn);
@@ -496,5 +528,7 @@
         private Sunny.UI.UIButton 初始化Btn;
         private Sunny.UI.UIButton 清空所有Btn;
         private Sunny.UI.UIButton 本机数据Btn;
+        private Sunny.UI.UIButton 导出数据Btn;
+        private Sunny.UI.UIButton 使用指定数据启动翻译姬Btn;
     }
 }

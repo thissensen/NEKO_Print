@@ -208,6 +208,17 @@ public class 全局设置数据 : INotifyPropertyChanged {
     }
     private string _写出编码;
 
+    public string 写出后缀 {
+        get => _写出后缀;
+        set {
+            if (_写出后缀 != value) {
+                _写出后缀 = value;
+                通知更改(() => 写出后缀);
+            }
+        }
+    }
+    private string _写出后缀;
+
     public string 写出格式 {
         get => _写出格式;
         set {

@@ -168,7 +168,12 @@ namespace 翻译姬 {
                             };
                         }
                         调用管理.文本机翻(机翻, 处理中文件结构);
-
+                        if (机翻 == 机翻方式.不机翻) {
+                            foreach (var 文件 in 处理中文件结构) {
+                                文件.机翻后数据处理(机翻);
+                                文件.写出();
+                            }
+                        }
                     } catch (Exception ex) {
                         数据中转.文本显示AppendLine(ex.Message);
                     }
@@ -397,6 +402,8 @@ namespace 翻译姬 {
                 文本显示追加(起始显示文本 + sb.ToString());
             } catch (Exception ex) {
                 消息框帮助.轻便消息(ex.Message, this, UINotifierType.WARNING);
+            } finally {
+                全局数据.写出格式全局变量 = 1;
             }
         }
 
@@ -444,8 +451,12 @@ namespace 翻译姬 {
                 try {
                     机翻中 = false;
                     全局数据.是否中止 = true;
+                    全局数据.写出格式全局变量 = 1;
                     var cons = 控件组();
                     foreach (var c in cons) {
+                        if (c.Name == 机翻接口Box.Name && !c.Enabled) {
+                            continue;//灰色的机翻接口还得是灰色
+                        }
                         c.Enabled = true;
                     }
                     开始Btn.Text = "开始";

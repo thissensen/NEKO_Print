@@ -33,6 +33,8 @@ namespace 翻译姬 {
 
         public static DataTable API主表 { get; set; }
 
+        public static int 写出格式全局变量 { get; set; } = 1;
+
         /// <summary>
         /// 总数据库
         /// </summary>

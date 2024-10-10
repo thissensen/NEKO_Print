@@ -25,6 +25,7 @@ partial class 全局设置 {
     /// </summary>
     private void InitializeComponent() {
             this.读写设置Box = new Sunny.UI.UIGroupBox();
+            this.uiLabel22 = new Sunny.UI.UILabel();
             this.uiLabel14 = new Sunny.UI.UILabel();
             this.uiMarkLabel2 = new Sunny.UI.UIMarkLabel();
             this.Xml指令Box = new Sunny.UI.UIComboBox();
@@ -72,13 +73,14 @@ partial class 全局设置 {
             this.目标语言Box = new Sunny.UI.UIComboBox();
             this.uiMarkLabel3 = new Sunny.UI.UIMarkLabel();
             this.其他设置Box = new Sunny.UI.UIGroupBox();
+            this.uiLabel12 = new Sunny.UI.UILabel();
+            this.单账号线程数Box = new Sunny.UI.UITextBox();
             this.uiLabel11 = new Sunny.UI.UILabel();
             this.正则逆向写入Switch = new 翻译姬.自定义Switch();
             this.uiLabel8 = new Sunny.UI.UILabel();
             this.内置中括号过滤Switch = new 翻译姬.自定义Switch();
             this.本机IPBtn = new Sunny.UI.UIButton();
-            this.uiLabel12 = new Sunny.UI.UILabel();
-            this.单账号线程数Box = new Sunny.UI.UITextBox();
+            this.写出后缀Box = new Sunny.UI.UITextBox();
             this.读写设置Box.SuspendLayout();
             this.机翻设置Box.SuspendLayout();
             this.其他设置Box.SuspendLayout();
@@ -86,6 +88,8 @@ partial class 全局设置 {
             // 
             // 读写设置Box
             // 
+            this.读写设置Box.Controls.Add(this.写出后缀Box);
+            this.读写设置Box.Controls.Add(this.uiLabel22);
             this.读写设置Box.Controls.Add(this.uiLabel14);
             this.读写设置Box.Controls.Add(this.uiMarkLabel2);
             this.读写设置Box.Controls.Add(this.Xml指令Box);
@@ -120,6 +124,17 @@ partial class 全局设置 {
             this.读写设置Box.TabIndex = 0;
             this.读写设置Box.Text = "读写设置";
             this.读写设置Box.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiLabel22
+            // 
+            this.uiLabel22.AutoSize = true;
+            this.uiLabel22.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel22.Location = new System.Drawing.Point(233, 246);
+            this.uiLabel22.Name = "uiLabel22";
+            this.uiLabel22.Size = new System.Drawing.Size(74, 21);
+            this.uiLabel22.TabIndex = 69;
+            this.uiLabel22.Text = "写出后缀";
+            this.uiLabel22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // uiLabel14
             // 
@@ -752,6 +767,37 @@ partial class 全局设置 {
             this.其他设置Box.Text = "其他";
             this.其他设置Box.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // uiLabel12
+            // 
+            this.uiLabel12.AutoSize = true;
+            this.uiLabel12.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel12.Location = new System.Drawing.Point(242, 70);
+            this.uiLabel12.Name = "uiLabel12";
+            this.uiLabel12.Size = new System.Drawing.Size(106, 21);
+            this.uiLabel12.TabIndex = 140;
+            this.uiLabel12.Text = "单账号线程数";
+            this.uiLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // 单账号线程数Box
+            // 
+            this.单账号线程数Box.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.单账号线程数Box.DoubleValue = 1D;
+            this.单账号线程数Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.单账号线程数Box.IntValue = 1;
+            this.单账号线程数Box.Location = new System.Drawing.Point(377, 66);
+            this.单账号线程数Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.单账号线程数Box.Maximum = 500D;
+            this.单账号线程数Box.Minimum = 1D;
+            this.单账号线程数Box.MinimumSize = new System.Drawing.Size(1, 16);
+            this.单账号线程数Box.Name = "单账号线程数Box";
+            this.单账号线程数Box.ShowText = false;
+            this.单账号线程数Box.Size = new System.Drawing.Size(62, 29);
+            this.单账号线程数Box.TabIndex = 139;
+            this.单账号线程数Box.Text = "1";
+            this.单账号线程数Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.单账号线程数Box.Type = Sunny.UI.UITextBox.UIEditType.Integer;
+            this.单账号线程数Box.Watermark = "";
+            // 
             // uiLabel11
             // 
             this.uiLabel11.AutoSize = true;
@@ -808,36 +854,21 @@ partial class 全局设置 {
             this.本机IPBtn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.本机IPBtn.Click += new System.EventHandler(this.本机IPBtn_Click);
             // 
-            // uiLabel12
+            // 写出后缀Box
             // 
-            this.uiLabel12.AutoSize = true;
-            this.uiLabel12.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel12.Location = new System.Drawing.Point(242, 70);
-            this.uiLabel12.Name = "uiLabel12";
-            this.uiLabel12.Size = new System.Drawing.Size(106, 21);
-            this.uiLabel12.TabIndex = 140;
-            this.uiLabel12.Text = "单账号线程数";
-            this.uiLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // 单账号线程数Box
-            // 
-            this.单账号线程数Box.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.单账号线程数Box.DoubleValue = 1D;
-            this.单账号线程数Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.单账号线程数Box.IntValue = 1;
-            this.单账号线程数Box.Location = new System.Drawing.Point(377, 66);
-            this.单账号线程数Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.单账号线程数Box.Maximum = 500D;
-            this.单账号线程数Box.Minimum = 1D;
-            this.单账号线程数Box.MinimumSize = new System.Drawing.Size(1, 16);
-            this.单账号线程数Box.Name = "单账号线程数Box";
-            this.单账号线程数Box.ShowText = false;
-            this.单账号线程数Box.Size = new System.Drawing.Size(62, 29);
-            this.单账号线程数Box.TabIndex = 139;
-            this.单账号线程数Box.Text = "1";
-            this.单账号线程数Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.单账号线程数Box.Type = Sunny.UI.UITextBox.UIEditType.Integer;
-            this.单账号线程数Box.Watermark = "";
+            this.写出后缀Box.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.写出后缀Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.写出后缀Box.Location = new System.Drawing.Point(317, 242);
+            this.写出后缀Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.写出后缀Box.Maximum = 500D;
+            this.写出后缀Box.Minimum = 1D;
+            this.写出后缀Box.MinimumSize = new System.Drawing.Size(1, 16);
+            this.写出后缀Box.Name = "写出后缀Box";
+            this.写出后缀Box.ShowText = false;
+            this.写出后缀Box.Size = new System.Drawing.Size(119, 29);
+            this.写出后缀Box.TabIndex = 140;
+            this.写出后缀Box.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.写出后缀Box.Watermark = "无需写.";
             // 
             // 全局设置
             // 
@@ -917,4 +948,6 @@ partial class 全局设置 {
     private 自定义Switch 正则逆向写入Switch;
     private Sunny.UI.UILabel uiLabel12;
     private Sunny.UI.UITextBox 单账号线程数Box;
+    private Sunny.UI.UILabel uiLabel22;
+    private Sunny.UI.UITextBox 写出后缀Box;
 }

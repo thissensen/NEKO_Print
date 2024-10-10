@@ -79,6 +79,10 @@ public class 文本读写 {
     }
     public static void 写出文本(文件结构 文件, string 文本) {
         string 写出路径 = (全局设置数据.写出目录 + 文件.相对路径).创建父目录();
+        if (!全局设置数据.写出后缀.IsNullOrEmpty()) {
+            var f = new FileInfo(写出路径);
+            写出路径 = Path.Combine(f.DirectoryName, Regex.Replace(f.Name, @$"{f.Extension}$", $".{全局设置数据.写出后缀.Trim()}"));
+        }
         using FileStream fs = new FileStream(写出路径, FileMode.Create, FileAccess.Write, FileShare.None);
         using StreamWriter sw = new StreamWriter(fs, Encoding.GetEncoding(全局设置数据.写出编码));
         sw.Write(文本);

@@ -74,7 +74,7 @@ public class 正则读写 {
             提取型正则.IsNullOrEmpty()) {
 
             for (int i = 0; i < 译文.Length; i++) {
-                res.Add(写出格式替换(原文本行[i], 译文[i].译文));
+                res.Add(写出格式替换(原文本行[i], 译文[i].译文, i));
             }
             return res.ToArray();
         }
@@ -112,7 +112,7 @@ public class 正则读写 {
                     }
                 }
                 //进行写出格式替换
-                res.Add(写出格式替换(text, 译文text));
+                res.Add(写出格式替换(text, 译文text, i));
             } else {
                 res.Add(text);
             }
@@ -185,12 +185,25 @@ public class 正则读写 {
         }
         return null;
     }
-    private static string 写出格式替换(string 原文text, string 译文text) {
+    private static Regex 单文件行reg = new Regex(@"\[单文件行顺序\+?(-?\d{1,8})?\]");
+    private static Regex 全局顺序reg = new Regex(@"\[全局顺序\+?(-?\d{1,8})?\]");
+    private static string 写出格式替换(string 原文text, string 译文text, int 单文件行顺序) {
         if (全局设置数据.写出格式.IsNullOrEmpty()) {
             return 译文text;
         }
+        单文件行顺序++;//都默认从1开始
         string res = 全局设置数据.写出格式.Replace("[原文]", 原文text);
-        return res.Replace("[译文]", 译文text);
+        res = res.Replace("[译文]", 译文text);
+        if (单文件行reg.IsMatch(全局设置数据.写出格式)) {
+            int.TryParse(单文件行reg.Match(全局设置数据.写出格式).Groups[1].ToString(), out int 变量值);
+            res = 单文件行reg.Replace(res, (单文件行顺序 + 变量值).ToString());
+        }
+        if (全局顺序reg.IsMatch(全局设置数据.写出格式)) {
+            int.TryParse(全局顺序reg.Match(全局设置数据.写出格式).Groups[1].ToString(), out int 变量值);
+            res = 全局顺序reg.Replace(res, (变量值 + 全局数据.写出格式全局变量).ToString());
+            全局数据.写出格式全局变量++;
+        }
+        return res;
     }
     private static string[] 文本过滤(string 文本, string 文本过滤正则) {
         string[] 原文本;

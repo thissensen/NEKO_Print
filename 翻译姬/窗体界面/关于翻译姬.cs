@@ -260,5 +260,31 @@ namespace 翻译姬 {
         private void 本机数据Btn_Click(object sender, EventArgs e) {
             工具类.CMD异步调用($"explorer \"{Program.软件存储目录}\"");
         }
+
+        private void 导出数据Btn_Click(object sender, EventArgs e) {
+            try {
+                string file = 工具类.选择保存目录("数据保存目录", $"{全局字符串.桌面路径}{DateTime.Now:yyyy-MM-dd}.db", "文件", "*.db");
+                if (file == null) {
+                    return;
+                }
+                File.Copy(Program.数据库路径, file, false);
+                消息框帮助.轻便消息("保存成功", this);
+            } catch (Exception ex) {
+                MessageBoxEx.Show(ex.Message);
+            }
+        }
+
+        private void 使用指定数据启动翻译姬Btn_Click(object sender, EventArgs e) {
+            try {
+                string path = 工具类.选择文件("请选择由翻译姬导出的db文件", "文件", "*.db").FirstOrDefault();
+                if (path == null) {
+                    return;
+                }
+                string 翻译姬路径 = $"{全局字符串.项目路径 + 全局字符串.软件名称}.exe";
+                工具类.CMD异步调用(翻译姬路径, path);
+            } catch (Exception ex) {
+                MessageBoxEx.Show(ex.Message);
+            }
+        }
     }
 }

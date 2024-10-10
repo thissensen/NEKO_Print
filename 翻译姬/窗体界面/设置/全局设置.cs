@@ -41,6 +41,7 @@ public partial class 全局设置 : 自定义Page {
 
         写出目录Box.DataBindings.Add("Text", 全局设置数据, "写出目录", false, DataSourceUpdateMode.OnPropertyChanged);
         写出编码Box.DataBindings.Add("Text", 全局设置数据, "写出编码", false, DataSourceUpdateMode.OnPropertyChanged);
+        写出后缀Box.DataBindings.Add("Text", 全局设置数据, "写出后缀", false, DataSourceUpdateMode.OnPropertyChanged);
         写出格式Box.DataBindings.Add("Text", 全局设置数据, "写出格式", false, DataSourceUpdateMode.OnPropertyChanged);
 
         使用正则Box.DataBindings.Add("Text", 全局设置数据, "使用正则", false, DataSourceUpdateMode.OnPropertyChanged);
