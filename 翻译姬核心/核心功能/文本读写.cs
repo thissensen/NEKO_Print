@@ -50,8 +50,7 @@ public class 文本读写 {
         return 文件路径.ToArray();
     }
 
-    public static string[] 读取文本行(string 路径) {
-        string 读取编码 = 全局设置数据.读取编码;
+    public static string[] 读取文本行(string 路径, ref string 读取编码) {
         if (读取编码 == "自动识别") {
             读取编码 = Util.文本编码识别(路径);
         }
@@ -67,9 +66,8 @@ public class 文本读写 {
     public static void 写出文本行(文件结构 文件, string[] 文本行) {
         写出文本(文件, string.Join(Environment.NewLine, 文本行));
     }
-    public static string 读取文本(string 路径) {
+    public static string 读取文本(string 路径, ref string 读取编码) {
         //文本读取
-        string 读取编码 = 全局设置数据.读取编码;
         if (读取编码 == "自动识别") {
             读取编码 = Util.文本编码识别(路径);
         }

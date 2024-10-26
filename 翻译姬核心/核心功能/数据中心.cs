@@ -44,15 +44,15 @@ public class 文件结构 {
     [JsonIgnore]
     public 文件完成机翻 文件完成机翻;
 
-    public void 读取后数据处理(读取方式 读取方式) {
+    public void 读取后数据处理(读取方式 读取方式, ref string 读取编码) {
         if (读取方式 == 读取方式.文本读取) {
-            原文本行 = 文本读写.读取文本行(路径);
+            原文本行 = 文本读写.读取文本行(路径, ref 读取编码);
             有效文本 = 正则读写.正则文本提取(原文本行, 处理数据.正则.Rows[0]);
         } else if (读取方式 == 读取方式.Json读取) {
-            Json文本 = 文本读写.读取文本(路径);
+            Json文本 = 文本读写.读取文本(路径, ref 读取编码);
             有效文本 = 文本读写.Json提取(Json文本, 处理数据.Json指令.Rows[0], 处理数据.正则.Rows[0]);
         } else if (读取方式 == 读取方式.Xml读取) {
-            Xml文本 = 文本读写.读取文本(路径);
+            Xml文本 = 文本读写.读取文本(路径, ref 读取编码);
             有效文本 = 文本读写.Xml提取(Xml文本, 处理数据.Xml指令.Rows[0], 处理数据.正则.Rows[0]);
         }
         var rows = 处理数据.替换列表.Select("替换时机='机翻前'");
@@ -92,7 +92,7 @@ public class 文件结构 {
             if (rows.Length > 0) {
                 文本替换.替换(有效文本, 替换类型.译文, rows.CopyToDataTable());
             }
-            有效文本.文本检查();
+            有效文本.文本检查(处理数据.API类型.Name == typeof(GPTAPI).Name);
             完成状态检查();
         } else {
             foreach (var 文本 in 有效文本) {
@@ -270,11 +270,18 @@ public static class 文本拓展方法 {
         }
     }
 
-    public static void 文本检查(this 文本[] 文本) {
+    public static void 文本检查(this 文本[] 文本, bool 是否GPT = false) {
         foreach (var t in 文本) {
             if (t.文本类型 == 文本类型.人名) {
                 if (t.译文.IsNullOrEmpty()) {
                     t.译文 = t.原文;
+                }
+                if (是否GPT && 全局数据.GPT设置数据.输出人名优先词汇表) {
+                    //GPT从GPT词汇表尝试读取
+                    var 词汇表row = 全局数据.GPT设置数据.GPT词汇表.Select($"原文='{t.原文}'").LastOrDefault();
+                    if (词汇表row != null) {
+                        t.译文 = 词汇表row["译文"].ToString();
+                    }
                 }
                 continue;
             }

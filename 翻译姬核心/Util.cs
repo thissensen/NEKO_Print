@@ -455,18 +455,18 @@ namespace 翻译姬 {
             }
         }
 */
+        private static Regex 换行符_n = new Regex(@"(?<!\\r)\\n");
+        private static Regex 换行符_r = new Regex(@"\\r(?!\\n)");
         private static string 换行符修正(string src) {
-            var reg_n = new Regex(@"(?<!\r)\n");
-            if (reg_n.IsMatch(src)) {
-                src = reg_n.Replace(src, "\r\n");
-            }
-            var reg_r = new Regex(@"\r(?!\n)");
-            if (reg_r.IsMatch(src)) {
-                src = reg_r.Replace(src, "\r\n");
-            }
             src = Regex.Replace(src, @"\\*\r\\*\n", @"\r\n");
             src = Regex.Replace(src, @"\\+r", @"\r");
             src = Regex.Replace(src, @"\\+n", @"\n");
+            if (换行符_n.IsMatch(src)) {
+                src = 换行符_n.Replace(src, @"\r\n");
+            }
+            if (换行符_r.IsMatch(src)) {
+                src = 换行符_r.Replace(src, @"\r\n");
+            }
             return src;
         }
         /// <summary>

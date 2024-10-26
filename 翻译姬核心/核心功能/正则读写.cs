@@ -136,7 +136,7 @@ public class 正则读写 {
                 foreach (var kv in 提取结果) {
                     string 提取name = kv.Key;
                     string 提取text = kv.Value;
-                    if (提取text == null) {
+                    if (提取text.IsNullOrEmpty()) {
                         continue;//提取了个空气，主要是*造成的，+就没事
                     }
                     string[] 分割后arr;

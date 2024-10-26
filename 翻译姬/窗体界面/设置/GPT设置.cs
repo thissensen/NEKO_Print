@@ -98,6 +98,7 @@ public partial class GPT设置 : 自定义Page {
         相邻对话合并Switch.DataBindings.Add("Active", GPT设置数据, "相邻对话合并", false, DataSourceUpdateMode.OnPropertyChanged);
         漏翻检测Switch.DataBindings.Add("Active", GPT设置数据, "漏翻检测", false, DataSourceUpdateMode.OnPropertyChanged);
         错误跳过Switch.DataBindings.Add("Active", GPT设置数据, "错误跳过", false, DataSourceUpdateMode.OnPropertyChanged);
+        输出人名优先词汇表Switch.DataBindings.Add("Active", GPT设置数据, "输出人名优先词汇表", false, DataSourceUpdateMode.OnPropertyChanged);
         简易模式Switch.DataBindings.Add("Active", GPT设置数据, "简易模式", false, DataSourceUpdateMode.OnPropertyChanged);
         翻后润色Switch.DataBindings.Add("Active", GPT设置数据, "翻后润色", false, DataSourceUpdateMode.OnPropertyChanged);
 

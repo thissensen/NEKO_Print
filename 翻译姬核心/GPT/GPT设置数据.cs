@@ -198,6 +198,17 @@ public class GPT设置数据 : INotifyPropertyChanged {
     }
     private bool _相邻对话合并 = true;
 
+    public bool 输出人名优先词汇表 {
+        get => _输出人名优先词汇表;
+        set {
+            if (_输出人名优先词汇表 != value) {
+                _输出人名优先词汇表 = value;
+                通知更改(() => 输出人名优先词汇表);
+            }
+        }
+    }
+    private bool _输出人名优先词汇表 = true;
+
     //原文-译文-备注
     public DataTable GPT词汇表 { get; set; } = new DataTable();
 

@@ -73,6 +73,8 @@ partial class GPT设置 {
             this.简易模式Switch = new 翻译姬.自定义Switch();
             this.uiLabel5 = new Sunny.UI.UILabel();
             this.相邻对话合并Switch = new 翻译姬.自定义Switch();
+            this.uiLabel10 = new Sunny.UI.UILabel();
+            this.输出人名优先词汇表Switch = new 翻译姬.自定义Switch();
             this.SuspendLayout();
             // 
             // uiLabel4
@@ -739,10 +741,33 @@ partial class GPT设置 {
             this.相邻对话合并Switch.Text = "自定义Switch1";
             this.相邻对话合并Switch.ActiveChanged += new System.EventHandler(this.相邻对话合并Switch_ActiveChanged);
             // 
+            // uiLabel10
+            // 
+            this.uiLabel10.AutoSize = true;
+            this.uiLabel10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel10.Location = new System.Drawing.Point(437, 59);
+            this.uiLabel10.Name = "uiLabel10";
+            this.uiLabel10.Size = new System.Drawing.Size(154, 21);
+            this.uiLabel10.TabIndex = 163;
+            this.uiLabel10.Text = "输出人名优先词汇表";
+            this.uiLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // 输出人名优先词汇表Switch
+            // 
+            this.输出人名优先词汇表Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.输出人名优先词汇表Switch.Location = new System.Drawing.Point(600, 55);
+            this.输出人名优先词汇表Switch.MinimumSize = new System.Drawing.Size(1, 1);
+            this.输出人名优先词汇表Switch.Name = "输出人名优先词汇表Switch";
+            this.输出人名优先词汇表Switch.Size = new System.Drawing.Size(75, 29);
+            this.输出人名优先词汇表Switch.TabIndex = 164;
+            this.输出人名优先词汇表Switch.Text = "自定义Switch1";
+            // 
             // GPT设置
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(987, 618);
+            this.Controls.Add(this.uiLabel10);
+            this.Controls.Add(this.输出人名优先词汇表Switch);
             this.Controls.Add(this.uiLabel5);
             this.Controls.Add(this.相邻对话合并Switch);
             this.Controls.Add(this.uiLabel3);
@@ -853,4 +878,6 @@ partial class GPT设置 {
     private 自定义Switch 简易模式Switch;
     private Sunny.UI.UILabel uiLabel5;
     private 自定义Switch 相邻对话合并Switch;
+    private Sunny.UI.UILabel uiLabel10;
+    private 自定义Switch 输出人名优先词汇表Switch;
 }

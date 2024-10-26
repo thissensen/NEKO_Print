@@ -454,8 +454,8 @@ namespace 翻译姬 {
                     全局数据.写出格式全局变量 = 1;
                     var cons = 控件组();
                     foreach (var c in cons) {
-                        if (c.Name == 机翻接口Box.Name && !c.Enabled) {
-                            continue;//灰色的机翻接口还得是灰色
+                        if (机翻方式Box.Text == "不机翻" && c.Name == 机翻接口Box.Name && !c.Enabled) {
+                            continue;//不机翻情况下灰色的机翻接口还得是灰色
                         }
                         c.Enabled = true;
                     }

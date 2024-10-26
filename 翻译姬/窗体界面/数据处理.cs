@@ -111,7 +111,6 @@ public partial class 数据处理 : 自定义Form {
         dt.Columns.Add("异常");
         dt.Columns.Add("原文");
         dt.Columns.Add("译文");
-
         for (int i = 0; i < 文本.Length; i++) {
             DataRow dr = dt.NewRow();
             var 异常 = 文本[i].异常状态 == 文本异常状态.无 ? "" : 文本[i].异常状态.ToString();
