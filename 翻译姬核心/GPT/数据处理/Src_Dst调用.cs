@@ -87,6 +87,7 @@ public class Src_Dst调用 : GPT数据处理接口 {
         ["日语"] = "Japanese",
         ["英语"] = "English",
         ["韩语"] = "Korean",
+        ["俄语"] = "Russian",
         ["繁中"] = "Traditional Chinese",
         ["简中"] = "Simplified Chinese"
     };
