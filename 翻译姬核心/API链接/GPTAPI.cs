@@ -14,7 +14,9 @@ public class GPTAPI : API接口模板 {
     private GPT调用 GPT调用;
     GPT数据处理接口 数据处理;
     public GPTAPI(API信息 data) : base(data) {
-        if (GPT设置数据.简易模式) {
+        if (GPT设置数据.Sakura机翻) {
+            数据处理 = new Sakura调用();
+        } else if (GPT设置数据.简易模式) {
             数据处理 = new 序列号调用();
         } else {
             数据处理 = new Src_Dst调用();

@@ -133,7 +133,7 @@ namespace 翻译姬 {
         }
 
         private async Task<string> 获取版本号() {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://gitee.com/this_sensen/NEKO_Print/blob/master/README.md");
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://gitee.com/this_sensen/NEKO_Print");
             request.Method = "GET";
             request.ContentType = "text/html;charset=UTF-8";
             request.UserAgent = null;

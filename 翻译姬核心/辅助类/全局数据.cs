@@ -87,12 +87,14 @@ namespace 翻译姬 {
             主表.Columns.Add("日语");
             主表.Columns.Add("英语");
             主表.Columns.Add("韩语");
+            主表.Columns.Add("俄语");
             主表.Columns.Add("简中");
             主表.Columns.Add("繁中");
-            主表.Rows.Add("阿里云", "https://mt.console.aliyun.com/products", "ja", "en", "ko", "zh", "zh-tw");
-            主表.Rows.Add("百度", "http://api.fanyi.baidu.com/api/trans/product/index", "jp", "en", "kor", "zh", "cht");
-            主表.Rows.Add("腾讯云", "https://console.cloud.tencent.com/cam/capi", "ja", "en", "ko", "zh", "zh-TW");
-            主表.Rows.Add("火山", "https://console.volcengine.com/home", "ja", "en", "ko", "zh", "zh-Hant");
+            主表.Rows.Add("阿里云", "https://mt.console.aliyun.com/products", "ja", "en", "ko", "ru", "zh", "zh-tw");
+            主表.Rows.Add("百度", "http://api.fanyi.baidu.com/api/trans/product/index", "jp", "en", "kor", "ru", "zh", "cht");
+            //腾讯云不支持日/韩译俄
+            主表.Rows.Add("腾讯云", "https://console.cloud.tencent.com/cam/capi", "ja", "en", "ko", "ru", "zh", "zh-TW");
+            主表.Rows.Add("火山", "https://console.volcengine.com/home", "ja", "en", "ko", "ru", "zh", "zh-Hant");
 
             API主表 = 主表;
         }

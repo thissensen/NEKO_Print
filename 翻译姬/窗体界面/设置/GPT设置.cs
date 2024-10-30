@@ -62,6 +62,14 @@ public partial class GPT设置 : 自定义Page {
         each object in one line without any explanation or comments, then end.
         [Glossary]
         """;
+
+    private string Sakura_Prompt = """
+        你是一个轻小说翻译模型，可以流畅通顺地以日本轻小说的风格将日文翻译成简体中文，并联系上下文正确使用人称代词，注意不要擅自添加原文中没有的代词，也不要擅自增加或减少换行
+        根据以下术语表：
+        [Glossary]
+        将下面的日文文本根据上述术语表的对应关系和注释翻译成中文
+        """;
+
     //有人名的使用词汇表
     private GPT设置数据 GPT设置数据 => 全局数据.GPT设置数据;
 
@@ -99,6 +107,7 @@ public partial class GPT设置 : 自定义Page {
         漏翻检测Switch.DataBindings.Add("Active", GPT设置数据, "漏翻检测", false, DataSourceUpdateMode.OnPropertyChanged);
         错误跳过Switch.DataBindings.Add("Active", GPT设置数据, "错误跳过", false, DataSourceUpdateMode.OnPropertyChanged);
         输出人名优先词汇表Switch.DataBindings.Add("Active", GPT设置数据, "输出人名优先词汇表", false, DataSourceUpdateMode.OnPropertyChanged);
+        Sakura机翻Switch.DataBindings.Add("Active", GPT设置数据, "Sakura机翻", false, DataSourceUpdateMode.OnPropertyChanged);
         简易模式Switch.DataBindings.Add("Active", GPT设置数据, "简易模式", false, DataSourceUpdateMode.OnPropertyChanged);
         翻后润色Switch.DataBindings.Add("Active", GPT设置数据, "翻后润色", false, DataSourceUpdateMode.OnPropertyChanged);
 
@@ -265,18 +274,31 @@ public partial class GPT设置 : 自定义Page {
 
     private void 简易模式Switch_ActiveChanged(object sender, EventArgs e) {
         if (简易模式Switch.Active) {
-            if (IsShown && !MessageBoxEx.Show("会导致文本质量降低，确认开启？", 显示按钮: 提示窗按钮.确认取消)) {
-                简易模式Switch.Active = false;
-                return;
+            Sakura机翻Switch.Active = false;
+            简易模式Switch.Active = true;
+        }
+        Sakura和简易模式按钮判定Timer.Enabled = true;
+    }
+
+    private void Sakura机翻Switch_ActiveChanged(object sender, EventArgs e) {
+        if (Sakura机翻Switch.Active) {
+            简易模式Switch.Active = false;
+            if (IsShown && 语境Box.Text != Sakura_Prompt && MessageBoxEx.Show("是否使用Sakura专用语境替换现有语境？", "提示", 提示窗按钮.确认取消)) {
+                语境Box.Text = Sakura_Prompt;
             }
+            Sakura机翻Switch.Active = true;
+        }
+        Sakura和简易模式按钮判定Timer.Enabled = true;
+    }
+
+    private void Sakura和简易模式按钮判定Timer_Tick(object sender, EventArgs e) {
+        if (Sakura机翻Switch.Active || 简易模式Switch.Active) {
             翻后润色Switch.Enabled = false;
             润色语境Box.Enabled = false;
-
-            翻后润色Switch.Active = false;
         } else {
-            //关闭
             翻后润色Switch.Enabled = true;
             润色语境Box.Enabled = true;
         }
+        Sakura和简易模式按钮判定Timer.Enabled = false;
     }
 }

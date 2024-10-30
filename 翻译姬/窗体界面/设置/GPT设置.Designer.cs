@@ -24,6 +24,7 @@ partial class GPT设置 {
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.uiLabel4 = new Sunny.UI.UILabel();
             this.请求等待延迟Box = new Sunny.UI.UITextBox();
             this.uiLabel2 = new Sunny.UI.UILabel();
@@ -75,6 +76,9 @@ partial class GPT设置 {
             this.相邻对话合并Switch = new 翻译姬.自定义Switch();
             this.uiLabel10 = new Sunny.UI.UILabel();
             this.输出人名优先词汇表Switch = new 翻译姬.自定义Switch();
+            this.uiLabel19 = new Sunny.UI.UILabel();
+            this.Sakura机翻Switch = new 翻译姬.自定义Switch();
+            this.Sakura和简易模式按钮判定Timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // uiLabel4
@@ -762,10 +766,39 @@ partial class GPT设置 {
             this.输出人名优先词汇表Switch.TabIndex = 164;
             this.输出人名优先词汇表Switch.Text = "自定义Switch1";
             // 
+            // uiLabel19
+            // 
+            this.uiLabel19.AutoSize = true;
+            this.uiLabel19.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel19.Location = new System.Drawing.Point(609, 98);
+            this.uiLabel19.Name = "uiLabel19";
+            this.uiLabel19.Size = new System.Drawing.Size(94, 21);
+            this.uiLabel19.TabIndex = 165;
+            this.uiLabel19.Text = "Sakura机翻";
+            this.uiLabel19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Sakura机翻Switch
+            // 
+            this.Sakura机翻Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Sakura机翻Switch.Location = new System.Drawing.Point(712, 94);
+            this.Sakura机翻Switch.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Sakura机翻Switch.Name = "Sakura机翻Switch";
+            this.Sakura机翻Switch.Size = new System.Drawing.Size(75, 29);
+            this.Sakura机翻Switch.TabIndex = 166;
+            this.Sakura机翻Switch.Text = "自定义Switch1";
+            this.Sakura机翻Switch.ActiveChanged += new System.EventHandler(this.Sakura机翻Switch_ActiveChanged);
+            // 
+            // Sakura和简易模式按钮判定Timer
+            // 
+            this.Sakura和简易模式按钮判定Timer.Interval = 30;
+            this.Sakura和简易模式按钮判定Timer.Tick += new System.EventHandler(this.Sakura和简易模式按钮判定Timer_Tick);
+            // 
             // GPT设置
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(987, 618);
+            this.Controls.Add(this.uiLabel19);
+            this.Controls.Add(this.Sakura机翻Switch);
             this.Controls.Add(this.uiLabel10);
             this.Controls.Add(this.输出人名优先词汇表Switch);
             this.Controls.Add(this.uiLabel5);
@@ -880,4 +913,7 @@ partial class GPT设置 {
     private 自定义Switch 相邻对话合并Switch;
     private Sunny.UI.UILabel uiLabel10;
     private 自定义Switch 输出人名优先词汇表Switch;
+    private Sunny.UI.UILabel uiLabel19;
+    private 自定义Switch Sakura机翻Switch;
+    private System.Windows.Forms.Timer Sakura和简易模式按钮判定Timer;
 }

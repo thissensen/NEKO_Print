@@ -141,18 +141,14 @@ public class 序列号调用 : GPT数据处理接口 {
         string text = Regex.Replace(content, @"^`+[^{\[]+", "");
         text = Regex.Replace(text, @"[\r\n]", "");
         text = Regex.Replace(text, @"`+$", "");
+        if (text.EndsWith("}") && !text.StartsWith("{")) {
+            text = Regex.Replace(text, @"^""", "");
+            text = @"{""0"":""" + text;
+        } else if (Regex.IsMatch(text, @"^\d")) {
+            text = "0:" + text;
+        }
+
         var res = new List<KeyValue<int, string>>();
-        /*try {
-            var arr = text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            if (arr.Length == GPT请求.Count) {
-                for (int i = 0; i < arr.Length; i++) {
-                    res.Add(new KeyValue<int, string>() {
-                        Key = i,
-                        Value = arr[i]
-                    });
-                }
-            }
-        } catch { }*/
         try {
             var dic = JsonConvert.DeserializeObject<Dictionary<int, string>>(text);
             var temp = from kv in dic
@@ -160,11 +156,15 @@ public class 序列号调用 : GPT数据处理接口 {
                     let t = new KeyValue<int, string>() { Key = kv.Key, Value = kv.Value }
                     select t;
             res.AddRange(temp);
-        } catch { }
+        } catch {
+            text = Regex.Replace(text, @"\\?""?}?$", "");
+        }
         try {
             if (res.Count == 0) {
                 //1：「xxx」\n2：
-                var matches = Regex.Matches(text, @"(?'id'\d+)[:：　] ?");
+                //"1":"xxx","2":"xxx"
+
+                var matches = Regex.Matches(text, @"(?'id'\d+)""?[:：　]?""? ?");
                 int 当前取值下标 = 0, 上级取值长度 = -1, id取值长度 = 0;
                 var id组 = new List<int>();
                 var 数据组 = new List<string>();
@@ -174,8 +174,10 @@ public class 序列号调用 : GPT数据处理接口 {
                     if (上级取值长度 != -1) {
                         //取上一次的循环内容
                         string 内容 = text.Substring(当前取值下标 + id取值长度, match.Index - 当前取值下标 - id取值长度);
+                        内容 = Regex.Replace(内容, @"^，?,?""?", "");
                         内容 = Regex.Replace(内容, @"^「", "");
-                        内容 = Regex.Replace(内容, @"」?\\?n?$", "");
+                        内容 = Regex.Replace(内容, @"""?,?""?$", "");
+                        内容 = Regex.Replace(内容, @"[」\\]+?\\?n?$", "");
                         if (!内容.IsNullOrEmpty()) {
                             数据组.Add(内容);
                         }
@@ -185,8 +187,10 @@ public class 序列号调用 : GPT数据处理接口 {
                     id取值长度 = match.Length;
                 }
                 string temp = text.Substring(当前取值下标 + id取值长度);
+                temp = Regex.Replace(temp, @"^，?,?""?", "");
                 temp = Regex.Replace(temp, @"^「", "");
-                temp = Regex.Replace(temp, @"」?\\?n?$", "");
+                temp = Regex.Replace(temp, @"""?,?""?$", "");
+                temp = Regex.Replace(temp, @"[」\\]+?\\?n?$", "");
                 if (!temp.IsNullOrEmpty()) {
                     数据组.Add(temp);
                 }
@@ -197,6 +201,20 @@ public class 序列号调用 : GPT数据处理接口 {
                         kv.Key = id组[i];
                         kv.Value = 数据组[i];
                         res.Add(kv);
+                    }
+                }
+            }
+        } catch { }
+
+        try {
+            if (res.Count == 0) {
+                var arr = text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                if (arr.Length == GPT请求.Count) {
+                    for (int i = 0; i < arr.Length; i++) {
+                        res.Add(new KeyValue<int, string>() {
+                            Key = i,
+                            Value = arr[i]
+                        });
                     }
                 }
             }

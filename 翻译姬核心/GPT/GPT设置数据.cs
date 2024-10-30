@@ -234,6 +234,17 @@ public class GPT设置数据 : INotifyPropertyChanged {
     }
     private string _语境;
 
+    public bool Sakura机翻 {
+        get => _Sakura机翻;
+        set {
+            if (_Sakura机翻 != value) {
+                _Sakura机翻 = value;
+                通知更改(() => Sakura机翻);
+            }
+        }
+    }
+    private bool _Sakura机翻;
+
     public bool 简易模式 {
         get => _简易模式;
         set {
