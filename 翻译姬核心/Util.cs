@@ -16,7 +16,8 @@ namespace 翻译姬 {
             ["简中"] = new Regex(@"[\u4e00-\u9fa5]"),
             ["日语"] = new Regex(@"[\u0800-\u4e00]"),
             ["英语"] = new Regex(@"[[a-zA-Zａ-ｚＡ-Ｚ]]"),
-            ["韩语"] = new Regex(@"[\x3130-\x318F\xAC00-\xD7A3]")
+            ["韩语"] = new Regex(@"[\x3130-\x318F\xAC00-\xD7A3]"),
+            ["俄语"] = new Regex(@"[а-яА-Я]")
         };
         /// <summary>
         /// 漏翻了就返回true

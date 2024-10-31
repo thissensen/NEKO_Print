@@ -79,7 +79,7 @@ namespace 翻译姬 {
             读取方式Box.DataSource = new List<string>() { "文本读取", "Json读取", "Xml读取" };
             机翻方式Box.DataSource = new List<string>() { "标准机翻", "不机翻" };
             写出方式Box.DataSource = new List<string>() { "文本写出", "Json写出", "Xml写出" };
-            源语言Box.DataSource = new List<string>() { "日语", "英语", "韩语", "繁中", "简中" };
+            源语言Box.DataSource = new List<string>() { "日语", "英语", "韩语", "俄语", "繁中", "简中" };
             目标语言Box.DataSource = new List<string>() { "简中", "日语", "英语", "韩语" };
             读取编码Box.DataSource = new List<string>() { "自动识别", "Shift-JIS", "UTF-8", "GBK", "UTF-16LE" };
             写出编码Box.DataSource = new List<string>() { "UTF-16LE", "UTF-8", "GBK" };

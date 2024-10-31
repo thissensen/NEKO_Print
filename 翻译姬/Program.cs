@@ -14,12 +14,7 @@ using 翻译姬.Properties;
 
 namespace 翻译姬 {
     /*
-     * 1、更新俄语的支持
-     * 2、修复了最新版本获取的问题
-     * 3、添加了Sakura机翻的专属支持
-     * 4、添加了Sakura机翻的一键切换，切换方式：
-     *    ·下载Sakura机翻.db，拖动到翻译姬.exe上打开
-     *    ·[关于翻译姬]界面，点击[使用指定数据启动翻译姬]按钮选择db进行打开
+     * 1、修复了俄语机翻的BUG
      */
     internal static class Program {
 

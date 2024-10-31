@@ -52,8 +52,8 @@ public partial class 全局设置 : 自定义Page {
         正则逆向写入Switch.DataBindings.Add("Active", 全局设置数据, "正则逆向写入", false, DataSourceUpdateMode.OnPropertyChanged);
         单账号线程数Box.DataBindings.Add("Text", 全局设置数据, "单账号线程数", false, DataSourceUpdateMode.OnPropertyChanged);
 
-        源语言Box.DataSource = new List<string>() { "日语", "英语", "韩语", "俄语", "繁中", "简中"};
-        目标语言Box.DataSource = new List<string>() { "简中", "繁中", "日语", "英语", "韩语", "俄语" };
+        源语言Box.DataSource = new List<string>() { "日语", "英语", "韩语", "俄语", "繁中", "简中" };
+        目标语言Box.DataSource = new List<string>() { "简中", "日语", "英语", "韩语" };
         读取编码Box.DataSource = new List<string>() { "自动识别", "Shift-JIS", "UTF-8", "GBK", "UTF-16LE" };
         写出编码Box.DataSource = new List<string>() { "UTF-16LE", "UTF-8", "GBK" };
 
