@@ -301,4 +301,9 @@ public partial class GPT设置 : 自定义Page {
         }
         Sakura和简易模式按钮判定Timer.Enabled = false;
     }
+
+    private void GPT请求参数Btn_Click(object sender, EventArgs e) {
+        var f = new GPT请求参数();
+        f.ShowDialog();
+    }
 }

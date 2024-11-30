@@ -43,6 +43,8 @@ namespace 翻译姬 {
                 ["关于翻译姬"] = new 关于翻译姬(),
             };
 
+        public static List<Control> 主题设置控件 = new List<Control>();//主要用于主题的设置
+
         public 主界面() {
             InitializeComponent();
             Activated += 主界面_Activated;
@@ -51,12 +53,6 @@ namespace 翻译姬 {
             数据中转.进度条 = 进度条;
             //Dpi设置
             全局字符串.屏幕缩放比 = 获取屏幕缩放比();
-            //主题设置
-            窗体列表.BackColor = 全局字符串.背景色;
-            //主题设置
-            关闭Btn.RectColor = Color.Red;
-            关闭Btn.RectHoverColor = Color.Red;
-            关闭Btn.RectPressColor = Color.Red;
             //窗体设置
             int 图标大小 = (int)(32 * 全局字符串.屏幕缩放比);
             //提前初始化
@@ -125,12 +121,15 @@ namespace 翻译姬 {
 
         private void 主界面_Load(object sender, EventArgs e) {
             //额外主题设置
-            最小化Btn.RectColor = 全局字符串.主题色;
+            最小化Btn.主题设置();
+            关闭Btn.主题设置();
+            窗体列表.主题设置();
+            /*最小化Btn.RectColor = 全局字符串.主题色;
             最小化Btn.SymbolHoverColor = 全局字符串.深级主题色;
             最小化Btn.SymbolPressColor = 全局字符串.深级主题色;
             关闭Btn.RectColor = 全局字符串.主题色;
             关闭Btn.SymbolHoverColor = Color.Red;
-            关闭Btn.SymbolPressColor = Color.Red;
+            关闭Btn.SymbolPressColor = Color.Red;*/
             //额外DPI设置
             窗体列表.ItemHeight = (int)(窗体列表.ItemHeight * 全局字符串.屏幕缩放比);
             //允许托盘图标

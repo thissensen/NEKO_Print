@@ -32,6 +32,9 @@ public class GPTAPI : API接口模板 {
             GPT设置数据.连接域名,
             GPT设置数据.连接路由,
             GPT设置数据.使用模型, 
+            GPT设置数据.frequency_penalty,
+            GPT设置数据.temperature,
+            GPT设置数据.top_p,
             GPT设置数据.请求等待延迟, 
             data.秘钥
         );
@@ -55,9 +58,13 @@ public class GPTAPI : API接口模板 {
             //机翻
             GPT返回 返回结果 = null;
             dynamic 解析结束的请求;
+            int 最大token = 全局数据.BPE算法.Token计算(JsonConvert.SerializeObject(请求内容));
 机翻开始:
             try {
-                返回结果 = GPT调用.调用(请求内容);
+                返回结果 = GPT调用.调用(请求内容, 最大token);
+                if (返回结果.Usage.TotalTokens == 最大token) {
+                    throw new Exception("返回token达到最大token限制，疑似退化，重试");
+                }
                 机翻字符增加(返回结果.Usage.TotalTokens);
                 解析结束的请求 = 数据处理.返回值解析(返回结果.Choices[0].Message.Content, 原请求, false);//List<GPT请求>
             } catch (Exception_API异常) {
@@ -80,7 +87,10 @@ public class GPTAPI : API接口模板 {
                 var 待润色请求内容 = 数据处理.获取请求内容(true, 待润色请求);
 润色开始:
                 try {
-                    var 润色返回结果 = GPT调用.调用(待润色请求内容);
+                    var 润色返回结果 = GPT调用.调用(待润色请求内容, 最大token);
+                    if (返回结果.Usage.TotalTokens == 最大token) {
+                        throw new Exception("返回token达到最大token限制，疑似退化，重试");
+                    }
                     机翻字符增加(润色返回结果.Usage.TotalTokens);
                     解析结束的请求 = 数据处理.返回值解析(润色返回结果.Choices[0].Message.Content, 待润色请求, true);
                 } catch (Exception_API异常) {
@@ -192,7 +202,9 @@ public class GPTAPI : API接口模板 {
 
 
         for (int i = 0; i < 对话结果.Count; i += GPT设置数据.单次机翻行) {
-            文本[][] temp = 对话结果.Skip(i).Take(GPT设置数据.单次机翻行).ToArray();
+            int 拷贝长度 = Math.Min(GPT设置数据.单次机翻行, 对话结果.Count - i);
+            var temp = new 文本[拷贝长度][];
+            对话结果.CopyTo(i, temp, 0, 拷贝长度);//Copy方案比linq快无数倍
             var res = new List<文本>();
             foreach (文本[] 文本arr in temp) {
                 res.AddRange(文本arr);

@@ -171,6 +171,7 @@
             this.ShowTitle = false;
             this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "自定义提示窗";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.自定义提示窗_Load);
             this.Shown += new System.EventHandler(this.自定义提示窗_Shown);
             this.窗体总Panel.ResumeLayout(false);

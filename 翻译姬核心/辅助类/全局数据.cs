@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,6 +23,10 @@ namespace 翻译姬 {
             set => _缓存数据路径 = value;
         }
         private static string _缓存数据路径;
+
+        public static readonly string 软件存储目录 = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\翻译姬\";
+        public static string 数据库路径 = 软件存储目录 + "翻译姬数据库.db";
+        public static readonly string GPT词表路径 = 软件存储目录 + "cl100k_base.tiktoken";
 
         /// <summary>
         /// 中止机翻信号
@@ -62,8 +67,13 @@ namespace 翻译姬 {
         /// 软件主题
         /// </summary>
         public static 全局主题设置 全局主题设置 = new 全局主题设置();
+        public static BPE算法 BPE算法;
 
         public static void 数据初始化() {
+            //BPE算法加载
+            try {
+                BPE算法 = new BPE算法();
+            } catch { BPE算法 = null; }
             //序列化预加载
             DataTable dt = 数据库.Select($"select 窗体名,序列化值 from 窗体序列化");
             窗体名_序列化数据 = (from row in dt.AsEnumerable()

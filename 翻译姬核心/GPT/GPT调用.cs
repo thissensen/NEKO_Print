@@ -23,6 +23,9 @@ public class GPT调用 {
     public string 域名 { get; set; }
     public string 路由 { get; set; }
     public string 模型 { get; set; }
+    public double frequency_penalty { get; set; }
+    public double temperature { get; set; }
+    public double top_p { get; set; }
     public int 等待超时 { get; set; } = 60;//秒
     public string 令牌 { get; set; }
 
@@ -31,19 +34,22 @@ public class GPT调用 {
     public int QPS显示单位 { get; set; } = 60000;//token的限制为每60秒
     public bool 已进行token限制 { get; set; } = false;
 
-    public GPT调用(Stopwatch 计时器, int token限制, bool 是否Https, string 域名, string 路由, string 模型, int 等待超时, string 令牌) {
+    public GPT调用(Stopwatch 计时器, int token限制, bool 是否Https, string 域名, string 路由, string 模型, double frequency_penalty, double temperature, double top_p, int 等待超时, string 令牌) {
         this.计时器 = 计时器;
         this.token限制 = token限制;
         this.是否Https = 是否Https;
         this.域名 = 域名;
         this.路由 = 路由;
         this.模型 = 模型;
+        this.frequency_penalty = frequency_penalty;
+        this.temperature = temperature;
+        this.top_p = top_p;
         this.等待超时 = 等待超时;
         this.令牌 = 令牌;
         client.DefaultRequestHeaders.Add("Authorization", "Bearer " + 令牌);
     }
 
-    public GPT返回 调用(List<dynamic> 请求内容) {
+    public GPT返回 调用(List<dynamic> 请求内容, int 最大token) {
         //做Token限制
         if (已用token > token限制) {
             计时器.Stop();
@@ -60,9 +66,13 @@ public class GPT调用 {
             string 连接前缀 = 是否Https ? "https" : "http";
             string url = $"{连接前缀}://{域名}{路由}";
             var res = new Dictionary<string, dynamic>();
-            res.Add("model", 模型);
             //res.Add("response_format", new { type = "json_object" });//强制Json
+            res.Add("model", 模型);
             res.Add("messages", 请求内容);
+            res.Add("frequency_penalty", frequency_penalty);//减少模型重复输出，-2到2，默认0，处理退化(返回值一直是最大token)则往上加0.1，
+            res.Add("temperature", temperature);//采样度，0到2，默认1，越高输出越随机
+            res.Add("top_p", top_p);//质量采样，0到1默认1，0.1表示只会用前10质量的文本。与上方参数二选一
+            res.Add("max_tokens", 最大token);
             string body = JsonConvert.SerializeObject(res);
             var rep = client.PostAsync(url, new StringContent(body, Encoding.UTF8, "application/json")).Result;
             json = rep.Content.ReadAsStringAsync().Result;

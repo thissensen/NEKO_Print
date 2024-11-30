@@ -79,6 +79,7 @@ partial class GPT设置 {
             this.uiLabel19 = new Sunny.UI.UILabel();
             this.Sakura机翻Switch = new 翻译姬.自定义Switch();
             this.Sakura和简易模式按钮判定Timer = new System.Windows.Forms.Timer(this.components);
+            this.GPT请求参数Btn = new Sunny.UI.UIButton();
             this.SuspendLayout();
             // 
             // uiLabel4
@@ -548,7 +549,7 @@ partial class GPT设置 {
             // 
             this.词汇表设置Btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.词汇表设置Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.词汇表设置Btn.Location = new System.Drawing.Point(326, 52);
+            this.词汇表设置Btn.Location = new System.Drawing.Point(614, 49);
             this.词汇表设置Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.词汇表设置Btn.Name = "词汇表设置Btn";
             this.词汇表设置Btn.Size = new System.Drawing.Size(105, 35);
@@ -749,7 +750,7 @@ partial class GPT设置 {
             // 
             this.uiLabel10.AutoSize = true;
             this.uiLabel10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel10.Location = new System.Drawing.Point(437, 59);
+            this.uiLabel10.Location = new System.Drawing.Point(725, 56);
             this.uiLabel10.Name = "uiLabel10";
             this.uiLabel10.Size = new System.Drawing.Size(154, 21);
             this.uiLabel10.TabIndex = 163;
@@ -759,7 +760,7 @@ partial class GPT设置 {
             // 输出人名优先词汇表Switch
             // 
             this.输出人名优先词汇表Switch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.输出人名优先词汇表Switch.Location = new System.Drawing.Point(600, 55);
+            this.输出人名优先词汇表Switch.Location = new System.Drawing.Point(888, 52);
             this.输出人名优先词汇表Switch.MinimumSize = new System.Drawing.Size(1, 1);
             this.输出人名优先词汇表Switch.Name = "输出人名优先词汇表Switch";
             this.输出人名优先词汇表Switch.Size = new System.Drawing.Size(75, 29);
@@ -793,10 +794,24 @@ partial class GPT设置 {
             this.Sakura和简易模式按钮判定Timer.Interval = 30;
             this.Sakura和简易模式按钮判定Timer.Tick += new System.EventHandler(this.Sakura和简易模式按钮判定Timer_Tick);
             // 
+            // GPT请求参数Btn
+            // 
+            this.GPT请求参数Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.GPT请求参数Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.GPT请求参数Btn.Location = new System.Drawing.Point(332, 49);
+            this.GPT请求参数Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.GPT请求参数Btn.Name = "GPT请求参数Btn";
+            this.GPT请求参数Btn.Size = new System.Drawing.Size(105, 35);
+            this.GPT请求参数Btn.TabIndex = 167;
+            this.GPT请求参数Btn.Text = "GPT请求参数";
+            this.GPT请求参数Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.GPT请求参数Btn.Click += new System.EventHandler(this.GPT请求参数Btn_Click);
+            // 
             // GPT设置
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(987, 618);
+            this.Controls.Add(this.GPT请求参数Btn);
             this.Controls.Add(this.uiLabel19);
             this.Controls.Add(this.Sakura机翻Switch);
             this.Controls.Add(this.uiLabel10);
@@ -916,4 +931,5 @@ partial class GPT设置 {
     private Sunny.UI.UILabel uiLabel19;
     private 自定义Switch Sakura机翻Switch;
     private System.Windows.Forms.Timer Sakura和简易模式按钮判定Timer;
+    private Sunny.UI.UIButton GPT请求参数Btn;
 }

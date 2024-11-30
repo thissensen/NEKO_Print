@@ -25,15 +25,15 @@ public class BPE算法 {
     /// </summary>
     /// <param name="模型词表">GPT模型词表</param>
     /// <exception cref="FormatException"></exception>
-    /*public BPE算法() {
+    public BPE算法() {
         //格式化
         var bpeDict = new Dictionary<byte[], int>(new ByteArrayComparer());
-        if (!File.Exists(Program.GPT词表路径)) {
+        if (!File.Exists(全局数据.GPT词表路径)) {
             throw new Exception("模型词表路径不存在，请联系开发者");
         }
         string[] 模型词表;
         try {
-            模型词表 = File.ReadAllLines(Program.GPT词表路径);
+            模型词表 = File.ReadAllLines(全局数据.GPT词表路径);
         } catch (Exception ex) {
             throw new Exception($"模型词表读取错误：{ex.Message}");
         }
@@ -53,7 +53,7 @@ public class BPE算法 {
             bpeDict[tokenBytes] = rank;
         }
         _corePBE = new CoreBPE(bpeDict, special_tokens, @"(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\r\n\p{L}\p{N}]?\p{L}+|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n]*|\s*[\r\n]+|\s+(?!\S)|\s+");
-    }*/
+    }
 
     public int Token计算(string text) {
         try {
@@ -280,7 +280,9 @@ public class BytePairEncoding {
     }
     //framwork不支持列表模式，linq模拟
     public static T[] 数组分割<T>(T[] buf, int start, int end) {
-        return buf.Skip(start).Take(end - start).ToArray();
+        var res = new T[end - start];
+        buf.ToList().CopyTo(start, res, 0, end - start);
+        return res;
     }
 
     public static List<int> BytePairEncode(byte[] piece, Dictionary<byte[], int> ranks) {

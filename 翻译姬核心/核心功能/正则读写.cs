@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -9,40 +10,49 @@ public class 正则读写 {
 
     private static 全局设置数据 全局设置数据 => 全局数据.全局设置数据;
 
-    public static 文本[] 文本过滤正则(文本 文本, DataRow 正则row) {
-        string 文本过滤正则 = 正则row["文本过滤正则"].ToString();
-        if (文本过滤正则.Trim() == "") {
+    public static 文本[] 文本过滤正则(文本 文本, Regex 行过滤正则, Regex 文本过滤正则) {
+        if (行过滤正则 == null && 文本过滤正则 == null) {
             return new[] { 文本 };
         }
-        if (!Regex.IsMatch(文本.原文, 文本过滤正则)) {
-            return new[] { 文本 };
+        var 文本arr = 正则识别分割(文本.原文, 文本.文本下标, 行过滤正则, 文本过滤正则, null, null); 
+        if (文本arr == null) {
+            return null;
         }
         var res = new List<文本>();
-        string[] arr = 文本过滤(文本.原文, 文本过滤正则);
-        if (arr.Length == 0) {
-            return new[] { 文本 };
-        }
-        foreach (var s in arr) {
-            if (s.Trim() == "") {
-                continue;
-            }
-            var 新文本 = new 文本(文本.文本下标, s);
-            新文本.文本类型 = 文本.文本类型;
-            新文本.人名 = 文本.人名;
-            res.Add(新文本);
+        foreach (var item in 文本arr) {
+            res.Add(item);
         }
         return res.ToArray();
     }
     public static 文本[] 正则文本提取(string[] 原文本行, DataRow 正则row) {
-        string 行过滤正则 = 正则row["行过滤正则"].ToString();
-        string 文本过滤正则 = 正则row["文本过滤正则"].ToString();
-        string 提取前行过滤正则 = 正则row["提取前行过滤正则"].ToString();
-        string 提取型正则 = 正则row["提取型正则"].ToString();
-        if ((行过滤正则.IsNullOrEmpty() &&
-            文本过滤正则.IsNullOrEmpty() &&
-            提取前行过滤正则.IsNullOrEmpty() &&
-            提取型正则.IsNullOrEmpty()) || 原文本行.Length == 0) {
+        #region 正则预加载，提升速度
+        Regex 行过滤正则 = null;
+        Regex 文本过滤正则 = null;
+        Regex 提取前行过滤正则 = null;
+        Regex[] 提取型正则arr = null;
 
+        if (!正则row["行过滤正则"].ToString().IsNullOrEmpty()) {
+            行过滤正则 = new Regex(正则row["行过滤正则"].ToString());
+        }
+
+        if (!正则row["文本过滤正则"].ToString().IsNullOrEmpty()) {
+            文本过滤正则 = new Regex(正则row["文本过滤正则"].ToString());
+        }
+
+        if (!正则row["提取前行过滤正则"].ToString().IsNullOrEmpty()) {
+            提取前行过滤正则 = new Regex(正则row["提取前行过滤正则"].ToString());
+        }
+
+        if (!正则row["提取型正则"].ToString().IsNullOrEmpty()) {
+            string[] 提取正则arr = Util.正则分割(正则row["提取型正则"].ToString());
+            var 提取正则list = new List<Regex>();
+            foreach (var 正则 in 提取正则arr) {
+                提取正则list.Add(new Regex(正则));
+            }
+            提取型正则arr = 提取正则list.ToArray();
+        }
+        #endregion
+        if (行过滤正则 == null && 文本过滤正则 == null && 提取前行过滤正则 == null && 提取型正则arr == null) {
             var temp = new List<文本>();
             for (int i = 0; i < 原文本行.Length; i++) {
                 temp.Add(new 文本(i, 原文本行[i]));
@@ -52,7 +62,7 @@ public class 正则读写 {
         List<文本> res = new List<文本>();
         for (int i = 0; i < 原文本行.Length; i++) {
             string text = 原文本行[i];
-            文本[] 提取文本 = 正则识别分割(text, i, 行过滤正则, 文本过滤正则, 提取前行过滤正则, 提取型正则);
+            文本[] 提取文本 = 正则识别分割(text, i, 行过滤正则, 文本过滤正则, 提取前行过滤正则, 提取型正则arr);
             if (提取文本 != null) {
                 res.AddRange(提取文本);
             }
@@ -60,28 +70,49 @@ public class 正则读写 {
         return res.ToArray();
     }
     public static string[] 正则文本写入(string[] 原文本行, 文本[] 译文, DataRow 正则row) {
-        string 行过滤正则 = 正则row["行过滤正则"].ToString();
-        string 文本过滤正则 = 正则row["文本过滤正则"].ToString();
-        string 提取前行过滤正则 = 正则row["提取前行过滤正则"].ToString();
-        string 提取型正则 = 正则row["提取型正则"].ToString();
+
         if (原文本行.Length == 0 || 译文.Length == 0) {
             return 原文本行;
         }
-        List<string> res = new List<string>();
-        if (行过滤正则.IsNullOrEmpty() &&
-            文本过滤正则.IsNullOrEmpty() &&
-            提取前行过滤正则.IsNullOrEmpty() &&
-            提取型正则.IsNullOrEmpty()) {
+        #region 正则预加载，提升速度
+        Regex 行过滤正则 = null;
+        Regex 文本过滤正则 = null;
+        Regex 提取前行过滤正则 = null;
+        Regex[] 提取型正则arr = null;
 
+        if (!正则row["行过滤正则"].ToString().IsNullOrEmpty()) {
+            行过滤正则 = new Regex(正则row["行过滤正则"].ToString());
+        }
+
+        if (!正则row["文本过滤正则"].ToString().IsNullOrEmpty()) {
+            文本过滤正则 = new Regex(正则row["文本过滤正则"].ToString());
+        }
+
+        if (!正则row["提取前行过滤正则"].ToString().IsNullOrEmpty()) {
+            提取前行过滤正则 = new Regex(正则row["提取前行过滤正则"].ToString());
+        }
+
+        if (!正则row["提取型正则"].ToString().IsNullOrEmpty()) {
+            string[] 提取正则arr = Util.正则分割(正则row["提取型正则"].ToString());
+            var 提取正则list = new List<Regex>();
+            foreach (var 正则 in 提取正则arr) {
+                提取正则list.Add(new Regex(正则));
+            }
+            提取型正则arr = 提取正则list.ToArray();
+        }
+        #endregion
+        var res = new List<string>();
+        if (行过滤正则 == null && 文本过滤正则 == null && 提取前行过滤正则 == null && 提取型正则arr == null) {
             for (int i = 0; i < 译文.Length; i++) {
                 res.Add(写出格式替换(原文本行[i], 译文[i].译文, i));
             }
             return res.ToArray();
         }
+
         int 译文下标 = 0, 写出格式id = 1;
         for (int i = 0; i < 原文本行.Length; i++) {
             string text = 原文本行[i];
-            文本[] 提取文本 = 正则识别分割(text, i, 行过滤正则, 文本过滤正则, 提取前行过滤正则, 提取型正则);
+            文本[] 提取文本 = 正则识别分割(text, i, 行过滤正则, 文本过滤正则, 提取前行过滤正则, 提取型正则arr);
             if (提取文本 != null) {
                 //替换为译文
                 string 译文text = text;
@@ -120,15 +151,18 @@ public class 正则读写 {
         }
         return res.ToArray();
     }
-    // 默认Trim()
-    private static 文本[] 正则识别分割(string text, int 文本下标, string 行过滤正则, string 文本过滤正则, string 提取前行过滤正则, string 提取型正则) {
+    /// <summary>
+    /// // 默认Trim()
+    /// </summary>
+    /// <returns>要么null，要么一定有至少一个值</returns>
+    private static 文本[] 正则识别分割(string text, int 文本下标, Regex 行过滤正则, Regex 文本过滤正则, Regex 提取前行过滤正则, Regex[] 提取型正则arr) {
         //先提取
         List<文本> 结果 = new List<文本>();
-        if (提取型正则 != "" && !(提取前行过滤正则 != "" && Regex.IsMatch(text, 提取前行过滤正则))) {
+        if (提取型正则arr != null && 提取型正则arr.Length > 0 && !(提取前行过滤正则 != null && 提取前行过滤正则.IsMatch(text))) {
             //有提取型正则，并没被提取前行过滤掉
-            string[] 提取正则arr = Util.正则分割(提取型正则);
-            foreach (var 提取正则 in 提取正则arr) {
-                GroupCollection groups = Regex.Match(text, 提取正则).Groups;
+            //string[] 提取正则arr = Util.正则分割(提取型正则);
+            foreach (var 提取正则 in 提取型正则arr) {
+                GroupCollection groups = 提取正则.Match(text).Groups;
                 var 提取结果 = groups.获取提取结果();
                 if (提取结果.Count == 0) {
                     continue;
@@ -140,7 +174,7 @@ public class 正则读写 {
                         continue;//提取了个空气，主要是*造成的，+就没事
                     }
                     string[] 分割后arr;
-                    if (提取name != "name" && 文本过滤正则 != "") {
+                    if (提取name != "name" && 文本过滤正则 != null) {
                         分割后arr = 文本过滤(提取text, 文本过滤正则);
                     } else {
                         分割后arr = new string[] { 提取text };
@@ -164,12 +198,12 @@ public class 正则读写 {
             }
         }
         //提取不到再普通
-        if (行过滤正则 != "" && Regex.IsMatch(text, 行过滤正则)) {//符合行过滤不执行
+        if (行过滤正则 != null && 行过滤正则.IsMatch(text)) {//符合行过滤不执行
             return null;
         }
         //正则分割
         string[] arr;
-        if (文本过滤正则 != "") {
+        if (文本过滤正则 != null) {
             arr = 文本过滤(text, 文本过滤正则);
         } else {
             arr = new string[] { text };
@@ -205,21 +239,20 @@ public class 正则读写 {
         }
         return res;
     }
-    private static string[] 文本过滤(string 文本, string 文本过滤正则) {
+    private static string[] 文本过滤(string 文本, Regex 文本过滤正则) {
         string[] 原文本;
         if (全局设置数据.内置中括号过滤) {
             原文本 = 中括号分割(文本);
         } else {
             原文本 = new string[] { 文本 };
         }
-        var reg = new Regex(文本过滤正则);
         var res = new List<string>();
         foreach (var 分割后 in 原文本) {
             var s = 分割后.Trim();
             if (s == "") {
                 continue;
             }
-            var arr = reg.Split(s);
+            var arr = 文本过滤正则.Split(s);
             res.AddRange(arr);
         }
         return res.ToArray();

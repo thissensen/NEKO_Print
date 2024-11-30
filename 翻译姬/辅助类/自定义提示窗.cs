@@ -42,6 +42,7 @@ namespace 翻译姬 {
         }
 
         private void 自定义提示窗_Shown(object sender, EventArgs e) {
+            TopMost = false;
             确认Btn.Select();
             /*//计算一行显示多少字
             int 文字宽度 = TextRenderer.MeasureText(提示内容, 文字区Panel.Font).Width;

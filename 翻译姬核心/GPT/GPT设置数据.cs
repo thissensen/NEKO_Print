@@ -55,6 +55,39 @@ public class GPT设置数据 : INotifyPropertyChanged {
     }
     private string _使用模型 = "gpt-3.5-turbo";
 
+    public double frequency_penalty {
+        get => _frequency_penalty;
+        set {
+            if (_frequency_penalty != value) {
+                _frequency_penalty = value;
+                通知更改(() => frequency_penalty);
+            }
+        }
+    }
+    private double _frequency_penalty = 0.3;
+
+    public double temperature {
+        get => _temperature;
+        set {
+            if (_temperature != value) {
+                _temperature = value;
+                通知更改(() => temperature);
+            }
+        }
+    }
+    private double _temperature = 0.4;
+
+    public double top_p {
+        get => _top_p;
+        set {
+            if (_top_p != value) {
+                _top_p = value;
+                通知更改(() => top_p);
+            }
+        }
+    }
+    private double _top_p = 0.95;
+
     public int 次数限制 {
         get => _次数限制;
         set {

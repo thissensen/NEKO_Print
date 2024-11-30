@@ -126,6 +126,7 @@
             this.标题栏Panel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.标题栏Panel.MinimumSize = new System.Drawing.Size(1, 1);
             this.标题栏Panel.Name = "标题栏Panel";
+            this.标题栏Panel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.标题栏Panel.RadiusSides = Sunny.UI.UICornerRadiusSides.None;
             this.标题栏Panel.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom;
             this.标题栏Panel.Size = new System.Drawing.Size(987, 100);
@@ -149,8 +150,8 @@
             this.最小化Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.最小化Btn.Name = "最小化Btn";
             this.最小化Btn.RadiusSides = Sunny.UI.UICornerRadiusSides.None;
-            this.最小化Btn.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom;
-            this.最小化Btn.Size = new System.Drawing.Size(100, 100);
+            this.最小化Btn.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.最小化Btn.Size = new System.Drawing.Size(100, 98);
             this.最小化Btn.Style = Sunny.UI.UIStyle.Custom;
             this.最小化Btn.StyleCustomMode = true;
             this.最小化Btn.Symbol = 61544;
@@ -191,8 +192,8 @@
             this.关闭Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.关闭Btn.Name = "关闭Btn";
             this.关闭Btn.RadiusSides = Sunny.UI.UICornerRadiusSides.None;
-            this.关闭Btn.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom;
-            this.关闭Btn.Size = new System.Drawing.Size(100, 100);
+            this.关闭Btn.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.关闭Btn.Size = new System.Drawing.Size(100, 98);
             this.关闭Btn.Style = Sunny.UI.UIStyle.Custom;
             this.关闭Btn.StyleCustomMode = true;
             this.关闭Btn.Symbol = 61453;

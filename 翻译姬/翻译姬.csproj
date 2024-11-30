@@ -102,12 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GPTAPI2.cs" />
-    <Compile Include="数组数据数值更改.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="数组数据数值更改.Designer.cs">
-      <DependentUpon>数组数据数值更改.cs</DependentUpon>
-    </Compile>
     <Compile Include="窗体界面\API设置\火山.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,11 +114,23 @@
     <Compile Include="窗体界面\辅助窗体\GPT词汇表窗体.Designer.cs">
       <DependentUpon>GPT词汇表窗体.cs</DependentUpon>
     </Compile>
+    <Compile Include="窗体界面\辅助窗体\GPT请求参数.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="窗体界面\辅助窗体\GPT请求参数.Designer.cs">
+      <DependentUpon>GPT请求参数.cs</DependentUpon>
+    </Compile>
     <Compile Include="窗体界面\辅助窗体\数据转换.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="窗体界面\辅助窗体\数据转换.Designer.cs">
       <DependentUpon>数据转换.cs</DependentUpon>
+    </Compile>
+    <Compile Include="窗体界面\辅助窗体\数组数据数值更改.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="窗体界面\辅助窗体\数组数据数值更改.Designer.cs">
+      <DependentUpon>数组数据数值更改.cs</DependentUpon>
     </Compile>
     <Compile Include="窗体界面\辅助窗体\正则指令数值更改.cs">
       <SubType>Form</SubType>
@@ -180,7 +186,6 @@
     <Compile Include="辅助类\自定义颜色选择器.Designer.cs">
       <DependentUpon>自定义颜色选择器.cs</DependentUpon>
     </Compile>
-    <Compile Include="辅助类\BPE算法.cs" />
     <Compile Include="窗体界面\设置\全局设置.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -902,14 +907,17 @@
       <DependentUpon>表格增删改.cs</DependentUpon>
     </Compile>
     <Compile Include="辅助类\错误处理.cs" />
-    <EmbeddedResource Include="数组数据数值更改.resx">
-      <DependentUpon>数组数据数值更改.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="窗体界面\辅助窗体\GPT词汇表窗体.resx">
       <DependentUpon>GPT词汇表窗体.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="窗体界面\辅助窗体\GPT请求参数.resx">
+      <DependentUpon>GPT请求参数.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="窗体界面\辅助窗体\数据转换.resx">
       <DependentUpon>数据转换.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="窗体界面\辅助窗体\数组数据数值更改.resx">
+      <DependentUpon>数组数据数值更改.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="窗体界面\辅助窗体\正则指令数值更改.resx">
       <DependentUpon>正则指令数值更改.cs</DependentUpon>
@@ -1200,6 +1208,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\cl100k_base.tiktoken" />
     <None Include="Resources\ElegantIcons.ttf" />
     <None Include="Resources\fa-brands-400.ttf" />
     <None Include="Resources\fa-regular-400.ttf" />

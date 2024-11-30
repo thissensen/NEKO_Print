@@ -244,21 +244,16 @@ namespace Sunny.UI
             MenuHelper.Clear();
         }
 
-        private Color backColor = Color.FromArgb(56, 56, 56);
-
         [DefaultValue(typeof(Color), "56, 56, 56")]
         [Description("背景颜色"), Category("SunnyUI")]
         public override Color BackColor
         {
-            get => backColor;
+            get => base.BackColor;
             set
             {
-                if (backColor != value)
-                {
-                    backColor = value;
-                    menuStyle = UIMenuStyle.Custom;
-                    Invalidate();
-                }
+                base.BackColor = value;
+                menuStyle = UIMenuStyle.Custom;
+                Invalidate();
             }
         }
 

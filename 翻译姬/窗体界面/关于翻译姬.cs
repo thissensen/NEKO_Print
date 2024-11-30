@@ -105,12 +105,72 @@ namespace 翻译姬 {
             f.Show();
         }
 
+        private void 主题色粉Box_Click(object sender, EventArgs e) {
+            全局字符串.主题色 = Color.FromArgb(255, 121, 188);
+            全局字符串.深级主题色 = Color.FromArgb(255, 180, 188);
+            全局字符串.次级主题色 = Color.FromArgb(50, 255, 121, 188);
+            全局字符串.不可用时颜色 = Color.FromArgb(220, 220, 220);
+            全局字符串.背景色 = Color.White;
+            刷新Panel颜色();
+        }
+
+        private void 主题色黑Box_Click(object sender, EventArgs e) {
+            全局字符串.背景色 = Color.FromArgb(32, 32, 32);
+            全局字符串.不可用时颜色 = Color.FromArgb(96, 96, 96);
+            全局字符串.次级主题色 = Color.FromArgb(160, 160, 160);
+            全局字符串.深级主题色 = Color.FromArgb(224, 224, 224);
+            全局字符串.主题色 = Color.White;
+            刷新Panel颜色();
+        }
+
+        private void 主题色白Box_Click(object sender, EventArgs e) {
+            全局字符串.主题色 = Color.FromArgb(32, 32, 32);
+            全局字符串.深级主题色 = Color.FromArgb(96, 96, 96);
+            全局字符串.次级主题色 = Color.FromArgb(160, 160, 160);
+            全局字符串.不可用时颜色 = Color.FromArgb(224, 224, 224);
+            全局字符串.背景色 = Color.White;
+            刷新Panel颜色();
+        }
+
+        private void 主题色绿Box_Click(object sender, EventArgs e) {
+            全局字符串.主题色 = Color.FromArgb(0, 204, 0);
+            全局字符串.深级主题色 = Color.FromArgb(153, 255, 153);
+            全局字符串.次级主题色 = Color.FromArgb(204, 255, 204);
+            全局字符串.不可用时颜色 = Color.FromArgb(220, 220, 220);
+            全局字符串.背景色 = Color.White;
+            刷新Panel颜色();
+        }
+
+        private void 主题色蓝Box_Click(object sender, EventArgs e) {
+            全局字符串.主题色 = Color.FromArgb(0, 102, 204);
+            全局字符串.深级主题色 = Color.FromArgb(51, 153, 255);
+            全局字符串.次级主题色 = Color.FromArgb(153, 204, 255);
+            全局字符串.不可用时颜色 = Color.FromArgb(220, 220, 220);
+            全局字符串.背景色 = Color.White;
+            刷新Panel颜色();
+        }
+
         private void 刷新Panel颜色() {
+            控件颜色刷新();
             主题色Panel.FillColor = 全局字符串.主题色;
-            背景色Panel.FillColor = 全局字符串.背景色;
-            次级主题色Panel.FillColor = 全局字符串.次级主题色;
             深级主题色Panel.FillColor = 全局字符串.深级主题色;
+            次级主题色Panel.FillColor = 全局字符串.次级主题色;
             不可用时颜色Panel.FillColor = 全局字符串.不可用时颜色;
+            背景色Panel.FillColor = 全局字符串.背景色;
+
+            主题色粉Box.FillColor = Color.FromArgb(255, 121, 188);
+            主题色黑Box.FillColor = Color.FromArgb(32, 32, 32);
+            主题色白Box.FillColor = Color.White;
+            主题色绿Box.FillColor = Color.FromArgb(0, 204, 0);
+            主题色蓝Box.FillColor = Color.FromArgb(0, 102, 204);
+        }
+
+        private void 控件颜色刷新() {
+            if (IsShown) {
+                foreach (var con in 主界面.主题设置控件) {
+                    con.主题设置();
+                }
+            }
         }
 
         private Point 获取窗体位置(UIButton btn) {

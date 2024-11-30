@@ -91,8 +91,19 @@ public class 文本读写 {
     }
 
     public static 文本[] Json提取(string Json文本, DataRow Json指令row, DataRow 正则指令row = null) {
+        //正则预加载
+        Regex 行过滤正则 = null;
+        Regex 文本过滤正则 = null;
+        if (正则指令row != null) {
+            if (!正则指令row["行过滤正则"].ToString().IsNullOrEmpty()) {
+                行过滤正则 = new Regex(正则指令row["行过滤正则"].ToString());
+            }
+            if (!正则指令row["文本过滤正则"].ToString().IsNullOrEmpty()) {
+                文本过滤正则 = new Regex(正则指令row["文本过滤正则"].ToString());
+            }
+        }
         //指令集提取
-        string[] 正则指令集 = 获取正则指令集(Json指令row);
+        var 正则指令集 = 获取正则指令集(Json指令row);
         //文本提取
         JToken token = null;
         try {
@@ -107,19 +118,22 @@ public class 文本读写 {
             if (reader.TokenType != JsonToken.String || reader.Value == null || reader.Value.ToString().Trim() == "") {
                 continue;
             }
-            foreach (string 正则指令 in 正则指令集) {
-                if (!Regex.IsMatch(reader.Path, 正则指令)) {
+            foreach (var 正则指令 in 正则指令集) {
+                if (!正则指令.IsMatch(reader.Path)) {
                     continue;
                 }
-                var 是否人名 = Regex.Match(reader.Path, 正则指令).Groups["name"].ToString() != "";
+                var 是否人名 = 正则指令.Match(reader.Path).Groups["name"].ToString() != "";
                 var 文本 = new 文本(文本下标, reader.Value.ToString().Trim());
                 if (正则指令row != null) {
-                    foreach (var t in 正则读写.文本过滤正则(文本, 正则指令row)) {
-                        if (是否人名) {
-                            t.文本类型 = 文本类型.人名;
-                            t.人名 = 文本.原文;
+                    var 文本arr = 正则读写.文本过滤正则(文本, 行过滤正则, 文本过滤正则);
+                    if (文本arr != null) {
+                        foreach (var t in 文本arr) {
+                            if (是否人名) {
+                                t.文本类型 = 文本类型.人名;
+                                t.人名 = 文本.原文;
+                            }
+                            res.Add(t);
                         }
-                        res.Add(t);
                     }
                 } else {
                     if (是否人名) {
@@ -135,8 +149,19 @@ public class 文本读写 {
         return res.ToArray();
     }
     public static string Json写入(string Json文本, 文本[] 文本行, DataRow Json指令row, DataRow 正则指令row = null) {
+        //正则预加载
+        Regex 行过滤正则 = null;
+        Regex 文本过滤正则 = null;
+        if (正则指令row != null) {
+            if (!正则指令row["行过滤正则"].ToString().IsNullOrEmpty()) {
+                行过滤正则 = new Regex(正则指令row["行过滤正则"].ToString());
+            }
+            if (!正则指令row["文本过滤正则"].ToString().IsNullOrEmpty()) {
+                文本过滤正则 = new Regex(正则指令row["文本过滤正则"].ToString());
+            }
+        }
         //指令集提取
-        string[] 正则指令集 = 获取正则指令集(Json指令row);
+        var 正则指令集 = 获取正则指令集(Json指令row);
         //写入
         JToken token = null, res = null;
         try {
@@ -152,16 +177,19 @@ public class 文本读写 {
             if (reader.TokenType != JsonToken.String || reader.Value == null || reader.Value.ToString().Trim() == "") {
                 continue;
             }
-            foreach (string 正则指令 in 正则指令集) {
-                if (!Regex.IsMatch(reader.Path, 正则指令)) {
+            foreach (var 正则指令 in 正则指令集) {
+                if (!正则指令.IsMatch(reader.Path)) {
                     continue;
                 }
                 string text = reader.Value.ToString().Trim();
                 var 文本 = new 文本(文本下标, text);
                 if (正则指令row != null) {
-                    foreach (var t in 正则读写.文本过滤正则(文本, 正则指令row)) {
-                        文本 待替换 = 文本行.ElementAtOrDefault(取值下标++);
-                        text = new Regex(Regex.Escape(待替换.原文)).Replace(text, 待替换.译文, 1);
+                    var 文本arr = 正则读写.文本过滤正则(文本, 行过滤正则, 文本过滤正则);
+                    if (文本arr != null) {
+                        foreach (var t in 文本arr) {
+                            文本 待替换 = 文本行.ElementAtOrDefault(取值下标++);
+                            text = new Regex(Regex.Escape(待替换.原文)).Replace(text, 待替换.译文, 1);
+                        }
                     }
                 } else {
                     文本 待替换 = 文本行.ElementAtOrDefault(取值下标++);
@@ -174,16 +202,16 @@ public class 文本读写 {
         }
         return res.ToString();
     }
-    private static string[] 获取正则指令集(DataRow Json指令row) {
-        List<string> list = new List<string>();
+    private static Regex[] 获取正则指令集(DataRow Json指令row) {
+        var list = new List<Regex>();
         foreach (string 指令 in Json指令row["指令集"].ToString().Split('|')) {
             string 正则指令 = 指令正则化(指令);
             try {
-                new Regex(正则指令);
+                var temp = new Regex(正则指令);
+                list.Add(temp);
             } catch (Exception ex) {
                 throw new Exception($"指令【{指令}】不符合要求");
             }
-            list.Add(正则指令);
         }
         return list.ToArray();
     }
@@ -196,6 +224,17 @@ public class 文本读写 {
     }
 
     public static 文本[] Xml提取(string Xml文本, DataRow Xml指令row, DataRow 正则指令row = null) {
+        //正则预加载
+        Regex 行过滤正则 = null;
+        Regex 文本过滤正则 = null;
+        if (正则指令row != null) {
+            if (!正则指令row["行过滤正则"].ToString().IsNullOrEmpty()) {
+                行过滤正则 = new Regex(正则指令row["行过滤正则"].ToString());
+            }
+            if (!正则指令row["文本过滤正则"].ToString().IsNullOrEmpty()) {
+                文本过滤正则 = new Regex(正则指令row["文本过滤正则"].ToString());
+            }
+        }
         //指令集提取
         string[] 指令集 = Xml指令row["指令集"].ToString().Split('|');
         //文本提取
@@ -219,8 +258,11 @@ public class 文本读写 {
                 if (指令集.Contains(node.获取XPath()) && node.InnerText.Trim() != "") {
                     var 文本 = new 文本(文本下标, node.InnerText.Trim());
                     if (正则指令row != null) {
-                        foreach (var t in 正则读写.文本过滤正则(文本, 正则指令row)) {
-                            res.Add(t);
+                        var 文本arr = 正则读写.文本过滤正则(文本, 行过滤正则, 文本过滤正则);
+                        if (文本arr != null) {
+                            foreach (var t in 文本arr) {
+                                res.Add(t);
+                            }
                         }
                     } else {
                         res.Add(文本);
@@ -233,6 +275,17 @@ public class 文本读写 {
         return res.ToArray();
     }
     public static string Xml写入(string Xml文本, 文本[] 文本行, DataRow Xml指令row, DataRow 正则指令row = null) {
+        //正则预加载
+        Regex 行过滤正则 = null;
+        Regex 文本过滤正则 = null;
+        if (正则指令row != null) {
+            if (!正则指令row["行过滤正则"].ToString().IsNullOrEmpty()) {
+                行过滤正则 = new Regex(正则指令row["行过滤正则"].ToString());
+            }
+            if (!正则指令row["文本过滤正则"].ToString().IsNullOrEmpty()) {
+                文本过滤正则 = new Regex(正则指令row["文本过滤正则"].ToString());
+            }
+        }
         //指令集提取
         string[] 指令集 = Xml指令row["指令集"].ToString().Split('|');
         //文本提取
@@ -259,9 +312,12 @@ public class 文本读写 {
                     string text = node.InnerText.Trim();
                     var 文本 = new 文本(文本下标, text);
                     if (正则指令row != null) {
-                        foreach (var t in 正则读写.文本过滤正则(文本, 正则指令row)) {
-                            文本 待替换 = 文本行.ElementAtOrDefault(取值下标++);
-                            text = new Regex(Regex.Escape(待替换.原文)).Replace(text, 待替换.译文, 1);
+                        var 文本arr = 正则读写.文本过滤正则(文本, 行过滤正则, 文本过滤正则);
+                        if (文本arr != null) {
+                            foreach (var t in 文本arr) {
+                                文本 待替换 = 文本行.ElementAtOrDefault(取值下标++);
+                                text = new Regex(Regex.Escape(待替换.原文)).Replace(text, 待替换.译文, 1);
+                            }
                         }
                     } else {
                         文本 待替换 = 文本行.ElementAtOrDefault(取值下标++);

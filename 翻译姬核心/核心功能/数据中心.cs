@@ -59,7 +59,7 @@ public class 文件结构 {
         if (rows.Length > 0) {
             文本替换.替换(有效文本, 替换类型.原文, rows.CopyToDataTable());
         }
-        有效文本.对话检索();
+        //有效文本.对话检索();
     }
 
     public void 机翻前数据处理() {

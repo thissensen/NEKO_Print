@@ -1469,6 +1469,23 @@ namespace Sunny.UI
         }
 
         /// <summary>
+        /// 圆角角度
+        /// </summary>
+        /*[Description("圆角角度"), Category("SunnyUI")]
+        [DefaultValue(5)]
+        public int Radius {
+            get => radius;
+            set {
+                if (radius != value) {
+                    radius = Math.Max(0, value);
+                    SetRadius();
+                    Invalidate();
+                }
+            }
+        }
+        private int radius = 5;*/
+
+        /// <summary>
         /// 是否显示阴影
         /// </summary>
         private bool _showShadow;

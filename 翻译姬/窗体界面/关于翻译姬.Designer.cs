@@ -53,7 +53,14 @@
             this.本机数据Btn = new Sunny.UI.UIButton();
             this.导出数据Btn = new Sunny.UI.UIButton();
             this.使用指定数据启动翻译姬Btn = new Sunny.UI.UIButton();
+            this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.主题色白Box = new Sunny.UI.UIPanel();
+            this.主题色蓝Box = new Sunny.UI.UIPanel();
+            this.主题色绿Box = new Sunny.UI.UIPanel();
+            this.主题色黑Box = new Sunny.UI.UIPanel();
+            this.主题色粉Box = new Sunny.UI.UIPanel();
             this.主题设置Box.SuspendLayout();
+            this.uiGroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // 主题色Btn
@@ -136,7 +143,7 @@
             // 
             this.uiLabel3.AutoSize = true;
             this.uiLabel3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel3.Location = new System.Drawing.Point(55, 93);
+            this.uiLabel3.Location = new System.Drawing.Point(55, 246);
             this.uiLabel3.Name = "uiLabel3";
             this.uiLabel3.Size = new System.Drawing.Size(58, 21);
             this.uiLabel3.TabIndex = 8;
@@ -146,7 +153,7 @@
             // 背景色Panel
             // 
             this.背景色Panel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.背景色Panel.Location = new System.Drawing.Point(124, 86);
+            this.背景色Panel.Location = new System.Drawing.Point(124, 239);
             this.背景色Panel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.背景色Panel.MinimumSize = new System.Drawing.Size(1, 1);
             this.背景色Panel.Name = "背景色Panel";
@@ -160,7 +167,7 @@
             // 
             this.背景色Btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.背景色Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.背景色Btn.Location = new System.Drawing.Point(241, 86);
+            this.背景色Btn.Location = new System.Drawing.Point(241, 239);
             this.背景色Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.背景色Btn.Name = "背景色Btn";
             this.背景色Btn.Radius = 25;
@@ -174,7 +181,7 @@
             // 
             this.uiLabel4.AutoSize = true;
             this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel4.Location = new System.Drawing.Point(23, 195);
+            this.uiLabel4.Location = new System.Drawing.Point(23, 93);
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.Size = new System.Drawing.Size(90, 21);
             this.uiLabel4.TabIndex = 11;
@@ -184,7 +191,7 @@
             // 深级主题色Panel
             // 
             this.深级主题色Panel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.深级主题色Panel.Location = new System.Drawing.Point(124, 188);
+            this.深级主题色Panel.Location = new System.Drawing.Point(124, 86);
             this.深级主题色Panel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.深级主题色Panel.MinimumSize = new System.Drawing.Size(1, 1);
             this.深级主题色Panel.Name = "深级主题色Panel";
@@ -198,7 +205,7 @@
             // 
             this.深级主题色Btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.深级主题色Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.深级主题色Btn.Location = new System.Drawing.Point(241, 188);
+            this.深级主题色Btn.Location = new System.Drawing.Point(241, 86);
             this.深级主题色Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.深级主题色Btn.Name = "深级主题色Btn";
             this.深级主题色Btn.Radius = 25;
@@ -212,7 +219,7 @@
             // 
             this.uiLabel5.AutoSize = true;
             this.uiLabel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel5.Location = new System.Drawing.Point(7, 246);
+            this.uiLabel5.Location = new System.Drawing.Point(7, 195);
             this.uiLabel5.Name = "uiLabel5";
             this.uiLabel5.Size = new System.Drawing.Size(106, 21);
             this.uiLabel5.TabIndex = 14;
@@ -222,7 +229,7 @@
             // 不可用时颜色Panel
             // 
             this.不可用时颜色Panel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.不可用时颜色Panel.Location = new System.Drawing.Point(124, 239);
+            this.不可用时颜色Panel.Location = new System.Drawing.Point(124, 188);
             this.不可用时颜色Panel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.不可用时颜色Panel.MinimumSize = new System.Drawing.Size(1, 1);
             this.不可用时颜色Panel.Name = "不可用时颜色Panel";
@@ -236,7 +243,7 @@
             // 
             this.不可用时颜色Btn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.不可用时颜色Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.不可用时颜色Btn.Location = new System.Drawing.Point(241, 239);
+            this.不可用时颜色Btn.Location = new System.Drawing.Point(241, 188);
             this.不可用时颜色Btn.MinimumSize = new System.Drawing.Size(1, 1);
             this.不可用时颜色Btn.Name = "不可用时颜色Btn";
             this.不可用时颜色Btn.Radius = 25;
@@ -264,14 +271,14 @@
             this.主题设置Box.Controls.Add(this.uiLabel2);
             this.主题设置Box.Controls.Add(this.深级主题色Btn);
             this.主题设置Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.主题设置Box.Location = new System.Drawing.Point(13, 14);
+            this.主题设置Box.Location = new System.Drawing.Point(13, 114);
             this.主题设置Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.主题设置Box.MinimumSize = new System.Drawing.Size(1, 1);
             this.主题设置Box.Name = "主题设置Box";
             this.主题设置Box.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.主题设置Box.Size = new System.Drawing.Size(337, 292);
             this.主题设置Box.TabIndex = 15;
-            this.主题设置Box.Text = "主题设置";
+            this.主题设置Box.Text = "主题自定义";
             this.主题设置Box.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // 检查更新Btn
@@ -468,10 +475,99 @@
             this.使用指定数据启动翻译姬Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.使用指定数据启动翻译姬Btn.Click += new System.EventHandler(this.使用指定数据启动翻译姬Btn_Click);
             // 
+            // uiGroupBox1
+            // 
+            this.uiGroupBox1.Controls.Add(this.主题色白Box);
+            this.uiGroupBox1.Controls.Add(this.主题色蓝Box);
+            this.uiGroupBox1.Controls.Add(this.主题色绿Box);
+            this.uiGroupBox1.Controls.Add(this.主题色黑Box);
+            this.uiGroupBox1.Controls.Add(this.主题色粉Box);
+            this.uiGroupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiGroupBox1.Location = new System.Drawing.Point(13, 14);
+            this.uiGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiGroupBox1.Name = "uiGroupBox1";
+            this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
+            this.uiGroupBox1.Size = new System.Drawing.Size(337, 90);
+            this.uiGroupBox1.TabIndex = 16;
+            this.uiGroupBox1.Text = "主题切换";
+            this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // 主题色白Box
+            // 
+            this.主题色白Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.主题色白Box.Location = new System.Drawing.Point(141, 37);
+            this.主题色白Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.主题色白Box.MinimumSize = new System.Drawing.Size(1, 1);
+            this.主题色白Box.Name = "主题色白Box";
+            this.主题色白Box.Radius = 15;
+            this.主题色白Box.Size = new System.Drawing.Size(54, 35);
+            this.主题色白Box.TabIndex = 3;
+            this.主题色白Box.Text = null;
+            this.主题色白Box.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.主题色白Box.Click += new System.EventHandler(this.主题色白Box_Click);
+            // 
+            // 主题色蓝Box
+            // 
+            this.主题色蓝Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.主题色蓝Box.Location = new System.Drawing.Point(271, 37);
+            this.主题色蓝Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.主题色蓝Box.MinimumSize = new System.Drawing.Size(1, 1);
+            this.主题色蓝Box.Name = "主题色蓝Box";
+            this.主题色蓝Box.Radius = 15;
+            this.主题色蓝Box.Size = new System.Drawing.Size(54, 35);
+            this.主题色蓝Box.TabIndex = 4;
+            this.主题色蓝Box.Text = null;
+            this.主题色蓝Box.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.主题色蓝Box.Click += new System.EventHandler(this.主题色蓝Box_Click);
+            // 
+            // 主题色绿Box
+            // 
+            this.主题色绿Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.主题色绿Box.Location = new System.Drawing.Point(206, 37);
+            this.主题色绿Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.主题色绿Box.MinimumSize = new System.Drawing.Size(1, 1);
+            this.主题色绿Box.Name = "主题色绿Box";
+            this.主题色绿Box.Radius = 15;
+            this.主题色绿Box.Size = new System.Drawing.Size(54, 35);
+            this.主题色绿Box.TabIndex = 3;
+            this.主题色绿Box.Text = null;
+            this.主题色绿Box.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.主题色绿Box.Click += new System.EventHandler(this.主题色绿Box_Click);
+            // 
+            // 主题色黑Box
+            // 
+            this.主题色黑Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.主题色黑Box.Location = new System.Drawing.Point(76, 37);
+            this.主题色黑Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.主题色黑Box.MinimumSize = new System.Drawing.Size(1, 1);
+            this.主题色黑Box.Name = "主题色黑Box";
+            this.主题色黑Box.Radius = 15;
+            this.主题色黑Box.Size = new System.Drawing.Size(54, 35);
+            this.主题色黑Box.TabIndex = 2;
+            this.主题色黑Box.Text = null;
+            this.主题色黑Box.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.主题色黑Box.Click += new System.EventHandler(this.主题色黑Box_Click);
+            // 
+            // 主题色粉Box
+            // 
+            this.主题色粉Box.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.主题色粉Box.Location = new System.Drawing.Point(11, 37);
+            this.主题色粉Box.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.主题色粉Box.MinimumSize = new System.Drawing.Size(1, 1);
+            this.主题色粉Box.Name = "主题色粉Box";
+            this.主题色粉Box.Radius = 15;
+            this.主题色粉Box.Size = new System.Drawing.Size(54, 35);
+            this.主题色粉Box.TabIndex = 1;
+            this.主题色粉Box.Text = null;
+            this.主题色粉Box.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.主题色粉Box.Click += new System.EventHandler(this.主题色粉Box_Click);
+            // 
             // 关于翻译姬
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(987, 618);
+            this.Controls.Add(this.uiGroupBox1);
             this.Controls.Add(this.使用指定数据启动翻译姬Btn);
             this.Controls.Add(this.导出数据Btn);
             this.Controls.Add(this.本机数据Btn);
@@ -493,6 +589,7 @@
             this.Shown += new System.EventHandler(this.关于翻译姬_Shown);
             this.主题设置Box.ResumeLayout(false);
             this.主题设置Box.PerformLayout();
+            this.uiGroupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -530,5 +627,11 @@
         private Sunny.UI.UIButton 本机数据Btn;
         private Sunny.UI.UIButton 导出数据Btn;
         private Sunny.UI.UIButton 使用指定数据启动翻译姬Btn;
+        private Sunny.UI.UIGroupBox uiGroupBox1;
+        private Sunny.UI.UIPanel 主题色粉Box;
+        private Sunny.UI.UIPanel 主题色黑Box;
+        private Sunny.UI.UIPanel 主题色蓝Box;
+        private Sunny.UI.UIPanel 主题色绿Box;
+        private Sunny.UI.UIPanel 主题色白Box;
     }
 }

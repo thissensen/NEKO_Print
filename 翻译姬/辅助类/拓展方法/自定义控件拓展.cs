@@ -52,20 +52,7 @@ namespace 翻译姬 {
         public static void DPI自适应(this 自定义Page page, Dictionary<string, Control> Name_Control) {
             DPI设置(page, Name_Control);
         }
-        public static void 主题设置(this 自定义Page page) {
-            page.AutoScaleMode = AutoScaleMode.None;
-            page.BackColor = 全局字符串.背景色;
-            主题设置(page.Name_Control);
-        }
-        public static void 主题设置(this 自定义Form form) {
-            form.AutoScaleMode = AutoScaleMode.None;
-            form.BackColor = 全局字符串.背景色;
-            form.RectColor = 全局字符串.主题色;
-            form.TitleColor = 全局字符串.次级主题色;//标题背景色
-            form.TitleForeColor = 全局字符串.主题色;//标题字颜色
-            form.ControlBoxForeColor = 全局字符串.主题色;//按钮字颜色
-            主题设置(form.Name_Control);
-        }
+
         private static void 主题设置(Dictionary<string, Control> Name_Control) {
             /*
              * 其他设置点：列控件Switch、自定义Swutch、主界面、文本翻译
@@ -75,9 +62,29 @@ namespace 翻译姬 {
             }
         }
         public static void 主题设置(this Control con) {
+            if (!主界面.主题设置控件.Contains(con)) {
+                主界面.主题设置控件.Add(con);
+            }
+            if (con.IsDisposed) {
+                return;
+            }
+            //con.Disposed += (_, _) => 主界面.主题设置控件.Remove(con);
             //设置全局字体
             float 字体大小 = con.Font.Size;
             con.Font = new Font(全局字符串.主字体, 字体大小);
+            if (con is 自定义Page page) {
+                page.AutoScaleMode = AutoScaleMode.None;
+                page.BackColor = 全局字符串.背景色;
+                主题设置(page.Name_Control);
+            } else if (con is 自定义Form form) {
+                form.AutoScaleMode = AutoScaleMode.None;
+                form.BackColor = 全局字符串.背景色;
+                form.RectColor = 全局字符串.主题色;
+                form.TitleColor = 全局字符串.次级主题色;//标题背景色
+                form.TitleForeColor = 全局字符串.主题色;//标题字颜色
+                form.ControlBoxForeColor = 全局字符串.主题色;//按钮字颜色
+                主题设置(form.Name_Control);
+            }
             if (con is UIUserControl userControl) {
                 userControl.BackColor = 全局字符串.背景色;
                 userControl.FillColor = 全局字符串.背景色;
@@ -221,11 +228,11 @@ namespace 翻译姬 {
             }
             //UIButton子类
             if (con is UISymbolButton symbolButton) {//SymbolButton的额外设置
-                symbolButton.SymbolColor = 全局字符串.主题色;
-                symbolButton.SymbolHoverColor = 全局字符串.主题色;
-                symbolButton.SymbolPressColor = 全局字符串.主题色;
+                symbolButton.SymbolColor = 全局字符串.深级主题色;
+                symbolButton.SymbolHoverColor = 全局字符串.主题色;//鼠标移上
+                symbolButton.SymbolPressColor = 全局字符串.深级主题色;//鼠标按下
                 symbolButton.SymbolSelectedColor = 全局字符串.主题色;
-
+                symbolButton.ForeColor = 全局字符串.深级主题色;
             }
             //UIPanel子类
             if (con is UITextBox textBox) {
