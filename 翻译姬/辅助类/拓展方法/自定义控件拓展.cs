@@ -228,11 +228,11 @@ namespace 翻译姬 {
             }
             //UIButton子类
             if (con is UISymbolButton symbolButton) {//SymbolButton的额外设置
-                symbolButton.SymbolColor = 全局字符串.深级主题色;
-                symbolButton.SymbolHoverColor = 全局字符串.主题色;//鼠标移上
+                symbolButton.SymbolColor = 全局字符串.主题色;
+                symbolButton.SymbolHoverColor = 全局字符串.次级主题色;//鼠标移上
                 symbolButton.SymbolPressColor = 全局字符串.深级主题色;//鼠标按下
-                symbolButton.SymbolSelectedColor = 全局字符串.主题色;
-                symbolButton.ForeColor = 全局字符串.深级主题色;
+                symbolButton.SymbolSelectedColor = 全局字符串.深级主题色;
+                symbolButton.ForeColor = 全局字符串.主题色;
             }
             //UIPanel子类
             if (con is UITextBox textBox) {

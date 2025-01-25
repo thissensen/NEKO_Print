@@ -13,13 +13,12 @@ using System.Windows.Forms;
 
 namespace 翻译姬 {
     /*
-     * 1、修复了俄语机翻的BUG
-     * 2、修复了提示窗口容易被盖在后面导致主界面异常灰色的问题
-     * 3、GPT增加退化检测(重复输出文本)
-     * 4、大幅优化文本加载读写速度
-     * 5、使json/xml支持行过滤正则
-     * 6、新增5种可快捷切换的主题
-     * 7、GPT新增请求参数：frequency_penalty、temperature、top_p的设置
+     * 1、修复了部分按钮颜色显示的不一致性
+     * 2、更新了KR引擎的默认两个正则
+     * 3、GPT机翻的过程中，进入数据处理页面发现译文处人名未显示问题
+     * 4、优化常规GPT机翻的错行问题，强化了提取功能
+     * 5、GPT设置添加默认语境按钮，以免手动填写的劳累
+     * 6、正则、Json、Xml、替换列表的设置页面添加Shift+C、V的复制粘贴功能
      */
     internal static class Program {
 

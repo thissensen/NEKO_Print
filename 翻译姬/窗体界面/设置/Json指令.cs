@@ -61,6 +61,40 @@ namespace 翻译姬 {
             筛选Box.Text = "";
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+            try {
+                if (全局字符串.键盘按下按钮组.Count == 2 &&
+                    全局字符串.键盘按下按钮组.Contains(Keys.LShiftKey) &&
+                    全局字符串.键盘按下按钮组.Contains(Keys.C)) {//复制
+
+                    Focus();
+                    查询表格.EndEdit();
+                    var row = 查询表格.获取所在行();
+                    if (row == null) {
+                        消息框帮助.轻便消息("光标选中具体行再复制", 查询表格, UINotifierType.WARNING);
+                    } else {
+                        Clipboard.SetText(配置文件操作.常规写出(row));
+                        消息框帮助.轻便消息($"已复制[{row["名称"]}]", 查询表格);
+                    }
+                } else if (全局字符串.键盘按下按钮组.Count == 2 &&
+                    全局字符串.键盘按下按钮组.Contains(Keys.LShiftKey) &&
+                    全局字符串.键盘按下按钮组.Contains(Keys.V)) {//粘贴
+
+                    Focus();
+                    查询表格.EndEdit();
+                    string text = Clipboard.GetText(TextDataFormat.Text);
+                    string[] arr = text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    var rows = 配置文件操作.常规读取(查询表格.DataTable, arr);
+                    if (rows.Length > 0) {
+                        消息框帮助.轻便消息($"已读取[{string.Join(",", rows.Select(r => r["名称"]))}]", 查询表格);
+                    }
+                }
+            } catch (Exception ex) {
+                MessageBoxEx.Show(ex.Message);
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private bool 表格增删改_新添前行验证(DataRow row) {
             try {
                 行验证(row);

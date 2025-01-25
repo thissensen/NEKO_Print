@@ -24,7 +24,7 @@ namespace 翻译姬 {
         }
         private static string _缓存数据路径;
 
-        public static readonly string 软件存储目录 = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\翻译姬\";
+        public static string 软件存储目录 = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\翻译姬\";
         public static string 数据库路径 = 软件存储目录 + "翻译姬数据库.db";
         public static readonly string GPT词表路径 = 软件存储目录 + "cl100k_base.tiktoken";
 

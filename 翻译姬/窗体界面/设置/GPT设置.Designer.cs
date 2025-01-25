@@ -80,6 +80,7 @@ partial class GPT设置 {
             this.Sakura机翻Switch = new 翻译姬.自定义Switch();
             this.Sakura和简易模式按钮判定Timer = new System.Windows.Forms.Timer(this.components);
             this.GPT请求参数Btn = new Sunny.UI.UIButton();
+            this.默认语境Btn = new Sunny.UI.UIButton();
             this.SuspendLayout();
             // 
             // uiLabel4
@@ -807,10 +808,24 @@ partial class GPT设置 {
             this.GPT请求参数Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.GPT请求参数Btn.Click += new System.EventHandler(this.GPT请求参数Btn_Click);
             // 
+            // 默认语境Btn
+            // 
+            this.默认语境Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.默认语境Btn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.默认语境Btn.Location = new System.Drawing.Point(474, 49);
+            this.默认语境Btn.MinimumSize = new System.Drawing.Size(1, 1);
+            this.默认语境Btn.Name = "默认语境Btn";
+            this.默认语境Btn.Size = new System.Drawing.Size(105, 35);
+            this.默认语境Btn.TabIndex = 168;
+            this.默认语境Btn.Text = "默认语境";
+            this.默认语境Btn.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.默认语境Btn.Click += new System.EventHandler(this.默认语境Btn_Click);
+            // 
             // GPT设置
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(987, 618);
+            this.Controls.Add(this.默认语境Btn);
             this.Controls.Add(this.GPT请求参数Btn);
             this.Controls.Add(this.uiLabel19);
             this.Controls.Add(this.Sakura机翻Switch);
@@ -932,4 +947,5 @@ partial class GPT设置 {
     private 自定义Switch Sakura机翻Switch;
     private System.Windows.Forms.Timer Sakura和简易模式按钮判定Timer;
     private Sunny.UI.UIButton GPT请求参数Btn;
+    private Sunny.UI.UIButton 默认语境Btn;
 }

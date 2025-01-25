@@ -103,7 +103,7 @@ namespace 翻译姬 {
                     } else {
                         if (是否正则) {
                             try {
-                                Regex.IsMatch("", line);
+                                Regex.IsMatch("", arr[1]);
                             } catch { throw new Exception($"第{i + 1}行不符合正则规则"); }
                         }
                         dic.Add(arr[0], arr[1]);

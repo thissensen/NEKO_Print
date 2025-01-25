@@ -29,7 +29,7 @@ public class 文件结构 {
     private string _路径;
     public string 相对路径;
     public string 文件名 => new FileInfo(路径).Name;
-    public 读取方式 读取方式;
+    public 读取方式 读取方式;//也用作于标明文件格式
 
     public string[] 原文本行 = new string[0];//普通文本的全文本
     public string Json文本;

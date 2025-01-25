@@ -99,7 +99,7 @@ public class Src_Dst调用 : GPT数据处理接口 {
         text = Regex.Replace(text, @"[\r\n]", "");//去除莫名的换行
         text = Regex.Replace(text, @"`+$", "");//去除结尾的`
         text = Regex.Replace(text, @"^\[|\]$", "");//删除左右[]
-        text = Regex.Replace(text, @"(?<=""|,)}?\]?\s*?[，,]?\s*?\[?{", "}\r\n{");//修正}, {的异常
+        text = Regex.Replace(text, @"(?:(?<=""|,)}?|})\s*?[，,]?\s*?{", "}\r\n{");//修正}, {的异常
         if (!text.EndsWith("}")) {
             text += "}";
         }
@@ -107,33 +107,30 @@ public class Src_Dst调用 : GPT数据处理接口 {
         try {
             string[] arr = text.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
             string 取值目标 = 是否润色 ? "newdst" : "dst";
-            var reg_dst = new Regex(@$".*?(?:""id"".+?(?'id'\d+))?.*?""{取值目标}"".*?""(?'dst'.*?)[""}}]");
-            var reg_src = new Regex(@".*?(?:""id"".+?(?'id'\d+))?.*?""src"".*?""(?'src'.*?)[""}]");
+            var reg_id = new Regex(@".*?""id"".+?(?'id'\d{1,8}).*");
+            var reg_dst = new Regex(@$".*""{取值目标}"".*?""(?'dst'.*?)[""}}]");
+            var reg_src = new Regex(@".*""src"".*?""(?'src'.*?)[""}]");
             int num = 0;
             foreach (var s in arr) {
                 GroupCollection g = null;
                 int id = -1;
+                string 正则提取id = reg_id.Match(s).Groups["id"].ToString();
+                if (正则提取id != "") {
+                    id = int.Parse(正则提取id);
+                } else {
+                    id = num++;
+                }
                 string dst = null;
                 if (reg_dst.IsMatch(s)) {
                     g = reg_dst.Match(s).Groups;
                     dst = g["dst"].ToString().Trim();
                     if (dst != "") {
-                        if (g["id"].ToString() == "") {
-                            id = num++;
-                        } else {
-                            id = int.Parse(g["id"].ToString());
-                        }
                         goto 返回值提取成功;
                     }
                     dst = null;
                 }
-                //src提取解析
+                //dst没提取到，src提取
                 g = reg_src.Match(s).Groups;
-                if (g["id"].ToString() == "") {
-                    id = num++;
-                } else {
-                    id = int.Parse(g["id"].ToString());
-                }
                 var src = g["src"].ToString().Trim();
                 if (src != "" && !Util.漏翻检测(src)) {
                     dst = src;

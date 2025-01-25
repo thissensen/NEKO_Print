@@ -234,6 +234,9 @@ namespace 翻译姬 {
         }
 
         private void 时间校准Btn_Click(object sender, EventArgs e) {
+            if (!MessageBoxEx.Show("是否校准系统时间为百度时间？", "提示", 提示窗按钮.确认取消)) {
+                return;
+            }
             string str = GetNetDateTime();
             if (str.IsNullOrEmpty()) {
                 消息框帮助.轻便消息("校准失败", this);

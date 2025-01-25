@@ -19,6 +19,11 @@ namespace 翻译姬 {
     public static class 全局字符串 {
 
         static 全局字符串() {
+            //安装键盘钩子
+            全局键盘监听.KeyDownEvent += (_, e) => 键盘按下按钮组.Add(e.KeyCode);
+            全局键盘监听.KeyUpEvent += (_, e) => 键盘按下按钮组.Remove(e.KeyCode);
+            全局键盘监听.Start();
+            //设置字体
             byte[] 字体 = Resources.MaoKenZhuYuanTi_MaokenZhuyuanTi_2;
             PrivateFontCollection pfc = new PrivateFontCollection();
             pfc.AddMemoryFont(字体.ToIntPtr(), 字体.Length);
@@ -31,6 +36,10 @@ namespace 翻译姬 {
             //不可用时颜色 = Color.Gray;
 #endif
         }
+
+        public static 键盘Hook 全局键盘监听 = new 键盘Hook();
+        public static Keys 键盘单个按下按钮 => 键盘按下按钮组.Count == 1 ? 键盘按下按钮组.Single() : Keys.None;
+        public static List<Keys> 键盘按下按钮组 = new List<Keys>();
 
         public static FontFamily 主字体 { get; set; }
         public static Color 主题色 {

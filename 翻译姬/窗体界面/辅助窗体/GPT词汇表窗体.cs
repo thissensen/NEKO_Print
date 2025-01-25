@@ -32,30 +32,7 @@ public partial class GPT词汇表窗体 : 自定义Form {
             if (path == null) {
                 return;
             }
-            using FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, false);
-            using StreamReader sr = new StreamReader(fs, Encoding.UTF8);
-            string t = sr.ReadLine();
-            var dt = new DataTable();
-            dt.Columns.Add("原文");
-            dt.Columns.Add("译文");
-            dt.Columns.Add("备注");
-            while ((t = sr.ReadLine()) != null) {
-                if (t.Trim() == "") {
-                    continue;
-                }
-                var arr = t.Split('\t');
-                if (arr.Length < 2) {
-                    throw new Exception("csv格式异常，请从[数据处理]界面导出后修改再导入");
-                }
-                if (arr[0].ToString().Length == 0) {
-                    throw new Exception("原文不能为空");
-                }
-                var dr = dt.NewRow();
-                dr["原文"] = arr[0];
-                dr["译文"] = arr[1];
-                dr["备注"] = string.Join("\t", arr.Skip(2));
-                dt.Rows.Add(dr);
-            }
+            var dt = Util.词汇表读取(path);
             词汇表.DataTable = dt;
             GPT设置数据.GPT词汇表 = dt;
         } catch (Exception ex) {

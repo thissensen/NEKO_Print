@@ -36,6 +36,13 @@ namespace 翻译姬 {
             查询表格.禁用排序();
             待机翻Box.TextBox.ShowScrollBar = true;
             机翻后Box.TextBox.ShowScrollBar = true;
+            提示内容Box.Text = """
+                执行顺序：先【提取类正则】，提取不到则【行过滤正则】
+                1、提取型正则使用()提取
+                2、提取型正则(?'name'xxx)用于标记人名，人名不会被机翻
+                3、文本过滤正则用于文本切割
+                4、按左Shift+C、V可进行专属复制粘贴
+                """;
         }
 
         private void 正则设置_Page被选中() {
@@ -51,6 +58,48 @@ namespace 翻译姬 {
 
         private void 正则设置_Shown(object sender, EventArgs e) {
             查询表格.CurrentCell = null;
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+            try {
+                if (全局字符串.键盘按下按钮组.Count == 2 &&
+                    全局字符串.键盘按下按钮组.Contains(Keys.LShiftKey) &&
+                    全局字符串.键盘按下按钮组.Contains(Keys.C)) {//复制
+
+                    Focus();
+                    查询表格.EndEdit();
+                    var row = 查询表格.获取所在行();
+                    if (row == null) {
+                        消息框帮助.轻便消息("光标选中具体行再复制", 查询表格, UINotifierType.WARNING);
+                    } else {
+                        var dr = 查询表格.DataTable.NewRow();
+                        dr.ItemArray = row.ItemArray;
+                        foreach (DataColumn col in 查询表格.DataTable.Columns) {
+                            if (col.ColumnName.ToLower() == "id") {
+                                continue;
+                            }
+                            dr[col.ColumnName] = string.Join(Environment.NewLine, Util.正则分割(dr[col.ColumnName].ToString()));
+                        }
+                        Clipboard.SetText(配置文件操作.常规写出(dr));
+                        消息框帮助.轻便消息($"已复制[{row["正则名称"]}]", 查询表格);
+                    }
+                } else if (全局字符串.键盘按下按钮组.Count == 2 &&
+                    全局字符串.键盘按下按钮组.Contains(Keys.LShiftKey) &&
+                    全局字符串.键盘按下按钮组.Contains(Keys.V)) {//粘贴
+
+                    Focus();
+                    查询表格.EndEdit();
+                    string text = Clipboard.GetText(TextDataFormat.Text);
+                    string[] arr = text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    var rows = 配置文件操作.常规读取(查询表格.DataTable, arr, "正则名称");
+                    if (rows.Length > 0) {
+                        消息框帮助.轻便消息($"已读取[{string.Join(",", rows.Select(r => r["正则名称"]))}]", 查询表格);
+                    }
+                }
+            } catch (Exception ex) {
+                MessageBoxEx.Show(ex.Message);
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private bool 表格增删改_新添前行验证(DataRow row) {

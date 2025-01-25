@@ -113,11 +113,21 @@ namespace 翻译姬 {
         * 获取所在多行，获取所在多行下标
         */
         #region 获取数据(内部数据DataTable)
-        public static DataRow 获取行(this DataGridView view, int index) {
-            if (index > view.Rows.Count - 1) {
-                return null;
+        public static int 获取行所在下标(this DataGridView view, DataRow row) {
+            for (int i = 0; i < view.Rows.Count; i++) {
+                if (view.获取行(i) == row) {
+                    return i;
+                }
             }
-            return (view.Rows[index].DataBoundItem as DataRowView).Row;
+            return -1;
+        }
+        public static DataRow 获取行(this DataGridView view, int index) {
+            try {
+                if (index > view.Rows.Count - 1) {
+                    return null;
+                }
+                return (view.Rows[index].DataBoundItem as DataRowView)?.Row;
+            } catch { return null; }
         }
         public static DataRow 获取所选行(this DataGridView view) {
             return 获取所选多行(view)?.ElementAtOrDefault(0);
@@ -160,8 +170,10 @@ namespace 翻译姬 {
             if (view.SelectedCells.Count == 0) {
                 return null;
             }
-            DataGridViewCell cell = view.SelectedCells[0];
-            return (view.Rows[cell.RowIndex].DataBoundItem as DataRowView).Row;
+            try {
+                DataGridViewCell cell = view.SelectedCells[0];
+                return (view.Rows[cell.RowIndex].DataBoundItem as DataRowView)?.Row;
+            } catch { return null; }
         }
         public static int 获取所在行下标(this DataGridView view) {
             if (view.SelectedCells.Count == 0) {
@@ -169,6 +181,13 @@ namespace 翻译姬 {
             }
             DataGridViewCell cell = view.SelectedCells[0];
             return cell.RowIndex;
+        }
+        public static int 获取所在列下标(this DataGridView view) {
+            if (view.SelectedCells.Count == 0) {
+                return -1;
+            }
+            DataGridViewCell cell = view.SelectedCells[0];
+            return cell.ColumnIndex;
         }
         public static IEnumerable<DataRow> 获取所在多行(this DataGridView view) {
             DataGridViewSelectedCellCollection cells = view.SelectedCells;

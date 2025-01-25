@@ -63,6 +63,13 @@ public partial class GPT设置 : 自定义Page {
         [Glossary]
         """;
 
+    private string 简易_Prompt = """
+        你是一个轻小说翻译模型，可以流畅通顺地以日本轻小说的风格将日文翻译成简体中文，并联系上下文正确使用人称代词，注意不要擅自添加原文中没有的代词，也不要擅自增加或减少换行，按原有json格式返回
+        根据以下术语表：
+        [Glossary]
+        将下面的日文文本根据上述术语表的对应关系和注释翻译成中文
+        """;
+
     private string Sakura_Prompt = """
         你是一个轻小说翻译模型，可以流畅通顺地以日本轻小说的风格将日文翻译成简体中文，并联系上下文正确使用人称代词，注意不要擅自添加原文中没有的代词，也不要擅自增加或减少换行
         根据以下术语表：
@@ -305,5 +312,19 @@ public partial class GPT设置 : 自定义Page {
     private void GPT请求参数Btn_Click(object sender, EventArgs e) {
         var f = new GPT请求参数();
         f.ShowDialog();
+    }
+
+    private void 默认语境Btn_Click(object sender, EventArgs e) {
+        if (!MessageBoxEx.Show("是否使用默认语境替换现有语境？", "提示", 提示窗按钮.确认取消)) {
+            return;
+        }
+        if (Sakura机翻Switch.Active) {
+            语境Box.Text = Sakura_Prompt;
+        } else if (简易模式Switch.Active) {
+            语境Box.Text = 简易_Prompt;
+        } else {
+            语境Box.Text = Prompt;
+            润色语境Box.Text = 润色Prompt;
+        }
     }
 }
