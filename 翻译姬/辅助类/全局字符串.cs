@@ -20,9 +20,13 @@ namespace 翻译姬 {
 
         static 全局字符串() {
             //安装键盘钩子
-            全局键盘监听.KeyDownEvent += (_, e) => 键盘按下按钮组.Add(e.KeyCode);
-            全局键盘监听.KeyUpEvent += (_, e) => 键盘按下按钮组.Remove(e.KeyCode);
-            全局键盘监听.Start();
+            try {
+                全局键盘监听.KeyDownEvent += (_, e) => 键盘按下按钮组.Add(e.KeyCode);
+                全局键盘监听.KeyUpEvent += (_, e) => 键盘按下按钮组.Remove(e.KeyCode);
+                全局键盘监听.Start();
+            } catch (Exception ex) {
+                MessageBoxEx.Show("键盘钩子加载失败");
+            }
             //设置字体
             byte[] 字体 = Resources.MaoKenZhuYuanTi_MaokenZhuyuanTi_2;
             PrivateFontCollection pfc = new PrivateFontCollection();
