@@ -101,6 +101,135 @@ namespace 翻译姬 {
             HorizontalScrollBar.VisibleChanged += HorizontalScrollBar_VisibleChanged;
         }
 
+        protected override void OnCellPainting(DataGridViewCellPaintingEventArgs e) {
+            if (DesignMode) {
+                base.OnCellPainting(e);
+                return;
+            }
+            //ComboBox列的单元格绘制
+            if (e.RowIndex > -1 && e.ColumnIndex > -1) {
+                //绘制string[]类型
+                var 列名 = Columns[e.ColumnIndex].Name;
+                var 数据row = this.获取行(e.RowIndex);
+                if (数据row != null && 数据row.Table.Columns.Contains(列名) && 数据row[列名] is string[] arr) {
+                    单元格覆盖绘制($"[ {arr.Join(", ", "\"", "\"")}]", e);//模拟JArray的默认显示
+                } else {
+                    var 内容 = Rows[e.RowIndex].Cells[e.ColumnIndex].FormattedValue?.ToString() ?? "";
+                    单元格覆盖绘制(内容, e);
+                }
+            } else {
+                单元格覆盖绘制(e.FormattedValue?.ToString() ?? "", e);
+            }
+            //e.Handled = true;
+            base.OnCellPainting(e);
+        }
+        private void 单元格覆盖绘制(string 内容, DataGridViewCellPaintingEventArgs e) {
+            //特殊类型不绘制
+            if (e.ColumnIndex > -1) {
+                if (Columns[e.ColumnIndex] is DataGridViewCheckBoxColumn ||
+                    Columns[e.ColumnIndex] is DataGridViewButtonColumn) {
+                    return;
+                }
+            }
+            /*if (e.RowIndex != -1 && 列名_列控件.ContainsKey(Columns[e.ColumnIndex].Name)) {
+                内容 = "";
+            }*/
+            SizeF 文字大小F = e.Graphics.MeasureString(内容, e.CellStyle.Font);
+            var 文字大小 = new Size((int)Math.Ceiling(文字大小F.Width), (int)Math.Ceiling(文字大小F.Height));
+            if (文字大小.Width > e.CellBounds.Width || 文字大小.Height > e.CellBounds.Height) {
+                //文字超范围，调整到极限大小
+                内容 = 内容.Replace("\r\n", "\n");
+                内容 = 内容.Replace("\r", "\n");
+                var 单字高度 = e.Graphics.MeasureString("正", e.CellStyle.Font).Height;
+                int 最大行数 = Math.Max(1, (int)(e.CellBounds.Height / 单字高度));//最多几行
+                var 文本行 = new List<string>();
+                string temp = null;
+                float 已用宽度 = 0;
+                foreach (char c in 内容) {
+                    char c2 = c;
+                    if (c == '\n') {
+                        c2 = ' ';
+                    }
+                    var 所需宽度 = e.Graphics.MeasureString(c.ToString(), e.CellStyle.Font).Width;
+                    if (所需宽度 + 已用宽度 > e.CellBounds.Width) {
+                        文本行.Add(temp);
+                        temp = null;
+                        已用宽度 = 0;
+                    }
+                    temp += c2;
+                    已用宽度 += 所需宽度;
+                }
+                if (temp != null) {
+                    文本行.Add(temp);
+                }
+                if (文本行.Count > 最大行数) {
+                    文本行 = 文本行.Take(最大行数).ToList();
+                    var len = 文本行[文本行.Count - 1].Length;
+                    //最后字符替换为...
+                    文本行[文本行.Count - 1] = 文本行[文本行.Count - 1].Substring(0, len - 1) + "…";
+                }
+                内容 = string.Join(Environment.NewLine, 文本行);
+            }
+
+            var 背景色 = 全局字符串.背景色;
+            var 字体色 = 全局字符串.主题色;
+            if (e.State.HasFlag(DataGridViewElementStates.Selected)) {
+                背景色 = 全局字符串.深级主题色;
+            }
+            //画矩形
+            using Brush backBrush = new SolidBrush(背景色);
+            e.Graphics.FillRectangle(backBrush, e.CellBounds);
+            //画底线+右线
+            using Pen pen = new Pen(全局字符串.主题色);
+            e.Graphics.DrawLine(pen, e.CellBounds.Left, e.CellBounds.Bottom - 1, e.CellBounds.Right, e.CellBounds.Bottom - 1);
+            e.Graphics.DrawLine(pen, e.CellBounds.Right - 1, e.CellBounds.Top, e.CellBounds.Right - 1, e.CellBounds.Bottom);
+            //画标题头线
+            if (e.RowIndex == -1) {
+                e.Graphics.DrawLine(pen, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Right, e.CellBounds.Top);
+            }
+            //绘制字符串
+            var size = e.Graphics.MeasureString(内容, e.CellStyle.Font);
+            (float x, float y) = 获取绘制字符串坐标(内容, e);
+            using Brush foreBrush = new SolidBrush(字体色);
+            e.Graphics.DrawString(内容, e.CellStyle.Font, foreBrush, x, y);
+            e.Handled = true;
+
+        }
+        private (float x, float y) 获取绘制字符串坐标(string 内容, DataGridViewCellPaintingEventArgs e) {
+            var size = e.Graphics.MeasureString(内容, e.CellStyle.Font);
+            float x, y;
+            switch (e.CellStyle.Alignment) {
+                case DataGridViewContentAlignment.TopLeft:
+                case DataGridViewContentAlignment.MiddleLeft:
+                case DataGridViewContentAlignment.BottomLeft:
+                    x = e.CellBounds.Left - 1;
+                    break;
+                case DataGridViewContentAlignment.TopRight:
+                case DataGridViewContentAlignment.MiddleRight:
+                case DataGridViewContentAlignment.BottomRight:
+                    x = e.CellBounds.Left - 1 + (e.CellBounds.Width - size.Width);
+                    break;
+                default:
+                    x = (e.CellBounds.Width - size.Width) / 2 + e.CellBounds.Left - 1;
+                    break;
+            }
+            switch (e.CellStyle.Alignment) {
+                case DataGridViewContentAlignment.TopLeft:
+                case DataGridViewContentAlignment.TopCenter:
+                case DataGridViewContentAlignment.TopRight:
+                    y = e.CellBounds.Top;
+                    break;
+                case DataGridViewContentAlignment.BottomLeft:
+                case DataGridViewContentAlignment.BottomCenter:
+                case DataGridViewContentAlignment.BottomRight:
+                    y = e.CellBounds.Height - size.Height + e.CellBounds.Top;
+                    break;
+                default:
+                    y = (e.CellBounds.Height - size.Height) / 2 + e.CellBounds.Top;
+                    break;
+            }
+            return (x, y);
+        }
         protected override void OnColumnAdded(DataGridViewColumnEventArgs e) {
             if (e.Column.CellType == typeof(DataGridViewComboBoxCell)) {
                 //将默认单元格替换为自定义强化单元格

@@ -23,19 +23,23 @@ namespace 翻译姬 {
         /// 漏翻了就返回true
         /// </summary>
         public static bool 漏翻检测(string text) {
-            string 替换后 = Regex.Replace(text, @"[\p{P}\p{N}\p{M}\p{S}\p{Z}\p{C}]", "");//去符号
-            替换后 = 替换后.Replace("ー", "");//日文的常见特殊符号
-            if (全局设置数据.目标语言 != "英语") {
-                替换后 = Regex.Replace(替换后, @"[a-zA-Zａ-ｚＡ-Ｚ]+", "");
-            }
-            if (替换后.Length == 0) return false;
-            decimal 不符合数量 = 0;
-            foreach (var s in 替换后) {
-                if (!语言范围[全局设置数据.目标语言].IsMatch(s.ToString())) {
-                    不符合数量++;
+            try {
+                string 替换后 = Regex.Replace(text, @"[\p{P}\p{N}\p{M}\p{S}\p{Z}\p{C}]", "");//去符号
+                替换后 = 替换后.Replace("ー", "");//日文的常见特殊符号
+                if (全局设置数据.目标语言 != "英语") {
+                    替换后 = Regex.Replace(替换后, @"[a-zA-Zａ-ｚＡ-Ｚ]+", "");
                 }
+                if (替换后.Length == 0) return false;
+                decimal 不符合数量 = 0;
+                foreach (var s in 替换后) {
+                    if (!语言范围[全局设置数据.目标语言].IsMatch(s.ToString())) {
+                        不符合数量++;
+                    }
+                }
+                return 不符合数量 / 替换后.Length > 0.3m;
+            } catch (Exception ex) {
+                throw new Exception($"漏翻检测BUG：{ex.Message}");
             }
-            return 不符合数量 / 替换后.Length > 0.3m;
         }
 
         private static object 数据库_lock = new object();
@@ -318,92 +322,96 @@ namespace 翻译姬 {
         }
 
         public static void 对话写入文本(文本[] 文本arr, List<KeyValue<string, string>> 对话list, bool 返回值换行符修正) {
-            var 下标分组 = (from 文本 in 文本arr
-                        where 文本.文本类型 != 文本类型.人名
-                        group 文本 by 文本.文本下标 into g
-                        select g).ToDictionary(t => t.Key, t => t);
-            int 请求id = 0, 上级文本下标 = -2;
-            文本 最后文本 = null;
-            var 读取中结果 = new Queue<string>();
-            for (int i = 0; i < 文本arr.Length; i++) {
-                var 文本 = 文本arr[i];
-                if (文本.文本类型 == 文本类型.人名) {
-                    if (全局数据.GPT设置数据.输出人名优先词汇表) {
-                        //GPT从GPT词汇表尝试读取
-                        var 词汇表row = 全局数据.GPT设置数据.GPT词汇表.Select($"原文='{文本.原文}'").LastOrDefault();
-                        if (词汇表row != null) {
-                            文本.译文 = 词汇表row["译文"].ToString();
+            try {
+                var 下标分组 = (from 文本 in 文本arr
+                            where 文本.文本类型 != 文本类型.人名
+                            group 文本 by 文本.文本下标 into g
+                            select g).ToDictionary(t => t.Key, t => t);
+                int 请求id = 0, 上级文本下标 = -2;
+                文本 最后文本 = null;
+                var 读取中结果 = new Queue<string>();
+                for (int i = 0; i < 文本arr.Length; i++) {
+                    var 文本 = 文本arr[i];
+                    if (文本.文本类型 == 文本类型.人名) {
+                        if (全局数据.GPT设置数据.输出人名优先词汇表) {
+                            //GPT从GPT词汇表尝试读取
+                            var 词汇表row = 全局数据.GPT设置数据.GPT词汇表.Select($"原文='{文本.原文}'").LastOrDefault();
+                            if (词汇表row != null) {
+                                文本.译文 = 词汇表row["译文"].ToString();
+                            }
                         }
-                    } 
-                    if (文本.译文.IsNullOrEmpty()){
-                        文本.译文 = 文本.原文;
+                        if (文本.译文.IsNullOrEmpty()) {
+                            文本.译文 = 文本.原文;
+                        }
+                        continue;
                     }
-                    continue;
-                }
-                if (GPT设置数据.连续对话合并 && 文本.文本下标 == 上级文本下标) {
-                    //不进行左右重复合并保存
-                    continue;
-                }
-                if (GPT设置数据.连续对话合并) {
-                    if (GPT设置数据.相邻对话合并 && 文本.文本下标 == 上级文本下标 + 1) {
-                        //连续对话，当前内容合并到上级
+                    if (GPT设置数据.连续对话合并 && 文本.文本下标 == 上级文本下标) {
+                        //不进行左右重复合并保存
+                        continue;
+                    }
+                    if (GPT设置数据.连续对话合并) {
+                        if (GPT设置数据.相邻对话合并 && 文本.文本下标 == 上级文本下标 + 1) {
+                            //连续对话，当前内容合并到上级
+                            var 原文组 = 下标分组[文本.文本下标];
+                            var 上级文本 = 下标分组[上级文本下标].Last();
+                            文本 临时最后文本 = null;
+                            foreach (var 原文文本 in 原文组) {
+                                if (读取中结果.Count > 0) {
+                                    原文文本.译文 = 读取中结果.Dequeue();
+                                    原文文本.异常状态 = 上级文本.异常状态;
+                                    临时最后文本 = 原文文本;
+                                }
+                            }
+                            上级文本下标 = 文本.文本下标;
+                            continue;
+                        }
+                    }
+                    //非连续，正常读取赋值
+                    var kv = 对话list[请求id++];
+                    bool 是否漏翻 = (bool)kv.Tag;
+                    if (GPT设置数据.连续对话合并) {//从左往右，从上往下，取值赋值
                         var 原文组 = 下标分组[文本.文本下标];
-                        var 上级文本 = 下标分组[上级文本下标].Last();
-                        文本 临时最后文本 = null;
+                        string 请求结果 = kv.Value;
+                        if (返回值换行符修正) {
+                            请求结果 = 换行符修正(请求结果);
+                        }
+                        //判断多换行符
+                        if (读取中结果.Count > 0) {
+                            if (最后文本 != null) {
+                                最后文本.异常状态 = 文本异常状态.多换行符;
+                                while (读取中结果.Count != 0) {
+                                    最后文本.译文 += 读取中结果.Dequeue();//剩余的拼接在最后的文本中
+                                }
+                            } else {
+                                throw new Exception("算法异常，最后文本为null");
+                            }
+                            读取中结果.Clear();
+                        }
+                        //a-b  -  c-d
+                        string[] gpt译文 = Regex.Split(请求结果, Regex.Escape(GPT设置数据.合并分隔符));
+                        foreach (var 译文 in gpt译文) {
+                            读取中结果.Enqueue(译文);
+                        }
                         foreach (var 原文文本 in 原文组) {
                             if (读取中结果.Count > 0) {
                                 原文文本.译文 = 读取中结果.Dequeue();
-                                原文文本.异常状态 = 上级文本.异常状态;
-                                临时最后文本 = 原文文本;
+                                if (是否漏翻) {
+                                    原文文本.异常状态 = 文本异常状态.存在漏翻;
+                                }
                             }
+                            最后文本 = 原文文本;
                         }
-                        上级文本下标 = 文本.文本下标;
-                        continue;
+                    } else {
+                        文本.译文 = kv.Value;
+                        if (是否漏翻) {
+                            文本.异常状态 = 文本异常状态.存在漏翻;
+                        }
+                        最后文本 = 文本;
                     }
+                    上级文本下标 = 文本.文本下标;
                 }
-                //非连续，正常读取赋值
-                var kv = 对话list[请求id++];
-                bool 是否漏翻 = (bool)kv.Tag;
-                if (GPT设置数据.连续对话合并) {//从左往右，从上往下，取值赋值
-                    var 原文组 = 下标分组[文本.文本下标];
-                    string 请求结果 = kv.Value;
-                    if (返回值换行符修正) {
-                        请求结果 = 换行符修正(请求结果);
-                    }
-                    //判断多换行符
-                    if (读取中结果.Count > 0) {
-                        if (最后文本 != null) {
-                            最后文本.异常状态 = 文本异常状态.多换行符;
-                            while (读取中结果.Count != 0) {
-                                最后文本.译文 += 读取中结果.Dequeue();//剩余的拼接在最后的文本中
-                            }
-                        } else {
-                            throw new Exception("算法异常，最后文本为null");
-                        }
-                        读取中结果.Clear();
-                    }
-                    //a-b  -  c-d
-                    string[] gpt译文 = Regex.Split(请求结果, Regex.Escape(GPT设置数据.合并分隔符));
-                    foreach (var 译文 in gpt译文) {
-                        读取中结果.Enqueue(译文);
-                    }
-                    foreach (var 原文文本 in 原文组) {
-                        if (读取中结果.Count > 0) {
-                            原文文本.译文 = 读取中结果.Dequeue();
-                            if (是否漏翻) {
-                                原文文本.异常状态 = 文本异常状态.存在漏翻;
-                            }
-                        }
-                        最后文本 = 原文文本;
-                    }
-                } else {
-                    文本.译文 = kv.Value;
-                    if (是否漏翻) {
-                        文本.异常状态 = 文本异常状态.存在漏翻;
-                    }
-                    最后文本 = 文本;
-                }
-                上级文本下标 = 文本.文本下标;
+            } catch (Exception ex) {
+                throw new Exception($"对话写入文本错误：{ex.Message}");
             }
         }
 
@@ -495,16 +503,20 @@ namespace 翻译姬 {
         private static Regex 换行符_n = new Regex(@"(?<!\\r)\\n");
         private static Regex 换行符_r = new Regex(@"\\r(?!\\n)");
         private static string 换行符修正(string src) {
-            src = Regex.Replace(src, @"\\*\r\\*\n", @"\r\n");
-            src = Regex.Replace(src, @"\\+r", @"\r");
-            src = Regex.Replace(src, @"\\+n", @"\n");
-            if (换行符_n.IsMatch(src)) {
-                src = 换行符_n.Replace(src, @"\r\n");
+            try {
+                src = Regex.Replace(src, @"\\*\r\\*\n", @"\r\n");
+                src = Regex.Replace(src, @"\\+r", @"\r");
+                src = Regex.Replace(src, @"\\+n", @"\n");
+                if (换行符_n.IsMatch(src)) {
+                    src = 换行符_n.Replace(src, @"\r\n");
+                }
+                if (换行符_r.IsMatch(src)) {
+                    src = 换行符_r.Replace(src, @"\r\n");
+                }
+                return src;
+            } catch (Exception ex) {
+                throw new Exception($"换行符修正错误：{ex.Message}");
             }
-            if (换行符_r.IsMatch(src)) {
-                src = 换行符_r.Replace(src, @"\r\n");
-            }
-            return src;
         }
         /// <summary>
         /// 防止文件存在，后面加(1) (2)之类

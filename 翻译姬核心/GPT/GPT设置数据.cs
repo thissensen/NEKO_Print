@@ -243,7 +243,19 @@ public class GPT设置数据 : INotifyPropertyChanged {
     private bool _输出人名优先词汇表 = true;
 
     //原文-译文-备注
-    public DataTable GPT词汇表 { get; set; } = new DataTable();
+    public DataTable GPT词汇表 {
+        get {
+            if (_GPT词汇表 == null) {
+                _GPT词汇表 = new DataTable();
+                _GPT词汇表.Columns.Add("原文");
+                _GPT词汇表.Columns.Add("译文");
+                _GPT词汇表.Columns.Add("备注");
+            }
+            return _GPT词汇表;
+        }
+        set => _GPT词汇表 = value;
+    }
+    private DataTable _GPT词汇表;
 
     public string 合并分隔符 {
         get => _合并分隔符;

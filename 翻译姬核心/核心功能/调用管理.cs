@@ -73,9 +73,11 @@ public class 调用管理 {
         }
     }
 
-    public static void 文本机翻(机翻方式 机翻方式, params 文件结构[] 文件组) {
-        foreach (var 文件 in 文件组) {
-            文件.机翻前数据处理();
+    public static void 文本机翻(机翻方式 机翻方式, bool 机翻前数据处理 = true, params 文件结构[] 文件组) {
+        if (机翻前数据处理) {
+            foreach (var 文件 in 文件组) {
+                文件.机翻前数据处理();
+            }
         }
         if (机翻方式 == 机翻方式.标准机翻) {//预显示不进行机翻
             标准机翻.机翻(文件组);

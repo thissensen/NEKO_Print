@@ -45,7 +45,11 @@ public class GPTAPI : API接口模板 {
     }
 
     public override void 单组执行完() {
-        数据处理.清空上文内容();
+        try {
+            数据处理.清空上文内容();
+        } catch (Exception ex) {
+            throw new Exception($"单组执行完后BUG：{ex.Message}");
+        }
     }
 
     private int 漏翻重试次数 = 0;
@@ -67,8 +71,8 @@ public class GPTAPI : API接口模板 {
                 }
                 机翻字符增加(返回结果.Usage.TotalTokens);
                 解析结束的请求 = 数据处理.返回值解析(返回结果.Choices[0].Message.Content, 原请求, false);//List<GPT请求>
-            } catch (Exception_API异常) {
-                throw;
+            } catch (Exception_API异常 ex) {
+                throw new Exception_API异常($"单段机翻开始：{ex.Message}");
             } catch (Exception ex) {
                 if (异常重试次数 == GPT设置数据.异常重试上限) {
                     throw new Exception("异常重试次数已达上限");
@@ -93,8 +97,8 @@ public class GPTAPI : API接口模板 {
                     }
                     机翻字符增加(润色返回结果.Usage.TotalTokens);
                     解析结束的请求 = 数据处理.返回值解析(润色返回结果.Choices[0].Message.Content, 待润色请求, true);
-                } catch (Exception_API异常) {
-                    throw;
+                } catch (Exception_API异常 ex) {
+                    throw new Exception_API异常($"单段润色开始：{ex.Message}");
                 } catch (Exception ex) {
                     if (异常重试次数 == GPT设置数据.异常重试上限) {
                         throw new Exception("异常重试次数已达上限");
@@ -213,43 +217,5 @@ public class GPTAPI : API接口模板 {
         }
         
     }
-
-    //废弃的原算法
-    /*public static IEnumerable<文本[]> 文本分割2(文本[] arr) {
-        //使用键值对索引提速，linq嵌套会消耗大量性能
-        var 下标分组 = (from 文本 in arr
-                    where 文本.文本类型 != 文本类型.人名
-                    group 文本 by 文本.文本下标 into g
-                    select g).ToDictionary(t => t.Key, t => t);
-        var res = new List<文本>();
-        int 已存对话组 = 0, 最后合并id = -1;
-        for (int i = 0; i < arr.Length; i++) {
-            var 文本 = arr[i];
-            if (文本.文本类型 == 文本类型.人名) {//人名不算做对话组
-                res.Add(文本);
-                continue;
-            }
-            if (GPT设置数据.连续对话合并) {
-                if (文本.文本下标 == 最后合并id) {
-                    continue;
-                }
-                var 文本arr = 下标分组[文本.文本下标];
-                res.AddRange(文本arr);
-                最后合并id = 文本.文本下标;
-                已存对话组++;
-            } else {
-                已存对话组++;
-            }
-            if (已存对话组 == GPT设置数据.单次机翻行) {
-                yield return res.ToArray();
-                res.Clear();
-                已存对话组 = 0;
-            }
-        }
-        if (res.Count > 0) {
-            yield return res.ToArray();
-        }
-    }*/
-
 
 }

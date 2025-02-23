@@ -16,7 +16,7 @@ public class 配置文件操作 {
     public static DataRow[] 常规读取(DataTable dt, string[] 文本行, string 名称列名 = "名称") {
         var res = new List<DataRow>();
         var 已读取行 = new List<string>();
-        var 名称正则 = new Regex(@"^\[(.*?)\].*$");
+        var 名称正则 = new Regex(@"^\[名称:(.*?)\].*$");
         string 当前名称 = null;
         DataRow row = null;
         var 已存文本行 = new List<string>();
@@ -50,7 +50,7 @@ public class 配置文件操作 {
                 continue;
             }
             if (col.ColumnName == "名称" || col.ColumnName == "正则名称") {
-                sb.AppendLine($"[{row[col.ColumnName]}]");
+                sb.AppendLine($"[名称:{row[col.ColumnName]}]");
             } else {
                 string[] arr = row[col.ColumnName].ToString().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 if (arr.Length <= 1) {

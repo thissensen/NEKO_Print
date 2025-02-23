@@ -438,7 +438,6 @@
         #endregion
 
         private Sunny.UI.UIPanel 正则上半Panel;
-        private 自定义DataGridView 查询表格;
         private 表格增删改 表格增删改;
         private 组合控件TextBox 提取型正则Box;
         private 组合控件TextBox 提取前行过滤正则Box;
@@ -455,5 +454,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 文本过滤正则;
         private System.Windows.Forms.DataGridViewTextBoxColumn 提取前行过滤正则;
         private System.Windows.Forms.DataGridViewTextBoxColumn 提取型正则;
+        public 自定义DataGridView 查询表格;
     }
 }

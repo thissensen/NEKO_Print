@@ -84,8 +84,12 @@ namespace 翻译姬 {
                 待机翻.设置译文(机翻完);
             }
             //为空使用原文
-            if (全局数据.全局设置数据.机翻空值使用原文) {
-                空值替换为原文(待机翻);
+            try {
+                if (全局数据.全局设置数据.机翻空值使用原文) {
+                    空值替换为原文(待机翻);
+                }
+            } catch (Exception ex) {
+                throw new Exception($"空值替换原文BUG：{ex.Message}");
             }
             机翻执行次数++;//QPS控制
         }
@@ -105,18 +109,22 @@ namespace 翻译姬 {
         /// <param name="字符数"></param>
         public static event 翻译姬核心使用字符增加 翻译姬核心使用字符增加;
         protected virtual void 机翻字符增加(int 字符数) {
-            //进行额度判断
-            if (data.可用额度 != -1 && data.可用额度 > 0) {
-                if (data.已用额度 + 字符数 > data.可用额度) {
-                    Util.多线程数据库Exec($"update API明细 set 是否启用=0 where ID={data.ID}");
-                    throw new Exception_API异常($"{data.类型}字符已达上限");
+            try {
+                //进行额度判断
+                if (data.可用额度 != -1 && data.可用额度 > 0) {
+                    if (data.已用额度 + 字符数 > data.可用额度) {
+                        Util.多线程数据库Exec($"update API明细 set 是否启用=0 where ID={data.ID}");
+                        throw new Exception_API异常($"{data.类型}字符已达上限");
+                    }
                 }
-            }
-            data.已用额度 += 字符数;
-            翻译姬核心使用字符增加?.Invoke(字符数);
-            //数据库更新
-            if (是否更新字符数) {
-                Util.多线程数据库Exec($"update API明细 set 已用额度=已用额度+{字符数} where ID={data.ID}");
+                data.已用额度 += 字符数;
+                翻译姬核心使用字符增加?.Invoke(字符数);
+                //数据库更新
+                if (是否更新字符数) {
+                    Util.多线程数据库Exec($"update API明细 set 已用额度=已用额度+{字符数} where ID={data.ID}");
+                }
+            } catch (Exception ex) {
+                throw new Exception($"机翻字符增加异常：{ex.Message}");
             }
         }
 
