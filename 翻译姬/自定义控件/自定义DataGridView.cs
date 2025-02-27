@@ -131,9 +131,6 @@ namespace 翻译姬 {
                     return;
                 }
             }
-            /*if (e.RowIndex != -1 && 列名_列控件.ContainsKey(Columns[e.ColumnIndex].Name)) {
-                内容 = "";
-            }*/
             SizeF 文字大小F = e.Graphics.MeasureString(内容, e.CellStyle.Font);
             var 文字大小 = new Size((int)Math.Ceiling(文字大小F.Width), (int)Math.Ceiling(文字大小F.Height));
             if (文字大小.Width > e.CellBounds.Width || 文字大小.Height > e.CellBounds.Height) {

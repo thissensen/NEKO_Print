@@ -63,6 +63,7 @@ namespace 翻译姬 {
             界面组["全局设置"].Show();
             界面组["GPT设置"].Show();
             界面组["文本翻译"].Show();
+            界面组["关于翻译姬"].Show();
             MainTabControl.AddPage(界面组["文本翻译"]);
             MainTabControl.AddPage(界面组["关于翻译姬"]);
             TreeNode 文本翻译Node = 窗体列表.CreateNode("文本翻译", 61867, 图标大小, 界面组["文本翻译"].PageIndex);

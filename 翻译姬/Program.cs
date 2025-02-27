@@ -13,10 +13,11 @@ using System.Windows.Forms;
 
 namespace 翻译姬 {
     /*
-     * 1、Shift+C、V的复制粘贴功能修改部分参数，使其不与正则的[]混淆
-     * 2、修复续翻会从头开始的问题
-     * 3、修复GPTAPI和火山API的UI显示问题
-     * 4、重绘表格，修复部分UI问题
+     * 1、优化内置的Kr正则
+     * 2、给已写出文件添加输出提示
+     * 3、给Shift+V粘贴时，未识别到情况下添加提示
+     * 4、修复续翻状态时无法正常写出文本的问题
+     * 5、进入软件后会自动检查更新
      */
     internal static class Program {
 

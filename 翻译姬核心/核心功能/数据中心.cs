@@ -35,7 +35,7 @@ public class 文件结构 {
     public string Json文本;
     public string Xml文本;
 
-    private object _lock = new object();
+    public object _lock = new object();
     public int 已机翻文本组数 = 0;
     public 文本[] 有效文本;//所有提取类型提取出的有效文本，文本组生成前/续翻前
     public 文本组[] 文本组 = new 文本组[0];//提取后的
@@ -73,7 +73,7 @@ public class 文件结构 {
             for (int i = 0; i < 分割后.Length; i++) {
                 分割后[i].文本组中下标 = i;
             }
-            文本.文本组已完成机翻 += () => {
+            文本.文本组已完成机翻 += () => {//数据和业务未解耦导致的屎山代码位置
                 lock(_lock) {
                     已机翻文本组数++;
                     if (已机翻文本组数 == 文本组.Length) {

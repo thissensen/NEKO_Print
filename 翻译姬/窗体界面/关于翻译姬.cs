@@ -38,6 +38,13 @@ namespace 翻译姬 {
         private async void 关于翻译姬_Shown(object sender, EventArgs e) {
             //版本检查
             最新版本Label.Text = await 获取版本号();
+            try {
+                int 当前版本 = int.Parse(当前版本Label.Text.Substring(6).Replace(".", ""));
+                int 最新版本 = int.Parse(最新版本Label.Text.Substring(6).Replace(".", ""));
+                if (!最新版本Label.Text.Contains("获取失败") && 最新版本 > 当前版本) {
+                    MessageBoxEx.Show("检查到软件有更新，可前往更新");
+                }
+            } catch { } 
         }
 
         private void 主题色Btn_Click(object sender, EventArgs e) {

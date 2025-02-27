@@ -94,6 +94,8 @@ namespace 翻译姬 {
                     var rows = 配置文件操作.常规读取(查询表格.DataTable, arr, "正则名称");
                     if (rows.Length > 0) {
                         消息框帮助.轻便消息($"已读取[{string.Join(",", rows.Select(r => r["正则名称"]))}]", 查询表格);
+                    } else {
+                        消息框帮助.轻便消息($"识别失败", 查询表格);
                     }
                 }
             } catch (Exception ex) {
