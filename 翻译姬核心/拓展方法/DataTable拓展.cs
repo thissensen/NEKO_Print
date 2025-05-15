@@ -113,14 +113,14 @@ namespace 翻译姬 {
                 }
             }
             foreach (DataRow row in data.Rows) {
-                DataRow[] rows = dt.Select($"{主键}={row[主键]}");
+                DataRow[] rows = dt.AsEnumerable().Where(r => r[主键].ToString() == 主键).Select(r => r).ToArray();
                 if (rows.Count() == 0) {//不存在追加
                     DataRow dr = dt.NewRow();
                     foreach (string 列名 in 相同列名) {
                         dr[列名] = row[列名];
                     }
                     dt.Rows.Add(dr);
-                } else if (rows.Count() == 1){//存在覆盖
+                } else if (rows.Count() == 1) {//存在覆盖
                     DataRow dr = rows[0];
                     foreach (string 列名 in 相同列名) {
                         dr[列名] = row[列名];

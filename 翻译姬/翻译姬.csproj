@@ -233,7 +233,7 @@
     <Compile Include="辅助类\自定义提示窗.Designer.cs">
       <DependentUpon>自定义提示窗.cs</DependentUpon>
     </Compile>
-    <Compile Include="辅助类\拓展方法\其他拓展.cs" />
+    <Compile Include="拓展方法\其他拓展.cs" />
     <Compile Include="辅助类\数据中转.cs" />
     <Compile Include="窗体界面\关于翻译姬.cs">
       <SubType>Form</SubType>
@@ -291,14 +291,14 @@
     <Compile Include="辅助类\工具类.cs" />
     <Compile Include="辅助类\消息框帮助.cs" />
     <Compile Include="辅助类\程序集解析.cs" />
-    <Compile Include="辅助类\拓展方法\Bytes拓展.cs" />
-    <Compile Include="辅助类\拓展方法\DataGridView拓展.cs" />
-    <Compile Include="辅助类\拓展方法\Image拓展.cs" />
-    <Compile Include="辅助类\拓展方法\TreeNode拓展.cs" />
+    <Compile Include="拓展方法\Bytes拓展.cs" />
+    <Compile Include="拓展方法\DataGridView拓展.cs" />
+    <Compile Include="拓展方法\Image拓展.cs" />
+    <Compile Include="拓展方法\TreeNode拓展.cs" />
     <Compile Include="辅助类\Start.cs" />
     <Compile Include="辅助类\全局字符串.cs" />
     <Compile Include="辅助类\内部控件排列方式.cs" />
-    <Compile Include="辅助类\拓展方法\自定义控件拓展.cs" />
+    <Compile Include="拓展方法\自定义控件拓展.cs" />
     <Compile Include="窗体界面\API设置\百度.cs">
       <SubType>Form</SubType>
     </Compile>

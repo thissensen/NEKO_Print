@@ -286,11 +286,11 @@
         private Sunny.UI.UIPanel 标题栏Panel;
         private Sunny.UI.UIPanel 右边半块Panel;
         private Sunny.UI.UISymbolButton 关闭Btn;
-        private Sunny.UI.UITabControl 窗体显示区TabControl;
         private Sunny.UI.UISymbolButton 最小化Btn;
         private Sunny.UI.UIProcessBar 进度条;
         private Sunny.UI.UINavMenu 窗体列表;
         private Sunny.UI.UIStyleManager StyleManager;
         private System.Windows.Forms.NotifyIcon 通知图标;
+        public Sunny.UI.UITabControl 窗体显示区TabControl;
     }
 }

@@ -11,7 +11,7 @@ namespace 翻译姬 {
 
         private static 全局设置数据 全局设置数据 => 全局数据.全局设置数据;
         private static GPT设置数据 GPT设置数据 => 全局数据.GPT设置数据;
-        
+
         private static Dictionary<string, Regex> 语言范围 = new() {
             ["简中"] = new Regex(@"[\u4e00-\u9fa5]"),
             ["日语"] = new Regex(@"[\u0800-\u4e00]"),
@@ -87,8 +87,8 @@ namespace 翻译姬 {
                     dt.Rows.Add(row);
                 }
                 return (from row in dt.AsEnumerable()
-                               orderby int.Parse(row["乱码次数"].ToString()), int.Parse(row["文本长度"].ToString())
-                               select row["编码"].ToString()).First();
+                        orderby int.Parse(row["乱码次数"].ToString()), int.Parse(row["文本长度"].ToString())
+                        select row["编码"].ToString()).First();
             }
         }
 
@@ -335,7 +335,7 @@ namespace 翻译姬 {
                     if (文本.文本类型 == 文本类型.人名) {
                         if (全局数据.GPT设置数据.输出人名优先词汇表) {
                             //GPT从GPT词汇表尝试读取
-                            var 词汇表row = 全局数据.GPT设置数据.GPT词汇表.Select($"原文='{文本.原文}'").LastOrDefault();
+                            var 词汇表row = 全局数据.GPT设置数据.GPT词汇表.AsEnumerable().Where(r => r["原文"].ToString() == 文本.原文).LastOrDefault();
                             if (词汇表row != null) {
                                 文本.译文 = 词汇表row["译文"].ToString();
                             }

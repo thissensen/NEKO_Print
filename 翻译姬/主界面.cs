@@ -15,7 +15,7 @@ using 翻译姬.Properties;
 
 namespace 翻译姬 {
     //要做的事：退出时Close()界面
-    public partial class 主界面 : 自定义Form {
+    public partial class 主界面: 自定义Form {
 
         #region 拖动panel移动窗口
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -28,20 +28,20 @@ namespace 翻译姬 {
         #endregion
 
         public static Dictionary<string, 自定义Page> 界面组 = new Dictionary<string, 自定义Page>() {
-                ["文本翻译"] = new 文本翻译(),
-                ["百度"] = new 百度(),
-                ["腾讯云"] = new 腾讯云(),
-                ["阿里云"] = new 阿里云(),
-                ["火山"] = new 火山(),
-                ["GPT"] = new GPT(),
-                ["全局设置"] = new 全局设置(),
-                ["GPT设置"] = new GPT设置(),
-                ["正则设置"] = new 正则设置(),
-                ["替换列表"] = new 替换列表(),
-                ["Json指令"] = new Json指令(),
-                ["Xml指令"] = new Xml指令(),
-                ["关于翻译姬"] = new 关于翻译姬(),
-            };
+            ["文本翻译"] = new 文本翻译(),
+            ["百度"] = new 百度(),
+            ["腾讯云"] = new 腾讯云(),
+            ["阿里云"] = new 阿里云(),
+            ["火山"] = new 火山(),
+            ["GPT"] = new GPT(),
+            ["全局设置"] = new 全局设置(),
+            ["GPT设置"] = new GPT设置(),
+            ["正则设置"] = new 正则设置(),
+            ["替换列表"] = new 替换列表(),
+            ["Json指令"] = new Json指令(),
+            ["Xml指令"] = new Xml指令(),
+            ["关于翻译姬"] = new 关于翻译姬(),
+        };
 
         public static List<Control> 主题设置控件 = new List<Control>();//主要用于主题的设置
 
@@ -104,7 +104,7 @@ namespace 翻译姬 {
                 Location = p;*/
             } else if (WindowState == FormWindowState.Minimized) {
                 //最小化时
-                
+
             }
         }
 
@@ -193,7 +193,7 @@ namespace 翻译姬 {
                 if (page.IsLoad) {
                     page.OnPage被选中();
                 }
-                
+
                 SelectPage(pageIndex);
             }
         }

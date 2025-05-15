@@ -18,7 +18,9 @@ public class 调用管理 {
     //文本读取 -> 正则提取? -> 对话检索 -> 机翻前替换
     public static IEnumerable<文件结构> 文本读取(读取方式 读取方式) {
         DataTable 替换列表 = 数据库.Select("select * from 替换列表 where 是否启用=1");
-        DataTable 正则 = 数据库.Select($"select * from 正则 where 正则名称='{全局设置数据.使用正则}'");
+        DataTable 正则 = 数据库.Select($"select * from 正则 where 正则名称=@正则名称", new Dictionary<string, object>() {
+            ["正则名称"] = 全局设置数据.使用正则
+        });
         Type API类型 = 文件结构.获取API类型();
         string 读取编码 = 全局设置数据.读取编码;
         if (读取方式 == 读取方式.文本读取) {

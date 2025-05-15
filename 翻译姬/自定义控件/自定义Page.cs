@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using 翻译姬.Properties;
 
 namespace 翻译姬 {
-    public partial class 自定义Page : UIPage, 自定义窗体 {
+    public partial class 自定义Page: UIPage, 自定义窗体 {
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public 数据库连接 数据库 => 全局数据.数据库;

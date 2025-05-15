@@ -74,7 +74,7 @@ public class 文件结构 {
                 分割后[i].文本组中下标 = i;
             }
             文本.文本组已完成机翻 += () => {//数据和业务未解耦导致的屎山代码位置
-                lock(_lock) {
+                lock (_lock) {
                     已机翻文本组数++;
                     if (已机翻文本组数 == 文本组.Length) {
                         文件完成机翻?.Invoke();
@@ -168,7 +168,7 @@ public class 文件结构 {
             _ => throw new Exception($"不存在API名称【{全局数据.全局设置数据.使用机翻}】")
         };
     }
-    
+
 }
 public delegate void 文本组已完成机翻();
 //多个文本对象分为一组
@@ -248,7 +248,7 @@ public class 文本处理数据 {
     private DataTable _替换列表;
     public DataTable 正则;
     public DataTable Json指令;
-    public DataTable Xml指令;   
+    public DataTable Xml指令;
 }
 public static class 文本拓展方法 {
 
@@ -278,7 +278,7 @@ public static class 文本拓展方法 {
                 }
                 if (是否GPT && 全局数据.GPT设置数据.输出人名优先词汇表) {
                     //GPT从GPT词汇表尝试读取
-                    var 词汇表row = 全局数据.GPT设置数据.GPT词汇表.Select($"原文='{t.原文}'").LastOrDefault();
+                    var 词汇表row = 全局数据.GPT设置数据.GPT词汇表.AsEnumerable().Where(r => r["原文"].ToString() == t.原文).LastOrDefault();
                     if (词汇表row != null) {
                         t.译文 = 词汇表row["译文"].ToString();
                     }

@@ -13,11 +13,9 @@ using System.Windows.Forms;
 
 namespace 翻译姬 {
     /*
-     * 1、优化内置的Kr正则
-     * 2、给已写出文件添加输出提示
-     * 3、给Shift+V粘贴时，未识别到情况下添加提示
-     * 4、修复续翻状态时无法正常写出文本的问题
-     * 5、进入软件后会自动检查更新
+     * 1、尝试修复Shift C V操作失效问题
+     * 2、修复下拉框颜色不对的问题
+     * 3、修复正则名称带有特殊符号时软件报错的问题
      */
     internal static class Program {
 

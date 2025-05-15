@@ -21,9 +21,9 @@ namespace 翻译姬 {
         static 全局字符串() {
             //安装键盘钩子
             try {
+                全局键盘监听.Start();
                 全局键盘监听.KeyDownEvent += (_, e) => 键盘按下按钮组.Add(e.KeyCode);
                 全局键盘监听.KeyUpEvent += (_, e) => 键盘按下按钮组.Remove(e.KeyCode);
-                全局键盘监听.Start();
             } catch (Exception ex) {
                 MessageBoxEx.Show("键盘钩子加载失败");
             }
@@ -63,7 +63,7 @@ namespace 翻译姬 {
             set => 全局数据.全局主题设置.不可用时颜色 = value;
         }
         public static Color 背景色 {
-            get => 全局数据.全局主题设置.背景色; 
+            get => 全局数据.全局主题设置.背景色;
             set => 全局数据.全局主题设置.背景色 = value;
         }
         public static decimal 屏幕缩放比 { get; set; }

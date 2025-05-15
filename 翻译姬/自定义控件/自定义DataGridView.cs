@@ -1,4 +1,5 @@
 ﻿using Sunny.UI;
+using Sunny.UI.Win32;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 namespace 翻译姬 {
-    public class 自定义DataGridView : DataGridView {
+    public class 自定义DataGridView: DataGridView {
         //滚动条相关
         public readonly UIScrollBar VBar = new UIScrollBar();
         public readonly UIHorScrollBarEx HBar = new UIHorScrollBarEx();
@@ -228,8 +229,8 @@ namespace 翻译姬 {
             return (x, y);
         }
         protected override void OnColumnAdded(DataGridViewColumnEventArgs e) {
+            //将默认单元格替换为自定义强化单元格
             if (e.Column.CellType == typeof(DataGridViewComboBoxCell)) {
-                //将默认单元格替换为自定义强化单元格
                 e.Column.CellTemplate = new DataGridViewComboBoxCellEx();
             }
             base.OnColumnAdded(e);

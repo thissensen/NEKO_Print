@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace 翻译姬 {
-    public partial class 正则设置 : 自定义Page {
+    public partial class 正则设置: 自定义Page {
 
         private string[] 待机翻Lines {
             get {
@@ -43,6 +43,7 @@ namespace 翻译姬 {
                 3、文本过滤正则用于文本切割
                 4、按左Shift+C、V可进行专属复制粘贴
                 """;
+            全局字符串.全局键盘监听.KeyDownEvent += 全局键盘监听_KeyDownEvent;
         }
 
         private void 正则设置_Page被选中() {
@@ -60,8 +61,13 @@ namespace 翻译姬 {
             查询表格.CurrentCell = null;
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+
+        private void 全局键盘监听_KeyDownEvent(object sender, KeyEventArgs e) {
             try {
+                var f = ((主界面)数据中转.主窗体).窗体显示区TabControl.SelectedTab.Controls[0];
+                if (f != this) {
+                    return;
+                }
                 if (全局字符串.键盘按下按钮组.Count == 2 &&
                     全局字符串.键盘按下按钮组.Contains(Keys.LShiftKey) &&
                     全局字符串.键盘按下按钮组.Contains(Keys.C)) {//复制
@@ -101,7 +107,6 @@ namespace 翻译姬 {
             } catch (Exception ex) {
                 MessageBoxEx.Show(ex.Message);
             }
-            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private bool 表格增删改_新添前行验证(DataRow row) {

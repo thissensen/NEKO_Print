@@ -35,7 +35,7 @@ namespace 翻译姬 {
                 foreach (Control c in con.Controls) {
                     if (c is T t) {
                         yield return t;
-                    } 
+                    }
                     if (c.Controls.Count > 0) {
                         stack.Push(c);
                     }
@@ -93,7 +93,7 @@ namespace 翻译姬 {
                 userControl.ForeColor = 全局字符串.主题色;
                 userControl.RectColor = 全局字符串.主题色;
                 userControl.RectDisableColor = 全局字符串.不可用时颜色;
-                
+
             } else if (con is UIProcessBar processBar) {
                 processBar.FillColor = 全局字符串.背景色;
                 processBar.ForeColor = 全局字符串.主题色;
@@ -164,10 +164,15 @@ namespace 翻译姬 {
                 //view.ScrollBarColor = 全局字符串.主题色;
                 //view.ScrollBarBackColor = 全局字符串.背景色;
                 //view.ScrollBarRectColor = 全局字符串.主题色;
+
+                float size = view.ColumnHeadersDefaultCellStyle.Font.Size;
+                Font font = new Font(全局字符串.主字体, size);
+                view.DefaultCellStyle.Font = font;
                 //标题行
                 view.ColumnHeadersDefaultCellStyle.BackColor = 全局字符串.背景色;//标题行背景色
                 view.ColumnHeadersDefaultCellStyle.ForeColor = 全局字符串.主题色;
                 view.ColumnHeadersDefaultCellStyle.Font = new Font(全局字符串.主字体, view.ColumnHeadersDefaultCellStyle.Font.Size);
+                view.ColumnHeadersDefaultCellStyle.Font = new Font(全局字符串.主字体, size);
                 //单元格线条
                 view.GridColor = 全局字符串.主题色;//单元格线条色
                 //奇数行
@@ -175,33 +180,37 @@ namespace 翻译姬 {
                 view.AlternatingRowsDefaultCellStyle.ForeColor = 全局字符串.主题色;//奇数行文字色
                 view.AlternatingRowsDefaultCellStyle.SelectionBackColor = 全局字符串.背景色;
                 view.AlternatingRowsDefaultCellStyle.SelectionForeColor = 全局字符串.主题色;
-                if (view.AlternatingRowsDefaultCellStyle.Font != null) {
+                view.AlternatingRowsDefaultCellStyle.Font = font;
+                /*if (view.AlternatingRowsDefaultCellStyle.Font != null) {
                     view.AlternatingRowsDefaultCellStyle.Font = new Font(全局字符串.主字体, view.AlternatingRowsDefaultCellStyle.Font.Size);
-                }
+                }*/
                 //默认行
                 view.RowsDefaultCellStyle.BackColor = 全局字符串.背景色;//单元格背景色
                 view.RowsDefaultCellStyle.ForeColor = 全局字符串.主题色;//单元格文字色
                 view.RowsDefaultCellStyle.SelectionForeColor = 全局字符串.主题色;//选中字颜色
                 view.RowsDefaultCellStyle.SelectionBackColor = 全局字符串.次级主题色;//选中背景色
-                if (view.RowsDefaultCellStyle.Font != null) {
+                view.RowsDefaultCellStyle.Font = font;
+                /*if (view.RowsDefaultCellStyle.Font != null) {
                     view.RowsDefaultCellStyle.Font = new Font(全局字符串.主字体, view.RowsDefaultCellStyle.Font.Size);
-                }
+                }*/
                 //默认新增行
                 view.RowTemplate.DefaultCellStyle.BackColor = 全局字符串.背景色;
                 view.RowTemplate.DefaultCellStyle.ForeColor = 全局字符串.主题色;
                 view.RowTemplate.DefaultCellStyle.SelectionForeColor = 全局字符串.主题色;//选中字颜色
                 view.RowTemplate.DefaultCellStyle.SelectionBackColor = 全局字符串.深级主题色;//选中背景色
-                if (view.RowTemplate.DefaultCellStyle.Font != null) {
+                view.RowTemplate.DefaultCellStyle.Font = font;
+                /*if (view.RowTemplate.DefaultCellStyle.Font != null) {
                     view.RowTemplate.DefaultCellStyle.Font = new Font(全局字符串.主字体, view.RowTemplate.DefaultCellStyle.Font.Size);
-                }
+                }*/
                 //行标题
                 view.RowHeadersDefaultCellStyle.BackColor = 全局字符串.背景色;
                 view.RowHeadersDefaultCellStyle.ForeColor = 全局字符串.主题色;
                 view.RowHeadersDefaultCellStyle.SelectionBackColor = 全局字符串.背景色;
                 view.RowHeadersDefaultCellStyle.SelectionForeColor = 全局字符串.主题色;
-                if (view.RowHeadersDefaultCellStyle.Font != null) {
+                view.RowHeadersDefaultCellStyle.Font = font;
+                /*if (view.RowHeadersDefaultCellStyle.Font != null) {
                     view.RowHeadersDefaultCellStyle.Font = new Font(全局字符串.主字体, view.RowHeadersDefaultCellStyle.Font.Size);
-                }
+                }*/
                 //滚动条相关
                 view.VBar.BackColor = 全局字符串.背景色;
                 view.VBar.FillColor = 全局字符串.背景色;

@@ -15,7 +15,7 @@ using System.Windows.Forms;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace 翻译姬 {
-    public partial class Json指令 : 自定义Page {
+    public partial class Json指令: 自定义Page {
 
         protected virtual string 关联表 => "Json指令";
 
@@ -35,10 +35,10 @@ namespace 翻译姬 {
             提取结果Box.TextBox.ShowScrollBar = true;
             查询表格.禁用排序();
             指令表格.禁用排序();
+            全局字符串.全局键盘监听.KeyDownEvent += 全局键盘监听_KeyDownEvent;
         }
 
         private void Json指令_Page被选中() {
-            //查询表格.CurrentCell = null;
         }
 
         private void Json指令_Load(object sender, EventArgs e) {
@@ -61,8 +61,12 @@ namespace 翻译姬 {
             筛选Box.Text = "";
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+        private void 全局键盘监听_KeyDownEvent(object sender, KeyEventArgs e) {
             try {
+                var f = ((主界面)数据中转.主窗体).窗体显示区TabControl.SelectedTab.Controls[0];
+                if (f != this) {
+                    return;
+                }
                 if (全局字符串.键盘按下按钮组.Count == 2 &&
                     全局字符串.键盘按下按钮组.Contains(Keys.LShiftKey) &&
                     全局字符串.键盘按下按钮组.Contains(Keys.C)) {//复制
@@ -94,7 +98,6 @@ namespace 翻译姬 {
             } catch (Exception ex) {
                 MessageBoxEx.Show(ex.Message);
             }
-            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private bool 表格增删改_新添前行验证(DataRow row) {
@@ -186,9 +189,9 @@ namespace 翻译姬 {
         private void 筛选Box_KeyPress(object sender, KeyPressEventArgs e) {
             if (筛选Box.Text.IsNullOrEmpty()) {
                 指令表格.DataTable.DefaultView.RowFilter = null;
-            } else 
+            } else
                 指令表格.DataTable.DefaultView.RowFilter = $"内容='{筛选Box.Text}'";
-            }
+        }
 
         private void 筛选Box_TextChanged(object sender, EventArgs e) {
             if (!IsShown) {
@@ -214,7 +217,7 @@ namespace 翻译姬 {
                 文本[] res = 文本读写.Json提取(指令表格.Tag.ToString(), json指令row);
                 提取结果Box.Text = string.Join(Environment.NewLine, res.获取原文组());
 
-            } catch(Exception ex) {
+            } catch (Exception ex) {
                 消息框帮助.轻便消息(ex.Message, 查询表格, UINotifierType.WARNING);
             }
         }
@@ -222,7 +225,7 @@ namespace 翻译姬 {
         private void 查询表格_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e) {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) {
                 return;
-            } else if (查询表格.Columns[e.ColumnIndex].HeaderText == 指令集.HeaderText) { 
+            } else if (查询表格.Columns[e.ColumnIndex].HeaderText == 指令集.HeaderText) {
                 //点到了指令集
                 DataRow row = (查询表格.Rows[e.RowIndex].DataBoundItem as DataRowView).Row;
                 var f = Activator.CreateInstance(指令集数值更改窗, row) as Form;
