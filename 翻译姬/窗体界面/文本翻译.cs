@@ -257,7 +257,11 @@ namespace 翻译姬 {
                     
                     BeginInvoke(() => 消息框帮助.通知栏消息("机翻完成！"));
                 } catch (Exception ex) {
+#if DEBUG
+                throw;
+#else
                     MessageBoxEx.Show(ex.Message);
+#endif
                 } finally {
                     机翻后();
                 }
@@ -326,7 +330,11 @@ namespace 翻译姬 {
 
                     BeginInvoke(() => 消息框帮助.通知栏消息("机翻完成！"));
                 } catch (Exception ex) {
+#if DEBUG
+                throw;
+#else
                     MessageBoxEx.Show(ex.Message);
+#endif
                 } finally {
                     机翻后();
                 }
@@ -404,7 +412,11 @@ namespace 翻译姬 {
                 Invoke(() => 预计使用字符Label.Text = 预计字符);
                 文本显示追加(起始显示文本 + sb.ToString());
             } catch (Exception ex) {
+#if DEBUG
+                throw;
+#else
                 消息框帮助.轻便消息(ex.Message, this, UINotifierType.WARNING);
+#endif
             } finally {
                 全局数据.写出格式全局变量 = 1;
             }

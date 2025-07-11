@@ -209,7 +209,7 @@ public class 文本读写 {
             try {
                 var temp = new Regex(正则指令);
                 list.Add(temp);
-            } catch (Exception ex) {
+            } catch {
                 throw new Exception($"指令【{指令}】不符合要求");
             }
         }
@@ -241,8 +241,8 @@ public class 文本读写 {
         XmlDocument xml = new XmlDocument();
         try {
             xml.LoadXml(Xml文本);
-        } catch (Exception ex) { 
-            throw new Exception($"Xml识别失败：{ex.Message}"); 
+        } catch (Exception ex) {
+            throw new Exception($"Xml识别失败：{ex.Message}");
         }
         var res = new List<文本>();
         var stack = new Stack<XmlNode>();
@@ -254,7 +254,7 @@ public class 文本读写 {
                 for (int i = node.ChildNodes.Count - 1; i >= 0; i--) {
                     stack.Push(node.ChildNodes[i]);
                 }
-            } else { 
+            } else {
                 if (指令集.Contains(node.获取XPath()) && node.InnerText.Trim() != "") {
                     var 文本 = new 文本(文本下标, node.InnerText.Trim());
                     if (正则指令row != null) {
@@ -270,7 +270,7 @@ public class 文本读写 {
                 }
                 文本下标++;
             }
-            
+
         }
         return res.ToArray();
     }

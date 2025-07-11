@@ -13,9 +13,7 @@ using System.Windows.Forms;
 
 namespace 翻译姬 {
     /*
-     * 1、尝试修复Shift C V操作失效问题
-     * 2、修复下拉框颜色不对的问题
-     * 3、修复正则名称带有特殊符号时软件报错的问题
+     * 1、发布为默认64位程序(兼容32位)，防止莫名爆内存
      */
     internal static class Program {
 
