@@ -62,7 +62,7 @@ public class GPTAPI: API接口模板 {
             //机翻
             GPT返回 返回结果 = null;
             dynamic 解析结束的请求;
-            int 最大token = 全局数据.BPE算法.Token计算(JsonConvert.SerializeObject(请求内容)) * 1.2;
+            int 最大token = (int)(全局数据.BPE算法.Token计算(JsonConvert.SerializeObject(请求内容)) * 1.2);
 机翻开始:
             try {
                 返回结果 = GPT调用.调用(请求内容, 最大token);
