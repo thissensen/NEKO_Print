@@ -13,7 +13,8 @@ using System.Windows.Forms;
 
 namespace 翻译姬 {
     /*
-     * 1、发布为默认64位程序(兼容32位)，防止莫名爆内存
+     * 1、减弱AI翻译的退化检测
+     * 2、更新QQ群链接
      */
     internal static class Program {
 

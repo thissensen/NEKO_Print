@@ -19,7 +19,7 @@ using System.Windows.Forms;
 
 //JsonPath和XmlPath：https://www.cnblogs.com/youring2/p/10942728.html
 namespace 翻译姬 {
-    public partial class 关于翻译姬 : 自定义Page {
+    public partial class 关于翻译姬: 自定义Page {
 
         [DllImport("Kernel32.dll")]
         public static extern bool SetLocalTime(ref SYSTEMTIME Time);
@@ -44,7 +44,7 @@ namespace 翻译姬 {
                 if (!最新版本Label.Text.Contains("获取失败") && 最新版本 > 当前版本) {
                     MessageBoxEx.Show("检查到软件有更新，可前往更新");
                 }
-            } catch { } 
+            } catch { }
         }
 
         private void 主题色Btn_Click(object sender, EventArgs e) {
@@ -233,7 +233,7 @@ namespace 翻译姬 {
         }
 
         private void 交流群Btn_Click(object sender, EventArgs e) {
-            Process.Start("https://qm.qq.com/cgi-bin/qm/qr?authKey=uJu9cCUREatWVmk6Sc%2F8hfigYi%2F%2B9BhAapMbrEr4U%2FXVValM3xRB%2FrzKCX1uWpLh&k=pYjvXcwknhVTViXPYPWr6a2LXZ3VaSD5&noverify=0");
+            Process.Start("https://qm.qq.com/q/V7Pv7yxsMW");
         }
 
         private void 使用手册Btn_Click(object sender, EventArgs e) {

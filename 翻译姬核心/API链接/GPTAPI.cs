@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 namespace 翻译姬;
-public class GPTAPI : API接口模板 {
+public class GPTAPI: API接口模板 {
 
     private static GPT设置数据 GPT设置数据 => 全局数据.GPT设置数据;
     public override int QPS显示单位 => 60000;//QPS以分钟作限制
@@ -26,16 +26,16 @@ public class GPTAPI : API接口模板 {
         data.QPS = GPT设置数据.次数限制;
         GPT设置数据.必要数据验证();
         GPT调用 = new GPT调用(
-            计时器, 
-            GPT设置数据.Token限制, 
+            计时器,
+            GPT设置数据.Token限制,
             GPT设置数据.是否Https,
             GPT设置数据.连接域名,
             GPT设置数据.连接路由,
-            GPT设置数据.使用模型, 
+            GPT设置数据.使用模型,
             GPT设置数据.frequency_penalty,
             GPT设置数据.temperature,
             GPT设置数据.top_p,
-            GPT设置数据.请求等待延迟, 
+            GPT设置数据.请求等待延迟,
             data.秘钥
         );
     }
@@ -62,7 +62,7 @@ public class GPTAPI : API接口模板 {
             //机翻
             GPT返回 返回结果 = null;
             dynamic 解析结束的请求;
-            int 最大token = 全局数据.BPE算法.Token计算(JsonConvert.SerializeObject(请求内容));
+            int 最大token = 全局数据.BPE算法.Token计算(JsonConvert.SerializeObject(请求内容)) * 1.2;
 机翻开始:
             try {
                 返回结果 = GPT调用.调用(请求内容, 最大token);
@@ -215,7 +215,7 @@ public class GPTAPI : API接口模板 {
             }
             yield return res.ToArray();
         }
-        
+
     }
 
 }
